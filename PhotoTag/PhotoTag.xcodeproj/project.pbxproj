@@ -16,6 +16,7 @@
 		6AFE3C10253EDF3300B385AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AFE3C0E253EDF3300B385AC /* LaunchScreen.storyboard */; };
 		6AFE3C1B253EDF3400B385AC /* PhotoTagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFE3C1A253EDF3400B385AC /* PhotoTagTests.swift */; };
 		6AFE3C26253EDF3400B385AC /* PhotoTagUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFE3C25253EDF3400B385AC /* PhotoTagUITests.swift */; };
+		6AFE3C45253F0A1000B385AC /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6AFE3C44253F0A1000B385AC /* .swiftlint.yml */; };
 		87C3DF72AD41326D022E65B7 /* Pods_PhotoTag.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459C89B745AB9DFDF8401216 /* Pods_PhotoTag.framework */; };
 		AD1A86D34227B2694E8374EA /* Pods_PhotoTagTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C50E63E085C51AC0A7575C /* Pods_PhotoTagTests.framework */; };
 		EC8EC43202A61B27BC07FC9A /* Pods_PhotoTag_PhotoTagUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D1010CE998524E6ACF77B1 /* Pods_PhotoTag_PhotoTagUITests.framework */; };
@@ -60,6 +61,7 @@
 		6AFE3C21253EDF3400B385AC /* PhotoTagUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoTagUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AFE3C25253EDF3400B385AC /* PhotoTagUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTagUITests.swift; sourceTree = "<group>"; };
 		6AFE3C27253EDF3400B385AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6AFE3C44253F0A1000B385AC /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		75C50E63E085C51AC0A7575C /* Pods_PhotoTagTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoTagTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82E5AC2E9E9D24CC8DA5D523 /* Pods-PhotoTag-PhotoTagUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTag-PhotoTagUITests.debug.xcconfig"; path = "Target Support Files/Pods-PhotoTag-PhotoTagUITests/Pods-PhotoTag-PhotoTagUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		86D1010CE998524E6ACF77B1 /* Pods_PhotoTag_PhotoTagUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoTag_PhotoTagUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,7 +105,6 @@
 				1FF56B06483978E2BF93607D /* Pods-PhotoTagTests.debug.xcconfig */,
 				1E0338A9F18C5C4585105303 /* Pods-PhotoTagTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -120,6 +121,7 @@
 		6AFE3BF4253EDF3200B385AC = {
 			isa = PBXGroup;
 			children = (
+				6AFE3C44253F0A1000B385AC /* .swiftlint.yml */,
 				6AFE3BFF253EDF3200B385AC /* PhotoTag */,
 				6AFE3C19253EDF3400B385AC /* PhotoTagTests */,
 				6AFE3C24253EDF3400B385AC /* PhotoTagUITests */,
@@ -183,6 +185,7 @@
 				6AFE3BF9253EDF3200B385AC /* Sources */,
 				6AFE3BFA253EDF3200B385AC /* Frameworks */,
 				6AFE3BFB253EDF3200B385AC /* Resources */,
+				6AFE3C40253F08F700B385AC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -278,6 +281,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AFE3C45253F0A1000B385AC /* .swiftlint.yml in Resources */,
 				6AFE3C10253EDF3300B385AC /* LaunchScreen.storyboard in Resources */,
 				6AFE3C0D253EDF3300B385AC /* Assets.xcassets in Resources */,
 				6AFE3C08253EDF3200B385AC /* Main.storyboard in Resources */,
@@ -322,6 +326,23 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		6AFE3C40253F08F700B385AC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
 		BECD3451FAC276A574AD2CC1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
