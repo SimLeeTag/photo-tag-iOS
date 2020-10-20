@@ -1,0 +1,6 @@
+framework module Pods_PhotoTag_PhotoTagUITests {
+  umbrella header "Pods-PhotoTag-PhotoTagUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
