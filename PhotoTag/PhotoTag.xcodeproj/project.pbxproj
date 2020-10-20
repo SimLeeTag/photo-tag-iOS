@@ -144,14 +144,9 @@
 		6AFE3BFF253EDF3200B385AC /* PhotoTag */ = {
 			isa = PBXGroup;
 			children = (
-				6AFE3C00253EDF3200B385AC /* AppDelegate.swift */,
-				6AFE3C02253EDF3200B385AC /* SceneDelegate.swift */,
-				6AFE3C04253EDF3200B385AC /* ViewController.swift */,
-				6AFE3C06253EDF3200B385AC /* Main.storyboard */,
-				6AFE3C0C253EDF3300B385AC /* Assets.xcassets */,
-				6AFE3C0E253EDF3300B385AC /* LaunchScreen.storyboard */,
 				6AFE3C11253EDF3300B385AC /* Info.plist */,
-				6AFE3C09253EDF3200B385AC /* PhotoTag.xcdatamodeld */,
+				6AFE3C56253F0BBE00B385AC /* App */,
+				6AFE3C04253EDF3200B385AC /* ViewController.swift */,
 			);
 			path = PhotoTag;
 			sourceTree = "<group>";
@@ -172,6 +167,19 @@
 				6AFE3C27253EDF3400B385AC /* Info.plist */,
 			);
 			path = PhotoTagUITests;
+			sourceTree = "<group>";
+		};
+		6AFE3C56253F0BBE00B385AC /* App */ = {
+			isa = PBXGroup;
+			children = (
+				6AFE3C00253EDF3200B385AC /* AppDelegate.swift */,
+				6AFE3C02253EDF3200B385AC /* SceneDelegate.swift */,
+				6AFE3C06253EDF3200B385AC /* Main.storyboard */,
+				6AFE3C0E253EDF3300B385AC /* LaunchScreen.storyboard */,
+				6AFE3C0C253EDF3300B385AC /* Assets.xcassets */,
+				6AFE3C09253EDF3200B385AC /* PhotoTag.xcdatamodeld */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
