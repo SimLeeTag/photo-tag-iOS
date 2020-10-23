@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6AFE3C01253EDF3200B385AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFE3C00253EDF3200B385AC /* AppDelegate.swift */; };
-		6AFE3C03253EDF3200B385AC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFE3C02253EDF3200B385AC /* SceneDelegate.swift */; };
 		6AFE3C05253EDF3200B385AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFE3C04253EDF3200B385AC /* ViewController.swift */; };
 		6AFE3C0B253EDF3200B385AC /* PhotoTag.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AFE3C09253EDF3200B385AC /* PhotoTag.xcdatamodeld */; };
 		6AFE3C0D253EDF3300B385AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AFE3C0C253EDF3300B385AC /* Assets.xcassets */; };
@@ -47,7 +46,6 @@
 		69C5A0A87B20F059A81797E0 /* Pods-PhotoTag.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTag.release.xcconfig"; path = "Target Support Files/Pods-PhotoTag/Pods-PhotoTag.release.xcconfig"; sourceTree = "<group>"; };
 		6AFE3BFD253EDF3200B385AC /* PhotoTag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AFE3C00253EDF3200B385AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6AFE3C02253EDF3200B385AC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6AFE3C04253EDF3200B385AC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6AFE3C0A253EDF3200B385AC /* PhotoTag.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoTag.xcdatamodel; sourceTree = "<group>"; };
 		6AFE3C0C253EDF3300B385AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -171,7 +169,6 @@
 			isa = PBXGroup;
 			children = (
 				6AFE3C00253EDF3200B385AC /* AppDelegate.swift */,
-				6AFE3C02253EDF3200B385AC /* SceneDelegate.swift */,
 				6AFE3C0E253EDF3300B385AC /* LaunchScreen.storyboard */,
 				6AFE3C0C253EDF3300B385AC /* Assets.xcassets */,
 				6AFE3C09253EDF3200B385AC /* PhotoTag.xcdatamodeld */,
@@ -401,7 +398,6 @@
 			files = (
 				6AFE3C05253EDF3200B385AC /* ViewController.swift in Sources */,
 				6AFE3C01253EDF3200B385AC /* AppDelegate.swift in Sources */,
-				6AFE3C03253EDF3200B385AC /* SceneDelegate.swift in Sources */,
 				6AFE3C0B253EDF3200B385AC /* PhotoTag.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
