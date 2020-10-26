@@ -10,7 +10,6 @@ import UIKit
 class EntryCoordinator: Coordinator {
 
     var childCoordinators: [Coordinator] = []
-    
     unowned let navigationController: UINavigationController
     
     required init(navigationController: UINavigationController) {
@@ -24,9 +23,17 @@ class EntryCoordinator: Coordinator {
     }
 }
 
-extension EntryCoordinator: LoginDelegate {
+extension EntryCoordinator: TagSceneTransitioning {
     func navigateToTagCategory() {
-        //TODO: - set up and start TagCoordinator
-        print(#function)
+        let tagCoordinator = TagCoordinator(navigationController: navigationController)
+        tagCoordinator.delegate = self
+        childCoordinators.append(tagCoordinator)
+        tagCoordinator.start()
+    }
+    
+    func navigateToTagManagement() {
+        let tagManagementViewController = LoginViewController()
+        tagManagementViewController.delegate = self
+        self.navigationController.pushViewController(tagManagementViewController, animated: true)
     }
 }
