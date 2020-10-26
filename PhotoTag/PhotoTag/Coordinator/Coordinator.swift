@@ -9,7 +9,7 @@ import UIKit
 
 public protocol Coordinator: class {
     
-    var childCoordinator: [Coordinator] { get set }
+    var childCoordinators: [Coordinator] { get set }
     
     init(navigationController: UINavigationController)
     
