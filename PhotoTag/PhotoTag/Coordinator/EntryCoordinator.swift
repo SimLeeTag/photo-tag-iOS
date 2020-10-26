@@ -23,7 +23,7 @@ class EntryCoordinator: Coordinator {
     }
 }
 
-extension EntryCoordinator: TagSceneTransitioning {
+extension EntryCoordinator: TagSceneTransitionDelegate {
     func navigateToTagCategory() {
         let tagCoordinator = TagCoordinator(navigationController: navigationController)
         tagCoordinator.delegate = self
