@@ -1,13 +1,13 @@
 //
-//  LoginCoordinator.swift
+//  EntryCoordinator.swift
 //  PhotoTag
 //
-//  Created by Keunna Lee on 2020/10/24.
+//  Created by Keunna Lee on 2020/10/26.
 //
 
 import UIKit
 
-class LoginCoordinator: Coordinator {
+class EntryCoordinator: Coordinator {
 
     var childCoordinators: [Coordinator] = []
     
@@ -24,7 +24,7 @@ class LoginCoordinator: Coordinator {
     }
 }
 
-extension LoginCoordinator: LoginDelegate {
+extension EntryCoordinator: LoginDelegate {
     func navigateToTagCategory() {
         //TODO: - set up and start TagCoordinator
         print(#function)

@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A4F23EA2546E2AC00577718 /* EntryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F23E92546E2AC00577718 /* EntryCoordinator.swift */; };
 		6AB83AE02542B4340065B698 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83ADF2542B4340065B698 /* Coordinator.swift */; };
-		6AB83AE825441B410065B698 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83AE725441B410065B698 /* LoginCoordinator.swift */; };
 		6AB83AF425442B370065B698 /* TagCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83AF325442B370065B698 /* TagCoordinator.swift */; };
 		6AB83AF925442C030065B698 /* TagCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83AF825442C030065B698 /* TagCategoryViewController.swift */; };
 		6AFE3C01253EDF3200B385AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFE3C00253EDF3200B385AC /* AppDelegate.swift */; };
@@ -48,8 +48,8 @@
 		459C89B745AB9DFDF8401216 /* Pods_PhotoTag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoTag.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		60576465683417BCC75C5DD6 /* Pods-PhotoTag.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTag.debug.xcconfig"; path = "Target Support Files/Pods-PhotoTag/Pods-PhotoTag.debug.xcconfig"; sourceTree = "<group>"; };
 		69C5A0A87B20F059A81797E0 /* Pods-PhotoTag.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTag.release.xcconfig"; path = "Target Support Files/Pods-PhotoTag/Pods-PhotoTag.release.xcconfig"; sourceTree = "<group>"; };
+		6A4F23E92546E2AC00577718 /* EntryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCoordinator.swift; sourceTree = "<group>"; };
 		6AB83ADF2542B4340065B698 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		6AB83AE725441B410065B698 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		6AB83AF325442B370065B698 /* TagCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCoordinator.swift; sourceTree = "<group>"; };
 		6AB83AF825442C030065B698 /* TagCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryViewController.swift; sourceTree = "<group>"; };
 		6AFE3BFD253EDF3200B385AC /* PhotoTag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,8 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				6AB83ADF2542B4340065B698 /* Coordinator.swift */,
-				6AB83AE725441B410065B698 /* LoginCoordinator.swift */,
 				6AB83AF325442B370065B698 /* TagCoordinator.swift */,
+				6A4F23E92546E2AC00577718 /* EntryCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -452,9 +452,9 @@
 				6AB83AF425442B370065B698 /* TagCoordinator.swift in Sources */,
 				6AFE3C05253EDF3200B385AC /* LoginViewController.swift in Sources */,
 				6AB83AF925442C030065B698 /* TagCategoryViewController.swift in Sources */,
-				6AB83AE825441B410065B698 /* LoginCoordinator.swift in Sources */,
 				6AFE3C01253EDF3200B385AC /* AppDelegate.swift in Sources */,
 				6AFE3C0B253EDF3200B385AC /* PhotoTag.xcdatamodeld in Sources */,
+				6A4F23EA2546E2AC00577718 /* EntryCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

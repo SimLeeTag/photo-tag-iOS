@@ -12,14 +12,14 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var loginCoordinator: LoginCoordinator?
+    var loginCoordinator: EntryCoordinator?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UINavigationController()
         
-        loginCoordinator = LoginCoordinator(navigationController: window?.rootViewController as! UINavigationController)
+        loginCoordinator = EntryCoordinator(navigationController: window?.rootViewController as! UINavigationController)
         
         loginCoordinator?.start()
         window?.makeKeyAndVisible()
