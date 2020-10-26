@@ -7,13 +7,9 @@
 
 import UIKit
 
-protocol LoginDelegate: class {
-    func navigateToTagCategory()
-}
-
 class LoginViewController: UIViewController {
     
-    weak var delegate: LoginDelegate?
+    weak var delegate: TagSceneTransitioning?
     
     private let contentView: UIView = {
         let view = UIView()
