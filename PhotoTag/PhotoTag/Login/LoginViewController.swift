@@ -9,7 +9,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    weak var delegate: TagSceneTransitionDelegate?
+    weak var delegate: CoordinatorDelegate?
     
     private let contentView: UIView = {
         let view = UIView()
