@@ -33,18 +33,22 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
-        contentView.addSubview(loginButton)
-        view.addSubview(contentView)
-        contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        contentView.heightAnchor.constraint(equalToConstant: view.frame.height).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        addSubView()
         
         loginButton.topAnchor.constraint(greaterThanOrEqualTo: self.view.centerYAnchor, constant: 100).isActive = true
         loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         loginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         title = "\(String(describing: self))"
+    }
+    
+    private func addSubView() {
+        contentView.addSubview(loginButton)
+        view.addSubview(contentView)
+    }
+    
+    private func setupLayout() {
+        contentView.pinEdges(to: self.view)
     }
     
     @objc func navigateToTagCategory(_ sender: Any) {
