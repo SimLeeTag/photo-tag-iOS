@@ -24,10 +24,14 @@ extension UILayoutGuide: LayoutGuideCompatible {}
 extension UIView: LayoutGuideCompatible {}
 
 extension LayoutGuideCompatible {
+    
+    // MARK: - translatesAutoresizingMaskIntoConstraints
     func prepareForSettingConstraints() {
         guard let view = self as? UIView else { return }
         view.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    // MARK: - Sides
     
     func pinTop(to yAxis: NSLayoutAnchor<NSLayoutYAxisAnchor>, offset: CGFloat = 0) -> NSLayoutConstraint {
         prepareForSettingConstraints()
@@ -73,4 +77,52 @@ extension LayoutGuideCompatible {
             bottom: pinBottom(to: container.bottomAnchor, offset: -edgeInsets.bottom))
         return edgeLayoutConstraints
     }
+    
+    // MARK: - Centers
+    
+    func pinCenterX(to xAxis: NSLayoutXAxisAnchor, offset: CGFloat = 0) -> NSLayoutConstraint {
+        prepareForSettingConstraints()
+        let contraint = centerXAnchor.constraint(equalTo: xAxis, constant: offset)
+        contraint.isActive = true
+        return contraint
+    }
+    
+    func pinCenterY(to yAxis: NSLayoutYAxisAnchor,
+                    offset: CGFloat = 0) -> NSLayoutConstraint {
+        prepareForSettingConstraints()
+        let constraint = centerYAnchor.constraint(equalTo: yAxis, constant: offset)
+        constraint.isActive = true
+        return constraint
+    }
+    
+    typealias CenterLayoutConstraints = (
+        centerX: NSLayoutConstraint,
+        centerY: NSLayoutConstraint
+    )
+
+    @discardableResult
+    func pinCenter(to container: LayoutGuideCompatible,
+                   offset: CGPoint = .zero) -> CenterLayoutConstraints {
+        return CenterLayoutConstraints(
+            centerX: pinCenterX(to: container.centerXAnchor),
+            centerY: pinCenterY(to: container.centerYAnchor)
+        )
+    }
+
+    @discardableResult
+    func alignCenterX(with view: LayoutGuideCompatible, multiplier: CGFloat = 1, constant: CGFloat = 0) -> NSLayoutConstraint {
+        prepareForSettingConstraints()
+        let constraint = NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: multiplier, constant: constant)
+        constraint.isActive = true
+        return constraint
+    }
+    
+    @discardableResult
+    func alignCenterY(with view: LayoutGuideCompatible, multiplier: CGFloat = 1, constant: CGFloat = 0) -> NSLayoutConstraint {
+        prepareForSettingConstraints()
+        let constraint = NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: multiplier, constant: constant)
+        constraint.isActive = true
+        return constraint
+    }
+    
 }
