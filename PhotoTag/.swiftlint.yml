@@ -1,5 +1,18 @@
+identifier_name:
+    min_length: 1
+    error: 4
+    max_length: 30
+    warning: 40
+    error: 50
+    excluded:
+        - id
+        - URL
+        - GlobalAPIKey
+
 disabled_rules:
 - line_length
+- trailing_whitespace
+- todo
 included:
 excluded:
 - Pods
