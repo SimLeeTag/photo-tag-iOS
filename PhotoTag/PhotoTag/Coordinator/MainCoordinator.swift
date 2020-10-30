@@ -18,8 +18,7 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        let tagCategoryViewController: TagCategoryViewController = TagCategoryViewController()
-        tagCategoryViewController.delegate = self
+        let tagCategoryViewController: TagCategoryViewController = TagCategoryViewController(delegate: self)
         self.navigationController.pushViewController(tagCategoryViewController, animated: true)
     }
 }

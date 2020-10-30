@@ -9,16 +9,19 @@ import UIKit
 
 class AppCoordinator: Coordinator {
 
+    // MARK: - Coordinator
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
+    // MARK: - Factory
+    let appViewControllerFactory = AppViewControllersFactory()
     
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 
     func start() {
-        let loginViewController: LoginViewController = LoginViewController()
-        loginViewController.delegate = self
+        //TODO:- with view model as parameter
+        let loginViewController = appViewControllerFactory.loginViewController(delegate: self)
         self.navigationController.viewControllers = [loginViewController]
     }
 }
@@ -37,8 +40,7 @@ extension AppCoordinator: CoordinatorDelegate {
     }
     
     func navigateToPhotoNoteList() {
-        let photoNoteListViewController = PhotoNoteListViewController()
-        photoNoteListViewController.delegate = self
+        let photoNoteListViewController = PhotoNoteListViewController(delegate: self)
         self.navigationController.pushViewController(photoNoteListViewController, animated: true)
     }
     
@@ -50,8 +52,7 @@ extension AppCoordinator: CoordinatorDelegate {
     }
     
     func navigateToTagManagement() {
-        let tagManagementViewController = TagManagementViewController()
-        tagManagementViewController.delegate = self
+        let tagManagementViewController = TagManagementViewController(delegate: self)
         self.navigationController.pushViewController(tagManagementViewController, animated: true)
     }
 }

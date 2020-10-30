@@ -12,6 +12,9 @@
 		6A6825222548053F00B19C9A /* TagManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6825212548053F00B19C9A /* TagManagementViewController.swift */; };
 		6A68252A25480ACF00B19C9A /* CoordinatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A68252925480ACF00B19C9A /* CoordinatorDelegate.swift */; };
 		6A6825332548384700B19C9A /* LayoutGuideCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */; };
+		6A682539254854E200B19C9A /* AppViewControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A682538254854E200B19C9A /* AppViewControllersFactory.swift */; };
+		6A68254425485DA300B19C9A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A68254325485DA300B19C9A /* LoginView.swift */; };
+		6A68255025497B7200B19C9A /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A68254F25497B7200B19C9A /* Shadow.swift */; };
 		6AB83AE02542B4340065B698 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83ADF2542B4340065B698 /* Coordinator.swift */; };
 		6AB83AF425442B370065B698 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83AF325442B370065B698 /* MainCoordinator.swift */; };
 		6AB83AF925442C030065B698 /* TagCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83AF825442C030065B698 /* TagCategoryViewController.swift */; };
@@ -57,6 +60,9 @@
 		6A6825212548053F00B19C9A /* TagManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementViewController.swift; sourceTree = "<group>"; };
 		6A68252925480ACF00B19C9A /* CoordinatorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorDelegate.swift; sourceTree = "<group>"; };
 		6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGuideCompatible.swift; sourceTree = "<group>"; };
+		6A682538254854E200B19C9A /* AppViewControllersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewControllersFactory.swift; sourceTree = "<group>"; };
+		6A68254325485DA300B19C9A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		6A68254F25497B7200B19C9A /* Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
 		6AB83ADF2542B4340065B698 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		6AB83AF325442B370065B698 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		6AB83AF825442C030065B698 /* TagCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryViewController.swift; sourceTree = "<group>"; };
@@ -134,8 +140,26 @@
 			isa = PBXGroup;
 			children = (
 				6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */,
+				6A68254F25497B7200B19C9A /* Shadow.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		6A682537254854D000B19C9A /* AppConfigurator */ = {
+			isa = PBXGroup;
+			children = (
+				6A682538254854E200B19C9A /* AppViewControllersFactory.swift */,
+			);
+			path = AppConfigurator;
+			sourceTree = "<group>";
+		};
+		6A68254225485D9000B19C9A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6AFE3C04253EDF3200B385AC /* LoginViewController.swift */,
+				6A68254325485DA300B19C9A /* LoginView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		6AB83ADE2542B4130065B698 /* Coordinator */ = {
@@ -152,7 +176,7 @@
 		6AB83AEC25441BC20065B698 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				6AFE3C04253EDF3200B385AC /* LoginViewController.swift */,
+				6A68254225485D9000B19C9A /* View */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -207,6 +231,7 @@
 		6AFE3BFF253EDF3200B385AC /* PhotoTag */ = {
 			isa = PBXGroup;
 			children = (
+				6A682537254854D000B19C9A /* AppConfigurator */,
 				6A68252E254837E900B19C9A /* Utility */,
 				6AB83ADE2542B4130065B698 /* Coordinator */,
 				6AB83AEC25441BC20065B698 /* Login */,
@@ -473,10 +498,13 @@
 				6AB83AE02542B4340065B698 /* Coordinator.swift in Sources */,
 				6AB83AF425442B370065B698 /* MainCoordinator.swift in Sources */,
 				6A68252A25480ACF00B19C9A /* CoordinatorDelegate.swift in Sources */,
+				6A682539254854E200B19C9A /* AppViewControllersFactory.swift in Sources */,
 				6AFE3C05253EDF3200B385AC /* LoginViewController.swift in Sources */,
+				6A68254425485DA300B19C9A /* LoginView.swift in Sources */,
 				6A4F23F72546EC8A00577718 /* PhotoNoteListViewController.swift in Sources */,
 				6AB83AF925442C030065B698 /* TagCategoryViewController.swift in Sources */,
 				6AFE3C01253EDF3200B385AC /* AppDelegate.swift in Sources */,
+				6A68255025497B7200B19C9A /* Shadow.swift in Sources */,
 				6AFE3C0B253EDF3200B385AC /* PhotoTag.xcdatamodeld in Sources */,
 				6A4F23EA2546E2AC00577718 /* AppCoordinator.swift in Sources */,
 			);
