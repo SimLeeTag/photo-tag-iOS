@@ -179,5 +179,26 @@ extension LayoutGuideCompatible {
         constraint.isActive = true
         return constraint
     }
-
+    
+    typealias RelativeSizeLayoutConstraints = (
+        top: NSLayoutConstraint,
+        leading: NSLayoutConstraint,
+        trailing: NSLayoutConstraint,
+        bottom: NSLayoutConstraint
+    )
+    
+    @discardableResult
+    func pinRelativeSize(to view: LayoutGuideCompatible, widthInset: CGFloat, heightInset: CGFloat) -> RelativeSizeLayoutConstraints {
+        return RelativeSizeLayoutConstraints(
+            top: pinTop(to: view.topAnchor, offset: heightInset),
+            leading: pinLeading(to: view.leadingAnchor, offset: widthInset),
+            trailing: pinTrailing(to: view.trailingAnchor, offset: widthInset),
+            bottom: pinBottom(to: view.bottomAnchor, offset: heightInset)
+        )
+    }
+    
+    @discardableResult
+    func aspectRation(_ ratio: CGFloat) -> NSLayoutConstraint {
+        return NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: self, attribute: .width, multiplier: ratio, constant: 0)
+    }
 }
