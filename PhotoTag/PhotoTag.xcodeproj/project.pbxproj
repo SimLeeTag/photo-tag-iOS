@@ -57,6 +57,7 @@
 		69C5A0A87B20F059A81797E0 /* Pods-PhotoTag.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTag.release.xcconfig"; path = "Target Support Files/Pods-PhotoTag/Pods-PhotoTag.release.xcconfig"; sourceTree = "<group>"; };
 		6A4F23E92546E2AC00577718 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6A4F23F62546EC8A00577718 /* PhotoNoteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNoteListViewController.swift; sourceTree = "<group>"; };
+		6A598F42254C6BB400547E67 /* PhotoTag.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoTag.entitlements; sourceTree = "<group>"; };
 		6A6825212548053F00B19C9A /* TagManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementViewController.swift; sourceTree = "<group>"; };
 		6A68252925480ACF00B19C9A /* CoordinatorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorDelegate.swift; sourceTree = "<group>"; };
 		6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGuideCompatible.swift; sourceTree = "<group>"; };
@@ -231,6 +232,7 @@
 		6AFE3BFF253EDF3200B385AC /* PhotoTag */ = {
 			isa = PBXGroup;
 			children = (
+				6A598F42254C6BB400547E67 /* PhotoTag.entitlements */,
 				6A682537254854D000B19C9A /* AppConfigurator */,
 				6A68252E254837E900B19C9A /* Utility */,
 				6AB83ADE2542B4130065B698 /* Coordinator */,
@@ -675,14 +677,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PhotoTag/PhotoTag.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 93A6S4WHC4;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = PhotoTag/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = lena.SampleApp.PhotoTag;
+				PRODUCT_BUNDLE_IDENTIFIER = lena.SimLeeTag.PhotoTag;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -695,14 +698,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PhotoTag/PhotoTag.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 93A6S4WHC4;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = PhotoTag/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = lena.SampleApp.PhotoTag;
+				PRODUCT_BUNDLE_IDENTIFIER = lena.SimLeeTag.PhotoTag;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
