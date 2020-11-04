@@ -46,7 +46,8 @@ class LoginViewController: UIViewController {
     private func configure () {
         self.navigationController?.isNavigationBarHidden = true
         loginView.appleLoginButton.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
-        loginView.googleLoginButton.addTarget(self, action: #selector(navigateToTagCategory(_:)), for: .touchUpInside)
+        // TODO: - navigate to tutorial scene
+        loginView.howToUseButton.addTarget(self, action: #selector(navigateToTagCategory(_:)), for: .touchUpInside)
     }
     
     @objc func navigateToTagCategory(_ sender: Any) {

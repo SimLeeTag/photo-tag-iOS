@@ -14,7 +14,7 @@ class LoginView: UIView {
     let contentStackView = SubviewFactory.contentStackView()
     let buttonStackView = SubviewFactory.buttonStackView()
     let appleLoginButton = SubviewFactory.appleLoginButton()
-    let googleLoginButton = SubviewFactory.googleLoginButton()
+    let howToUseButton = SubviewFactory.howToUseButton()
     let contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -32,7 +32,7 @@ class LoginView: UIView {
     
     private func addSubviews() {
         buttonStackView.addArrangedSubview(appleLoginButton)
-        buttonStackView.addArrangedSubview(googleLoginButton)
+        buttonStackView.addArrangedSubview(howToUseButton)
         contentStackView.addArrangedSubview(logoImageView)
         contentStackView.addArrangedSubview(buttonStackView)
         contentView.addSubview(contentStackView)
@@ -88,12 +88,12 @@ private extension LoginView {
             return button
         }
 
-        static func googleLoginButton() -> UIButton {
+        static func howToUseButton() -> UIButton {
             let button = UIButton(frame: .zero)
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.setBackgroundImage(#imageLiteral(resourceName: "btn_google_signin_dark_pressed_web"), for: .normal)
-            let shadow = Shadow(color: .black, x: 0, y: 5, blur: 15, spread: 0)
-            button.layer.makeShadow(with: shadow)
+            button.setTitle("How To Use", for: .normal)
+            button.setTitleColor(.white, for: .normal)
+            button.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
             button.layer.cornerRadius = 5
             return button
         }
