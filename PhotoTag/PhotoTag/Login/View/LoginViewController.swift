@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Properties
     private weak var delegate: CoordinatorDelegate?
+    private let loginManager = LoginManager()
     private var loginView: LoginView! {
         return view as? LoginView
     }
@@ -32,7 +33,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure ()
+        configure()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -67,8 +68,12 @@ class LoginViewController: UIViewController {
     }
     
     private func performExistingAccountSetupFlows() {
-        let requests = [ASAuthorizationAppleIDProvider().createRequest(),
-                        ASAuthorizationPasswordProvider().createRequest()]
+        let appleIDProviderRequest = ASAuthorizationAppleIDProvider().createRequest()
+        let passwordProviderRequest = ASAuthorizationAppleIDProvider().createRequest()
+        appleIDProviderRequest.requestedScopes = [.fullName, .email]
+        passwordProviderRequest.requestedScopes = [.fullName, .email]
+        let requests = [appleIDProviderRequest,
+                        passwordProviderRequest]
         let authorizationController = ASAuthorizationController(authorizationRequests: requests)
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
@@ -78,47 +83,13 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        
-        if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
-            if let data = credential.authorizationCode, let code = String(data: data, encoding: .utf8) {
-                // TODO: - send 'code' to server to get an API token.
-                exchangeCode(code) { apiToken, error in
-                    
-                    do {
-                        
-                    }catch {
-                        print("Unable to save userIdentifier to keychain.")
-                    }
-
-                    let userIdentifier = credential.user
-                    let fullName = credential.fullName
-                    let email = credential.email
-                    let jwt = credential.identityToken
-                    
-                    self.saveUserInKeychain(userIdentifier)
-                    self.delegate?.navigateToTagCategory()
-                    self.dismiss(animated: true, completion: nil)
-                }
-            } else if let passwordCredential = authorization.credential as? ASPasswordCredential {
-                // Sign in using an existing iCloud Keychain credential.
-                let username = passwordCredential.user
-                let password = passwordCredential.password
-                
-                // Navigate to other view controller
-            }
-        }
-    }
-    
-    private func exchangeCode(_ code: String, handler: (String?, Error?) -> Void) {
-        //TODO: - send a request including token to server and get response from it
-    }
-    
-    private func saveUserInKeychain(_ userIdentifier: String) {
-        do {
-            try KeychainItem(service: "com.lena.SimLeeTag.PhotoTag", account: "userIdentifier").saveItem(userIdentifier)
-        } catch {
-            print("Unable to save userIdentifier to keychain.")
-        }
+        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
+        guard let token = appleIDCredential.identityToken else { return }
+        guard let jwt = String(data: token, encoding: .utf8) else { return }
+        loginManager.saveUserInKeychain(jwt)
+        loginManager.requestAppleLoginToken(credential: appleIDCredential)
+        self.delegate?.navigateToTagCategory()
+        self.dismiss(animated: true, completion: nil)
     }
     
     private func showPasswordCredentialAlert(username: String, password: String) {
@@ -131,7 +102,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        // Handle error.
+        // TODO: - Handle error.
     }
     
 }
