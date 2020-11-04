@@ -26,6 +26,7 @@
 		6AD3ED6725519FE900F8EF61 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD3ED6625519FE900F8EF61 /* UseCase.swift */; };
 		6AD3ED6C2551A09900F8EF61 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD3ED6B2551A09900F8EF61 /* HTTPMethod.swift */; };
 		6AD3ED712551A0B400F8EF61 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD3ED702551A0B400F8EF61 /* NetworkError.swift */; };
+		6AD3EDB1255274A400F8EF61 /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD3EDB0255274A400F8EF61 /* KeychainItem.swift */; };
 		6AFE3C01253EDF3200B385AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFE3C00253EDF3200B385AC /* AppDelegate.swift */; };
 		6AFE3C05253EDF3200B385AC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFE3C04253EDF3200B385AC /* LoginViewController.swift */; };
 		6AFE3C0B253EDF3200B385AC /* PhotoTag.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AFE3C09253EDF3200B385AC /* PhotoTag.xcdatamodeld */; };
@@ -78,6 +79,7 @@
 		6AD3ED6625519FE900F8EF61 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		6AD3ED6B2551A09900F8EF61 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		6AD3ED702551A0B400F8EF61 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		6AD3EDB0255274A400F8EF61 /* KeychainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift; sourceTree = "<group>"; };
 		6AFE3BFD253EDF3200B385AC /* PhotoTag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AFE3C00253EDF3200B385AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6AFE3C04253EDF3200B385AC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				6AD3ED6625519FE900F8EF61 /* UseCase.swift */,
 				6AD3ED6B2551A09900F8EF61 /* HTTPMethod.swift */,
 				6AD3ED702551A0B400F8EF61 /* NetworkError.swift */,
+				6AD3EDB0255274A400F8EF61 /* KeychainItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				6AA9BD6E254EA0ED00126749 /* Endpoint.swift in Sources */,
 				6AB83AF925442C030065B698 /* TagCategoryViewController.swift in Sources */,
 				6AD3ED712551A0B400F8EF61 /* NetworkError.swift in Sources */,
+				6AD3EDB1255274A400F8EF61 /* KeychainItem.swift in Sources */,
 				6AFE3C01253EDF3200B385AC /* AppDelegate.swift in Sources */,
 				6A68255025497B7200B19C9A /* Shadow.swift in Sources */,
 				6AFE3C0B253EDF3200B385AC /* PhotoTag.xcdatamodeld in Sources */,
