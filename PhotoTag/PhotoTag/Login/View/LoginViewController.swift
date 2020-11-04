@@ -87,6 +87,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         guard let token = appleIDCredential.identityToken else { return }
         guard let jwt = String(data: token, encoding: .utf8) else { return }
         loginManager.saveUserInKeychain(jwt)
+        UserDefaults.standard.set(jwt, forKey: "loginType")
         loginManager.requestAppleLoginToken(credential: appleIDCredential)
         self.delegate?.navigateToTagCategory()
         self.dismiss(animated: true, completion: nil)
