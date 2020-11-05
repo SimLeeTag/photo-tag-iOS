@@ -68,13 +68,16 @@ extension AppCoordinator: UINavigationControllerDelegate {
             return
         }
         
-        // fromVieController의 타입에 따라서 다르게 처리하는 메서드 만들기
-        // TagCategoryVC, SearchVC, PhotoNoteListVC
-        
         if let tagCategoryViewController = fromViewController as? TagCategoryViewController {
-            childDidFinish(tagCategoryViewController.delegate)
+            childDidFinish(tagCategoryViewController.coordinator)
         }
         
-        print(fromViewController.self)
+        if let searchViewController = fromViewController as? SearchViewController {
+            childDidFinish(searchViewController.coordinator)
+        }
+        
+        if let photoNoteListViewController = fromViewController as? PhotoNoteListViewController {
+            childDidFinish(photoNoteListViewController.coordinator)
+        }
     }
 }
