@@ -20,7 +20,7 @@ struct AppViewControllersFactory {
         return PhotoNoteListViewController(delegate: delegate)
     }
     
-    func tagCategoryViewController(delegate: CoordinatorDelegate) -> UIViewController {
+    func tagCategoryViewController(delegate: TagCoordinator) -> UIViewController {
         return TagCategoryViewController(delegate: delegate)
     }
     
