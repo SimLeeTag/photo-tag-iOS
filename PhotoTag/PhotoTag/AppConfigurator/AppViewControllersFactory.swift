@@ -12,19 +12,23 @@ struct AppViewControllersFactory {
     //TODO:- add viewModelFactory
     
     //TODO:- add viewModel as parameter
-    func loginViewController(delegate: CoordinatorDelegate) -> UIViewController {
-        return LoginViewController(delegate: delegate)
+    func loginViewController(coordinator: AppCoordinator) -> UIViewController {
+        return LoginViewController(coordinator: coordinator)
     }
     
-    func photoNoteListViewController(delegate: CoordinatorDelegate) -> UIViewController {
-        return PhotoNoteListViewController(delegate: delegate)
+    func photoNoteListViewController(coordinator: PhotoNoteCoordinator) -> UIViewController {
+        return PhotoNoteListViewController(coordinator: coordinator)
     }
     
-    func tagCategoryViewController(delegate: TagCoordinator) -> UIViewController {
-        return TagCategoryViewController(delegate: delegate)
+    func tagCategoryViewController(coordinator: TagCoordinator) -> UIViewController {
+        return TagCategoryViewController(coordinator: coordinator)
     }
     
-    func tagManagementViewController(delegate: CoordinatorDelegate) -> UIViewController {
-        return TagManagementViewController(delegate: delegate)
+    func tagManagementViewController(coordinator: TagCoordinator) -> UIViewController {
+        return TagManagementViewController(coordinator: coordinator)
+    }
+    
+    func searchViewController(coordinator: SearchCoordinator) -> UIViewController {
+        return SearchViewController(coordinator: coordinator)
     }
 }
