@@ -15,4 +15,9 @@ class TagCoordinator: ChildCoordinator {
         let tagCategoryViewController = appViewControllerFactory.tagCategoryViewController(coordinator: self)
         navigationController.pushViewController(tagCategoryViewController, animated: true)
     }
+    
+    func navigateToTagManagement() {
+        let tagManagementViewController = appViewControllerFactory.tagManagementViewController(coordinator: self)
+        navigationController.pushViewController(tagManagementViewController, animated: true)
+    }
 }
