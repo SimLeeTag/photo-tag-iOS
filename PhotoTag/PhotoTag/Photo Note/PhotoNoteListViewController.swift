@@ -77,10 +77,10 @@ class PhotoNoteListViewController: UIViewController {
     }
     
     @objc func navigateToTagCategory() {
-//        self.coordinator?.navigateToTagCategory()
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func navigateToSelectPhoto() {
-//        self.coordinator?.navigateToSelectPhoto()
+        coordinator?.navigateToSelectPhoto()
     }
 }

@@ -58,6 +58,6 @@ class TagManagementViewController: UIViewController {
     }
     
     @objc func navigateToTagCategory() {
-//        self.coordinator?.navigateToTagCategory()
+        self.navigationController?.popViewController(animated: true)
     }
 }
