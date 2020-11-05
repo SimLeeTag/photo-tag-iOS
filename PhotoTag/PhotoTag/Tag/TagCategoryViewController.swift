@@ -33,8 +33,8 @@ class TagCategoryViewController: UIViewController {
     }()
     
     //TODO:- add viewModel as parameter
-    init(delegate: TagCoordinator) {
-        self.delegate = delegate
+    init(coordinator: TagCoordinator) {
+        self.delegate = coordinator
         super.init(nibName: nil, bundle: nil)
     }
 

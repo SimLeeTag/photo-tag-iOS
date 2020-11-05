@@ -11,15 +11,15 @@ import AuthenticationServices
 class LoginViewController: UIViewController {
     
     // MARK: - Properties
-    private weak var delegate: CoordinatorDelegate?
+    private weak var coordinator: AppCoordinator?
     private let loginManager = LoginManager()
     private var loginView: LoginView! {
         return view as? LoginView
     }
     
     // MARK: - Intialization
-    init(delegate: CoordinatorDelegate) {
-        self.delegate = delegate
+    init(coordinator: AppCoordinator) {
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -51,7 +51,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc func navigateToTagCategory(_ sender: Any) {
-        self.delegate?.navigateToTagCategory()
+        coordinator?.navigateToSelectTagCategory()
     }
     
     @objc private func handleAuthorizationAppleIDButtonPress() {
@@ -90,7 +90,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         loginManager.saveUserInKeychain(jwt)
         UserDefaults.standard.set(jwt, forKey: "loginType")
         loginManager.requestAppleLoginToken(credential: appleIDCredential)
-        self.delegate?.navigateToTagCategory()
+        coordinator?.navigateToSelectTagCategory()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -105,6 +105,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // TODO: - Handle error.
+        debugPrint(error)
     }
     
 }

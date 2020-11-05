@@ -9,7 +9,7 @@ import UIKit
 
 class TagManagementViewController: UIViewController {
     
-    weak var delegate: CoordinatorDelegate?
+    weak var coordinator: TagCoordinator?
     
     private let contentView: UIView = {
         let view = UIView()
@@ -31,8 +31,8 @@ class TagManagementViewController: UIViewController {
     }()
     
     //TODO:- add viewModel as parameter
-    init(delegate: CoordinatorDelegate) {
-        self.delegate = delegate
+    init(coordinator: TagCoordinator) {
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -58,6 +58,6 @@ class TagManagementViewController: UIViewController {
     }
     
     @objc func navigateToTagCategory() {
-        self.delegate?.navigateToTagCategory()
+//        self.coordinator?.navigateToTagCategory()
     }
 }

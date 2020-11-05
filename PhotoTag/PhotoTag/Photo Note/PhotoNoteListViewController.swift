@@ -9,7 +9,7 @@ import UIKit
 
 class PhotoNoteListViewController: UIViewController {
     
-    weak var delegate: CoordinatorDelegate? // show tag category create new note
+    weak var coordinator: PhotoNoteCoordinator? // show tag category create new note
     private let contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -46,8 +46,8 @@ class PhotoNoteListViewController: UIViewController {
     }()
     
     //TODO:- add viewModel as parameter
-    init(delegate: CoordinatorDelegate) {
-        self.delegate = delegate
+    init(coordinator: PhotoNoteCoordinator) {
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -77,10 +77,10 @@ class PhotoNoteListViewController: UIViewController {
     }
     
     @objc func navigateToTagCategory() {
-        self.delegate?.navigateToTagCategory()
+//        self.coordinator?.navigateToTagCategory()
     }
     
     @objc func navigateToSelectPhoto() {
-        self.delegate?.navigateToSelectPhoto()
+//        self.coordinator?.navigateToSelectPhoto()
     }
 }
