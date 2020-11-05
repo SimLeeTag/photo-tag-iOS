@@ -7,19 +7,12 @@
 
 import UIKit
 
-class TagCoordinator: Coordinator {
+class TagCoordinator: ChildCoordinator {
     
-    var childCoordinators: [Coordinator] = []
     weak var parentCoordinator: AppCoordinator?
-    var navigationController: UINavigationController
     
-    required init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-    
-    func start() {
-        let tagCategoryViewController: TagCategoryViewController = TagCategoryViewController(delegate: self)
-        self.navigationController.pushViewController(tagCategoryViewController, animated: true)
+    override func start() {
+        let tagCategoryViewController = appViewControllerFactory.tagCategoryViewController(coordinator: self)
+        navigationController.pushViewController(tagCategoryViewController, animated: true)
     }
 }
-
