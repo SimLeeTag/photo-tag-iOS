@@ -15,4 +15,9 @@ class SearchCoordinator: ChildCoordinator {
         let searchViewController = appViewControllerFactory.searchViewController(coordinator: self)
         navigationController.pushViewController(searchViewController, animated: true)
     }
+    
+    func navigateToSelectPeriod() {
+        let searchViewController = appViewControllerFactory.searchViewController(coordinator: self)
+        navigationController.pushViewController(searchViewController, animated: true)
+    }
 }
