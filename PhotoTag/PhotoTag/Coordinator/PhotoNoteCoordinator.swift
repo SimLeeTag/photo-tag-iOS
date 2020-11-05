@@ -15,4 +15,24 @@ class PhotoNoteCoordinator: ChildCoordinator {
         let photoNoteListViewController = appViewControllerFactory.photoNoteListViewController(coordinator: self)
         navigationController.pushViewController(photoNoteListViewController, animated: true)
     }
+    
+    func navigateToPhotoNoteList() {
+        let photoNoteListViewController = appViewControllerFactory.photoNoteListViewController(coordinator: self)
+        navigationController.pushViewController(photoNoteListViewController, animated: true)
+    }
+    
+    func navigateToSelectPhoto() {
+        let selectPhotoViewController = appViewControllerFactory.photoNoteListViewController(coordinator: self)
+        navigationController.pushViewController(selectPhotoViewController, animated: true)
+    }
+    
+    func navigateToWritePhotoNote() {
+        let writePhotoNoteViewController = appViewControllerFactory.photoNoteListViewController(coordinator: self)
+        navigationController.pushViewController(writePhotoNoteViewController, animated: true)
+    }
+    
+    func navigateToPhotoNote() {
+        let photoNoteViewController = appViewControllerFactory.photoNoteViewController(coordinator: self)
+        navigationController.pushViewController(photoNoteViewController, animated: true)
+    }
 }

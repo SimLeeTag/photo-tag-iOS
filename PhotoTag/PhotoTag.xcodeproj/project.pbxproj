@@ -19,6 +19,10 @@
 		6A89B9B725546463003E1027 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9B625546463003E1027 /* SearchCoordinator.swift */; };
 		6A89B9BF25547088003E1027 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9BE25547088003E1027 /* SearchViewController.swift */; };
 		6A89B9D2255473C9003E1027 /* ChildCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9D1255473C9003E1027 /* ChildCoordinator.swift */; };
+		6A89B9E3255496F9003E1027 /* SelectPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9E2255496F9003E1027 /* SelectPhotoViewController.swift */; };
+		6A89B9E825549764003E1027 /* WritePhotoNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9E725549764003E1027 /* WritePhotoNoteViewController.swift */; };
+		6A89B9ED25549787003E1027 /* PhotoNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9EC25549787003E1027 /* PhotoNoteViewController.swift */; };
+		6A89B9F225549807003E1027 /* SelectPeriodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9F125549807003E1027 /* SelectPeriodViewController.swift */; };
 		6AA9BD65254E93C200126749 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA9BD64254E93C200126749 /* LoginManager.swift */; };
 		6AA9BD6E254EA0ED00126749 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA9BD6D254EA0ED00126749 /* Endpoint.swift */; };
 		6AB83AE02542B4340065B698 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83ADF2542B4340065B698 /* Coordinator.swift */; };
@@ -75,6 +79,10 @@
 		6A89B9B625546463003E1027 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		6A89B9BE25547088003E1027 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		6A89B9D1255473C9003E1027 /* ChildCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCoordinator.swift; sourceTree = "<group>"; };
+		6A89B9E2255496F9003E1027 /* SelectPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoViewController.swift; sourceTree = "<group>"; };
+		6A89B9E725549764003E1027 /* WritePhotoNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePhotoNoteViewController.swift; sourceTree = "<group>"; };
+		6A89B9EC25549787003E1027 /* PhotoNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNoteViewController.swift; sourceTree = "<group>"; };
+		6A89B9F125549807003E1027 /* SelectPeriodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPeriodViewController.swift; sourceTree = "<group>"; };
 		6AA9BD64254E93C200126749 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		6AA9BD6D254EA0ED00126749 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		6AB83ADF2542B4340065B698 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -225,6 +233,9 @@
 			isa = PBXGroup;
 			children = (
 				6A4F23F62546EC8A00577718 /* PhotoNoteListViewController.swift */,
+				6A89B9E2255496F9003E1027 /* SelectPhotoViewController.swift */,
+				6A89B9E725549764003E1027 /* WritePhotoNoteViewController.swift */,
+				6A89B9EC25549787003E1027 /* PhotoNoteViewController.swift */,
 			);
 			path = "Photo Note";
 			sourceTree = "<group>";
@@ -233,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				6A89B9BE25547088003E1027 /* SearchViewController.swift */,
+				6A89B9F125549807003E1027 /* SelectPeriodViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -538,6 +550,7 @@
 			files = (
 				6AD3ED6225519F9E00F8EF61 /* NetworkManager.swift in Sources */,
 				6A89B9D2255473C9003E1027 /* ChildCoordinator.swift in Sources */,
+				6A89B9E825549764003E1027 /* WritePhotoNoteViewController.swift in Sources */,
 				6A6825332548384700B19C9A /* LayoutGuideCompatible.swift in Sources */,
 				6A6825222548053F00B19C9A /* TagManagementViewController.swift in Sources */,
 				6AB83AE02542B4340065B698 /* Coordinator.swift in Sources */,
@@ -557,10 +570,13 @@
 				6AD3ED712551A0B400F8EF61 /* NetworkError.swift in Sources */,
 				6AD3EDB1255274A400F8EF61 /* KeychainItem.swift in Sources */,
 				6AFE3C01253EDF3200B385AC /* AppDelegate.swift in Sources */,
+				6A89B9E3255496F9003E1027 /* SelectPhotoViewController.swift in Sources */,
 				6A68255025497B7200B19C9A /* Shadow.swift in Sources */,
 				6AFE3C0B253EDF3200B385AC /* PhotoTag.xcdatamodeld in Sources */,
+				6A89B9F225549807003E1027 /* SelectPeriodViewController.swift in Sources */,
 				6AD3ED5D25519F5700F8EF61 /* URLRequest.swift in Sources */,
 				6A4F23EA2546E2AC00577718 /* AppCoordinator.swift in Sources */,
+				6A89B9ED25549787003E1027 /* PhotoNoteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
