@@ -11,15 +11,15 @@
 		6A4F23EA2546E2AC00577718 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F23E92546E2AC00577718 /* AppCoordinator.swift */; };
 		6A4F23F72546EC8A00577718 /* PhotoNoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F23F62546EC8A00577718 /* PhotoNoteListViewController.swift */; };
 		6A6825222548053F00B19C9A /* TagManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6825212548053F00B19C9A /* TagManagementViewController.swift */; };
-		6A68252A25480ACF00B19C9A /* CoordinatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A68252925480ACF00B19C9A /* CoordinatorDelegate.swift */; };
 		6A6825332548384700B19C9A /* LayoutGuideCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */; };
 		6A682539254854E200B19C9A /* AppViewControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A682538254854E200B19C9A /* AppViewControllersFactory.swift */; };
 		6A68254425485DA300B19C9A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A68254325485DA300B19C9A /* LoginView.swift */; };
 		6A68255025497B7200B19C9A /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A68254F25497B7200B19C9A /* Shadow.swift */; };
+		6A89B9AA25546013003E1027 /* CoordinatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9A925546013003E1027 /* CoordinatorDelegate.swift */; };
 		6AA9BD65254E93C200126749 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA9BD64254E93C200126749 /* LoginManager.swift */; };
 		6AA9BD6E254EA0ED00126749 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA9BD6D254EA0ED00126749 /* Endpoint.swift */; };
 		6AB83AE02542B4340065B698 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83ADF2542B4340065B698 /* Coordinator.swift */; };
-		6AB83AF425442B370065B698 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83AF325442B370065B698 /* MainCoordinator.swift */; };
+		6AB83AF425442B370065B698 /* TagCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83AF325442B370065B698 /* TagCoordinator.swift */; };
 		6AB83AF925442C030065B698 /* TagCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83AF825442C030065B698 /* TagCategoryViewController.swift */; };
 		6AD3ED5D25519F5700F8EF61 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD3ED5C25519F5700F8EF61 /* URLRequest.swift */; };
 		6AD3ED6225519F9E00F8EF61 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD3ED6125519F9E00F8EF61 /* NetworkManager.swift */; };
@@ -64,15 +64,15 @@
 		6A4F23F62546EC8A00577718 /* PhotoNoteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNoteListViewController.swift; sourceTree = "<group>"; };
 		6A598F42254C6BB400547E67 /* PhotoTag.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoTag.entitlements; sourceTree = "<group>"; };
 		6A6825212548053F00B19C9A /* TagManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementViewController.swift; sourceTree = "<group>"; };
-		6A68252925480ACF00B19C9A /* CoordinatorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorDelegate.swift; sourceTree = "<group>"; };
 		6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGuideCompatible.swift; sourceTree = "<group>"; };
 		6A682538254854E200B19C9A /* AppViewControllersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewControllersFactory.swift; sourceTree = "<group>"; };
 		6A68254325485DA300B19C9A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		6A68254F25497B7200B19C9A /* Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
+		6A89B9A925546013003E1027 /* CoordinatorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatorDelegate.swift; sourceTree = "<group>"; };
 		6AA9BD64254E93C200126749 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		6AA9BD6D254EA0ED00126749 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		6AB83ADF2542B4340065B698 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		6AB83AF325442B370065B698 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		6AB83AF325442B370065B698 /* TagCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCoordinator.swift; sourceTree = "<group>"; };
 		6AB83AF825442C030065B698 /* TagCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryViewController.swift; sourceTree = "<group>"; };
 		6AD3ED5C25519F5700F8EF61 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		6AD3ED6125519F9E00F8EF61 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -189,8 +189,8 @@
 			children = (
 				6AB83ADF2542B4340065B698 /* Coordinator.swift */,
 				6A4F23E92546E2AC00577718 /* AppCoordinator.swift */,
-				6AB83AF325442B370065B698 /* MainCoordinator.swift */,
-				6A68252925480ACF00B19C9A /* CoordinatorDelegate.swift */,
+				6AB83AF325442B370065B698 /* TagCoordinator.swift */,
+				6A89B9A925546013003E1027 /* CoordinatorDelegate.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -531,8 +531,7 @@
 				6A6825332548384700B19C9A /* LayoutGuideCompatible.swift in Sources */,
 				6A6825222548053F00B19C9A /* TagManagementViewController.swift in Sources */,
 				6AB83AE02542B4340065B698 /* Coordinator.swift in Sources */,
-				6AB83AF425442B370065B698 /* MainCoordinator.swift in Sources */,
-				6A68252A25480ACF00B19C9A /* CoordinatorDelegate.swift in Sources */,
+				6AB83AF425442B370065B698 /* TagCoordinator.swift in Sources */,
 				6AA9BD65254E93C200126749 /* LoginManager.swift in Sources */,
 				6A682539254854E200B19C9A /* AppViewControllersFactory.swift in Sources */,
 				6AD3ED6C2551A09900F8EF61 /* HTTPMethod.swift in Sources */,
@@ -549,6 +548,7 @@
 				6AFE3C0B253EDF3200B385AC /* PhotoTag.xcdatamodeld in Sources */,
 				6AD3ED5D25519F5700F8EF61 /* URLRequest.swift in Sources */,
 				6A4F23EA2546E2AC00577718 /* AppCoordinator.swift in Sources */,
+				6A89B9AA25546013003E1027 /* CoordinatorDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
