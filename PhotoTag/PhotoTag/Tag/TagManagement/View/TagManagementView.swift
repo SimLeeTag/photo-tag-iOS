@@ -7,12 +7,8 @@
 
 import UIKit
 
-class TagManagementView: UIView {
-    let contentView = SubviewFactory.contentView()
-    let scrollView = SubviewFactory.sceneScrollView()
-    let headerStackView = SubviewFactory.headerStackView()
+class TagManagementView: ScrollableContentViewWithHead {
     let backButton = SubviewFactory.backButton()
-    let contentStackView = SubviewFactory.contentStackView()
     let titleLabel = SubviewFactory.titleLabel()
     let hashtagTableView = SubviewFactory.hashtagTableView()
     
@@ -26,17 +22,19 @@ class TagManagementView: UIView {
     required init?(coder aDecoder: NSCoder) { return nil }
     
     // MARK: - Functions
-    private func addSubviews() {
-        headerStackView.addArrangedSubview(backButton)
-        headerStackView.addArrangedSubview(titleLabel)
+    override func addSubviews() {
+        configureHeaderView()
         contentStackView.addArrangedSubview(headerStackView)
         contentStackView.addArrangedSubview(hashtagTableView)
-        contentView.addSubview(contentStackView)
-        self.addSubview(contentView)
-        scrollView.addSubview(contentView)
+        configureContentView()
     }
     
-    private func setupLayout() {
+    override func configureHeaderView() {
+        headerStackView.addArrangedSubview(backButton)
+        headerStackView.addArrangedSubview(titleLabel)
+    }
+    
+    override func setupLayout() {
         titleLabel.pinWidth(to: self.widthAnchor, multiplier: 0.95)
         headerStackView.pinHeight(to: self.heightAnchor, multiplier: 0.1)
         contentView.pinEdges(to: scrollView)
@@ -47,38 +45,6 @@ class TagManagementView: UIView {
 private extension TagManagementView {
     
     struct SubviewFactory {
-        
-        static func contentView() -> UIView {
-            let view = UIView()
-            view.backgroundColor = .white
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }
-        
-        static func sceneScrollView() -> UIScrollView {
-            let scrollView = UIScrollView()
-            scrollView.translatesAutoresizingMaskIntoConstraints = false
-            return scrollView
-        }
-        
-        static func contentStackView() -> UIStackView {
-            let stackView = UIStackView()
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            stackView.alignment = .fill
-            stackView.axis = .vertical
-            stackView.distribution = .equalSpacing
-            stackView.spacing = 50
-            return stackView
-        }
-        
-        static func headerStackView() -> UIStackView {
-            let stackView = UIStackView()
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            stackView.alignment = .fill
-            stackView.axis = .horizontal
-            stackView.distribution = .fillProportionally
-            return stackView
-        }
         
         static func backButton() -> UIButton {
             let button = UIButton()
