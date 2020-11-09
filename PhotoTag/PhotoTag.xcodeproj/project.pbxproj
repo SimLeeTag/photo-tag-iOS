@@ -10,6 +10,8 @@
 		54022D74814B80EA4BF89773 /* Pods_PhotoTag_PhotoTagUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9883F4ADD7ADA08DC14AA90B /* Pods_PhotoTag_PhotoTagUITests.framework */; };
 		6A4F23EA2546E2AC00577718 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F23E92546E2AC00577718 /* AppCoordinator.swift */; };
 		6A4F23F72546EC8A00577718 /* PhotoNoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F23F62546EC8A00577718 /* PhotoNoteListViewController.swift */; };
+		6A5544C925599CDF003F3864 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5544C825599CDF003F3864 /* Colors.swift */; };
+		6A5544CE2559A5F0003F3864 /* Compositable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5544CD2559A5F0003F3864 /* Compositable.swift */; };
 		6A6825222548053F00B19C9A /* TagManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6825212548053F00B19C9A /* TagManagementViewController.swift */; };
 		6A6825332548384700B19C9A /* LayoutGuideCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */; };
 		6A682539254854E200B19C9A /* AppViewControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A682538254854E200B19C9A /* AppViewControllersFactory.swift */; };
@@ -25,6 +27,8 @@
 		6A89B9F225549807003E1027 /* SelectPeriodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9F125549807003E1027 /* SelectPeriodViewController.swift */; };
 		6AA9BD65254E93C200126749 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA9BD64254E93C200126749 /* LoginManager.swift */; };
 		6AA9BD6E254EA0ED00126749 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA9BD6D254EA0ED00126749 /* Endpoint.swift */; };
+		6AAE725E2555988B00CF7F9F /* TagCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAE725D2555988B00CF7F9F /* TagCategoryView.swift */; };
+		6AAE726E2555997D00CF7F9F /* TagManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAE726D2555997D00CF7F9F /* TagManagementView.swift */; };
 		6AB83AE02542B4340065B698 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83ADF2542B4340065B698 /* Coordinator.swift */; };
 		6AB83AF425442B370065B698 /* TagCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83AF325442B370065B698 /* TagCoordinator.swift */; };
 		6AB83AF925442C030065B698 /* TagCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83AF825442C030065B698 /* TagCategoryViewController.swift */; };
@@ -69,6 +73,8 @@
 		55C8346B7FC7025DA7D4F3EB /* Pods-PhotoTag.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTag.release.xcconfig"; path = "Target Support Files/Pods-PhotoTag/Pods-PhotoTag.release.xcconfig"; sourceTree = "<group>"; };
 		6A4F23E92546E2AC00577718 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6A4F23F62546EC8A00577718 /* PhotoNoteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNoteListViewController.swift; sourceTree = "<group>"; };
+		6A5544C825599CDF003F3864 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		6A5544CD2559A5F0003F3864 /* Compositable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compositable.swift; sourceTree = "<group>"; };
 		6A598F42254C6BB400547E67 /* PhotoTag.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoTag.entitlements; sourceTree = "<group>"; };
 		6A6825212548053F00B19C9A /* TagManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementViewController.swift; sourceTree = "<group>"; };
 		6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGuideCompatible.swift; sourceTree = "<group>"; };
@@ -85,6 +91,8 @@
 		6A89B9F125549807003E1027 /* SelectPeriodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPeriodViewController.swift; sourceTree = "<group>"; };
 		6AA9BD64254E93C200126749 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		6AA9BD6D254EA0ED00126749 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		6AAE725D2555988B00CF7F9F /* TagCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryView.swift; sourceTree = "<group>"; };
+		6AAE726D2555997D00CF7F9F /* TagManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementView.swift; sourceTree = "<group>"; };
 		6AB83ADF2542B4340065B698 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		6AB83AF325442B370065B698 /* TagCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCoordinator.swift; sourceTree = "<group>"; };
 		6AB83AF825442C030065B698 /* TagCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +170,8 @@
 			children = (
 				6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */,
 				6A68254F25497B7200B19C9A /* Shadow.swift */,
+				6A5544C825599CDF003F3864 /* Colors.swift */,
+				6A5544CD2559A5F0003F3864 /* Compositable.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -198,6 +208,40 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		6AAE72592555983800CF7F9F /* TagCategory */ = {
+			isa = PBXGroup;
+			children = (
+				6AAE725B2555986500CF7F9F /* View */,
+			);
+			path = TagCategory;
+			sourceTree = "<group>";
+		};
+		6AAE725A2555984400CF7F9F /* TagManagement */ = {
+			isa = PBXGroup;
+			children = (
+				6AAE725C2555986D00CF7F9F /* View */,
+			);
+			path = TagManagement;
+			sourceTree = "<group>";
+		};
+		6AAE725B2555986500CF7F9F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6AB83AF825442C030065B698 /* TagCategoryViewController.swift */,
+				6AAE725D2555988B00CF7F9F /* TagCategoryView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6AAE725C2555986D00CF7F9F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6A6825212548053F00B19C9A /* TagManagementViewController.swift */,
+				6AAE726D2555997D00CF7F9F /* TagManagementView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		6AB83ADE2542B4130065B698 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,8 +267,8 @@
 		6AB83AED25441BC90065B698 /* Tag */ = {
 			isa = PBXGroup;
 			children = (
-				6AB83AF825442C030065B698 /* TagCategoryViewController.swift */,
-				6A6825212548053F00B19C9A /* TagManagementViewController.swift */,
+				6AAE72592555983800CF7F9F /* TagCategory */,
+				6AAE725A2555984400CF7F9F /* TagManagement */,
 			);
 			path = Tag;
 			sourceTree = "<group>";
@@ -569,8 +613,12 @@
 				6AB83AF925442C030065B698 /* TagCategoryViewController.swift in Sources */,
 				6AD3ED712551A0B400F8EF61 /* NetworkError.swift in Sources */,
 				6AD3EDB1255274A400F8EF61 /* KeychainItem.swift in Sources */,
+				6AAE726E2555997D00CF7F9F /* TagManagementView.swift in Sources */,
 				6AFE3C01253EDF3200B385AC /* AppDelegate.swift in Sources */,
+				6A5544CE2559A5F0003F3864 /* Compositable.swift in Sources */,
 				6A89B9E3255496F9003E1027 /* SelectPhotoViewController.swift in Sources */,
+				6AAE725E2555988B00CF7F9F /* TagCategoryView.swift in Sources */,
+				6A5544C925599CDF003F3864 /* Colors.swift in Sources */,
 				6A68255025497B7200B19C9A /* Shadow.swift in Sources */,
 				6AFE3C0B253EDF3200B385AC /* PhotoTag.xcdatamodeld in Sources */,
 				6A89B9F225549807003E1027 /* SelectPeriodViewController.swift in Sources */,
