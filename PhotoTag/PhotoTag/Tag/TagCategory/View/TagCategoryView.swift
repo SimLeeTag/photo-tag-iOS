@@ -7,17 +7,12 @@
 
 import UIKit
 
-class TagCategoryView: UIView {
+class TagCategoryView: ScrollableContentViewWithHead {
     
     // MARK: - Properties
-    let contentView = SubviewFactory.contentView()
-    let scrollView = SubviewFactory.sceneScrollView()
-    let headerStackView = SubviewFactory.headerStackView()
-    let spaceView = SubviewFactory.spaceView()
     let moveToTagManagementButton = SubviewFactory.moveToTagManagementButton()
     let moveToPhotoListButton = SubviewFactory.moveToPhotoListButton()
     let tagCategoryTableView = SubviewFactory.tagCategoryTableView()
-    let contentStackView = SubviewFactory.contentStackView()
     
     // MARK: - Intialization
     init() {
@@ -29,26 +24,20 @@ class TagCategoryView: UIView {
     required init?(coder aDecoder: NSCoder) { return nil }
     
     // MARK: - Functions
-    private func addSubviews() {
+    override func addSubviews() {
         configureHeaderView()
         contentStackView.addArrangedSubview(tagCategoryTableView)
         contentStackView.addArrangedSubview(moveToPhotoListButton)
-        contentView.addSubview(contentStackView)
-        configureScrollView()
+        configureContentView()
     }
     
-    private func configureScrollView() {
-        self.addSubview(contentView)
-        scrollView.addSubview(contentView)
-    }
-    
-    private func configureHeaderView() {
+    override func configureHeaderView() {
         headerStackView.addArrangedSubview(spaceView)
         headerStackView.addArrangedSubview(moveToTagManagementButton)
         headerStackView.addArrangedSubview(headerStackView)
     }
     
-    private func setupLayout() {
+    override func setupLayout() {
         spaceView.pinWidth(to: self.widthAnchor, multiplier: 0.95)
         headerStackView.pinHeight(to: self.heightAnchor, multiplier: 0.1)
         moveToTagManagementButton.pinHeight(to: self.heightAnchor, multiplier: 0.15)
@@ -58,37 +47,7 @@ class TagCategoryView: UIView {
 }
 
 private extension TagCategoryView {
-    
     struct SubviewFactory {
-        
-        static func contentView() -> UIView {
-            let view = UIView()
-            view.backgroundColor = .white
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }
-        
-        static func sceneScrollView() -> UIScrollView {
-            let scrollView = UIScrollView()
-            scrollView.translatesAutoresizingMaskIntoConstraints = false
-            return scrollView
-        }
-        
-        static func headerStackView() -> UIStackView {
-            let stackView = UIStackView()
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            stackView.alignment = .fill
-            stackView.axis = .horizontal
-            stackView.distribution = .fillProportionally
-            return stackView
-        }
-        
-        static func spaceView() -> UIView {
-            let view = UIView()
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.backgroundColor = .clear
-            return view
-        }
         
         static func moveToTagManagementButton() -> UIButton {
             let button = UIButton()
