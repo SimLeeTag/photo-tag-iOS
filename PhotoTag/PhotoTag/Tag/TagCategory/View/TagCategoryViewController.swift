@@ -26,7 +26,7 @@ class TagCategoryViewController: UIViewController {
     
     // MARK: - Life Cycle
     override func loadView() {
-        view = LoginView()
+        view = TagCategoryView()
     }
     
     override func viewDidLoad() {
