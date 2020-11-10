@@ -41,8 +41,7 @@ private extension ContentView {
             stackView.translatesAutoresizingMaskIntoConstraints = false
             stackView.alignment = .fill
             stackView.axis = .vertical
-            stackView.distribution = .fillProportionally
-            stackView.spacing = 50
+            stackView.distribution = .fill
             return stackView
         }
     }
