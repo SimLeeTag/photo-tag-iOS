@@ -22,22 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         appCoordinator = AppCoordinator(navigationController: window?.rootViewController as! UINavigationController)
         
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        appleIDProvider.getCredentialState(forUserID: KeychainItem.currentUserIdentifier) { (credentialState, error) in
-            switch credentialState {
-            case .authorized:
-                self.appCoordinator?.navigateToSelectTagCategory()
-                break // The Apple ID credential is valid.
-            case .revoked, .notFound:
-                // The Apple ID credential is either revoked or was not found, so show the sign-in UI.
-                DispatchQueue.main.async {
-                    self.appCoordinator?.start()
-                    self.window?.makeKeyAndVisible()
-                }
-            default:
-                break
-            }
-        }
+        self.appCoordinator?.start()
+        self.window?.makeKeyAndVisible()
         return true
     }
     
