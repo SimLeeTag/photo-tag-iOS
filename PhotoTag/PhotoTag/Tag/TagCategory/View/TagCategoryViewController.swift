@@ -40,6 +40,7 @@ class TagCategoryViewController: UIViewController {
         tagCategoryView.moveToTagManagementButton.addTarget(self, action: #selector(navigateToTagManagement), for: .touchUpInside)
         // TODO: - navigate to tutorial scene
         tagCategoryView.moveToPhotoListButton.addTarget(self, action: #selector(navigateToPhotoNoteList), for: .touchUpInside)
+        tagCategoryView.tagCategoryCollectionView.dataSource = self
     }
     
     @objc func navigateToTagManagement() {
@@ -48,5 +49,22 @@ class TagCategoryViewController: UIViewController {
     
     @objc func navigateToPhotoNoteList() {
         coordinator?.parentCoordinator?.navigateToPhotoNoteList()
+    }
+}
+extension TagCategoryViewController: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return 150
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let collectionViewCell =  collectionView.dequeueReusableCell(withReuseIdentifier: "cellIdentifier", for: indexPath)
+        collectionView.backgroundColor = .brown
+        collectionViewCell.backgroundColor = .orange
+        return collectionViewCell
     }
 }

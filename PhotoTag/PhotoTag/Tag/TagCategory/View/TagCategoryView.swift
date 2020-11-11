@@ -12,7 +12,7 @@ class TagCategoryView: ContentViewWithHeader {
     // MARK: - Properties
     let moveToTagManagementButton = SubviewFactory.moveToTagManagementButton()
     let moveToPhotoListButton = SubviewFactory.moveToPhotoListButton()
-    let tagCategoryTableView = SubviewFactory.tagCategoryTableView()
+    let tagCategoryCollectionView = SubviewFactory.tagCategoryCollectionView()
     
     // MARK: - Intialization
     init() {
@@ -79,20 +79,12 @@ private extension TagCategoryView {
             return button
         }
         
-        static func tagCategoryTableView() -> UITableView {
-            let tableView = UITableView()
-            tableView.translatesAutoresizingMaskIntoConstraints = false
-            return tableView
-        }
-        
-        static func contentStackView() -> UIStackView {
-            let stackView = UIStackView()
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            stackView.alignment = .fill
-            stackView.axis = .vertical
-            stackView.distribution = .fillProportionally
-            stackView.spacing = 50
-            return stackView
+        static func tagCategoryCollectionView() -> UICollectionView {
+            let layout = UICollectionViewFlowLayout()
+            let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+            collectionView.translatesAutoresizingMaskIntoConstraints = false
+            collectionView.register(TagCategoryCollectionViewCell.self, forCellWithReuseIdentifier: "cellIdentifier")
+            return collectionView
         }
         
     }
