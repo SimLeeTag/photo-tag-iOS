@@ -13,7 +13,7 @@ protocol Scrollable: Representable {
     func configureScrollView()
 }
 
-class ScrollableContentViewWithHead: ContentViewWithHead, Scrollable {
+class ScrollableContentViewWithHeader: ContentViewWithHeader, Scrollable {
     
     var scrollView = SubviewFactory.sceneScrollView()
     
@@ -28,7 +28,7 @@ class ScrollableContentViewWithHead: ContentViewWithHead, Scrollable {
     
 }
 
-private extension ScrollableContentViewWithHead {
+private extension ScrollableContentViewWithHeader {
     struct SubviewFactory {
         
         static func sceneScrollView() -> UIScrollView {
