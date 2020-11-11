@@ -7,7 +7,13 @@
 
 import UIKit
 
-class TagManagementView: ScrollableContentViewWithHead {
+class TagManagementView: ContentViewWithHeader {
+    
+    enum TagManagementViewConstant {
+        static let title = "Manage Hashtags"
+    }
+    
+    // MARK: - Properties
     let backButton = SubviewFactory.backButton()
     let titleLabel = SubviewFactory.titleLabel()
     let hashtagTableView = SubviewFactory.hashtagTableView()
@@ -24,9 +30,9 @@ class TagManagementView: ScrollableContentViewWithHead {
     // MARK: - Functions
     override func addSubviews() {
         configureHeaderView()
-        contentStackView.addArrangedSubview(headerStackView)
-        contentStackView.addArrangedSubview(hashtagTableView)
+        configureContentStackView()
         configureContentView()
+        self.addSubview(contentView)
     }
     
     override func configureHeaderView() {
@@ -34,11 +40,18 @@ class TagManagementView: ScrollableContentViewWithHead {
         headerStackView.addArrangedSubview(titleLabel)
     }
     
+    private func configureContentStackView() {
+        contentStackView.addArrangedSubview(headerStackView)
+        contentStackView.addArrangedSubview(hashtagTableView)
+    }
+    
     override func setupLayout() {
-        titleLabel.pinWidth(to: self.widthAnchor, multiplier: 0.95)
-        headerStackView.pinHeight(to: self.heightAnchor, multiplier: 0.1)
-        contentView.pinEdges(to: scrollView)
-        scrollView.pinEdges(to: self, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        contentStackView.pinEdges(to: contentView)
+        contentView.pinEdges(to: self)
+        headerStackView.alignment = .bottom
+        contentStackView.spacing = .ten
+        titleLabel.pinWidth(to: self.widthAnchor, multiplier: .zeroPointEight)
+        headerStackView.pinHeight(to: self.heightAnchor, multiplier: .zeroPointOne)
     }
 }
 
@@ -49,21 +62,24 @@ private extension TagManagementView {
         static func backButton() -> UIButton {
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.setImage(UIImage(named: "ios-arrow-back"), for: .normal)
+            button.setImage(.back, for: .normal)
+            button.tintColor = .black
+            button.contentHorizontalAlignment = .center
             return button
         }
         
         static func titleLabel() -> UILabel {
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
-            label.text = "Manage Hashtags"
-            label.font = UIFont.boldSystemFont(ofSize: 20.0)
+            label.text = TagManagementViewConstant.title
+            label.font = UIFont.boldSystemFont(ofSize: .twenty)
             label.textAlignment = .left
             return label
         }
         
         static func hashtagTableView() -> UITableView {
-            let tableView = UITableView()
+            let tableView = UITableView(frame: .zero, style: .grouped)
+            tableView.register(cellType: TagManagementTableViewCell.self)
             tableView.translatesAutoresizingMaskIntoConstraints = false
             return tableView
         }
