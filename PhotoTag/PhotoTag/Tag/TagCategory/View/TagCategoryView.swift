@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TagCategoryView: ScrollableContentViewWithHead {
+class TagCategoryView: ContentViewWithHeader {
     
     // MARK: - Properties
     let moveToTagManagementButton = SubviewFactory.moveToTagManagementButton()
@@ -26,23 +26,35 @@ class TagCategoryView: ScrollableContentViewWithHead {
     // MARK: - Functions
     override func addSubviews() {
         configureHeaderView()
-        contentStackView.addArrangedSubview(tagCategoryTableView)
-        contentStackView.addArrangedSubview(moveToPhotoListButton)
+        configureContentStackView()
         configureContentView()
+        self.addSubview(contentView)
+        self.addSubview(moveToPhotoListButton)
     }
     
     override func configureHeaderView() {
         headerStackView.addArrangedSubview(spaceView)
         headerStackView.addArrangedSubview(moveToTagManagementButton)
-        headerStackView.addArrangedSubview(headerStackView)
+    }
+    
+    private func configureContentStackView() {
+        contentStackView.addArrangedSubview(headerStackView)
+        contentStackView.addArrangedSubview(tagCategoryCollectionView)
     }
     
     override func setupLayout() {
-        spaceView.pinWidth(to: self.widthAnchor, multiplier: 0.95)
+        
+        contentStackView.pinEdges(to: contentView)
+        contentView.pinEdges(to: self)
+        
+        moveToTagManagementButton.pinWidth(to: self.widthAnchor, multiplier: 0.1)
         headerStackView.pinHeight(to: self.heightAnchor, multiplier: 0.1)
-        moveToTagManagementButton.pinHeight(to: self.heightAnchor, multiplier: 0.15)
-        contentView.pinEdges(to: scrollView)
-        scrollView.pinEdges(to: self, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        headerStackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        
+        moveToPhotoListButton.pinWidth(to: self.widthAnchor, multiplier: 0.85)
+        moveToPhotoListButton.pinHeight(to: self.heightAnchor, multiplier: 0.05)
+        moveToPhotoListButton.pinCenterX(to: self.centerXAnchor)
+        moveToPhotoListButton.pinBottom(to: self.bottomAnchor, offset: -20)
     }
 }
 
@@ -52,7 +64,7 @@ private extension TagCategoryView {
         static func moveToTagManagementButton() -> UIButton {
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.setImage(UIImage(named: "plus.slash.minus"), for: .normal)
+            button.setTitle("Tag Management", for: .normal)
             return button
         }
     
