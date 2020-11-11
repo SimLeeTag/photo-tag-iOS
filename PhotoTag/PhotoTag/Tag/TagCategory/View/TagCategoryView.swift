@@ -9,7 +9,13 @@ import UIKit
 
 class TagCategoryView: ContentViewWithHeader {
     
+    enum TagCategoryViewConstant {
+        static let title = "Tags"
+        static let goButtonTitle = "Go"
+    }
+    
     // MARK: - Properties
+    let titleLabel = SubviewFactory.titleLabel()
     let moveToTagManagementButton = SubviewFactory.moveToTagManagementButton()
     let moveToPhotoListButton = SubviewFactory.moveToPhotoListButton()
     let tagCategoryCollectionView = SubviewFactory.tagCategoryCollectionView()
@@ -34,6 +40,7 @@ class TagCategoryView: ContentViewWithHeader {
     
     override func configureHeaderView() {
         headerStackView.addArrangedSubview(spaceView)
+        headerStackView.addArrangedSubview(titleLabel)
         headerStackView.addArrangedSubview(moveToTagManagementButton)
     }
     
@@ -43,37 +50,52 @@ class TagCategoryView: ContentViewWithHeader {
     }
     
     override func setupLayout() {
-        
         contentStackView.pinEdges(to: contentView)
         contentView.pinEdges(to: self)
         
-        moveToTagManagementButton.pinWidth(to: self.widthAnchor, multiplier: 0.1)
-        headerStackView.pinHeight(to: self.heightAnchor, multiplier: 0.1)
+        headerStackView.alignment = .bottom
+        contentStackView.spacing = .ten
+        
+        spaceView.pinWidth(to: self.widthAnchor, multiplier: .zeroPointOne)
+        moveToTagManagementButton.pinWidth(to: self.widthAnchor, multiplier: .zeroPointOneFive)
+        headerStackView.pinHeight(to: self.heightAnchor, multiplier: .zeroPointOneTwo)
         headerStackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
-        moveToPhotoListButton.pinWidth(to: self.widthAnchor, multiplier: 0.85)
-        moveToPhotoListButton.pinHeight(to: self.heightAnchor, multiplier: 0.05)
+        moveToPhotoListButton.pinWidth(to: self.widthAnchor, multiplier: .zeroPointEightfive)
+        moveToPhotoListButton.pinHeight(to: self.heightAnchor, multiplier: .zeroPointZerofive)
         moveToPhotoListButton.pinCenterX(to: self.centerXAnchor)
-        moveToPhotoListButton.pinBottom(to: self.bottomAnchor, offset: -20)
+        moveToPhotoListButton.pinBottom(to: self.bottomAnchor, offset: -.twenty)
     }
 }
 
 private extension TagCategoryView {
+    
     struct SubviewFactory {
+        
+        static func titleLabel() -> UILabel {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = TagCategoryViewConstant.title
+            label.font = UIFont.boldSystemFont(ofSize: .twenty)
+            label.textAlignment = .left
+            return label
+        }
         
         static func moveToTagManagementButton() -> UIButton {
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.setTitle("Tag Management", for: .normal)
+            button.setTitleColor(.darkGray, for: .normal)
+            button.setImage(.filter, for: .normal)
+            button.tintColor = .darkGray
             return button
         }
     
         static func moveToPhotoListButton() -> UIButton {
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.setTitle("go", for: .normal)
+            button.setTitle(TagCategoryViewConstant.goButtonTitle, for: .normal)
             button.clipsToBounds = false
-            button.layer.cornerRadius = 10
+            button.layer.cornerRadius = .ten
             button.backgroundColor = UIColor.keyColor
             button.setTitleColor(.white, for: .normal)
             return button
@@ -83,7 +105,7 @@ private extension TagCategoryView {
             let layout = UICollectionViewFlowLayout()
             let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
             collectionView.translatesAutoresizingMaskIntoConstraints = false
-            collectionView.register(TagCategoryCollectionViewCell.self, forCellWithReuseIdentifier: "cellIdentifier")
+            collectionView.register(cellType: TagCategoryCollectionViewCell.self)
             return collectionView
         }
         

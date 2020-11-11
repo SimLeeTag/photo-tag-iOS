@@ -7,8 +7,13 @@
 
 import UIKit
 
+enum TagCategoryCollectionViewConstant {
+    static let numberOfSections = 1
+    static let activeHashtagsSectionNumber = 0
+}
+
 class TagCategoryViewController: UIViewController {
-    
+        
     // MARK: - Properties
     weak var coordinator: TagCoordinator?
     private var tagCategoryView: TagCategoryView! {
@@ -29,6 +34,10 @@ class TagCategoryViewController: UIViewController {
         view = TagCategoryView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        hideNavigationBar()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -36,11 +45,15 @@ class TagCategoryViewController: UIViewController {
     
     // MARK: - Functions
     private func configure () {
-        self.navigationController?.isNavigationBarHidden = true
+        hideNavigationBar()
         tagCategoryView.moveToTagManagementButton.addTarget(self, action: #selector(navigateToTagManagement), for: .touchUpInside)
         // TODO: - navigate to tutorial scene
         tagCategoryView.moveToPhotoListButton.addTarget(self, action: #selector(navigateToPhotoNoteList), for: .touchUpInside)
         tagCategoryView.tagCategoryCollectionView.dataSource = self
+    }
+    
+    private func hideNavigationBar() {
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     @objc func navigateToTagManagement() {
@@ -54,17 +67,15 @@ class TagCategoryViewController: UIViewController {
 extension TagCategoryViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return TagCategoryCollectionViewConstant.numberOfSections
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 150
+        return 150 // 추후 변경 예정입니다.
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let collectionViewCell =  collectionView.dequeueReusableCell(withReuseIdentifier: "cellIdentifier", for: indexPath)
-        collectionView.backgroundColor = .brown
-        collectionViewCell.backgroundColor = .orange
+        let collectionViewCell = collectionView.dequeueReusableCell(with: TagCategoryCollectionViewCell.self, for: indexPath)
         return collectionViewCell
     }
 }

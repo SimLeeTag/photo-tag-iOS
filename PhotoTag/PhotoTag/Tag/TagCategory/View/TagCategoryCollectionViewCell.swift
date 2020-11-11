@@ -11,8 +11,6 @@ class TagCategoryCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        backgroundColor = .red
     }
 
 }
