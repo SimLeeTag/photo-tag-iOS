@@ -14,7 +14,8 @@ protocol HeaderRepresentable: Representable {
     func configureHeaderView()
 }
 
-class ContentViewWithHead: ContentView, HeaderRepresentable {
+class ContentViewWithHeader: ContentView, HeaderRepresentable {
+    
     var headerStackView = SubviewFactory.headerStackView()
     var spaceView = SubviewFactory.spaceView()
     
@@ -25,7 +26,7 @@ class ContentViewWithHead: ContentView, HeaderRepresentable {
     }
 }
 
-private extension ContentViewWithHead {
+private extension ContentViewWithHeader {
     struct SubviewFactory {
         
         static func headerStackView() -> UIStackView {
@@ -45,4 +46,3 @@ private extension ContentViewWithHead {
         }
     }
 }
-

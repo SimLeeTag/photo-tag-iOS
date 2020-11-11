@@ -12,7 +12,11 @@
 		6A4F23F72546EC8A00577718 /* PhotoNoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F23F62546EC8A00577718 /* PhotoNoteListViewController.swift */; };
 		6A5544C925599CDF003F3864 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5544C825599CDF003F3864 /* Colors.swift */; };
 		6A5544DC2559B3BB003F3864 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5544DB2559B3BB003F3864 /* ContentView.swift */; };
-		6A5544E42559B3CA003F3864 /* ScrollableContentViewWithHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5544E32559B3CA003F3864 /* ScrollableContentViewWithHead.swift */; };
+		6A5544E42559B3CA003F3864 /* ScrollableContentViewWithHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5544E32559B3CA003F3864 /* ScrollableContentViewWithHeader.swift */; };
+		6A5544F1255A75F4003F3864 /* PhotoNoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5544F0255A75F4003F3864 /* PhotoNoteListView.swift */; };
+		6A5544FF255AD575003F3864 /* TagCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5544FD255AD575003F3864 /* TagCategoryCollectionViewCell.swift */; };
+		6A554500255AD575003F3864 /* TagCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A5544FE255AD575003F3864 /* TagCategoryCollectionViewCell.xib */; };
+		6A554505255AE449003F3864 /* ContentViewWithHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A554504255AE449003F3864 /* ContentViewWithHeader.swift */; };
 		6A6825222548053F00B19C9A /* TagManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6825212548053F00B19C9A /* TagManagementViewController.swift */; };
 		6A6825332548384700B19C9A /* LayoutGuideCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */; };
 		6A682539254854E200B19C9A /* AppViewControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A682538254854E200B19C9A /* AppViewControllersFactory.swift */; };
@@ -76,7 +80,11 @@
 		6A4F23F62546EC8A00577718 /* PhotoNoteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNoteListViewController.swift; sourceTree = "<group>"; };
 		6A5544C825599CDF003F3864 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		6A5544DB2559B3BB003F3864 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		6A5544E32559B3CA003F3864 /* ScrollableContentViewWithHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableContentViewWithHead.swift; sourceTree = "<group>"; };
+		6A5544E32559B3CA003F3864 /* ScrollableContentViewWithHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableContentViewWithHeader.swift; sourceTree = "<group>"; };
+		6A5544F0255A75F4003F3864 /* PhotoNoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNoteListView.swift; sourceTree = "<group>"; };
+		6A5544FD255AD575003F3864 /* TagCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		6A5544FE255AD575003F3864 /* TagCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		6A554504255AE449003F3864 /* ContentViewWithHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewWithHeader.swift; sourceTree = "<group>"; };
 		6A598F42254C6BB400547E67 /* PhotoTag.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoTag.entitlements; sourceTree = "<group>"; };
 		6A6825212548053F00B19C9A /* TagManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementViewController.swift; sourceTree = "<group>"; };
 		6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGuideCompatible.swift; sourceTree = "<group>"; };
@@ -171,9 +179,27 @@
 			isa = PBXGroup;
 			children = (
 				6A5544DB2559B3BB003F3864 /* ContentView.swift */,
-				6A5544E32559B3CA003F3864 /* ScrollableContentViewWithHead.swift */,
+				6A554504255AE449003F3864 /* ContentViewWithHeader.swift */,
+				6A5544E32559B3CA003F3864 /* ScrollableContentViewWithHeader.swift */,
 			);
 			path = "Common View";
+			sourceTree = "<group>";
+		};
+		6A5544EE255A75C4003F3864 /* PhotoNoteList */ = {
+			isa = PBXGroup;
+			children = (
+				6A5544EF255A75CF003F3864 /* View */,
+			);
+			path = PhotoNoteList;
+			sourceTree = "<group>";
+		};
+		6A5544EF255A75CF003F3864 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6A4F23F62546EC8A00577718 /* PhotoNoteListViewController.swift */,
+				6A5544F0255A75F4003F3864 /* PhotoNoteListView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		6A68252E254837E900B19C9A /* Utility */ = {
@@ -239,6 +265,8 @@
 			children = (
 				6AB83AF825442C030065B698 /* TagCategoryViewController.swift */,
 				6AAE725D2555988B00CF7F9F /* TagCategoryView.swift */,
+				6A5544FD255AD575003F3864 /* TagCategoryCollectionViewCell.swift */,
+				6A5544FE255AD575003F3864 /* TagCategoryCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -286,7 +314,7 @@
 		6AB83AEE25441C040065B698 /* Photo Note */ = {
 			isa = PBXGroup;
 			children = (
-				6A4F23F62546EC8A00577718 /* PhotoNoteListViewController.swift */,
+				6A5544EE255A75C4003F3864 /* PhotoNoteList */,
 				6A89B9E2255496F9003E1027 /* SelectPhotoViewController.swift */,
 				6A89B9E725549764003E1027 /* WritePhotoNoteViewController.swift */,
 				6A89B9EC25549787003E1027 /* PhotoNoteViewController.swift */,
@@ -491,6 +519,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AFE3C45253F0A1000B385AC /* .swiftlint.yml in Resources */,
+				6A554500255AD575003F3864 /* TagCategoryCollectionViewCell.xib in Resources */,
 				6AFE3C10253EDF3300B385AC /* LaunchScreen.storyboard in Resources */,
 				6AFE3C0D253EDF3300B385AC /* Assets.xcassets in Resources */,
 			);
@@ -617,11 +646,13 @@
 				6A89B9B225546444003E1027 /* PhotoNoteCoordinator.swift in Sources */,
 				6AD3ED6725519FE900F8EF61 /* UseCase.swift in Sources */,
 				6AFE3C05253EDF3200B385AC /* LoginViewController.swift in Sources */,
+				6A554505255AE449003F3864 /* ContentViewWithHeader.swift in Sources */,
 				6A68254425485DA300B19C9A /* LoginView.swift in Sources */,
 				6A4F23F72546EC8A00577718 /* PhotoNoteListViewController.swift in Sources */,
 				6A5544DC2559B3BB003F3864 /* ContentView.swift in Sources */,
 				6AA9BD6E254EA0ED00126749 /* Endpoint.swift in Sources */,
 				6A89B9BF25547088003E1027 /* SearchViewController.swift in Sources */,
+				6A5544FF255AD575003F3864 /* TagCategoryCollectionViewCell.swift in Sources */,
 				6AB83AF925442C030065B698 /* TagCategoryViewController.swift in Sources */,
 				6AD3ED712551A0B400F8EF61 /* NetworkError.swift in Sources */,
 				6AD3EDB1255274A400F8EF61 /* KeychainItem.swift in Sources */,
@@ -630,12 +661,13 @@
 				6A89B9E3255496F9003E1027 /* SelectPhotoViewController.swift in Sources */,
 				6AAE725E2555988B00CF7F9F /* TagCategoryView.swift in Sources */,
 				6A5544C925599CDF003F3864 /* Colors.swift in Sources */,
-				6A5544E42559B3CA003F3864 /* ScrollableContentViewWithHead.swift in Sources */,
+				6A5544E42559B3CA003F3864 /* ScrollableContentViewWithHeader.swift in Sources */,
 				6A68255025497B7200B19C9A /* Shadow.swift in Sources */,
 				6AFE3C0B253EDF3200B385AC /* PhotoTag.xcdatamodeld in Sources */,
 				6A89B9F225549807003E1027 /* SelectPeriodViewController.swift in Sources */,
 				6AD3ED5D25519F5700F8EF61 /* URLRequest.swift in Sources */,
 				6A4F23EA2546E2AC00577718 /* AppCoordinator.swift in Sources */,
+				6A5544F1255A75F4003F3864 /* PhotoNoteListView.swift in Sources */,
 				6A89B9ED25549787003E1027 /* PhotoNoteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
