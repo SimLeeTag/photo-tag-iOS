@@ -7,17 +7,17 @@
 
 import UIKit
 
+enum TagManagementTableViewConstant {
+    static let numberOfSections = 2
+    static let activeHashtagsSectionNumber = 0
+    static let activeHashtagsSectionHeaderTitle = "Active Hashtags  (Swipe to edit)"
+    static let archivedHashtagsSectionHeaderTitle = "Archived Hashtags"
+}
+
 class TagManagementViewController: UIViewController {
     
-    enum TagManagementTableViewConstant {
-        static let numberOfSections = 2
-        static let activeHashtagsSectionNumber = 0
-        static let activeHashtagsSectionHeaderTitle = "Active Hashtags  (Swipe to edit)"
-        static let archivedHashtagsSectionHeaderTitle = "Archived Hashtags"
-        static let tableViewCellIdentifier = "tableViewCellIdentifier"
-    }
-    
     // MARK: - Properties
+    private let dataSource = TagManagementTableViewDataSource()
     weak var coordinator: TagCoordinator?
     private var tagManagementView: TagManagementView! {
         return view as? TagManagementView
@@ -46,13 +46,13 @@ class TagManagementViewController: UIViewController {
         configure()
     }
     
+    // MARK: - Functions
     private func configure () {
         hideNavigationBar()
         tagManagementView.backButton.addTarget(self, action: #selector(navigateToTagCategory), for: .touchUpInside)
-        tagManagementView.hashtagTableView.dataSource = self
+        tagManagementView.hashtagTableView.dataSource = dataSource
     }
     
-    // MARK: - Functions
     private func hideNavigationBar() {
         self.navigationController?.isNavigationBarHidden = true
     }
@@ -60,31 +60,4 @@ class TagManagementViewController: UIViewController {
     @objc func navigateToTagCategory() {
         self.navigationController?.popViewController(animated: true)
     }
-}
-
-extension TagManagementViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        TagManagementTableViewConstant.numberOfSections
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        var sectionTitle = ""
-        if section == TagManagementTableViewConstant.activeHashtagsSectionNumber {
-            sectionTitle = TagManagementTableViewConstant.activeHashtagsSectionHeaderTitle
-        } else {
-            sectionTitle = TagManagementTableViewConstant.archivedHashtagsSectionHeaderTitle
-        }
-        return sectionTitle
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5 // 추후 변경 예정입니다.
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: TagManagementTableViewConstant.tableViewCellIdentifier, for: indexPath) as? TagManagementTableViewCell else { return UITableViewCell() }
-        return cell
-    }
-    
 }
