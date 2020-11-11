@@ -36,11 +36,6 @@ class LoginViewController: UIViewController {
         configure()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        performExistingAccountSetupFlows()
-    }
-    
     // MARK: - Functions
     
     private func configure () {
@@ -68,18 +63,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func performExistingAccountSetupFlows() {
-        let appleIDProviderRequest = ASAuthorizationAppleIDProvider().createRequest()
-        let passwordProviderRequest = ASAuthorizationAppleIDProvider().createRequest()
-        appleIDProviderRequest.requestedScopes = [.fullName, .email]
-        passwordProviderRequest.requestedScopes = [.fullName, .email]
-        let requests = [appleIDProviderRequest,
-                        passwordProviderRequest]
-        let authorizationController = ASAuthorizationController(authorizationRequests: requests)
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
-        authorizationController.performRequests()
-    }
 }
 
 extension LoginViewController: ASAuthorizationControllerDelegate {
