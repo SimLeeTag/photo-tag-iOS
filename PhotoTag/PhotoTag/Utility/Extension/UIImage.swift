@@ -10,4 +10,5 @@ import UIKit
 extension UIImage {
     static let filter = UIImage(named: "line.horizontal.3.decrease.circle.fill")
     static let back = UIImage(named: "chevron.backward")
+    static let search = UIImage(named: "magnifyingglass.circle")
 }
