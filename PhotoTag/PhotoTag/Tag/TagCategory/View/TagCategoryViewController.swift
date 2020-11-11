@@ -15,6 +15,7 @@ enum TagCategoryCollectionViewConstant {
 class TagCategoryViewController: UIViewController {
         
     // MARK: - Properties
+    private let dataSource = TagCategoryCollectionViewDataSource()
     weak var coordinator: TagCoordinator?
     private var tagCategoryView: TagCategoryView! {
         return view as? TagCategoryView
@@ -49,7 +50,7 @@ class TagCategoryViewController: UIViewController {
         tagCategoryView.moveToTagManagementButton.addTarget(self, action: #selector(navigateToTagManagement), for: .touchUpInside)
         // TODO: - navigate to tutorial scene
         tagCategoryView.moveToPhotoListButton.addTarget(self, action: #selector(navigateToPhotoNoteList), for: .touchUpInside)
-        tagCategoryView.tagCategoryCollectionView.dataSource = self
+        tagCategoryView.tagCategoryCollectionView.dataSource = dataSource
     }
     
     private func hideNavigationBar() {
@@ -62,20 +63,5 @@ class TagCategoryViewController: UIViewController {
     
     @objc func navigateToPhotoNoteList() {
         coordinator?.parentCoordinator?.navigateToPhotoNoteList()
-    }
-}
-extension TagCategoryViewController: UICollectionViewDataSource {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return TagCategoryCollectionViewConstant.numberOfSections
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 150 // 추후 변경 예정입니다.
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let collectionViewCell = collectionView.dequeueReusableCell(with: TagCategoryCollectionViewCell.self, for: indexPath)
-        return collectionViewCell
     }
 }
