@@ -21,7 +21,10 @@ struct AppViewControllersFactory {
     }
     
     func tagManagementViewController(coordinator: TagCoordinator) -> UIViewController {
-        return TagManagementViewController(coordinator: coordinator)
+        let tagManagementViewController = TagManagementViewController(coordinator: coordinator)
+        let tableViewDelegate = TagManagementTableViewDelegate(withDelegate: tagManagementViewController)
+        tagManagementViewController.delegate = tableViewDelegate
+        return tagManagementViewController
     }
     
     func photoNoteListViewController(coordinator: PhotoNoteCoordinator) -> UIViewController {
