@@ -7,34 +7,34 @@
 
 import UIKit
 
+protocol ViewControllerDelegate: class {
+    func makeArchivingSwipeMenu(_ tableView: UITableView, indexPath: IndexPath) -> UIContextualAction
+    func makeActivatingSwipeMenu(_ tableView: UITableView, indexPath: IndexPath) -> UIContextualAction
+}
+
 class TagManagementTableViewDelegate: NSObject, UITableViewDelegate {
+
+    weak var delegate: ViewControllerDelegate?
+    
+    init(withDelegate delegate: ViewControllerDelegate) {
+        self.delegate = delegate
+    }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
+        guard let archivingSwipeMenu =  self.delegate?.makeArchivingSwipeMenu(tableView, indexPath: indexPath) else { return UISwipeActionsConfiguration()}
+        
+        guard let activatingSwipeMenu = self.delegate?.makeActivatingSwipeMenu(tableView, indexPath: indexPath) else { return UISwipeActionsConfiguration() }
         
         if indexPath.section == TagManagementTableViewConstant.activeHashtagsSectionNumber {
             return UISwipeActionsConfiguration(actions: [
-                makeArchiveContextualAction(tableView, forRowAt: indexPath)
+                archivingSwipeMenu
             ])
         }
         
         return UISwipeActionsConfiguration(actions: [
-            makeRestoreContextualAction(tableView, forRowAt: indexPath)
+            activatingSwipeMenu
         ])
     }
     
-    private func makeArchiveContextualAction(_ tableView: UITableView, forRowAt indexPath: IndexPath) -> UIContextualAction {
-        return UIContextualAction(style: .destructive, title: "Archive") { (_, _, completion) in
-            tableView.moveSection(indexPath.section, toSection: TagManagementTableViewConstant.archivedHashtagsSectionNumber)
-            completion(true)
-        }
-    }
-    
-    private func makeRestoreContextualAction(_ tableView: UITableView, forRowAt indexPath: IndexPath) -> UIContextualAction {
-        return UIContextualAction(style: .normal, title: "Restore") { (_, _, completion) in
-            
-            tableView.moveSection(indexPath.section, toSection: TagManagementTableViewConstant.activeHashtagsSectionNumber)
-            completion(true)
-        }
-    }
 }
