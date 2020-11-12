@@ -9,6 +9,10 @@ import UIKit
 
 class TagCategoryCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var latestImageView: UIImageView!
+    @IBOutlet weak var tagNameLabel: UILabel!
+    @IBOutlet weak var noteCountLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
