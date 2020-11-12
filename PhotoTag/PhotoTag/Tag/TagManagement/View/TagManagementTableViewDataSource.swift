@@ -28,8 +28,13 @@ class TagManagementTableViewDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(with: TagManagementTableViewCell.self, for: indexPath)
-        return cell
+        let tableViewCell = tableView.dequeueReusableCell(with: TagManagementTableViewCell.self, for: indexPath)
+        return tableViewCell
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
     }
     
 }

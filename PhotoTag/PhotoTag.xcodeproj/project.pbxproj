@@ -20,6 +20,7 @@
 		6A63BA12255C0AD10096A0F7 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A63BA11255C0AD10096A0F7 /* UITableView.swift */; };
 		6A63BA1A255C1ED40096A0F7 /* TagManagementTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A63BA19255C1ED40096A0F7 /* TagManagementTableViewDataSource.swift */; };
 		6A63BA1F255C1F450096A0F7 /* TagCategoryCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A63BA1E255C1F450096A0F7 /* TagCategoryCollectionViewDataSource.swift */; };
+		6A63BA2C255C2F210096A0F7 /* TagManagementTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A63BA2B255C2F210096A0F7 /* TagManagementTableViewDelegate.swift */; };
 		6A6825222548053F00B19C9A /* TagManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6825212548053F00B19C9A /* TagManagementViewController.swift */; };
 		6A6825332548384700B19C9A /* LayoutGuideCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */; };
 		6A682539254854E200B19C9A /* AppViewControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A682538254854E200B19C9A /* AppViewControllersFactory.swift */; };
@@ -100,6 +101,7 @@
 		6A63BA11255C0AD10096A0F7 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		6A63BA19255C1ED40096A0F7 /* TagManagementTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementTableViewDataSource.swift; sourceTree = "<group>"; };
 		6A63BA1E255C1F450096A0F7 /* TagCategoryCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		6A63BA2B255C2F210096A0F7 /* TagManagementTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementTableViewDelegate.swift; sourceTree = "<group>"; };
 		6A6825212548053F00B19C9A /* TagManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementViewController.swift; sourceTree = "<group>"; };
 		6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGuideCompatible.swift; sourceTree = "<group>"; };
 		6A682538254854E200B19C9A /* AppViewControllersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewControllersFactory.swift; sourceTree = "<group>"; };
@@ -224,6 +226,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		6A63BA30255C2F2B0096A0F7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		6A68252E254837E900B19C9A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +309,7 @@
 		6AAE725A2555984400CF7F9F /* TagManagement */ = {
 			isa = PBXGroup;
 			children = (
+				6A63BA30255C2F2B0096A0F7 /* ViewModel */,
 				6AAE725C2555986D00CF7F9F /* View */,
 			);
 			path = TagManagement;
@@ -356,6 +366,7 @@
 			children = (
 				6AAE72592555983800CF7F9F /* TagCategory */,
 				6AAE725A2555984400CF7F9F /* TagManagement */,
+				6A63BA2B255C2F210096A0F7 /* TagManagementTableViewDelegate.swift */,
 			);
 			path = Tag;
 			sourceTree = "<group>";
@@ -720,6 +731,7 @@
 				6AFE3C01253EDF3200B385AC /* AppDelegate.swift in Sources */,
 				6A89B9E3255496F9003E1027 /* SelectPhotoViewController.swift in Sources */,
 				6AAE725E2555988B00CF7F9F /* TagCategoryView.swift in Sources */,
+				6A63BA2C255C2F210096A0F7 /* TagManagementTableViewDelegate.swift in Sources */,
 				6A5544C925599CDF003F3864 /* UIColor.swift in Sources */,
 				6A5544E42559B3CA003F3864 /* ScrollableContentViewWithHeader.swift in Sources */,
 				6A68255025497B7200B19C9A /* Shadow.swift in Sources */,
