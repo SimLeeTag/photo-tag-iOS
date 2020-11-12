@@ -9,6 +9,9 @@ import UIKit
 
 class TagManagementTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var tagNameLabel: UILabel!
+    @IBOutlet weak var noteCountLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
