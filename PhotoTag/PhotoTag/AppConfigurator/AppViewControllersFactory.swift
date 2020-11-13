@@ -22,7 +22,7 @@ struct AppViewControllersFactory {
     
     func tagManagementViewController(coordinator: TagCoordinator) -> UIViewController {
         let tagManagementViewController = TagManagementViewController(coordinator: coordinator)
-        let tableViewDelegate = TagManagementTableViewDelegate(withDelegate: tagManagementViewController)
+        let tableViewDelegate = TagManagementTableViewDelegate()
         tagManagementViewController.delegate = tableViewDelegate
         return tagManagementViewController
     }

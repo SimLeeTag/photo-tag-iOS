@@ -29,6 +29,7 @@ class TagManagementTableViewDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableViewCell = tableView.dequeueReusableCell(with: TagManagementTableViewCell.self, for: indexPath)
+        tableViewCell.selectionStyle = .none
         return tableViewCell
     }
     
