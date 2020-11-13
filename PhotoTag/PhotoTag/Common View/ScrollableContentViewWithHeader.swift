@@ -15,7 +15,7 @@ protocol Scrollable: Representable {
 
 class ScrollableContentViewWithHeader: ContentViewWithHeader, Scrollable {
     
-    var scrollView = SubviewFactory.sceneScrollView()
+    @UsesAutoLayout var scrollView = SubviewFactory.sceneScrollView()
     
     override func configureContentView() {
         contentView.addSubview(contentStackView)
@@ -33,7 +33,6 @@ private extension ScrollableContentViewWithHeader {
         
         static func sceneScrollView() -> UIScrollView {
             let scrollView = UIScrollView()
-            scrollView.translatesAutoresizingMaskIntoConstraints = false
             return scrollView
         }
     }

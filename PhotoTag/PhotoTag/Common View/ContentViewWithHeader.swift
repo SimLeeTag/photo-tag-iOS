@@ -16,8 +16,8 @@ protocol HeaderRepresentable: Representable {
 
 class ContentViewWithHeader: ContentView, HeaderRepresentable {
     
-    var headerStackView = SubviewFactory.headerStackView()
-    var spaceView = SubviewFactory.spaceView()
+    @UsesAutoLayout var headerStackView = SubviewFactory.headerStackView()
+    @UsesAutoLayout var spaceView = SubviewFactory.spaceView()
     
     func configureHeaderView() { }
     
@@ -31,7 +31,6 @@ private extension ContentViewWithHeader {
         
         static func headerStackView() -> UIStackView {
             let stackView = UIStackView()
-            stackView.translatesAutoresizingMaskIntoConstraints = false
             stackView.alignment = .fill
             stackView.axis = .horizontal
             stackView.distribution = .fill
@@ -40,7 +39,6 @@ private extension ContentViewWithHeader {
         
         static func spaceView() -> UIView {
             let view = UIView()
-            view.translatesAutoresizingMaskIntoConstraints = false
             view.backgroundColor = .clear
             return view
         }

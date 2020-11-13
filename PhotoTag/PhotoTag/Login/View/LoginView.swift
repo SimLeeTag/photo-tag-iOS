@@ -10,15 +10,14 @@ import AuthenticationServices
 
 class LoginView: UIView {
     
-    let logoImageView = SubviewFactory.logoImageView()
-    let contentStackView = SubviewFactory.contentStackView()
-    let buttonStackView = SubviewFactory.buttonStackView()
-    let appleLoginButton = SubviewFactory.appleLoginButton()
-    let howToUseButton = SubviewFactory.howToUseButton()
-    let contentView: UIView = {
+    @UsesAutoLayout var logoImageView = SubviewFactory.logoImageView()
+    @UsesAutoLayout var contentStackView = SubviewFactory.contentStackView()
+    @UsesAutoLayout var buttonStackView = SubviewFactory.buttonStackView()
+    @UsesAutoLayout var appleLoginButton = SubviewFactory.appleLoginButton()
+    @UsesAutoLayout var howToUseButton = SubviewFactory.howToUseButton()
+    @UsesAutoLayout var contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -56,7 +55,6 @@ private extension LoginView {
         
         static func logoImageView() -> UIImageView {
             let imageView = UIImageView(frame: .zero)
-            imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.contentMode = .scaleAspectFill
             imageView.isUserInteractionEnabled = false
             imageView.image = #imageLiteral(resourceName: "logo.png")
@@ -65,7 +63,6 @@ private extension LoginView {
         
         static func contentStackView() -> UIStackView {
             let stackView = UIStackView()
-            stackView.translatesAutoresizingMaskIntoConstraints = false
             stackView.alignment = .fill
             stackView.axis = .vertical
             stackView.distribution = .equalSpacing
@@ -75,7 +72,6 @@ private extension LoginView {
         
         static func buttonStackView() -> UIStackView {
             let stackView = UIStackView()
-            stackView.translatesAutoresizingMaskIntoConstraints = false
             stackView.alignment = .fill
             stackView.axis = .vertical
             stackView.distribution = .fillEqually
@@ -90,8 +86,7 @@ private extension LoginView {
 
         static func howToUseButton() -> UIButton {
             let button = UIButton(frame: .zero)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.setTitle("How To Use", for: .normal)
+            button.setTitle("Move To Tag Category", for: .normal)
             button.setTitleColor(.white, for: .normal)
             button.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
             button.layer.cornerRadius = 5

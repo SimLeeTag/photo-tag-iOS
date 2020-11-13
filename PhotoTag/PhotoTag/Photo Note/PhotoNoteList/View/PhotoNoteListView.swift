@@ -12,13 +12,13 @@ import UIKit
 class PhotoNoteListView: ContentViewWithHeader {
     
     // MARK: - Properties
-    let moveToTagCategoryButton = SubviewFactory.moveToTagCategoryButton()
-    let moveToSelectPhotoButton = SubviewFactory.moveToSelectPhotoButton()
-    let searchButton = SubviewFactory.searchButton()
-    let selectedTagsStackView = SubviewFactory.selectedTagsStackView()
-    let firstTagLabel = SubviewFactory.tagLabel()
-    let secondTagLabel = SubviewFactory.tagLabel()
-    let thirdTagLabel = SubviewFactory.tagLabel()
+    @UsesAutoLayout var moveToTagCategoryButton = SubviewFactory.moveToTagCategoryButton()
+    @UsesAutoLayout var moveToSelectPhotoButton = SubviewFactory.moveToSelectPhotoButton()
+    @UsesAutoLayout var searchButton = SubviewFactory.searchButton()
+    @UsesAutoLayout var selectedTagsStackView = SubviewFactory.selectedTagsStackView()
+    @UsesAutoLayout var firstTagLabel = SubviewFactory.tagLabel()
+    @UsesAutoLayout var secondTagLabel = SubviewFactory.tagLabel()
+    @UsesAutoLayout var thirdTagLabel = SubviewFactory.tagLabel()
     
     // MARK: - Intialization
     init() {
@@ -78,7 +78,6 @@ private extension PhotoNoteListView {
         
         static func selectedTagsStackView() -> UIStackView {
             let stackView = UIStackView()
-            stackView.translatesAutoresizingMaskIntoConstraints = false
             stackView.alignment = .leading
             stackView.axis = .vertical
             stackView.distribution = .fill
@@ -87,7 +86,6 @@ private extension PhotoNoteListView {
         
         static func tagLabel() -> UILabel {
             let label = UILabel()
-            label.translatesAutoresizingMaskIntoConstraints = false
             label.text = "#Temporary_Tag"
             label.font = UIFont.boldSystemFont(ofSize: .twenty)
             label.textAlignment = .left
@@ -101,7 +99,6 @@ private extension PhotoNoteListView {
             button.tintColor = .white
             button.layer.cornerRadius = 5
             button.clipsToBounds = true
-            button.translatesAutoresizingMaskIntoConstraints = false
             return button
         }
         
@@ -112,13 +109,11 @@ private extension PhotoNoteListView {
             button.tintColor = .white
             button.layer.cornerRadius = 5
             button.clipsToBounds = true
-            button.translatesAutoresizingMaskIntoConstraints = false
             return button
         }
         
         static func searchButton() -> UIButton {
             let button = UIButton()
-            button.translatesAutoresizingMaskIntoConstraints = false
             button.setImage(.search, for: .normal)
             button.clipsToBounds = false
             button.layer.cornerRadius = .ten

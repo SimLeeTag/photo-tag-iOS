@@ -17,8 +17,8 @@ protocol Representable {
 }
 
 class ContentView: UIView, Representable {
-    var contentView = SubviewFactory.contentView()
-    var contentStackView = SubviewFactory.contentStackView()
+    @UsesAutoLayout var contentView = SubviewFactory.contentView()
+    @UsesAutoLayout var contentStackView = SubviewFactory.contentStackView()
     
     func addSubviews() { }
     func setupLayout() { }
@@ -32,13 +32,11 @@ private extension ContentView {
         static func contentView() -> UIView {
             let view = UIView()
             view.backgroundColor = .white
-            view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }
         
         static func contentStackView() -> UIStackView {
             let stackView = UIStackView()
-            stackView.translatesAutoresizingMaskIntoConstraints = false
             stackView.alignment = .fill
             stackView.axis = .vertical
             stackView.distribution = .fill

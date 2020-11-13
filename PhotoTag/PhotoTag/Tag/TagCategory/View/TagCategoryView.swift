@@ -15,10 +15,10 @@ class TagCategoryView: ContentViewWithHeader {
     }
     
     // MARK: - Properties
-    let titleLabel = SubviewFactory.titleLabel()
-    let moveToTagManagementButton = SubviewFactory.moveToTagManagementButton()
-    let moveToPhotoListButton = SubviewFactory.moveToPhotoListButton()
-    let tagCategoryCollectionView = SubviewFactory.tagCategoryCollectionView()
+    @UsesAutoLayout var titleLabel = SubviewFactory.titleLabel()
+    @UsesAutoLayout var moveToTagManagementButton = SubviewFactory.moveToTagManagementButton()
+    @UsesAutoLayout var moveToPhotoListButton = SubviewFactory.moveToPhotoListButton()
+    @UsesAutoLayout var tagCategoryCollectionView = SubviewFactory.tagCategoryCollectionView()
     
     // MARK: - Intialization
     init() {
@@ -74,7 +74,6 @@ private extension TagCategoryView {
         
         static func titleLabel() -> UILabel {
             let label = UILabel()
-            label.translatesAutoresizingMaskIntoConstraints = false
             label.text = TagCategoryViewConstant.title
             label.font = UIFont.boldSystemFont(ofSize: .twenty)
             label.textAlignment = .left
@@ -83,7 +82,6 @@ private extension TagCategoryView {
         
         static func moveToTagManagementButton() -> UIButton {
             let button = UIButton()
-            button.translatesAutoresizingMaskIntoConstraints = false
             button.setTitleColor(.darkGray, for: .normal)
             button.setImage(.filter, for: .normal)
             button.tintColor = .darkGray
@@ -92,7 +90,6 @@ private extension TagCategoryView {
     
         static func moveToPhotoListButton() -> UIButton {
             let button = UIButton()
-            button.translatesAutoresizingMaskIntoConstraints = false
             button.setTitle(TagCategoryViewConstant.goButtonTitle, for: .normal)
             button.clipsToBounds = false
             button.layer.cornerRadius = .ten
@@ -104,7 +101,6 @@ private extension TagCategoryView {
         static func tagCategoryCollectionView() -> UICollectionView {
             let layout = UICollectionViewFlowLayout()
             let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            collectionView.translatesAutoresizingMaskIntoConstraints = false
             collectionView.register(cellType: TagCategoryCollectionViewCell.self)
             return collectionView
         }

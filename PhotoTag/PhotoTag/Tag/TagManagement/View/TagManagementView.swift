@@ -14,9 +14,9 @@ class TagManagementView: ContentViewWithHeader {
     }
     
     // MARK: - Properties
-    let backButton = SubviewFactory.backButton()
-    let titleLabel = SubviewFactory.titleLabel()
-    let hashtagTableView = SubviewFactory.hashtagTableView()
+    @UsesAutoLayout var backButton = SubviewFactory.backButton()
+    @UsesAutoLayout var titleLabel = SubviewFactory.titleLabel()
+    @UsesAutoLayout var hashtagTableView = SubviewFactory.hashtagTableView()
     
     // MARK: - Intialization
     init() {
@@ -61,7 +61,6 @@ private extension TagManagementView {
         
         static func backButton() -> UIButton {
             let button = UIButton()
-            button.translatesAutoresizingMaskIntoConstraints = false
             button.setImage(.back, for: .normal)
             button.tintColor = .black
             button.contentHorizontalAlignment = .center
@@ -70,7 +69,6 @@ private extension TagManagementView {
         
         static func titleLabel() -> UILabel {
             let label = UILabel()
-            label.translatesAutoresizingMaskIntoConstraints = false
             label.text = TagManagementViewConstant.title
             label.font = UIFont.boldSystemFont(ofSize: .twenty)
             label.textAlignment = .left
@@ -80,7 +78,6 @@ private extension TagManagementView {
         static func hashtagTableView() -> UITableView {
             let tableView = UITableView(frame: .zero, style: .grouped)
             tableView.register(cellType: TagManagementTableViewCell.self)
-            tableView.translatesAutoresizingMaskIntoConstraints = false
             return tableView
         }
         
