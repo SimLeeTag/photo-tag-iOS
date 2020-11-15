@@ -1,7 +1,7 @@
 identifier_name:
     min_length: 1
     error: 4
-    max_length: 30
+    max_length: 40
     warning: 40
     error: 50
     excluded:

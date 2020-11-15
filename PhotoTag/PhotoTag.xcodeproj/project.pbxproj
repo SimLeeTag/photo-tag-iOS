@@ -10,16 +10,45 @@
 		54022D74814B80EA4BF89773 /* Pods_PhotoTag_PhotoTagUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9883F4ADD7ADA08DC14AA90B /* Pods_PhotoTag_PhotoTagUITests.framework */; };
 		6A4F23EA2546E2AC00577718 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F23E92546E2AC00577718 /* AppCoordinator.swift */; };
 		6A4F23F72546EC8A00577718 /* PhotoNoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F23F62546EC8A00577718 /* PhotoNoteListViewController.swift */; };
+		6A5544C925599CDF003F3864 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5544C825599CDF003F3864 /* UIColor.swift */; };
+		6A5544DC2559B3BB003F3864 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5544DB2559B3BB003F3864 /* ContentView.swift */; };
+		6A5544E42559B3CA003F3864 /* ScrollableContentViewWithHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5544E32559B3CA003F3864 /* ScrollableContentViewWithHeader.swift */; };
+		6A5544F1255A75F4003F3864 /* PhotoNoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5544F0255A75F4003F3864 /* PhotoNoteListView.swift */; };
+		6A5544FF255AD575003F3864 /* TagCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5544FD255AD575003F3864 /* TagCategoryCollectionViewCell.swift */; };
+		6A554500255AD575003F3864 /* TagCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A5544FE255AD575003F3864 /* TagCategoryCollectionViewCell.xib */; };
+		6A554505255AE449003F3864 /* ContentViewWithHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A554504255AE449003F3864 /* ContentViewWithHeader.swift */; };
+		6A57CAEF255ED33600E42348 /* UsesAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A57CAEE255ED33600E42348 /* UsesAutoLayout.swift */; };
+		6A63BA12255C0AD10096A0F7 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A63BA11255C0AD10096A0F7 /* UITableView.swift */; };
+		6A63BA1A255C1ED40096A0F7 /* TagManagementTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A63BA19255C1ED40096A0F7 /* TagManagementTableViewDataSource.swift */; };
+		6A63BA1F255C1F450096A0F7 /* TagCategoryCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A63BA1E255C1F450096A0F7 /* TagCategoryCollectionViewDataSource.swift */; };
+		6A63BA2C255C2F210096A0F7 /* TagManagementTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A63BA2B255C2F210096A0F7 /* TagManagementTableViewDelegate.swift */; };
 		6A6825222548053F00B19C9A /* TagManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6825212548053F00B19C9A /* TagManagementViewController.swift */; };
-		6A68252A25480ACF00B19C9A /* CoordinatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A68252925480ACF00B19C9A /* CoordinatorDelegate.swift */; };
 		6A6825332548384700B19C9A /* LayoutGuideCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */; };
 		6A682539254854E200B19C9A /* AppViewControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A682538254854E200B19C9A /* AppViewControllersFactory.swift */; };
 		6A68254425485DA300B19C9A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A68254325485DA300B19C9A /* LoginView.swift */; };
 		6A68255025497B7200B19C9A /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A68254F25497B7200B19C9A /* Shadow.swift */; };
+		6A7C054E255B93A000037184 /* TagManagementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C054C255B93A000037184 /* TagManagementTableViewCell.swift */; };
+		6A7C054F255B93A000037184 /* TagManagementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A7C054D255B93A000037184 /* TagManagementTableViewCell.xib */; };
+		6A7C056C255C022200037184 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C056B255C022200037184 /* UICollectionView.swift */; };
+		6A7C0571255C029E00037184 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C0570255C029E00037184 /* NSObject.swift */; };
+		6A7C0576255C033300037184 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C0575255C033300037184 /* UIImage.swift */; };
+		6A7C057B255C058300037184 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C057A255C058300037184 /* Int.swift */; };
+		6A7C0580255C081400037184 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C057F255C081400037184 /* CGFloat.swift */; };
+		6A7C0585255C086200037184 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C0584255C086200037184 /* UIView.swift */; };
+		6A89B9B225546444003E1027 /* PhotoNoteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9B125546444003E1027 /* PhotoNoteCoordinator.swift */; };
+		6A89B9B725546463003E1027 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9B625546463003E1027 /* SearchCoordinator.swift */; };
+		6A89B9BF25547088003E1027 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9BE25547088003E1027 /* SearchViewController.swift */; };
+		6A89B9D2255473C9003E1027 /* ChildCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9D1255473C9003E1027 /* ChildCoordinator.swift */; };
+		6A89B9E3255496F9003E1027 /* SelectPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9E2255496F9003E1027 /* SelectPhotoViewController.swift */; };
+		6A89B9E825549764003E1027 /* WritePhotoNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9E725549764003E1027 /* WritePhotoNoteViewController.swift */; };
+		6A89B9ED25549787003E1027 /* PhotoNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9EC25549787003E1027 /* PhotoNoteViewController.swift */; };
+		6A89B9F225549807003E1027 /* SelectPeriodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9F125549807003E1027 /* SelectPeriodViewController.swift */; };
 		6AA9BD65254E93C200126749 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA9BD64254E93C200126749 /* LoginManager.swift */; };
 		6AA9BD6E254EA0ED00126749 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA9BD6D254EA0ED00126749 /* Endpoint.swift */; };
+		6AAE725E2555988B00CF7F9F /* TagCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAE725D2555988B00CF7F9F /* TagCategoryView.swift */; };
+		6AAE726E2555997D00CF7F9F /* TagManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAE726D2555997D00CF7F9F /* TagManagementView.swift */; };
 		6AB83AE02542B4340065B698 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83ADF2542B4340065B698 /* Coordinator.swift */; };
-		6AB83AF425442B370065B698 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83AF325442B370065B698 /* MainCoordinator.swift */; };
+		6AB83AF425442B370065B698 /* TagCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83AF325442B370065B698 /* TagCoordinator.swift */; };
 		6AB83AF925442C030065B698 /* TagCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83AF825442C030065B698 /* TagCategoryViewController.swift */; };
 		6AD3ED5D25519F5700F8EF61 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD3ED5C25519F5700F8EF61 /* URLRequest.swift */; };
 		6AD3ED6225519F9E00F8EF61 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD3ED6125519F9E00F8EF61 /* NetworkManager.swift */; };
@@ -62,17 +91,46 @@
 		55C8346B7FC7025DA7D4F3EB /* Pods-PhotoTag.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTag.release.xcconfig"; path = "Target Support Files/Pods-PhotoTag/Pods-PhotoTag.release.xcconfig"; sourceTree = "<group>"; };
 		6A4F23E92546E2AC00577718 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6A4F23F62546EC8A00577718 /* PhotoNoteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNoteListViewController.swift; sourceTree = "<group>"; };
+		6A5544C825599CDF003F3864 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		6A5544DB2559B3BB003F3864 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6A5544E32559B3CA003F3864 /* ScrollableContentViewWithHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableContentViewWithHeader.swift; sourceTree = "<group>"; };
+		6A5544F0255A75F4003F3864 /* PhotoNoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNoteListView.swift; sourceTree = "<group>"; };
+		6A5544FD255AD575003F3864 /* TagCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		6A5544FE255AD575003F3864 /* TagCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		6A554504255AE449003F3864 /* ContentViewWithHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewWithHeader.swift; sourceTree = "<group>"; };
+		6A57CAEE255ED33600E42348 /* UsesAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsesAutoLayout.swift; sourceTree = "<group>"; };
 		6A598F42254C6BB400547E67 /* PhotoTag.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoTag.entitlements; sourceTree = "<group>"; };
+		6A63BA11255C0AD10096A0F7 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		6A63BA19255C1ED40096A0F7 /* TagManagementTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementTableViewDataSource.swift; sourceTree = "<group>"; };
+		6A63BA1E255C1F450096A0F7 /* TagCategoryCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		6A63BA2B255C2F210096A0F7 /* TagManagementTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementTableViewDelegate.swift; sourceTree = "<group>"; };
 		6A6825212548053F00B19C9A /* TagManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementViewController.swift; sourceTree = "<group>"; };
-		6A68252925480ACF00B19C9A /* CoordinatorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorDelegate.swift; sourceTree = "<group>"; };
 		6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGuideCompatible.swift; sourceTree = "<group>"; };
 		6A682538254854E200B19C9A /* AppViewControllersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewControllersFactory.swift; sourceTree = "<group>"; };
 		6A68254325485DA300B19C9A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		6A68254F25497B7200B19C9A /* Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
+		6A7C054C255B93A000037184 /* TagManagementTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementTableViewCell.swift; sourceTree = "<group>"; };
+		6A7C054D255B93A000037184 /* TagManagementTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagManagementTableViewCell.xib; sourceTree = "<group>"; };
+		6A7C056B255C022200037184 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
+		6A7C0570255C029E00037184 /* NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
+		6A7C0575255C033300037184 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		6A7C057A255C058300037184 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		6A7C057F255C081400037184 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
+		6A7C0584255C086200037184 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		6A89B9B125546444003E1027 /* PhotoNoteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNoteCoordinator.swift; sourceTree = "<group>"; };
+		6A89B9B625546463003E1027 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
+		6A89B9BE25547088003E1027 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		6A89B9D1255473C9003E1027 /* ChildCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCoordinator.swift; sourceTree = "<group>"; };
+		6A89B9E2255496F9003E1027 /* SelectPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoViewController.swift; sourceTree = "<group>"; };
+		6A89B9E725549764003E1027 /* WritePhotoNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePhotoNoteViewController.swift; sourceTree = "<group>"; };
+		6A89B9EC25549787003E1027 /* PhotoNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNoteViewController.swift; sourceTree = "<group>"; };
+		6A89B9F125549807003E1027 /* SelectPeriodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPeriodViewController.swift; sourceTree = "<group>"; };
 		6AA9BD64254E93C200126749 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		6AA9BD6D254EA0ED00126749 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		6AAE725D2555988B00CF7F9F /* TagCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryView.swift; sourceTree = "<group>"; };
+		6AAE726D2555997D00CF7F9F /* TagManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementView.swift; sourceTree = "<group>"; };
 		6AB83ADF2542B4340065B698 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		6AB83AF325442B370065B698 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		6AB83AF325442B370065B698 /* TagCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCoordinator.swift; sourceTree = "<group>"; };
 		6AB83AF825442C030065B698 /* TagCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryViewController.swift; sourceTree = "<group>"; };
 		6AD3ED5C25519F5700F8EF61 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		6AD3ED6125519F9E00F8EF61 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -143,9 +201,44 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		6A5544DA2559B39E003F3864 /* Common View */ = {
+			isa = PBXGroup;
+			children = (
+				6A5544DB2559B3BB003F3864 /* ContentView.swift */,
+				6A554504255AE449003F3864 /* ContentViewWithHeader.swift */,
+				6A5544E32559B3CA003F3864 /* ScrollableContentViewWithHeader.swift */,
+			);
+			path = "Common View";
+			sourceTree = "<group>";
+		};
+		6A5544EE255A75C4003F3864 /* PhotoNoteList */ = {
+			isa = PBXGroup;
+			children = (
+				6A5544EF255A75CF003F3864 /* View */,
+			);
+			path = PhotoNoteList;
+			sourceTree = "<group>";
+		};
+		6A5544EF255A75CF003F3864 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6A4F23F62546EC8A00577718 /* PhotoNoteListViewController.swift */,
+				6A5544F0255A75F4003F3864 /* PhotoNoteListView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6A63BA30255C2F2B0096A0F7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		6A68252E254837E900B19C9A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				6A7C056A255C021600037184 /* Extension */,
 				6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */,
 				6A68254F25497B7200B19C9A /* Shadow.swift */,
 			);
@@ -169,6 +262,29 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		6A7C055B255C00E300037184 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6A7C056A255C021600037184 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6A7C056B255C022200037184 /* UICollectionView.swift */,
+				6A63BA11255C0AD10096A0F7 /* UITableView.swift */,
+				6A7C0570255C029E00037184 /* NSObject.swift */,
+				6A7C0575255C033300037184 /* UIImage.swift */,
+				6A7C057A255C058300037184 /* Int.swift */,
+				6A7C057F255C081400037184 /* CGFloat.swift */,
+				6A7C0584255C086200037184 /* UIView.swift */,
+				6A5544C825599CDF003F3864 /* UIColor.swift */,
+				6A57CAEE255ED33600E42348 /* UsesAutoLayout.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		6AA9BD69254E93C800126749 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,13 +300,57 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		6AAE72592555983800CF7F9F /* TagCategory */ = {
+			isa = PBXGroup;
+			children = (
+				6A7C055B255C00E300037184 /* ViewModel */,
+				6AAE725B2555986500CF7F9F /* View */,
+			);
+			path = TagCategory;
+			sourceTree = "<group>";
+		};
+		6AAE725A2555984400CF7F9F /* TagManagement */ = {
+			isa = PBXGroup;
+			children = (
+				6A63BA30255C2F2B0096A0F7 /* ViewModel */,
+				6AAE725C2555986D00CF7F9F /* View */,
+			);
+			path = TagManagement;
+			sourceTree = "<group>";
+		};
+		6AAE725B2555986500CF7F9F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6AB83AF825442C030065B698 /* TagCategoryViewController.swift */,
+				6AAE725D2555988B00CF7F9F /* TagCategoryView.swift */,
+				6A5544FD255AD575003F3864 /* TagCategoryCollectionViewCell.swift */,
+				6A5544FE255AD575003F3864 /* TagCategoryCollectionViewCell.xib */,
+				6A63BA1E255C1F450096A0F7 /* TagCategoryCollectionViewDataSource.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6AAE725C2555986D00CF7F9F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6A6825212548053F00B19C9A /* TagManagementViewController.swift */,
+				6AAE726D2555997D00CF7F9F /* TagManagementView.swift */,
+				6A7C054C255B93A000037184 /* TagManagementTableViewCell.swift */,
+				6A7C054D255B93A000037184 /* TagManagementTableViewCell.xib */,
+				6A63BA19255C1ED40096A0F7 /* TagManagementTableViewDataSource.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		6AB83ADE2542B4130065B698 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
 				6AB83ADF2542B4340065B698 /* Coordinator.swift */,
+				6A89B9D1255473C9003E1027 /* ChildCoordinator.swift */,
 				6A4F23E92546E2AC00577718 /* AppCoordinator.swift */,
-				6AB83AF325442B370065B698 /* MainCoordinator.swift */,
-				6A68252925480ACF00B19C9A /* CoordinatorDelegate.swift */,
+				6AB83AF325442B370065B698 /* TagCoordinator.swift */,
+				6A89B9B125546444003E1027 /* PhotoNoteCoordinator.swift */,
+				6A89B9B625546463003E1027 /* SearchCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -207,8 +367,9 @@
 		6AB83AED25441BC90065B698 /* Tag */ = {
 			isa = PBXGroup;
 			children = (
-				6AB83AF825442C030065B698 /* TagCategoryViewController.swift */,
-				6A6825212548053F00B19C9A /* TagManagementViewController.swift */,
+				6AAE72592555983800CF7F9F /* TagCategory */,
+				6AAE725A2555984400CF7F9F /* TagManagement */,
+				6A63BA2B255C2F210096A0F7 /* TagManagementTableViewDelegate.swift */,
 			);
 			path = Tag;
 			sourceTree = "<group>";
@@ -216,7 +377,10 @@
 		6AB83AEE25441C040065B698 /* Photo Note */ = {
 			isa = PBXGroup;
 			children = (
-				6A4F23F62546EC8A00577718 /* PhotoNoteListViewController.swift */,
+				6A5544EE255A75C4003F3864 /* PhotoNoteList */,
+				6A89B9E2255496F9003E1027 /* SelectPhotoViewController.swift */,
+				6A89B9E725549764003E1027 /* WritePhotoNoteViewController.swift */,
+				6A89B9EC25549787003E1027 /* PhotoNoteViewController.swift */,
 			);
 			path = "Photo Note";
 			sourceTree = "<group>";
@@ -224,6 +388,8 @@
 		6AB83AEF25441C0C0065B698 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				6A89B9BE25547088003E1027 /* SearchViewController.swift */,
+				6A89B9F125549807003E1027 /* SelectPeriodViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -258,6 +424,7 @@
 				6A682537254854D000B19C9A /* AppConfigurator */,
 				6A68252E254837E900B19C9A /* Utility */,
 				6AB83ADE2542B4130065B698 /* Coordinator */,
+				6A5544DA2559B39E003F3864 /* Common View */,
 				6AB83AEC25441BC20065B698 /* Login */,
 				6AB83AED25441BC90065B698 /* Tag */,
 				6AB83AEE25441C040065B698 /* Photo Note */,
@@ -414,7 +581,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A7C054F255B93A000037184 /* TagManagementTableViewCell.xib in Resources */,
 				6AFE3C45253F0A1000B385AC /* .swiftlint.yml in Resources */,
+				6A554500255AD575003F3864 /* TagCategoryCollectionViewCell.xib in Resources */,
 				6AFE3C10253EDF3300B385AC /* LaunchScreen.storyboard in Resources */,
 				6AFE3C0D253EDF3300B385AC /* Assets.xcassets in Resources */,
 			);
@@ -528,27 +697,54 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AD3ED6225519F9E00F8EF61 /* NetworkManager.swift in Sources */,
+				6A89B9D2255473C9003E1027 /* ChildCoordinator.swift in Sources */,
+				6A89B9E825549764003E1027 /* WritePhotoNoteViewController.swift in Sources */,
+				6A7C057B255C058300037184 /* Int.swift in Sources */,
 				6A6825332548384700B19C9A /* LayoutGuideCompatible.swift in Sources */,
 				6A6825222548053F00B19C9A /* TagManagementViewController.swift in Sources */,
 				6AB83AE02542B4340065B698 /* Coordinator.swift in Sources */,
-				6AB83AF425442B370065B698 /* MainCoordinator.swift in Sources */,
-				6A68252A25480ACF00B19C9A /* CoordinatorDelegate.swift in Sources */,
+				6A7C056C255C022200037184 /* UICollectionView.swift in Sources */,
+				6A89B9B725546463003E1027 /* SearchCoordinator.swift in Sources */,
+				6AB83AF425442B370065B698 /* TagCoordinator.swift in Sources */,
 				6AA9BD65254E93C200126749 /* LoginManager.swift in Sources */,
 				6A682539254854E200B19C9A /* AppViewControllersFactory.swift in Sources */,
 				6AD3ED6C2551A09900F8EF61 /* HTTPMethod.swift in Sources */,
+				6A89B9B225546444003E1027 /* PhotoNoteCoordinator.swift in Sources */,
 				6AD3ED6725519FE900F8EF61 /* UseCase.swift in Sources */,
 				6AFE3C05253EDF3200B385AC /* LoginViewController.swift in Sources */,
+				6A554505255AE449003F3864 /* ContentViewWithHeader.swift in Sources */,
 				6A68254425485DA300B19C9A /* LoginView.swift in Sources */,
+				6A7C0571255C029E00037184 /* NSObject.swift in Sources */,
+				6A7C054E255B93A000037184 /* TagManagementTableViewCell.swift in Sources */,
 				6A4F23F72546EC8A00577718 /* PhotoNoteListViewController.swift in Sources */,
+				6A5544DC2559B3BB003F3864 /* ContentView.swift in Sources */,
+				6A63BA1A255C1ED40096A0F7 /* TagManagementTableViewDataSource.swift in Sources */,
 				6AA9BD6E254EA0ED00126749 /* Endpoint.swift in Sources */,
+				6A89B9BF25547088003E1027 /* SearchViewController.swift in Sources */,
+				6A7C0585255C086200037184 /* UIView.swift in Sources */,
+				6A5544FF255AD575003F3864 /* TagCategoryCollectionViewCell.swift in Sources */,
 				6AB83AF925442C030065B698 /* TagCategoryViewController.swift in Sources */,
 				6AD3ED712551A0B400F8EF61 /* NetworkError.swift in Sources */,
+				6A7C0580255C081400037184 /* CGFloat.swift in Sources */,
+				6A7C0576255C033300037184 /* UIImage.swift in Sources */,
 				6AD3EDB1255274A400F8EF61 /* KeychainItem.swift in Sources */,
+				6A63BA1F255C1F450096A0F7 /* TagCategoryCollectionViewDataSource.swift in Sources */,
+				6AAE726E2555997D00CF7F9F /* TagManagementView.swift in Sources */,
+				6A63BA12255C0AD10096A0F7 /* UITableView.swift in Sources */,
 				6AFE3C01253EDF3200B385AC /* AppDelegate.swift in Sources */,
+				6A89B9E3255496F9003E1027 /* SelectPhotoViewController.swift in Sources */,
+				6AAE725E2555988B00CF7F9F /* TagCategoryView.swift in Sources */,
+				6A57CAEF255ED33600E42348 /* UsesAutoLayout.swift in Sources */,
+				6A63BA2C255C2F210096A0F7 /* TagManagementTableViewDelegate.swift in Sources */,
+				6A5544C925599CDF003F3864 /* UIColor.swift in Sources */,
+				6A5544E42559B3CA003F3864 /* ScrollableContentViewWithHeader.swift in Sources */,
 				6A68255025497B7200B19C9A /* Shadow.swift in Sources */,
 				6AFE3C0B253EDF3200B385AC /* PhotoTag.xcdatamodeld in Sources */,
+				6A89B9F225549807003E1027 /* SelectPeriodViewController.swift in Sources */,
 				6AD3ED5D25519F5700F8EF61 /* URLRequest.swift in Sources */,
 				6A4F23EA2546E2AC00577718 /* AppCoordinator.swift in Sources */,
+				6A5544F1255A75F4003F3864 /* PhotoNoteListView.swift in Sources */,
+				6A89B9ED25549787003E1027 /* PhotoNoteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

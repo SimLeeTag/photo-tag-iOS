@@ -12,19 +12,42 @@ struct AppViewControllersFactory {
     //TODO:- add viewModelFactory
     
     //TODO:- add viewModel as parameter
-    func loginViewController(delegate: CoordinatorDelegate) -> UIViewController {
-        return LoginViewController(delegate: delegate)
+    func loginViewController(coordinator: AppCoordinator) -> UIViewController {
+        return LoginViewController(coordinator: coordinator)
     }
     
-    func photoNoteListViewController(delegate: CoordinatorDelegate) -> UIViewController {
-        return PhotoNoteListViewController(delegate: delegate)
+    func tagCategoryViewController(coordinator: TagCoordinator) -> UIViewController {
+        return TagCategoryViewController(coordinator: coordinator)
     }
     
-    func tagCategoryViewController(delegate: CoordinatorDelegate) -> UIViewController {
-        return TagCategoryViewController(delegate: delegate)
+    func tagManagementViewController(coordinator: TagCoordinator) -> UIViewController {
+        let tagManagementViewController = TagManagementViewController(coordinator: coordinator)
+        let tableViewDelegate = TagManagementTableViewDelegate()
+        tagManagementViewController.delegate = tableViewDelegate
+        return tagManagementViewController
     }
     
-    func tagManagementViewController(delegate: CoordinatorDelegate) -> UIViewController {
-        return TagManagementViewController(delegate: delegate)
+    func photoNoteListViewController(coordinator: PhotoNoteCoordinator) -> UIViewController {
+        return PhotoNoteListViewController(coordinator: coordinator)
+    }
+    
+    func selectPhotoViewController(coordinator: PhotoNoteCoordinator) -> UIViewController {
+        return SelectPhotoViewController(coordinator: coordinator)
+    }
+    
+    func writePhotoNoteViewController(coordinator: PhotoNoteCoordinator) -> UIViewController {
+        return WritePhotoNoteViewController(coordinator: coordinator)
+    }
+    
+    func photoNoteViewController(coordinator: PhotoNoteCoordinator) -> UIViewController {
+        return PhotoNoteViewController(coordinator: coordinator)
+    }
+    
+    func searchViewController(coordinator: SearchCoordinator) -> UIViewController {
+        return SearchViewController(coordinator: coordinator)
+    }
+    
+    func selectPeriodViewController(coordinator: SearchCoordinator) -> UIViewController {
+        return SelectPeriodViewController(coordinator: coordinator)
     }
 }
