@@ -1,6 +1,12 @@
 # Photo Tag - iOS Repository
-iOS Repository for project PHOTO TAG
 <img src = "https://user-images.githubusercontent.com/58318786/96359589-80726000-114f-11eb-9e7a-c17f51b32cb1.png" width = "60%">
+
+## Member
+* BE: [Poogle(심수현)](https://github.com/suhyunsim)
+* iOS: [Lena(이근나)](https://github.com/dev-Lena)
+## Team Ground Rules  
+[Team Ground Rules](https://github.com/SimLeeTag/Team/wiki/Ground-Rule)
+
 
 
 <br/>
@@ -9,8 +15,6 @@ iOS Repository for project PHOTO TAG
 
 <img src = "https://i.imgur.com/7ldnerY.png" width = "20%"><img src = "https://i.imgur.com/3GustEv.png" width = "20%"><img src = "https://i.imgur.com/pDLIIfJ.png" width = "20%">
 <br/>
-
-## 🚀CI/CD
 
 <br/>
 
