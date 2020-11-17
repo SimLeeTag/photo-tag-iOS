@@ -10,15 +10,15 @@ import UIKit
 class TagManagementTableViewDataSource: NSObject, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        TagManagementTableViewConstant.numberOfSections
+        TagManagementConstant.numberOfSections
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         var sectionTitle = ""
-        if section == TagManagementTableViewConstant.activeHashtagsSectionNumber {
-            sectionTitle = TagManagementTableViewConstant.activeHashtagsSectionHeaderTitle
+        if section == TagManagementConstant.activeHashtagsSectionNumber {
+            sectionTitle = TagManagementConstant.activeHashtagsSectionHeaderTitle
         } else {
-            sectionTitle = TagManagementTableViewConstant.archivedHashtagsSectionHeaderTitle
+            sectionTitle = TagManagementConstant.archivedHashtagsSectionHeaderTitle
         }
         return sectionTitle
     }

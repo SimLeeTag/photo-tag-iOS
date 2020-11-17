@@ -7,12 +7,15 @@
 
 import UIKit
 
-enum TagManagementTableViewConstant {
+enum TagManagementConstant {
+    static let title = "Manage Hashtags"
     static let numberOfSections = 2
     static let activeHashtagsSectionNumber = 0
     static let archivedHashtagsSectionNumber = 1
     static let activeHashtagsSectionHeaderTitle = "Active Hashtags  (Swipe to edit)"
     static let archivedHashtagsSectionHeaderTitle = "Archived Hashtags"
+    static let activeHashtagSwipeMenuText = "Archive"
+    static let archivedHashtagSwipeMenuText = "Restore"
 }
 
 class TagManagementViewController: UIViewController {

@@ -9,10 +9,6 @@ import UIKit
 
 class TagManagementView: ContentViewWithHeader {
     
-    enum TagManagementViewConstant {
-        static let title = "Manage Hashtags"
-    }
-    
     // MARK: - Properties
     @UsesAutoLayout var backButton = SubviewFactory.backButton()
     @UsesAutoLayout var titleLabel = SubviewFactory.titleLabel()
@@ -69,7 +65,7 @@ private extension TagManagementView {
         
         static func titleLabel() -> UILabel {
             let label = UILabel()
-            label.text = TagManagementViewConstant.title
+            label.text = TagManagementConstant.title
             label.font = UIFont.boldSystemFont(ofSize: .twenty)
             label.textAlignment = .left
             return label
