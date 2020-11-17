@@ -18,4 +18,9 @@ class TagCoordinator: ChildCoordinator {
         let tagManagementViewController = appViewControllerFactory.tagManagementViewController(coordinator: self)
         navigationController.pushViewController(tagManagementViewController, animated: true)
     }
+    
+    func navigateToPhotoNoteList() {
+        guard let appCoordinator =  parentCoordinator as? AppCoordinator else { return }
+        appCoordinator.navigateToPhotoNoteList()
+    }
 }

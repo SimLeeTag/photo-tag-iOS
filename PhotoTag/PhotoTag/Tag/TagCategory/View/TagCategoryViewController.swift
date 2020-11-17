@@ -62,7 +62,6 @@ class TagCategoryViewController: UIViewController {
     }
     
     @objc func navigateToPhotoNoteList() {
-        guard let tapCoordinator =  coordinator?.parentCoordinator as? AppCoordinator else { return }
-        tapCoordinator.navigateToPhotoNoteList()
+        coordinator?.navigateToPhotoNoteList()
     }
 }
