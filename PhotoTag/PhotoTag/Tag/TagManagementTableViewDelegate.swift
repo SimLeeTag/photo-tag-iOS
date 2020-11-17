@@ -11,7 +11,7 @@ class TagManagementTableViewDelegate: NSObject, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
-        if indexPath.section == TagManagementTableViewConstant.activeHashtagsSectionNumber {
+        if indexPath.section == TagManagementConstant.activeHashtagsSectionNumber {
             return UISwipeActionsConfiguration(actions: [
                 makeArchiveContextualAction(tableView, forRowAt: indexPath)
             ])
@@ -24,7 +24,7 @@ class TagManagementTableViewDelegate: NSObject, UITableViewDelegate {
     
     private func makeArchiveContextualAction(_ tableView: UITableView, forRowAt indexPath: IndexPath) -> UIContextualAction {
         return UIContextualAction(style: .destructive, title: "Archive") { (_, _, completion) in
-            tableView.moveSection(indexPath.section, toSection: TagManagementTableViewConstant.archivedHashtagsSectionNumber)
+            tableView.moveSection(indexPath.section, toSection: TagManagementConstant.archivedHashtagsSectionNumber)
             completion(true)
         }
     }
@@ -32,7 +32,7 @@ class TagManagementTableViewDelegate: NSObject, UITableViewDelegate {
     private func makeRestoreContextualAction(_ tableView: UITableView, forRowAt indexPath: IndexPath) -> UIContextualAction {
         return UIContextualAction(style: .normal, title: "Restore") { (_, _, completion) in
             
-            tableView.moveSection(indexPath.section, toSection: TagManagementTableViewConstant.activeHashtagsSectionNumber)
+            tableView.moveSection(indexPath.section, toSection: TagManagementConstant.activeHashtagsSectionNumber)
             completion(true)
         }
     }
