@@ -44,7 +44,7 @@ class TagManagementViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        hideNavigationBar()
+        // TODO: - request data from API
     }
     
     override func viewDidLoad() {

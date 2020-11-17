@@ -36,7 +36,6 @@ class TagCategoryViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        hideNavigationBar()
         // TODO: - request data from API
     }
     
