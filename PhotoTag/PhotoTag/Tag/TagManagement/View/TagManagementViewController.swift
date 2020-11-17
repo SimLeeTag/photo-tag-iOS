@@ -21,7 +21,7 @@ enum TagManagementConstant {
 class TagManagementViewController: UIViewController {
     
     // MARK: - Properties
-    private let dataSource: TagManagementTableViewDataSource?
+    private let dataSource: TagManagementTableViewDataSource
     var delegate: TagManagementTableViewDelegate?
     weak var coordinator: TagCoordinator?
     private var tagManagementView: TagManagementView! {
