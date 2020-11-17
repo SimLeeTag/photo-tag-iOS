@@ -14,13 +14,8 @@ class TagManagementTableViewDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        var sectionTitle = ""
-        if section == TagManagementConstant.activeHashtagsSectionNumber {
-            sectionTitle = TagManagementConstant.activeHashtagsSectionHeaderTitle
-        } else {
-            sectionTitle = TagManagementConstant.archivedHashtagsSectionHeaderTitle
-        }
-        return sectionTitle
+        
+        return section == TagManagementConstant.activeHashtagsSectionNumber ? TagManagementConstant.activeHashtagsSectionHeaderTitle : TagManagementConstant.archivedHashtagsSectionHeaderTitle
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
