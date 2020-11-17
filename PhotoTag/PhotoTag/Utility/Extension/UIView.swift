@@ -12,6 +12,6 @@ extension UIView {
       return UINib(
           nibName: nibNamed,
           bundle: bundle
-      ).instantiate(withOwner: nil, options: nil)[.first] as? UIView
+      ).instantiate(withOwner: nil, options: nil)[.zero] as? UIView
   }
 }

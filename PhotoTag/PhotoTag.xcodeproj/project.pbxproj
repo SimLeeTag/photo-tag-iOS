@@ -32,7 +32,6 @@
 		6A7C056C255C022200037184 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C056B255C022200037184 /* UICollectionView.swift */; };
 		6A7C0571255C029E00037184 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C0570255C029E00037184 /* NSObject.swift */; };
 		6A7C0576255C033300037184 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C0575255C033300037184 /* UIImage.swift */; };
-		6A7C057B255C058300037184 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C057A255C058300037184 /* Int.swift */; };
 		6A7C0580255C081400037184 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C057F255C081400037184 /* CGFloat.swift */; };
 		6A7C0585255C086200037184 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C0584255C086200037184 /* UIView.swift */; };
 		6A89B9B225546444003E1027 /* PhotoNoteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9B125546444003E1027 /* PhotoNoteCoordinator.swift */; };
@@ -114,7 +113,6 @@
 		6A7C056B255C022200037184 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		6A7C0570255C029E00037184 /* NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		6A7C0575255C033300037184 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
-		6A7C057A255C058300037184 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		6A7C057F255C081400037184 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		6A7C0584255C086200037184 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		6A89B9B125546444003E1027 /* PhotoNoteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNoteCoordinator.swift; sourceTree = "<group>"; };
@@ -276,7 +274,6 @@
 				6A63BA11255C0AD10096A0F7 /* UITableView.swift */,
 				6A7C0570255C029E00037184 /* NSObject.swift */,
 				6A7C0575255C033300037184 /* UIImage.swift */,
-				6A7C057A255C058300037184 /* Int.swift */,
 				6A7C057F255C081400037184 /* CGFloat.swift */,
 				6A7C0584255C086200037184 /* UIView.swift */,
 				6A5544C825599CDF003F3864 /* UIColor.swift */,
@@ -699,7 +696,6 @@
 				6AD3ED6225519F9E00F8EF61 /* NetworkManager.swift in Sources */,
 				6A89B9D2255473C9003E1027 /* ChildCoordinator.swift in Sources */,
 				6A89B9E825549764003E1027 /* WritePhotoNoteViewController.swift in Sources */,
-				6A7C057B255C058300037184 /* Int.swift in Sources */,
 				6A6825332548384700B19C9A /* LayoutGuideCompatible.swift in Sources */,
 				6A6825222548053F00B19C9A /* TagManagementViewController.swift in Sources */,
 				6AB83AE02542B4340065B698 /* Coordinator.swift in Sources */,
