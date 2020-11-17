@@ -44,11 +44,7 @@ class AppCoordinator: NSObject, Coordinator {
     }
     
     func childDidFinish(_ child: Coordinator?) {
-        
-        for (index, coordinator) in childCoordinators.enumerated() where coordinator === child {
-            childCoordinators.remove(at: index)
-            break
-        }
+        childCoordinators.removeAll(where: {$0 === child})
     }
     
     private func setupCoordinator<T: ChildCoordinator>(coordinator: T) {
