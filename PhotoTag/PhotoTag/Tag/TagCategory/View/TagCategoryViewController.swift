@@ -37,6 +37,7 @@ class TagCategoryViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         hideNavigationBar()
+        // TODO: - request data from API
     }
     
     override func viewDidLoad() {
@@ -62,6 +63,7 @@ class TagCategoryViewController: UIViewController {
     }
     
     @objc func navigateToPhotoNoteList() {
-        coordinator?.parentCoordinator?.navigateToPhotoNoteList()
+        guard let tapCoordinator =  coordinator?.parentCoordinator as? AppCoordinator else { return }
+        tapCoordinator.navigateToPhotoNoteList()
     }
 }

@@ -9,8 +9,6 @@ import UIKit
 
 class TagCoordinator: ChildCoordinator {
     
-    weak var parentCoordinator: AppCoordinator?
-    
     override func start() {
         let tagCategoryViewController = appViewControllerFactory.tagCategoryViewController(coordinator: self)
         navigationController.pushViewController(tagCategoryViewController, animated: true)

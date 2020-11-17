@@ -28,25 +28,19 @@ class AppCoordinator: NSObject, Coordinator {
     func navigateToSelectTagCategory() {
         // tagCoordinator is child coordinator of AppCoordinator
         let tagCoordinator = TagCoordinator(navigationController: navigationController)
-        tagCoordinator.parentCoordinator = self
-        childCoordinators.append(tagCoordinator)
-        tagCoordinator.start()
+        setupCoordinator(coordinator: tagCoordinator)
     }
     
     func navigateToPhotoNoteList() {
         // photoNoteCoordinator is child coordinator of AppCoordinator
         let photoNoteCoordinator = PhotoNoteCoordinator(navigationController: navigationController)
-        photoNoteCoordinator.parentCoordinator = self
-        childCoordinators.append(photoNoteCoordinator)
-        photoNoteCoordinator.start()
+        setupCoordinator(coordinator: photoNoteCoordinator)
     }
     
     func navigateToSearchNote() {
         // searchCoordinator is child coordinator of AppCoordinator
         let searchCoordinator = SearchCoordinator(navigationController: navigationController)
-        searchCoordinator.parentCoordinator = self
-        childCoordinators.append(searchCoordinator)
-        searchCoordinator.start()
+        setupCoordinator(coordinator: searchCoordinator)
     }
     
     func childDidFinish(_ child: Coordinator?) {
@@ -56,6 +50,12 @@ class AppCoordinator: NSObject, Coordinator {
                 break
             }
         }
+    }
+    
+    private func setupCoordinator<T: ChildCoordinator>(coordinator: T) {
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
+        coordinator.start()
     }
 }
 
