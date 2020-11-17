@@ -57,20 +57,16 @@ class AppCoordinator: NSObject, Coordinator {
 extension AppCoordinator: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         
-        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else { return }
-        
-        if navigationController.viewControllers.contains(fromViewController) {
-            return
-        }
+        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from), !navigationController.viewControllers.contains(fromViewController) else { return }
         
         if let tagCategoryViewController = fromViewController as? TagCategoryViewController {
             childDidFinish(tagCategoryViewController.coordinator)
         }
-        
+
         if let searchViewController = fromViewController as? SearchViewController {
             childDidFinish(searchViewController.coordinator)
         }
-        
+
         if let photoNoteListViewController = fromViewController as? PhotoNoteListViewController {
             childDidFinish(photoNoteListViewController.coordinator)
         }
