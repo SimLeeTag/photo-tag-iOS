@@ -5,7 +5,7 @@
 //  Created by Keunna Lee on 2020/11/11.
 //
 
-import Foundation
+import UIKit
 
 protocol ClassNameProtocol {
     static var className: String { get }
@@ -18,7 +18,7 @@ extension ClassNameProtocol {
     }
 
     var className: String {
-        return type(of: self).className
+        return Self.className
     }
 }
 

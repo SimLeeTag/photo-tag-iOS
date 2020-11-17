@@ -34,7 +34,7 @@ class PhotoNoteListViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        hideNavigationBar()
+        // TODO: - request data from API
     }
     
     override func viewDidLoad() {
@@ -50,11 +50,11 @@ class PhotoNoteListViewController: UIViewController {
     }
     
     private func hideNavigationBar() {
-        self.navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
     }
     
     @objc func navigateToTagCategory() {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func navigateToSelectPhoto() {

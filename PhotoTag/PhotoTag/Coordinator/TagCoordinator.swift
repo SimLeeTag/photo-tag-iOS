@@ -9,8 +9,6 @@ import UIKit
 
 class TagCoordinator: ChildCoordinator {
     
-    weak var parentCoordinator: AppCoordinator?
-    
     override func start() {
         let tagCategoryViewController = appViewControllerFactory.tagCategoryViewController(coordinator: self)
         navigationController.pushViewController(tagCategoryViewController, animated: true)
@@ -19,5 +17,10 @@ class TagCoordinator: ChildCoordinator {
     func navigateToTagManagement() {
         let tagManagementViewController = appViewControllerFactory.tagManagementViewController(coordinator: self)
         navigationController.pushViewController(tagManagementViewController, animated: true)
+    }
+    
+    func navigateToPhotoNoteList() {
+        guard let appCoordinator =  parentCoordinator as? AppCoordinator else { return }
+        appCoordinator.navigateToPhotoNoteList()
     }
 }

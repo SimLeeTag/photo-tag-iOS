@@ -28,54 +28,45 @@ class AppCoordinator: NSObject, Coordinator {
     func navigateToSelectTagCategory() {
         // tagCoordinator is child coordinator of AppCoordinator
         let tagCoordinator = TagCoordinator(navigationController: navigationController)
-        tagCoordinator.parentCoordinator = self
-        childCoordinators.append(tagCoordinator)
-        tagCoordinator.start()
+        setupCoordinator(coordinator: tagCoordinator)
     }
     
     func navigateToPhotoNoteList() {
         // photoNoteCoordinator is child coordinator of AppCoordinator
         let photoNoteCoordinator = PhotoNoteCoordinator(navigationController: navigationController)
-        photoNoteCoordinator.parentCoordinator = self
-        childCoordinators.append(photoNoteCoordinator)
-        photoNoteCoordinator.start()
+        setupCoordinator(coordinator: photoNoteCoordinator)
     }
     
     func navigateToSearchNote() {
         // searchCoordinator is child coordinator of AppCoordinator
         let searchCoordinator = SearchCoordinator(navigationController: navigationController)
-        searchCoordinator.parentCoordinator = self
-        childCoordinators.append(searchCoordinator)
-        searchCoordinator.start()
+        setupCoordinator(coordinator: searchCoordinator)
     }
     
     func childDidFinish(_ child: Coordinator?) {
-        for (index, coordinator) in childCoordinators.enumerated() {
-            if coordinator === child {
-                childCoordinators.remove(at: index)
-                break
-            }
-        }
+        childCoordinators.removeAll(where: {$0 === child})
+    }
+    
+    private func setupCoordinator<T: ChildCoordinator>(coordinator: T) {
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
+        coordinator.start()
     }
 }
 
 extension AppCoordinator: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         
-        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else { return }
-        
-        if navigationController.viewControllers.contains(fromViewController) {
-            return
-        }
+        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from), !navigationController.viewControllers.contains(fromViewController) else { return }
         
         if let tagCategoryViewController = fromViewController as? TagCategoryViewController {
             childDidFinish(tagCategoryViewController.coordinator)
         }
-        
+
         if let searchViewController = fromViewController as? SearchViewController {
             childDidFinish(searchViewController.coordinator)
         }
-        
+
         if let photoNoteListViewController = fromViewController as? PhotoNoteListViewController {
             childDidFinish(photoNoteListViewController.coordinator)
         }
