@@ -20,6 +20,6 @@ extension UITableView {
 
     public func dequeueReusableCell<T: UITableViewCell>(with type: T.Type, for indexPath: IndexPath) -> T {
         // swiftlint:disable force_cast
-        return dequeueReusableCell(withIdentifier: type.className, for: indexPath) as! T
+        return self.dequeueReusableCell(withIdentifier: type.className, for: indexPath) as! T
     }
 }

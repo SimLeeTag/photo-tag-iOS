@@ -9,7 +9,6 @@ import UIKit
 
 class ChildCoordinator: NSObject, Coordinator {
     
-    weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     let appViewControllerFactory = AppViewControllersFactory()

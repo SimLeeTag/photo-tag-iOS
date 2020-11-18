@@ -25,10 +25,17 @@ extension UIView: LayoutGuideCompatible {}
 
 extension LayoutGuideCompatible {
     
+    // MARK: - translatesAutoresizingMaskIntoConstraints
+    func prepareForSettingConstraints() {
+        guard let view = self as? UIView else { return }
+        view.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     // MARK: - Sides
     
     @discardableResult
     func pinTop(to yAxis: NSLayoutAnchor<NSLayoutYAxisAnchor>, offset: CGFloat = 0) -> NSLayoutConstraint {
+        prepareForSettingConstraints()
         let constraint = topAnchor.constraint(equalTo: yAxis, constant: offset)
         constraint.isActive = true
         return constraint
@@ -36,6 +43,7 @@ extension LayoutGuideCompatible {
     
     @discardableResult
     func pinLeading(to xAxis: NSLayoutAnchor<NSLayoutXAxisAnchor>, offset: CGFloat = 0) -> NSLayoutConstraint {
+        prepareForSettingConstraints()
         let constraint = leadingAnchor.constraint(equalTo: xAxis, constant: offset)
         constraint.isActive = true
         return constraint
@@ -43,6 +51,7 @@ extension LayoutGuideCompatible {
     
     @discardableResult
     func pinTrailing(to xAxis: NSLayoutAnchor<NSLayoutXAxisAnchor>, offset: CGFloat = 0) -> NSLayoutConstraint {
+        prepareForSettingConstraints()
         let constraint = trailingAnchor.constraint(equalTo: xAxis, constant: offset)
         constraint.isActive = true
         return constraint
@@ -50,6 +59,7 @@ extension LayoutGuideCompatible {
     
     @discardableResult
     func pinBottom(to yAxis: NSLayoutAnchor<NSLayoutYAxisAnchor>, offset: CGFloat = 0) -> NSLayoutConstraint {
+        prepareForSettingConstraints()
         let constraint = bottomAnchor.constraint(equalTo: yAxis, constant: offset)
         constraint.isActive = true
         return constraint
@@ -76,6 +86,7 @@ extension LayoutGuideCompatible {
     
     @discardableResult
     func pinCenterX(to xAxis: NSLayoutXAxisAnchor, offset: CGFloat = 0) -> NSLayoutConstraint {
+        prepareForSettingConstraints()
         let contraint = centerXAnchor.constraint(equalTo: xAxis, constant: offset)
         contraint.isActive = true
         return contraint
@@ -84,6 +95,7 @@ extension LayoutGuideCompatible {
     @discardableResult
     func pinCenterY(to yAxis: NSLayoutYAxisAnchor,
                     offset: CGFloat = 0) -> NSLayoutConstraint {
+        prepareForSettingConstraints()
         let constraint = centerYAnchor.constraint(equalTo: yAxis, constant: offset)
         constraint.isActive = true
         return constraint
@@ -105,6 +117,7 @@ extension LayoutGuideCompatible {
 
     @discardableResult
     func alignCenterX(with view: LayoutGuideCompatible, multiplier: CGFloat = 1, constant: CGFloat = 0) -> NSLayoutConstraint {
+        prepareForSettingConstraints()
         let constraint = NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: multiplier, constant: constant)
         constraint.isActive = true
         return constraint
@@ -112,6 +125,7 @@ extension LayoutGuideCompatible {
     
     @discardableResult
     func alignCenterY(with view: LayoutGuideCompatible, multiplier: CGFloat = 1, constant: CGFloat = 0) -> NSLayoutConstraint {
+        prepareForSettingConstraints()
         let constraint = NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: multiplier, constant: constant)
         constraint.isActive = true
         return constraint
@@ -121,6 +135,7 @@ extension LayoutGuideCompatible {
     
     @discardableResult
     func pinHeight(_ height: CGFloat) -> NSLayoutConstraint {
+        prepareForSettingConstraints()
         let constraint = heightAnchor.constraint(equalToConstant: height)
         constraint.isActive = true
         return constraint
@@ -128,6 +143,7 @@ extension LayoutGuideCompatible {
     
     @discardableResult
     func pinWidth(_ width: CGFloat) -> NSLayoutConstraint {
+        prepareForSettingConstraints()
         let constraint = widthAnchor.constraint(equalToConstant: width)
         constraint.isActive = true
         return constraint
@@ -148,6 +164,7 @@ extension LayoutGuideCompatible {
     
     @discardableResult
     func pinHeight(to height: NSLayoutDimension, multiplier: CGFloat = 1) -> NSLayoutConstraint {
+        prepareForSettingConstraints()
         let constraint = heightAnchor.constraint(equalTo: height,
                                                  multiplier: multiplier)
         constraint.isActive = true
@@ -156,6 +173,7 @@ extension LayoutGuideCompatible {
 
     @discardableResult
     func pinWidth(to width: NSLayoutDimension, multiplier: CGFloat = 1) -> NSLayoutConstraint {
+        prepareForSettingConstraints()
         let constraint = widthAnchor.constraint(equalTo: width,
                                                 multiplier: multiplier)
         constraint.isActive = true

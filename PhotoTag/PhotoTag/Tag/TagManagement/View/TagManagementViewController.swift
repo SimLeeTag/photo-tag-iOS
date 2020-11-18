@@ -7,21 +7,18 @@
 
 import UIKit
 
-enum TagManagementConstant {
-    static let title = "Manage Hashtags"
+enum TagManagementTableViewConstant {
     static let numberOfSections = 2
     static let activeHashtagsSectionNumber = 0
     static let archivedHashtagsSectionNumber = 1
     static let activeHashtagsSectionHeaderTitle = "Active Hashtags  (Swipe to edit)"
     static let archivedHashtagsSectionHeaderTitle = "Archived Hashtags"
-    static let activeHashtagSwipeMenuText = "Archive"
-    static let archivedHashtagSwipeMenuText = "Restore"
 }
 
 class TagManagementViewController: UIViewController {
     
     // MARK: - Properties
-    private let dataSource: TagManagementTableViewDataSource
+    private let dataSource: TagManagementTableViewDataSource?
     var delegate: TagManagementTableViewDelegate?
     weak var coordinator: TagCoordinator?
     private var tagManagementView: TagManagementView! {
@@ -44,7 +41,7 @@ class TagManagementViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // TODO: - request data from API
+        hideNavigationBar()
     }
     
     override func viewDidLoad() {

@@ -93,7 +93,7 @@ private extension TagCategoryView {
             button.setTitle(TagCategoryViewConstant.goButtonTitle, for: .normal)
             button.clipsToBounds = false
             button.layer.cornerRadius = .ten
-            button.backgroundColor = UIColor.keyColorInLightMode
+            button.backgroundColor = UIColor.keyColor
             button.setTitleColor(.white, for: .normal)
             return button
         }

@@ -10,12 +10,17 @@ import UIKit
 class TagManagementTableViewDataSource: NSObject, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        TagManagementConstant.numberOfSections
+        TagManagementTableViewConstant.numberOfSections
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        return section == TagManagementConstant.activeHashtagsSectionNumber ? TagManagementConstant.activeHashtagsSectionHeaderTitle : TagManagementConstant.archivedHashtagsSectionHeaderTitle
+        var sectionTitle = ""
+        if section == TagManagementTableViewConstant.activeHashtagsSectionNumber {
+            sectionTitle = TagManagementTableViewConstant.activeHashtagsSectionHeaderTitle
+        } else {
+            sectionTitle = TagManagementTableViewConstant.archivedHashtagsSectionHeaderTitle
+        }
+        return sectionTitle
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

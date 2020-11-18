@@ -9,6 +9,8 @@ import UIKit
 
 class PhotoNoteCoordinator: ChildCoordinator {
     
+    weak var parentCoordinator: AppCoordinator?
+    
     override func start() {
         let photoNoteListViewController = appViewControllerFactory.photoNoteListViewController(coordinator: self)
         navigationController.pushViewController(photoNoteListViewController, animated: true)

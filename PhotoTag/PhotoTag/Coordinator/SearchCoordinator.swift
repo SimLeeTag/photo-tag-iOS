@@ -9,6 +9,8 @@ import UIKit
 
 class SearchCoordinator: ChildCoordinator {
     
+    weak var parentCoordinator: AppCoordinator?
+    
     override func start() {
         let searchViewController = appViewControllerFactory.searchViewController(coordinator: self)
         navigationController.pushViewController(searchViewController, animated: true)
