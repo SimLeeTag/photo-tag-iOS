@@ -20,10 +20,10 @@ final class TagCategoryView: ContentViewWithHeader {
     }
     
     // MARK: - Properties
-    @UsesAutoLayout var titleLabel = SubviewFactory.titleLabel()
-    @UsesAutoLayout var moveToTagManagementButton = SubviewFactory.moveToTagManagementButton()
-    @UsesAutoLayout var moveToPhotoListButton = SubviewFactory.moveToPhotoListButton()
-    @UsesAutoLayout var tagCategoryCollectionView = SubviewFactory.tagCategoryCollectionView()
+    @UsesAutoLayout private var titleLabel = SubviewFactory.titleLabel()
+    @UsesAutoLayout private var moveToTagManagementButton = SubviewFactory.moveToTagManagementButton()
+    @UsesAutoLayout private var moveToPhotoListButton = SubviewFactory.moveToPhotoListButton()
+    @UsesAutoLayout private(set) var tagCategoryCollectionView = SubviewFactory.tagCategoryCollectionView()
     weak var delegate: TagCategoryViewDelegate?
     
     // MARK: - Intialization

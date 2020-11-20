@@ -14,9 +14,9 @@ protocol TagManagementViewDelegate: class {
 class TagManagementView: ContentViewWithHeader {
     
     // MARK: - Properties
-    @UsesAutoLayout var backButton = SubviewFactory.backButton()
-    @UsesAutoLayout var titleLabel = SubviewFactory.titleLabel()
-    @UsesAutoLayout var hashtagTableView = SubviewFactory.hashtagTableView()
+    @UsesAutoLayout private(set) var backButton = SubviewFactory.backButton()
+    @UsesAutoLayout private(set) var titleLabel = SubviewFactory.titleLabel()
+    @UsesAutoLayout private(set) var hashtagTableView = SubviewFactory.hashtagTableView()
     weak var delegate: TagManagementViewDelegate?
     
     // MARK: - Intialization

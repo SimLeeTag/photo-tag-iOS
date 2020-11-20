@@ -15,13 +15,11 @@ protocol PhotoNoteListViewDelegate: class {
 class PhotoNoteListView: ContentViewWithHeader {
     
     // MARK: - Properties
-    @UsesAutoLayout var searchButton = SubviewFactory.searchButton()
-    @UsesAutoLayout var selectedTagsStackView = SubviewFactory.selectedTagsStackView()
-    @UsesAutoLayout var firstTagLabel = SubviewFactory.tagLabel()
-    @UsesAutoLayout var secondTagLabel = SubviewFactory.tagLabel()
-    @UsesAutoLayout var thirdTagLabel = SubviewFactory.tagLabel()
-    private let leftSwipeGestureRecognizer = UISwipeGestureRecognizer.leftSwipeGestureRecognizer(target: self, action: #selector(leftSwipeDidBegin))
-    private let rightSwipeGestureRecognizer = UISwipeGestureRecognizer.rightSwipeGestureRecognizer(target: self, action: #selector(rightSwipeDidBegin))
+    @UsesAutoLayout private(set) var searchButton = SubviewFactory.searchButton()
+    @UsesAutoLayout private(set) var selectedTagsStackView = SubviewFactory.selectedTagsStackView()
+    @UsesAutoLayout private(set) var firstTagLabel = SubviewFactory.tagLabel()
+    @UsesAutoLayout private(set) var secondTagLabel = SubviewFactory.tagLabel()
+    @UsesAutoLayout private(set) var thirdTagLabel = SubviewFactory.tagLabel()
     weak var delegate: PhotoNoteListViewDelegate?
     
     // MARK: - Intialization
@@ -71,7 +69,7 @@ class PhotoNoteListView: ContentViewWithHeader {
     @objc private func leftSwipeDidBegin() {
         delegate?.leftSwipeDidBegin(self)
     }
-    
+
     @objc private func rightSwipeDidBegin() {
         delegate?.rightSwipeDidBegin(self)
     }

@@ -35,6 +35,7 @@ class PhotoNoteListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         // TODO: - request data from API
+        self.modalPresentationStyle = .fullScreen
     }
     
     override func viewDidLoad() {
@@ -65,9 +66,9 @@ extension PhotoNoteListViewController: PhotoNoteListViewDelegate {
     func leftSwipeDidBegin(_ photoNoteListView: PhotoNoteListView) {
         navigateToSelectPhoto()
     }
-    
+
     func rightSwipeDidBegin(_ photoNoteListView: PhotoNoteListView) {
         navigateToTagCategory()
     }
-    
+
 }
