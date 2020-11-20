@@ -47,7 +47,7 @@ class TagCategoryViewController: UIViewController {
     // MARK: - Functions
     private func configure () {
         hideNavigationBar()
-        tagCategoryView.buttonDelegate = self
+        tagCategoryView.delegate = self
         // TODO: - navigate to tutorial scene
         tagCategoryView.tagCategoryCollectionView.dataSource = dataSource
     }

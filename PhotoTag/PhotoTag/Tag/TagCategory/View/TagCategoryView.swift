@@ -24,7 +24,7 @@ final class TagCategoryView: ContentViewWithHeader {
     @UsesAutoLayout var moveToTagManagementButton = SubviewFactory.moveToTagManagementButton()
     @UsesAutoLayout var moveToPhotoListButton = SubviewFactory.moveToPhotoListButton()
     @UsesAutoLayout var tagCategoryCollectionView = SubviewFactory.tagCategoryCollectionView()
-    weak var buttonDelegate: TagCategoryViewDelegate?
+    weak var delegate: TagCategoryViewDelegate?
     
     // MARK: - Intialization
     init() {
@@ -80,11 +80,11 @@ final class TagCategoryView: ContentViewWithHeader {
     }
     
     @objc private func moveToTagManagementButtonDidTouched() {
-        buttonDelegate?.moveToTagManagementButtonDidTouched(self)
+        delegate?.moveToTagManagementButtonDidTouched(self)
     }
     
     @objc private func moveToPhotoListButtonDidTouched() {
-        buttonDelegate?.moveToPhotoListButtonDidTouched(self)
+        delegate?.moveToPhotoListButtonDidTouched(self)
     }
     
 }
