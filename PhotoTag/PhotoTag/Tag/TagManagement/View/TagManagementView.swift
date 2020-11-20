@@ -24,6 +24,7 @@ class TagManagementView: ContentViewWithHeader {
         super.init(frame: .zero)
         addSubviews()
         setupLayout()
+        addButtonsTarget()
     }
 
     required init?(coder aDecoder: NSCoder) { return nil }

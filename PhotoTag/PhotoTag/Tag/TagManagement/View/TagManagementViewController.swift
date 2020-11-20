@@ -54,6 +54,7 @@ class TagManagementViewController: UIViewController {
     
     // MARK: - Functions
     private func configure () {
+        tagManagementView.delegate = self
         hideNavigationBar()
         tagManagementView.delegate = self
         setupTableView()
