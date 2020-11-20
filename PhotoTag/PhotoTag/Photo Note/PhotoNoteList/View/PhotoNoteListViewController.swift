@@ -45,19 +45,29 @@ class PhotoNoteListViewController: UIViewController {
     // MARK: - Functions
     private func configure () {
         hideNavigationBar()
-        photoNoteListView.moveToTagCategoryButton.addTarget(self, action: #selector(navigateToTagCategory), for: .touchUpInside)
-        photoNoteListView.moveToSelectPhotoButton.addTarget(self, action: #selector(navigateToSelectPhoto), for: .touchUpInside)
+        photoNoteListView.delegate = self
     }
     
     private func hideNavigationBar() {
         navigationController?.isNavigationBarHidden = true
     }
     
-    @objc func navigateToTagCategory() {
+    private func navigateToTagCategory() {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func navigateToSelectPhoto() {
+    private func navigateToSelectPhoto() {
         coordinator?.navigateToSelectPhoto()
     }
+}
+
+extension PhotoNoteListViewController: PhotoNoteListViewDelegate {
+    func leftSwipeDidBegin(_ photoNoteListView: PhotoNoteListView) {
+        navigateToSelectPhoto()
+    }
+    
+    func rightSwipeDidBegin(_ photoNoteListView: PhotoNoteListView) {
+        navigateToTagCategory()
+    }
+    
 }
