@@ -54,9 +54,10 @@ class TagManagementViewController: UIViewController {
     
     // MARK: - Functions
     private func configure () {
+        tagManagementView.delegate = self
         hideNavigationBar()
+        tagManagementView.delegate = self
         setupTableView()
-        tagManagementView.backButton.addTarget(self, action: #selector(navigateToTagCategory), for: .touchUpInside)
     }
     
     private func setupTableView() {
@@ -68,7 +69,13 @@ class TagManagementViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
     
-    @objc func navigateToTagCategory() {
+    private func navigateToTagCategory() {
         self.navigationController?.popViewController(animated: true)
     }
+}
+extension TagManagementViewController: TagManagementViewDelegate {
+    func moveBackToTagCategoryButtonDidTouched(_ tagManagementView: TagManagementView) {
+        navigateToTagCategory()
+    }
+
 }

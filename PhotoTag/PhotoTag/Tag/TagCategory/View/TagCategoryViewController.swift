@@ -47,9 +47,8 @@ class TagCategoryViewController: UIViewController {
     // MARK: - Functions
     private func configure () {
         hideNavigationBar()
-        tagCategoryView.moveToTagManagementButton.addTarget(self, action: #selector(navigateToTagManagement), for: .touchUpInside)
+        tagCategoryView.delegate = self
         // TODO: - navigate to tutorial scene
-        tagCategoryView.moveToPhotoListButton.addTarget(self, action: #selector(navigateToPhotoNoteList), for: .touchUpInside)
         tagCategoryView.tagCategoryCollectionView.dataSource = dataSource
     }
     
@@ -57,11 +56,20 @@ class TagCategoryViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
     
-    @objc func navigateToTagManagement() {
+    private func navigateToTagManagement() {
         coordinator?.navigateToTagManagement()
     }
     
-    @objc func navigateToPhotoNoteList() {
+    private func navigateToPhotoNoteList() {
         coordinator?.navigateToPhotoNoteList()
     }
+}
+extension TagCategoryViewController: TagCategoryViewDelegate {
+    func moveToTagManagementButtonDidTouched(_ tagCategoryView: TagCategoryView) {
+        navigateToTagManagement()
+    }
+    func moveToPhotoListButtonDidTouched(_ tagCategoryView: TagCategoryView) {
+        navigateToPhotoNoteList()
+    }
+    
 }

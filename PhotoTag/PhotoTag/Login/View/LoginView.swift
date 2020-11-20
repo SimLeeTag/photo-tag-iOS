@@ -10,12 +10,12 @@ import AuthenticationServices
 
 class LoginView: UIView {
     
-    @UsesAutoLayout var logoImageView = SubviewFactory.logoImageView()
-    @UsesAutoLayout var contentStackView = SubviewFactory.contentStackView()
-    @UsesAutoLayout var buttonStackView = SubviewFactory.buttonStackView()
-    @UsesAutoLayout var appleLoginButton = SubviewFactory.appleLoginButton()
-    @UsesAutoLayout var howToUseButton = SubviewFactory.howToUseButton()
-    @UsesAutoLayout var contentView: UIView = {
+    @UsesAutoLayout private(set) var logoImageView = SubviewFactory.logoImageView()
+    @UsesAutoLayout private(set) var contentStackView = SubviewFactory.contentStackView()
+    @UsesAutoLayout private(set) var buttonStackView = SubviewFactory.buttonStackView()
+    @UsesAutoLayout private(set) var appleLoginButton = SubviewFactory.appleLoginButton()
+    @UsesAutoLayout private(set) var howToUseButton = SubviewFactory.howToUseButton()
+    @UsesAutoLayout private(set) var contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         return view

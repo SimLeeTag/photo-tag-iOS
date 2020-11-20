@@ -7,18 +7,24 @@
 
 import UIKit
 
+protocol TagManagementViewDelegate: class {
+    func moveBackToTagCategoryButtonDidTouched(_ tagManagementView: TagManagementView)
+}
+
 class TagManagementView: ContentViewWithHeader {
     
     // MARK: - Properties
-    @UsesAutoLayout var backButton = SubviewFactory.backButton()
-    @UsesAutoLayout var titleLabel = SubviewFactory.titleLabel()
-    @UsesAutoLayout var hashtagTableView = SubviewFactory.hashtagTableView()
+    @UsesAutoLayout private(set) var backButton = SubviewFactory.backButton()
+    @UsesAutoLayout private(set) var titleLabel = SubviewFactory.titleLabel()
+    @UsesAutoLayout private(set) var hashtagTableView = SubviewFactory.hashtagTableView()
+    weak var delegate: TagManagementViewDelegate?
     
     // MARK: - Intialization
     init() {
         super.init(frame: .zero)
         addSubviews()
         setupLayout()
+        addButtonsTarget()
     }
 
     required init?(coder aDecoder: NSCoder) { return nil }
@@ -29,6 +35,10 @@ class TagManagementView: ContentViewWithHeader {
         configureContentStackView()
         configureContentView()
         self.addSubview(contentView)
+    }
+    
+    private func addButtonsTarget() {
+        backButton.addTarget(self, action: #selector(moveBackToTagCategoryButtonDidTouched), for: .touchUpInside)
     }
     
     override func configureHeaderView() {
@@ -48,6 +58,10 @@ class TagManagementView: ContentViewWithHeader {
         contentStackView.spacing = .ten
         titleLabel.pinWidth(to: self.widthAnchor, multiplier: .zeroPointEight)
         headerStackView.pinHeight(to: self.heightAnchor, multiplier: .zeroPointOne)
+    }
+    
+    @objc private func moveBackToTagCategoryButtonDidTouched() {
+        delegate?.moveBackToTagCategoryButtonDidTouched(self)
     }
 }
 

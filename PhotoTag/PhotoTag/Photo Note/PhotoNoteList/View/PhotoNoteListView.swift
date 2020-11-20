@@ -7,24 +7,27 @@
 
 import UIKit
 
-// 임시 구현 상태입니다. 추후 리팩토링 예정입니다.
+protocol PhotoNoteListViewDelegate: class {
+    func leftSwipeDidBegin(_ photoNoteListView: PhotoNoteListView)
+    func rightSwipeDidBegin(_ photoNoteListView: PhotoNoteListView)
+}
 
 class PhotoNoteListView: ContentViewWithHeader {
     
     // MARK: - Properties
-    @UsesAutoLayout var moveToTagCategoryButton = SubviewFactory.moveToTagCategoryButton()
-    @UsesAutoLayout var moveToSelectPhotoButton = SubviewFactory.moveToSelectPhotoButton()
-    @UsesAutoLayout var searchButton = SubviewFactory.searchButton()
-    @UsesAutoLayout var selectedTagsStackView = SubviewFactory.selectedTagsStackView()
-    @UsesAutoLayout var firstTagLabel = SubviewFactory.tagLabel()
-    @UsesAutoLayout var secondTagLabel = SubviewFactory.tagLabel()
-    @UsesAutoLayout var thirdTagLabel = SubviewFactory.tagLabel()
+    @UsesAutoLayout private(set) var searchButton = SubviewFactory.searchButton()
+    @UsesAutoLayout private(set) var selectedTagsStackView = SubviewFactory.selectedTagsStackView()
+    @UsesAutoLayout private(set) var firstTagLabel = SubviewFactory.tagLabel()
+    @UsesAutoLayout private(set) var secondTagLabel = SubviewFactory.tagLabel()
+    @UsesAutoLayout private(set) var thirdTagLabel = SubviewFactory.tagLabel()
+    weak var delegate: PhotoNoteListViewDelegate?
     
     // MARK: - Intialization
     init() {
         super.init(frame: .zero)
         addSubviews()
         setupLayout()
+        setupGestureRecognizer()
     }
 
     required init?(coder aDecoder: NSCoder) { return nil }
@@ -34,6 +37,15 @@ class PhotoNoteListView: ContentViewWithHeader {
         configureHeaderView()
         configureContentView()
         self.addSubview(contentView)
+    }
+    
+    private func setupGestureRecognizer() {
+        let leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipeDidBegin))
+        leftSwipeGestureRecognizer.direction = .left
+                self.addGestureRecognizer(leftSwipeGestureRecognizer)
+        let rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(rightSwipeDidBegin))
+        rightSwipeGestureRecognizer.direction = .right
+                self.addGestureRecognizer(rightSwipeGestureRecognizer)
     }
     
     override func configureHeaderView() {
@@ -46,8 +58,6 @@ class PhotoNoteListView: ContentViewWithHeader {
     
     override func configureContentView() {
         contentView.addSubview(headerStackView)
-        contentView.addSubview(moveToTagCategoryButton)
-        contentView.addSubview(moveToSelectPhotoButton)
     }
     
     override func setupLayout() {
@@ -57,18 +67,15 @@ class PhotoNoteListView: ContentViewWithHeader {
         headerStackView.pinTop(to: self.safeAreaLayoutGuide.topAnchor, offset: .twenty)
         headerStackView.pinLeading(to: contentView.leadingAnchor, offset: .ten)
         headerStackView.pinTrailing(to: contentView.trailingAnchor, offset: .ten)
-        
-        moveToTagCategoryButton.pinLeading(to: self.leadingAnchor, offset: .ten)
-        moveToTagCategoryButton.pinTrailing(to: self.trailingAnchor, offset: -.ten)
-        moveToTagCategoryButton.pinHeight(to: self.heightAnchor, multiplier: .zeroPointOne)
-        moveToTagCategoryButton.pinCenter(to: self)
-        
-        moveToSelectPhotoButton.pinLeading(to: self.leadingAnchor, offset: .ten)
-        moveToSelectPhotoButton.pinTrailing(to: self.trailingAnchor, offset: -.ten)
-        moveToSelectPhotoButton.pinTop(to: moveToTagCategoryButton.bottomAnchor, offset: .twenty)
-        moveToSelectPhotoButton.pinHeight(to: self.heightAnchor, multiplier: .zeroPointOne)
-        
         selectedTagsStackView.pinWidth(to: self.widthAnchor, multiplier: .zeroPointEight)
+    }
+    
+    @objc private func leftSwipeDidBegin() {
+        delegate?.leftSwipeDidBegin(self)
+    }
+
+    @objc private func rightSwipeDidBegin() {
+        delegate?.rightSwipeDidBegin(self)
     }
 }
 
@@ -90,26 +97,6 @@ private extension PhotoNoteListView {
             label.font = UIFont.boldSystemFont(ofSize: .twenty)
             label.textAlignment = .left
             return label
-        }
-        
-        static func moveToTagCategoryButton() -> UIButton {
-            let button = UIButton(type: .system)
-            button.backgroundColor = .blue
-            button.setTitle("go to tag Category", for: .normal)
-            button.tintColor = .white
-            button.layer.cornerRadius = 5
-            button.clipsToBounds = true
-            return button
-        }
-        
-        static func moveToSelectPhotoButton() -> UIButton {
-            let button = UIButton(type: .system)
-            button.backgroundColor = .blue
-            button.setTitle("select Photo Button", for: .normal)
-            button.tintColor = .white
-            button.layer.cornerRadius = 5
-            button.clipsToBounds = true
-            return button
         }
         
         static func searchButton() -> UIButton {

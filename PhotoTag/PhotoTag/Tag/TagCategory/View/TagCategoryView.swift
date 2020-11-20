@@ -7,7 +7,12 @@
 
 import UIKit
 
-class TagCategoryView: ContentViewWithHeader {
+protocol TagCategoryViewDelegate: class {
+    func moveToTagManagementButtonDidTouched(_ tagCategoryView: TagCategoryView)
+    func moveToPhotoListButtonDidTouched(_ tagCategoryView: TagCategoryView)
+}
+
+final class TagCategoryView: ContentViewWithHeader {
     
     enum TagCategoryViewConstant {
         static let title = "Tags"
@@ -15,21 +20,28 @@ class TagCategoryView: ContentViewWithHeader {
     }
     
     // MARK: - Properties
-    @UsesAutoLayout var titleLabel = SubviewFactory.titleLabel()
-    @UsesAutoLayout var moveToTagManagementButton = SubviewFactory.moveToTagManagementButton()
-    @UsesAutoLayout var moveToPhotoListButton = SubviewFactory.moveToPhotoListButton()
-    @UsesAutoLayout var tagCategoryCollectionView = SubviewFactory.tagCategoryCollectionView()
+    @UsesAutoLayout private var titleLabel = SubviewFactory.titleLabel()
+    @UsesAutoLayout private var moveToTagManagementButton = SubviewFactory.moveToTagManagementButton()
+    @UsesAutoLayout private var moveToPhotoListButton = SubviewFactory.moveToPhotoListButton()
+    @UsesAutoLayout private(set) var tagCategoryCollectionView = SubviewFactory.tagCategoryCollectionView()
+    weak var delegate: TagCategoryViewDelegate?
     
     // MARK: - Intialization
     init() {
         super.init(frame: .zero)
+        addButtonsTarget()
         addSubviews()
         setupLayout()
     }
-
+    
     required init?(coder aDecoder: NSCoder) { return nil }
     
     // MARK: - Functions
+    
+    private func addButtonsTarget() {
+        moveToTagManagementButton.addTarget(self, action: #selector(moveToTagManagementButtonDidTouched), for: .touchUpInside)
+        moveToPhotoListButton.addTarget(self, action: #selector(moveToPhotoListButtonDidTouched), for: .touchUpInside)
+    }
     override func addSubviews() {
         configureHeaderView()
         configureContentStackView()
@@ -66,6 +78,15 @@ class TagCategoryView: ContentViewWithHeader {
         moveToPhotoListButton.pinCenterX(to: self.centerXAnchor)
         moveToPhotoListButton.pinBottom(to: self.bottomAnchor, offset: -.twenty)
     }
+    
+    @objc private func moveToTagManagementButtonDidTouched() {
+        delegate?.moveToTagManagementButtonDidTouched(self)
+    }
+    
+    @objc private func moveToPhotoListButtonDidTouched() {
+        delegate?.moveToPhotoListButtonDidTouched(self)
+    }
+    
 }
 
 private extension TagCategoryView {
@@ -87,7 +108,7 @@ private extension TagCategoryView {
             button.tintColor = .darkGray
             return button
         }
-    
+        
         static func moveToPhotoListButton() -> UIButton {
             let button = UIButton()
             button.setTitle(TagCategoryViewConstant.goButtonTitle, for: .normal)
