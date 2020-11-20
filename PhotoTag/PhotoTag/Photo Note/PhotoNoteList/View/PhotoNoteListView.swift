@@ -27,6 +27,7 @@ class PhotoNoteListView: ContentViewWithHeader {
         super.init(frame: .zero)
         addSubviews()
         setupLayout()
+        setupGestureRecognizer()
     }
 
     required init?(coder aDecoder: NSCoder) { return nil }
@@ -35,13 +36,16 @@ class PhotoNoteListView: ContentViewWithHeader {
     override func addSubviews() {
         configureHeaderView()
         configureContentView()
-        setupGestureRecognizer()
         self.addSubview(contentView)
     }
     
     private func setupGestureRecognizer() {
-        self.addGestureRecognizer(leftSwipeGestureRecognizer)
-        self.addGestureRecognizer(rightSwipeGestureRecognizer)
+        let leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipeDidBegin))
+        leftSwipeGestureRecognizer.direction = .left
+                self.addGestureRecognizer(leftSwipeGestureRecognizer)
+        let rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(rightSwipeDidBegin))
+        rightSwipeGestureRecognizer.direction = .right
+                self.addGestureRecognizer(rightSwipeGestureRecognizer)
     }
     
     override func configureHeaderView() {
