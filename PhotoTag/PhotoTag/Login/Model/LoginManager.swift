@@ -35,6 +35,7 @@ class LoginManager {
                      method: .post)
             .receive(subscriber: Subscribers.Sink(receiveCompletion: { [weak self] in
                 guard case let .failure(error) = $0 else { return }
+                print(#function)
                 debugPrint(error.message)
                 // TODO: - present alertController
             }, receiveValue: { [weak self] response in
@@ -43,12 +44,10 @@ class LoginManager {
     }
     
     private func checkResponseStatus(statusCode: Int, token: String) {
-        switch statusCode {
-        case 200 ..< 300:
+        if 200 <= statusCode || statusCode < 300 {
             try? saveUserInKeychain(token)
-            UserDefaults.standard.set("apple", forKey: "loginType")
-        // TODO: - 화면 
-        default:
+            UserDefaults.standard.set(token, forKey: UserDefaultKey.key)
+        } else {
             debugPrint("유효하지 않은 Apple ID 입니다.")
         }
     }

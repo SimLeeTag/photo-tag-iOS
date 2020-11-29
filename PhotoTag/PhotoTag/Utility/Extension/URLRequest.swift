@@ -13,10 +13,8 @@ extension URLRequest {
         self.httpMethod = method.description
         self.setValue("application/json",
                       forHTTPHeaderField: "Content-Type")
-        self.setValue("Bearer " + KeychainItem.currentUserIdentifier,
-                      forHTTPHeaderField: "Authorization")
-        self.setValue(UserDefaults.standard.object(forKey: "loginType") as? String,
-                      forHTTPHeaderField: "loginType")
+        self.setValue("Bearer " + UserDefaults.standard.string(forKey: UserDefaultKey.key)!, forHTTPHeaderField: "Authorization")
+        
         self.httpBody = body
     }
 }
