@@ -11,6 +11,7 @@ class TagManagementTableViewCell: UITableViewCell {
 
     @IBOutlet weak var tagNameLabel: UILabel!
     @IBOutlet weak var noteCountLabel: UILabel!
+    private var viewModel: TagManagementCellViewModel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,6 +22,11 @@ class TagManagementTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func fill(with hashtag: Hashtag) {
+        tagNameLabel.text = hashtag.tagName
+        noteCountLabel.text = "\(hashtag.frequency)"
     }
     
 }
