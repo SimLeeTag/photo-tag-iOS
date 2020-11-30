@@ -18,13 +18,14 @@ struct UseCase {
     private init() { }
     
     // MARK: - Methods
-    func request<E: Encodable>(_ network: NetworkConnectable = NetworkManager.shared, data: E, endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<HTTPURLResponse, NetworkError> {
+    func request<E: Encodable>(_ network: NetworkConnectable = NetworkManager.shared,
+                               data: E,
+                               endpoint: RequestProviding,
+                               method: HTTPMethod) -> AnyPublisher<HTTPURLResponse, NetworkError> {
         guard let url = endpoint.url else {
-            print(#function)
             return Fail(error: NetworkError.urlError).eraseToAnyPublisher()
         }
         guard let data = try? JSONEncoder().encode(data) else {
-            print(#function)
             return Fail(error: NetworkError.jsonEncodingError).eraseToAnyPublisher()
         }
         
@@ -37,20 +38,20 @@ struct UseCase {
             .eraseToAnyPublisher()
     }
     
-    func request<D: Decodable>(_ network: NetworkConnectable = NetworkManager.shared, type: D.Type, endpoint: RequestProviding, method: HTTPMethod) -> AnyPublisher<D, Error> {
+    
+    func request<D: Decodable>(_ network: NetworkConnectable = NetworkManager.shared,
+                               type: D.Type, endpoint: RequestProviding,
+                               method: HTTPMethod) -> AnyPublisher<D, Error> {
         guard let url = endpoint.url else {
-            print(#function)
             return Fail(error: NetworkError.urlError).eraseToAnyPublisher()
         }
         
         return network
             .session
-            .dataTaskPublisher(for: URLRequest(url: url))
-            .map{ data, response in
-                print(String(data: data, encoding: .utf8))
-                return data
-            }
+            .dataTaskPublisher(for: URLRequest(url: url, method: method))
+            .map { $0.data }
             .decode(type: D.self, decoder: decoder)
             .eraseToAnyPublisher()
     }
+    
 }
