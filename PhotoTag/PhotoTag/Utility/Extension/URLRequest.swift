@@ -8,6 +8,16 @@
 import Foundation
 
 extension URLRequest {
+    init(baseUrl: URL, method: HTTPMethod, body: Data? = nil) {
+        self.init(url: baseUrl)
+        self.httpMethod = method.description
+        self.setValue("application/json",
+                      forHTTPHeaderField: "Content-Type")
+        self.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        self.httpBody = body
+    }
+    
     init(url: URL, method: HTTPMethod, body: Data? = nil) {
         self.init(url: url)
         self.httpMethod = method.description
