@@ -8,6 +8,10 @@
 import UIKit
 import AuthenticationServices
 
+enum UserDefaultKey {
+    static let key = "userId"
+}
+
 class LoginViewController: UIViewController {
     
     // MARK: - Properties
@@ -68,10 +72,7 @@ class LoginViewController: UIViewController {
 extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
-        guard let token = appleIDCredential.identityToken else { return }
-        guard let jwt = String(data: token, encoding: .utf8) else { return }
-        loginManager.saveUserInKeychain(jwt)
-        UserDefaults.standard.set(jwt, forKey: "loginType")
+        
         loginManager.requestAppleLoginToken(credential: appleIDCredential)
         coordinator?.navigateToSelectTagCategory()
         self.dismiss(animated: true, completion: nil)
