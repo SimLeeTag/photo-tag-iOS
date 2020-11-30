@@ -22,7 +22,7 @@ struct Endpoint: RequestProviding {
         
         var description: String {
             switch self {
-            case .appleLogin: return "/applelogin"
+            case .appleLogin: return "/apple-login"
             case .fetchHashtags: return "/tags/setting"
             }
         }
@@ -30,7 +30,6 @@ struct Endpoint: RequestProviding {
     
     // MARK: - Properties
     var url: URL? {
-        var components = URLComponents()
         return URL(string: scheme + "://" + baseUrl + path.description)
     }
     var baseUrl: String = "52.78.129.236:8080"
