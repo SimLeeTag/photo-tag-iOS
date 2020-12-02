@@ -21,7 +21,7 @@ struct AppViewControllersFactory {
     }
     
     func tagManagementViewController(coordinator: TagCoordinator) -> UIViewController {
-        let tagManagementViewController = TagManagementViewController(coordinator: coordinator)
+        let tagManagementViewController = TagManagementViewController(with: TagManagementViewModel(), coordinator: coordinator)
         let tableViewDelegate = TagManagementTableViewDelegate()
         tagManagementViewController.delegate = tableViewDelegate
         return tagManagementViewController

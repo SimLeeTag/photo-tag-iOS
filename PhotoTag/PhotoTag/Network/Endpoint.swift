@@ -18,25 +18,21 @@ struct Endpoint: RequestProviding {
     
     enum Path: CustomStringConvertible {
         case appleLogin
+        case fetchHashtags
         
         var description: String {
             switch self {
-            case .appleLogin:
-                return "/applelogin"
+            case .appleLogin: return "/apple-login"
+            case .fetchHashtags: return "/tags/setting"
             }
         }
     }
     
     // MARK: - Properties
     var url: URL? {
-        var components = URLComponents()
-        components.host = baseUrl
-        components.scheme = scheme
-        components.path = path.description
-        
-        return components.url
+        return URL(string: scheme + "://" + baseUrl + path.description)
     }
-    var baseUrl: String = "52.78.129.236:8080/"
+    var baseUrl: String = "52.78.129.236:8080"
     var scheme: String = "http"
     var path: Path
 }

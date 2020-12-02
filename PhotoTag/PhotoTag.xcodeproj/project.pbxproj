@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		54022D74814B80EA4BF89773 /* Pods_PhotoTag_PhotoTagUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9883F4ADD7ADA08DC14AA90B /* Pods_PhotoTag_PhotoTagUITests.framework */; };
+		6A343C7B25735C7000146AAF /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A343C7A25735C7000146AAF /* Observable.swift */; };
+		6A343C8025735C8C00146AAF /* TagManagementCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A343C7F25735C8C00146AAF /* TagManagementCellViewModel.swift */; };
 		6A4F23EA2546E2AC00577718 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F23E92546E2AC00577718 /* AppCoordinator.swift */; };
 		6A4F23F72546EC8A00577718 /* PhotoNoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F23F62546EC8A00577718 /* PhotoNoteListViewController.swift */; };
 		6A5544C925599CDF003F3864 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5544C825599CDF003F3864 /* UIColor.swift */; };
@@ -42,6 +44,7 @@
 		6A89B9E825549764003E1027 /* WritePhotoNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9E725549764003E1027 /* WritePhotoNoteViewController.swift */; };
 		6A89B9ED25549787003E1027 /* PhotoNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9EC25549787003E1027 /* PhotoNoteViewController.swift */; };
 		6A89B9F225549807003E1027 /* SelectPeriodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9F125549807003E1027 /* SelectPeriodViewController.swift */; };
+		6A976A2D256D6EE900B27915 /* TagManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A976A2C256D6EE900B27915 /* TagManagementViewModel.swift */; };
 		6AA9BD65254E93C200126749 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA9BD64254E93C200126749 /* LoginManager.swift */; };
 		6AA9BD6E254EA0ED00126749 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA9BD6D254EA0ED00126749 /* Endpoint.swift */; };
 		6AAE725E2555988B00CF7F9F /* TagCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAE725D2555988B00CF7F9F /* TagCategoryView.swift */; };
@@ -49,12 +52,13 @@
 		6AB83AE02542B4340065B698 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83ADF2542B4340065B698 /* Coordinator.swift */; };
 		6AB83AF425442B370065B698 /* TagCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83AF325442B370065B698 /* TagCoordinator.swift */; };
 		6AB83AF925442C030065B698 /* TagCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB83AF825442C030065B698 /* TagCategoryViewController.swift */; };
+		6ACCADAC256E28A600072290 /* TagManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACCADAB256E28A600072290 /* TagManager.swift */; };
+		6ACCADBD256E28BE00072290 /* Hashtags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACCADBC256E28BE00072290 /* Hashtags.swift */; };
 		6AD3ED5D25519F5700F8EF61 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD3ED5C25519F5700F8EF61 /* URLRequest.swift */; };
 		6AD3ED6225519F9E00F8EF61 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD3ED6125519F9E00F8EF61 /* NetworkManager.swift */; };
 		6AD3ED6725519FE900F8EF61 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD3ED6625519FE900F8EF61 /* UseCase.swift */; };
 		6AD3ED6C2551A09900F8EF61 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD3ED6B2551A09900F8EF61 /* HTTPMethod.swift */; };
 		6AD3ED712551A0B400F8EF61 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD3ED702551A0B400F8EF61 /* NetworkError.swift */; };
-		6AD3EDB1255274A400F8EF61 /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD3EDB0255274A400F8EF61 /* KeychainItem.swift */; };
 		6AE1245E256830A300291388 /* UISwipeGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE1245D256830A300291388 /* UISwipeGestureRecognizer.swift */; };
 		6AFE3C01253EDF3200B385AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFE3C00253EDF3200B385AC /* AppDelegate.swift */; };
 		6AFE3C05253EDF3200B385AC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFE3C04253EDF3200B385AC /* LoginViewController.swift */; };
@@ -89,6 +93,9 @@
 		064CCBB8491AB889894E257E /* Pods_PhotoTag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoTag.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4748E784DBC15642B3BBD5BE /* Pods-PhotoTagTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTagTests.release.xcconfig"; path = "Target Support Files/Pods-PhotoTagTests/Pods-PhotoTagTests.release.xcconfig"; sourceTree = "<group>"; };
 		55C8346B7FC7025DA7D4F3EB /* Pods-PhotoTag.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTag.release.xcconfig"; path = "Target Support Files/Pods-PhotoTag/Pods-PhotoTag.release.xcconfig"; sourceTree = "<group>"; };
+		6A343C68257245D100146AAF /* PhotoTagRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoTagRelease.entitlements; sourceTree = "<group>"; };
+		6A343C7A25735C7000146AAF /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		6A343C7F25735C8C00146AAF /* TagManagementCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementCellViewModel.swift; sourceTree = "<group>"; };
 		6A4F23E92546E2AC00577718 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		6A4F23F62546EC8A00577718 /* PhotoNoteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNoteListViewController.swift; sourceTree = "<group>"; };
 		6A5544C825599CDF003F3864 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -124,6 +131,7 @@
 		6A89B9E725549764003E1027 /* WritePhotoNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePhotoNoteViewController.swift; sourceTree = "<group>"; };
 		6A89B9EC25549787003E1027 /* PhotoNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNoteViewController.swift; sourceTree = "<group>"; };
 		6A89B9F125549807003E1027 /* SelectPeriodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPeriodViewController.swift; sourceTree = "<group>"; };
+		6A976A2C256D6EE900B27915 /* TagManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementViewModel.swift; sourceTree = "<group>"; };
 		6AA9BD64254E93C200126749 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		6AA9BD6D254EA0ED00126749 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		6AAE725D2555988B00CF7F9F /* TagCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryView.swift; sourceTree = "<group>"; };
@@ -131,12 +139,13 @@
 		6AB83ADF2542B4340065B698 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		6AB83AF325442B370065B698 /* TagCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCoordinator.swift; sourceTree = "<group>"; };
 		6AB83AF825442C030065B698 /* TagCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryViewController.swift; sourceTree = "<group>"; };
+		6ACCADAB256E28A600072290 /* TagManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManager.swift; sourceTree = "<group>"; };
+		6ACCADBC256E28BE00072290 /* Hashtags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hashtags.swift; sourceTree = "<group>"; };
 		6AD3ED5C25519F5700F8EF61 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		6AD3ED6125519F9E00F8EF61 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		6AD3ED6625519FE900F8EF61 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		6AD3ED6B2551A09900F8EF61 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		6AD3ED702551A0B400F8EF61 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		6AD3EDB0255274A400F8EF61 /* KeychainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift; sourceTree = "<group>"; };
 		6AE1245D256830A300291388 /* UISwipeGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISwipeGestureRecognizer.swift; sourceTree = "<group>"; };
 		6AFE3BFD253EDF3200B385AC /* PhotoTag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AFE3C00253EDF3200B385AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -231,6 +240,8 @@
 		6A63BA30255C2F2B0096A0F7 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				6A976A2C256D6EE900B27915 /* TagManagementViewModel.swift */,
+				6A343C7F25735C8C00146AAF /* TagManagementCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -241,6 +252,7 @@
 				6A7C056A255C021600037184 /* Extension */,
 				6A6825322548384700B19C9A /* LayoutGuideCompatible.swift */,
 				6A68254F25497B7200B19C9A /* Shadow.swift */,
+				6A343C7A25735C7000146AAF /* Observable.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -281,21 +293,27 @@
 				6A5544C825599CDF003F3864 /* UIColor.swift */,
 				6A57CAEE255ED33600E42348 /* UsesAutoLayout.swift */,
 				6AE1245D256830A300291388 /* UISwipeGestureRecognizer.swift */,
+				6AD3ED5C25519F5700F8EF61 /* URLRequest.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		6A976A31256D787F00B27915 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6AA9BD6D254EA0ED00126749 /* Endpoint.swift */,
+				6AD3ED6125519F9E00F8EF61 /* NetworkManager.swift */,
+				6AD3ED6625519FE900F8EF61 /* UseCase.swift */,
+				6AD3ED6B2551A09900F8EF61 /* HTTPMethod.swift */,
+				6AD3ED702551A0B400F8EF61 /* NetworkError.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		6AA9BD69254E93C800126749 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				6AA9BD64254E93C200126749 /* LoginManager.swift */,
-				6AA9BD6D254EA0ED00126749 /* Endpoint.swift */,
-				6AD3ED5C25519F5700F8EF61 /* URLRequest.swift */,
-				6AD3ED6125519F9E00F8EF61 /* NetworkManager.swift */,
-				6AD3ED6625519FE900F8EF61 /* UseCase.swift */,
-				6AD3ED6B2551A09900F8EF61 /* HTTPMethod.swift */,
-				6AD3ED702551A0B400F8EF61 /* NetworkError.swift */,
-				6AD3EDB0255274A400F8EF61 /* KeychainItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -370,6 +388,7 @@
 				6AAE72592555983800CF7F9F /* TagCategory */,
 				6AAE725A2555984400CF7F9F /* TagManagement */,
 				6A63BA2B255C2F210096A0F7 /* TagManagementTableViewDelegate.swift */,
+				6ACCADAA256E288C00072290 /* Model */,
 			);
 			path = Tag;
 			sourceTree = "<group>";
@@ -392,6 +411,15 @@
 				6A89B9F125549807003E1027 /* SelectPeriodViewController.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		6ACCADAA256E288C00072290 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6ACCADAB256E28A600072290 /* TagManager.swift */,
+				6ACCADBC256E28BE00072290 /* Hashtags.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		6AFE3BF4253EDF3200B385AC = {
@@ -420,11 +448,13 @@
 		6AFE3BFF253EDF3200B385AC /* PhotoTag */ = {
 			isa = PBXGroup;
 			children = (
+				6A343C68257245D100146AAF /* PhotoTagRelease.entitlements */,
 				6A598F42254C6BB400547E67 /* PhotoTag.entitlements */,
 				6A682537254854D000B19C9A /* AppConfigurator */,
 				6A68252E254837E900B19C9A /* Utility */,
 				6AB83ADE2542B4130065B698 /* Coordinator */,
 				6A5544DA2559B39E003F3864 /* Common View */,
+				6A976A31256D787F00B27915 /* Network */,
 				6AB83AEC25441BC20065B698 /* Login */,
 				6AB83AED25441BC90065B698 /* Tag */,
 				6AB83AEE25441C040065B698 /* Photo Note */,
@@ -718,16 +748,20 @@
 				6A4F23F72546EC8A00577718 /* PhotoNoteListViewController.swift in Sources */,
 				6A5544DC2559B3BB003F3864 /* ContentView.swift in Sources */,
 				6A63BA1A255C1ED40096A0F7 /* TagManagementTableViewDataSource.swift in Sources */,
+				6A343C7B25735C7000146AAF /* Observable.swift in Sources */,
 				6AA9BD6E254EA0ED00126749 /* Endpoint.swift in Sources */,
+				6A343C8025735C8C00146AAF /* TagManagementCellViewModel.swift in Sources */,
 				6A89B9BF25547088003E1027 /* SearchViewController.swift in Sources */,
 				6A7C0585255C086200037184 /* UIView.swift in Sources */,
+				6ACCADAC256E28A600072290 /* TagManager.swift in Sources */,
 				6A5544FF255AD575003F3864 /* TagCategoryCollectionViewCell.swift in Sources */,
 				6AB83AF925442C030065B698 /* TagCategoryViewController.swift in Sources */,
+				6ACCADBD256E28BE00072290 /* Hashtags.swift in Sources */,
 				6AD3ED712551A0B400F8EF61 /* NetworkError.swift in Sources */,
 				6A7C0580255C081400037184 /* CGFloat.swift in Sources */,
 				6A7C0576255C033300037184 /* UIImage.swift in Sources */,
-				6AD3EDB1255274A400F8EF61 /* KeychainItem.swift in Sources */,
 				6A63BA1F255C1F450096A0F7 /* TagCategoryCollectionViewDataSource.swift in Sources */,
+				6A976A2D256D6EE900B27915 /* TagManagementViewModel.swift in Sources */,
 				6AAE726E2555997D00CF7F9F /* TagManagementView.swift in Sources */,
 				6A63BA12255C0AD10096A0F7 /* UITableView.swift in Sources */,
 				6AFE3C01253EDF3200B385AC /* AppDelegate.swift in Sources */,
@@ -935,7 +969,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = PhotoTag/PhotoTag.entitlements;
+				CODE_SIGN_ENTITLEMENTS = PhotoTag/PhotoTagRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = PhotoTag/Info.plist;
@@ -960,7 +994,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93A6S4WHC4;
 				INFOPLIST_FILE = PhotoTagTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -983,7 +1017,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93A6S4WHC4;
 				INFOPLIST_FILE = PhotoTagTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

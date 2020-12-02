@@ -13,6 +13,7 @@ enum HTTPMethod: CustomStringConvertible {
     case put
     case post
     case delete
+    case patch
     
     var description: String {
         switch self {
@@ -24,6 +25,8 @@ enum HTTPMethod: CustomStringConvertible {
             return "POST"
         case .delete:
             return "DELETE"
+        case .patch:
+            return "PATCH"
         }
     }
 }

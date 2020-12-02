@@ -23,14 +23,14 @@ class TagManagementTableViewDelegate: NSObject, UITableViewDelegate {
     }
     
     private func makeArchiveContextualAction(_ tableView: UITableView, forRowAt indexPath: IndexPath) -> UIContextualAction {
-        return UIContextualAction(style: .destructive, title: "Archive") { (_, _, completion) in
+        return UIContextualAction(style: .destructive, title: TagManagementConstant.activeHashtagSwipeMenuText) { (_, _, completion) in
             tableView.moveSection(indexPath.section, toSection: TagManagementConstant.archivedHashtagsSectionNumber)
             completion(true)
         }
     }
     
     private func makeRestoreContextualAction(_ tableView: UITableView, forRowAt indexPath: IndexPath) -> UIContextualAction {
-        return UIContextualAction(style: .normal, title: "Restore") { (_, _, completion) in
+        return UIContextualAction(style: .normal, title: TagManagementConstant.archivedHashtagSwipeMenuText) { (_, _, completion) in
             
             tableView.moveSection(indexPath.section, toSection: TagManagementConstant.activeHashtagsSectionNumber)
             completion(true)

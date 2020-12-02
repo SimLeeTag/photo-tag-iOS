@@ -24,14 +24,16 @@ class TagManagementViewController: UIViewController {
     private let dataSource: TagManagementTableViewDataSource
     var delegate: TagManagementTableViewDelegate?
     weak var coordinator: TagCoordinator?
+    let viewModel: TagManagementViewModel
     private var tagManagementView: TagManagementView! {
         return view as? TagManagementView
     }
     
     // MARK: - Intialization
     //TODO:- add viewModel as parameter
-    init(coordinator: TagCoordinator) {
+    init(with viewModel: TagManagementViewModel, coordinator: TagCoordinator) {
         self.coordinator = coordinator
+        self.viewModel = viewModel
         dataSource = TagManagementTableViewDataSource()
         super.init(nibName: nil, bundle: nil)
     }
@@ -44,15 +46,33 @@ class TagManagementViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // TODO: - request data from API
+        viewModel.fetchHashtags { fetchedViewModel in
+            self.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
+        }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
         configure()
     }
     
     // MARK: - Functions
+    private func bind() {
+        viewModel.title.bind { [weak self] sceneTitle in
+            self?.tagManagementView.titleLabel.text = sceneTitle
+        }
+        viewModel.activatedHashtags.bind { [weak self] _ in
+            self?.updateHashTags()
+        }
+        
+    }
+    
+    private func updateHashTags() {
+        self.tagManagementView.hashtagTableView.reloadData()
+    }
+    
     private func configure () {
         tagManagementView.delegate = self
         hideNavigationBar()
