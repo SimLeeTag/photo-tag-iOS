@@ -23,7 +23,6 @@ class TagManagementViewModel {
     }
     private(set) var activatedHashtagCounts: Int = 0
     private(set) var archivedHashtagCounts: Int = 0
-    let networkManager = NetworkManager()
     
     private func updateHashtagCount(tagType: TagType) {
         switch tagType {
