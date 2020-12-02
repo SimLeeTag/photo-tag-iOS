@@ -26,7 +26,7 @@ class TagManagementTableViewCell: UITableViewCell {
     
     func fill(with hashtag: Hashtag) {
         tagNameLabel.text = hashtag.tagName
-        noteCountLabel.text = "\(hashtag.frequency)"
+        noteCountLabel.text = "\(hashtag.frequency) note(s)"
     }
     
 }
