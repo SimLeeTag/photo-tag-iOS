@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,27 +18,29 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RT7-H8-4sw">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="RT7-H8-4sw">
+                        <rect key="frame" x="10" y="0.0" width="300" height="44"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Sample_Tag" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LmK-G5-00f">
-                                <rect key="frame" x="0.0" y="0.0" width="160" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="224" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="(3 NOTES)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDr-2X-JIO">
-                                <rect key="frame" x="160" y="0.0" width="160" height="44"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="(3 NOTES)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDr-2X-JIO">
+                                <rect key="frame" x="224" y="0.0" width="76" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="RT7-H8-4sw" secondAttribute="trailing" id="NBl-jH-wD0"/>
-                    <constraint firstItem="RT7-H8-4sw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="WLR-41-fML"/>
+                    <constraint firstItem="LmK-G5-00f" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.7" id="8fq-gB-Gzc"/>
+                    <constraint firstAttribute="trailing" secondItem="RT7-H8-4sw" secondAttribute="trailing" constant="10" id="NBl-jH-wD0"/>
+                    <constraint firstItem="RT7-H8-4sw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="WLR-41-fML"/>
                     <constraint firstAttribute="bottom" secondItem="RT7-H8-4sw" secondAttribute="bottom" id="mcx-VC-4q7"/>
                     <constraint firstItem="RT7-H8-4sw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="s3X-St-chH"/>
                 </constraints>
@@ -47,7 +50,12 @@
                 <outlet property="noteCountLabel" destination="fDr-2X-JIO" id="SJq-Xi-AEo"/>
                 <outlet property="tagNameLabel" destination="LmK-G5-00f" id="p43-pn-1TD"/>
             </connections>
-            <point key="canvasLocation" x="141" y="81"/>
+            <point key="canvasLocation" x="332" y="139"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
