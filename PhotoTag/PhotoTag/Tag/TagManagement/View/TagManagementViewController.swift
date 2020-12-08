@@ -37,7 +37,7 @@ class TagManagementViewController: UIViewController {
         dataSource = TagManagementTableViewDataSource()
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder aDecoder: NSCoder) { return nil }
     
     // MARK: - Life Cycle
@@ -46,16 +46,14 @@ class TagManagementViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.fetchHashtags { fetchedViewModel in
-            self.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
-        }
-        
+        fetchHashtags()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
         configure()
+        fetchHashtags()
     }
     
     // MARK: - Functions
@@ -69,8 +67,17 @@ class TagManagementViewController: UIViewController {
         
     }
     
+    private func fetchHashtags() {
+        viewModel.fetchHashtags { fetchedViewModel in
+            self.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
+            self.updateHashTags()
+        }
+    }
+    
     private func updateHashTags() {
-        self.tagManagementView.hashtagTableView.reloadData()
+        DispatchQueue.main.async {
+            self.tagManagementView.hashtagTableView.reloadData()
+        }
     }
     
     private func configure () {
@@ -97,5 +104,5 @@ extension TagManagementViewController: TagManagementViewDelegate {
     func moveBackToTagCategoryButtonDidTouched(_ tagManagementView: TagManagementView) {
         navigateToTagCategory()
     }
-
+    
 }

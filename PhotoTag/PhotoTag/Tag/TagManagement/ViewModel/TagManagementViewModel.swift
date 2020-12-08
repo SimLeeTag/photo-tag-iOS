@@ -27,16 +27,17 @@ class TagManagementViewModel {
     private func updateHashtagCount(tagType: TagType) {
         switch tagType {
         case .activated: activatedHashtagCounts = activatedHashtags.value.count
-        case .archived: archivedHashtagCounts = activatedHashtags.value.count
+        case .archived: archivedHashtagCounts = archivedHashtags.value.count
         }
     }
     
-    func fetchHashtags(completionHandler: @escaping (Self) -> Void) {
+    func fetchHashtags(completionHandler: @escaping (TagManagementViewModel) -> Void) {
         tagNetworkManager.fetchHashtags { hashtags in
             guard let activatedList = hashtags?.activatedList else { return }
             guard let archievedList = hashtags?.archivedList else { return }
             self.activatedHashtags = Observable(activatedList)
             self.archivedHashtags = Observable(archievedList)
+            completionHandler(self)
         }
     }
 }
