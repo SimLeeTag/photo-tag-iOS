@@ -23,3 +23,9 @@ struct Hashtag: Codable {
         case tagName
     }
 }
+
+extension Hashtag: Equatable {
+    static func == (lhs: Hashtag, rhs: Hashtag) -> Bool {
+        return lhs.activated == rhs.activated && lhs.frequency == rhs.frequency && lhs.tagID == rhs.tagID && lhs.tagName == rhs.tagName
+    }
+}
