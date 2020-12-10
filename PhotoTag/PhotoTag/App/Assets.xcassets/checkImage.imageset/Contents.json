@@ -1,15 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "checkImage.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "btn_google_signin_dark_normal_web@2x.png",
+      "filename" : "checkImage-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "checkImage-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
