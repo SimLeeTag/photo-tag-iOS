@@ -40,4 +40,31 @@ class TagManagementViewModel {
             completionHandler(self)
         }
     }
+    
+    func updateHashtagState(tagId: Int, willBe state: TagType) {
+        let tagState = state == .activated ? true : false
+        if tagState { // archived -> activated
+            restoreHashtag(with: tagId)
+        } else { // activate -> archived
+            archiveHashtag(with: tagId)
+        }
+        tagNetworkManager.updateHashtagActivatedState(of: tagId, with: HastagState(activated: tagState))
+    }
+    
+    func restoreHashtag(with tagId: Int) {
+        let tag = archivedHashtags.value.filter{ hashtag in
+            hashtag.tagID == tagId}.first!
+        archivedHashtags.value = archivedHashtags.value.filter{ hashtag in
+            hashtag != tag}
+        activatedHashtags.value.append(tag)
+    }
+    
+    func archiveHashtag(with tagId: Int) {
+        let tag = activatedHashtags.value.filter{ hashtag in
+            hashtag.tagID == tagId}.first!
+        activatedHashtags.value = archivedHashtags.value.filter{ hashtag in
+            hashtag != tag}
+        archivedHashtags.value.append(tag)
+    }
+    
 }
