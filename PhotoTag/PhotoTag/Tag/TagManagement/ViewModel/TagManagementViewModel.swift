@@ -52,19 +52,19 @@ class TagManagementViewModel {
     }
     
     func restoreHashtag(with tagId: Int) {
-        let tag = archivedHashtags.value.filter{ hashtag in
-            hashtag.tagID == tagId}.first!
-        archivedHashtags.value = archivedHashtags.value.filter{ hashtag in
-            hashtag != tag}
+        guard let tag = archivedHashtags.value.filter({ hashtag in
+                                                        hashtag.tagID == tagId}).first else { return }
         activatedHashtags.value.append(tag)
+        archivedHashtags.value = archivedHashtags.value.filter { hashtag in
+            hashtag != tag}
     }
     
     func archiveHashtag(with tagId: Int) {
-        let tag = activatedHashtags.value.filter{ hashtag in
-            hashtag.tagID == tagId}.first!
-        activatedHashtags.value = archivedHashtags.value.filter{ hashtag in
-            hashtag != tag}
+        guard let tag = activatedHashtags.value.filter({ hashtag in
+                                                        hashtag.tagID == tagId}).first else { return }
         archivedHashtags.value.append(tag)
+        activatedHashtags.value = activatedHashtags.value.filter { hashtag in
+            hashtag != tag}
     }
     
 }
