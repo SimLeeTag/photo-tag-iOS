@@ -52,9 +52,10 @@ class TagManagementViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNotification()
         bind()
-        configure()
         fetchHashtags()
+        configure()
     }
     
     // MARK: - Functions
@@ -71,6 +72,7 @@ class TagManagementViewController: UIViewController {
     private func fetchHashtags() {
         viewModel.fetchHashtags { fetchedViewModel in
             self.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
+            self.delegate?.updateViewModel(with: fetchedViewModel)
             self.updateHashTags()
         }
     }
@@ -101,6 +103,7 @@ class TagManagementViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
 }
+
 extension TagManagementViewController: TagManagementViewDelegate {
     func moveBackToTagCategoryButtonDidTouched(_ tagManagementView: TagManagementView) {
         navigateToTagCategory()
