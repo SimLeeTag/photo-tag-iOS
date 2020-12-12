@@ -90,6 +90,14 @@ class TagManagementViewController: UIViewController {
         setupTableView()
     }
     
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTableView), name: .tagManagementViewModelUpdated, object: nil)
+    }
+    
+    @objc private func updateTableView() {
+        updateHashTags()
+    }
+    
     private func setupTableView() {
         tagManagementView.hashtagTableView.dataSource = dataSource
         tagManagementView.hashtagTableView.delegate = delegate

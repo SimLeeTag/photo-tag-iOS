@@ -48,6 +48,17 @@ class TagManagementTableViewDataSource: NSObject, UITableViewDataSource {
         return .none
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+}
+
+extension TagManagementTableViewDataSource {
+    func updateViewModel(updatedViewModel: TagManagementViewModel) {
+        self.viewModel = updatedViewModel
+    }
+    
     private func bind(with cell: TagManagementTableViewCell) {
         let cellViewModel = TagManagementCellViewModel()
         cellViewModel.noteCount.bind { noteCount in

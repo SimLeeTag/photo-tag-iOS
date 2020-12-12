@@ -40,7 +40,7 @@ class TagNetworkManager {
     
     private func checkResponseStatus(statusCode: Int) {
         if 200 == statusCode {
-            // TODO: - show complete image
+            debugPrint("요청이 성공했습니다")
         } else if 204 == statusCode{
             debugPrint("No Content. 콘텐츠가 없습니다")
         } else if 401 == statusCode {
@@ -50,9 +50,5 @@ class TagNetworkManager {
         } else {
             debugPrint("알 수 없는 이유로 요청이 실패했습니다.")
         }
-    }
-    
-    private func showCompleteImage() {
-        //TODO: - make alert view
     }
 }

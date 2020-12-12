@@ -15,17 +15,13 @@ class TagManagementTableViewDelegate: NSObject, UITableViewDelegate {
         guard let cell = tableView.cellForRow(at: indexPath) as? TagManagementTableViewCell, let cellTagId = cell.tagId else {return UISwipeActionsConfiguration()}
         
         func didRestore() {
-            viewModel?.restoreHashtag(with: cellTagId)
             viewModel?.updateHashtagState(tagId: cellTagId, willBe: .activated)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.insertRows(at: [IndexPath(row: indexPath.last!, section: TagManagementConstant.activeHashtagsSectionNumber)], with: .automatic)
+            sendNotification()
         }
         
         func didArchive() {
-            viewModel?.archiveHashtag(with: cellTagId)
             viewModel?.updateHashtagState(tagId: cellTagId, willBe: .archived)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.insertRows(at: [IndexPath(row: indexPath.last!, section: TagManagementConstant.activeHashtagsSectionNumber)], with: .automatic)
+            sendNotification()
         }
         
         let restore = ActionType.make(.restore, handler: didRestore)
@@ -38,6 +34,10 @@ class TagManagementTableViewDelegate: NSObject, UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [restore])
     }
     
+    private func sendNotification() {
+        NotificationCenter.default.post(name: .tagManagementViewModelUpdated, object: nil)
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return TagManagementConstant.cellHeight
     }
@@ -46,6 +46,9 @@ class TagManagementTableViewDelegate: NSObject, UITableViewDelegate {
 
 // MARK: - SwipeAction
 extension TagManagementTableViewDelegate {
+    func updateViewModel(with newViewModel: TagManagementViewModel) {
+        self.viewModel = newViewModel
+    }
     enum ActionType {
         case restore
         case archive
@@ -72,34 +75,6 @@ extension TagManagementTableViewDelegate {
             case .archive:
                 return Attribute(style: .destructive, title: "Archive")
             }
-        }
-    }
-    
-    // TODO: - need to check whether use or not
-    private func makeArchiveContextualAction(_ tableView: UITableView, forRowAt indexPath: IndexPath) -> UIContextualAction {
-        return UIContextualAction(style: .destructive, title: TagManagementConstant.activeHashtagSwipeMenuText) { (_, _, completion) in
-            tableView.beginUpdates()
-            // viewModel update
-            // 여기서 네트워크에 연결
-            guard let cell = tableView.cellForRow(at: indexPath) as? TagManagementTableViewCell, let cellTagId = cell.tagId else {return}
-            self.viewModel?.updateHashtagState(tagId: cellTagId, willBe: .archived)
-            tableView.reloadData()
-            tableView.moveSection(indexPath.section, toSection: 1)
-            completion(true)
-            tableView.endUpdates()
-            
-        }
-    }
-    
-    private func makeRestoreContextualAction(_ tableView: UITableView, forRowAt indexPath: IndexPath) -> UIContextualAction {
-        return UIContextualAction(style: .normal, title: TagManagementConstant.archivedHashtagSwipeMenuText) { (_, _, completion) in
-            tableView.beginUpdates()
-            guard let cell = tableView.cellForRow(at: indexPath) as? TagManagementTableViewCell, let cellTagId = cell.tagId else {return}
-            self.viewModel?.updateHashtagState(tagId: cellTagId, willBe: .activated)
-            tableView.moveSection(indexPath.section, toSection: 0)
-            tableView.reloadData()
-            completion(true)
-            tableView.endUpdates()
         }
     }
 }
