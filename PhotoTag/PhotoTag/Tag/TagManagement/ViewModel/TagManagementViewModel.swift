@@ -15,19 +15,13 @@ class TagManagementViewModel {
     }
     let tagNetworkManager  = TagNetworkManager()
     let title = Observable(TagManagementConstant.title)
-    private(set) var activatedHashtags: Observable<[Hashtag]> = Observable([]) {
-        didSet { updateHashtagCount(tagType: .activated) }
-    }
-    var archivedHashtags: Observable<[Hashtag]> = Observable([]) {
-        didSet { updateHashtagCount(tagType: .archived) }
-    }
-    private(set) var activatedHashtagCounts: Int = 0
-    private(set) var archivedHashtagCounts: Int = 0
+    private(set) var activatedHashtags: Observable<[Hashtag]> = Observable([])
+    var archivedHashtags: Observable<[Hashtag]> = Observable([])
     
-    private func updateHashtagCount(tagType: TagType) {
+    func updatedHashtagCount(of tagType: TagType) -> Int {
         switch tagType {
-        case .activated: activatedHashtagCounts = activatedHashtags.value.count
-        case .archived: archivedHashtagCounts = archivedHashtags.value.count
+        case .activated: return activatedHashtags.value.count
+        case .archived: return archivedHashtags.value.count
         }
     }
     

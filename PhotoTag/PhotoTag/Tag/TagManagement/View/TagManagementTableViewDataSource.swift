@@ -11,10 +11,6 @@ class TagManagementTableViewDataSource: NSObject, UITableViewDataSource {
     
     private var viewModel = TagManagementViewModel()
     
-    func updateViewModel(updatedViewModel: TagManagementViewModel) {
-        self.viewModel = updatedViewModel
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         TagManagementConstant.numberOfSections
     }
@@ -26,7 +22,7 @@ class TagManagementTableViewDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let isActivatedSection = section == 0
-        return isActivatedSection ? viewModel.activatedHashtagCounts : viewModel.archivedHashtagCounts
+        return isActivatedSection ? viewModel.updatedHashtagCount(of: .activated) : viewModel.updatedHashtagCount(of: .archived)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -36,13 +32,11 @@ class TagManagementTableViewDataSource: NSObject, UITableViewDataSource {
         let isActivatedSection = indexPath.section == 0
         bind(with: tableViewCell)
         
-        let activatedTagCount = self.viewModel.activatedHashtagCounts
-        let archivedTagCount = self.viewModel.archivedHashtagCounts
-        if isActivatedSection, activatedTagCount != 0 {
+        if isActivatedSection, viewModel.updatedHashtagCount(of: .activated) != 0 {
             tableViewCell.fill(with: self.viewModel.activatedHashtags.value[indexPath.row])
             return tableViewCell
         }
-        if archivedTagCount != 0 {
+        if viewModel.updatedHashtagCount(of: .archived) != 0 {
             tableViewCell.fill(with: self.viewModel.archivedHashtags.value[indexPath.row])
         }
         
@@ -63,5 +57,4 @@ class TagManagementTableViewDataSource: NSObject, UITableViewDataSource {
             cell.tagNameLabel.text = tagName
         }
     }
-    
 }
