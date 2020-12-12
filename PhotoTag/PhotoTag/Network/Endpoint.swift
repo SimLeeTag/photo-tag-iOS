@@ -32,8 +32,12 @@ struct Endpoint: RequestProviding {
     
     // MARK: - Properties
     var url: URL? {
-        return URL(string: scheme + "://" + baseUrl + path.description)
+        if tagId == nil {
+            return URL(string: scheme + "://" + baseUrl + path.description)
+        }
+        return URL(string: scheme + "://" + baseUrl + path.description + "\(tagId!)")
     }
+    
     var urlWithTagId: URL? {
         return URL(string: scheme + "://" + baseUrl + path.description + "\(tagId!)")
     }
@@ -42,10 +46,9 @@ struct Endpoint: RequestProviding {
     var path: Path
     var tagId: Int?
     
-    static func hashtagPatch(path: Path, tagId: Int) -> Self {
+    static func hashtagPatch(path: Path, tagId: Int) -> RequestProviding {
         var endpoint = Endpoint(path: path)
         endpoint.tagId = tagId
-        
         return endpoint
     }
 }
