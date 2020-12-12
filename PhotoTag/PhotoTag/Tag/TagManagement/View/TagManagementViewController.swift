@@ -16,7 +16,7 @@ enum TagManagementConstant {
     static let archivedHashtagsSectionHeaderTitle = "Archived Hashtags"
     static let activeHashtagSwipeMenuText = "Archive"
     static let archivedHashtagSwipeMenuText = "Restore"
-    static let cellHeight: CGFloat = 70
+    static let cellHeight: CGFloat = 50
 }
 
 class TagManagementViewController: UIViewController {
