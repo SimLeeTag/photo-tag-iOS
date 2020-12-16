@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchCoordinator: ChildCoordinator {
+final class SearchCoordinator: ChildCoordinator {
     
     override func start() {
         let searchViewController = appViewControllerFactory.searchViewController(coordinator: self)

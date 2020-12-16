@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TagCategoryCollectionViewDataSource: NSObject, UICollectionViewDataSource {
+final class TagCategoryCollectionViewDataSource: NSObject, UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return TagCategoryCollectionViewConstant.numberOfSections

@@ -12,7 +12,7 @@ enum UserDefaultKey {
     static let key = "userId"
 }
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     
     // MARK: - Properties
     private weak var coordinator: AppCoordinator?

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WritePhotoNoteViewController: UIViewController {
+final class WritePhotoNoteViewController: UIViewController {
 
     weak var coordinator: PhotoNoteCoordinator?
     

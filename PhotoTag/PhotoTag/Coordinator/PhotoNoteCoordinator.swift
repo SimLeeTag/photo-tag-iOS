@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PhotoNoteCoordinator: ChildCoordinator {
+final class PhotoNoteCoordinator: ChildCoordinator {
     
     override func start() {
         let photoNoteListViewController = appViewControllerFactory.photoNoteListViewController(coordinator: self)

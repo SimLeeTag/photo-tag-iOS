@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TagManagementTableViewDelegate: NSObject, UITableViewDelegate {
+final class TagManagementTableViewDelegate: NSObject, UITableViewDelegate {
     
     var viewModel: TagManagementViewModel?
 

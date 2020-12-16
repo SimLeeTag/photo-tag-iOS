@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TagCoordinator: ChildCoordinator {
+final class TagCoordinator: ChildCoordinator {
     
     override func start() {
         let tagCategoryViewController = appViewControllerFactory.tagCategoryViewController(coordinator: self)

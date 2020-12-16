@@ -19,7 +19,7 @@ enum TagManagementConstant {
     static let cellHeight: CGFloat = 50
 }
 
-class TagManagementViewController: UIViewController {
+final class TagManagementViewController: UIViewController {
     
     // MARK: - Properties
     private let dataSource: TagManagementTableViewDataSource

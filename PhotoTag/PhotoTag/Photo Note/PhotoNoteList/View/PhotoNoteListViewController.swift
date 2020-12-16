@@ -9,7 +9,7 @@ import UIKit
 
 // 리팩토링 예정입니다.
 
-class PhotoNoteListViewController: UIViewController {
+final class PhotoNoteListViewController: UIViewController {
     
     weak var coordinator: PhotoNoteCoordinator? // show tag category create new note
     private var photoNoteListView: PhotoNoteListView! {

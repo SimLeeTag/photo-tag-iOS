@@ -12,7 +12,7 @@ protocol PhotoNoteListViewDelegate: class {
     func rightSwipeDidBegin(_ photoNoteListView: PhotoNoteListView)
 }
 
-class PhotoNoteListView: ContentViewWithHeader {
+final class PhotoNoteListView: ContentViewWithHeader {
     
     // MARK: - Properties
     @UsesAutoLayout private(set) var searchButton = SubviewFactory.searchButton()

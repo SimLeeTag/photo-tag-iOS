@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TagManagementTableViewCell: UITableViewCell {
+final class TagManagementTableViewCell: UITableViewCell {
 
     @IBOutlet weak var tagNameLabel: UILabel!
     @IBOutlet weak var noteCountLabel: UILabel!

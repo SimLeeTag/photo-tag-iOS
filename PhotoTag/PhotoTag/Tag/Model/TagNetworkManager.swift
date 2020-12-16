@@ -12,7 +12,7 @@ struct HastagState: Codable {
     let activated: Bool // true = activated
 }
 
-class TagNetworkManager {
+final class TagNetworkManager {
     
     func fetchHashtags(completionHandler: @escaping (Hashtags?) -> Void) {
         UseCase.shared

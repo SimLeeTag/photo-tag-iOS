@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TagManagementViewModel {
+final class TagManagementViewModel {
     
     enum TagType {
         case activated
