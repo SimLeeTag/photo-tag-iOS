@@ -7,16 +7,17 @@
 
 import Foundation
 
+enum TagType {
+    case activated
+    case archived
+}
+
 final class TagManagementViewModel {
     
-    enum TagType {
-        case activated
-        case archived
-    }
-    let tagNetworkManager  = TagNetworkManager()
+    let tagNetworkManager  = TagNetworkingManager()
     let title = Observable(TagManagementConstant.title)
     private(set) var activatedHashtags: Observable<[Hashtag]> = Observable([])
-    var archivedHashtags: Observable<[Hashtag]> = Observable([])
+    private(set) var archivedHashtags: Observable<[Hashtag]> = Observable([])
     
     func updatedHashtagCount(of tagType: TagType) -> Int {
         switch tagType {
@@ -46,19 +47,25 @@ final class TagManagementViewModel {
     }
     
     func restoreHashtag(with tagId: Int) {
-        guard let tag = archivedHashtags.value.filter({ hashtag in
-                                                        hashtag.tagID == tagId}).first else { return }
-        activatedHashtags.value.append(tag)
+        guard var tag = archivedHashtags.value.filter({ hashtag in
+                                                        hashtag.tagID == tagId})
+                                                        .first else { return }
         archivedHashtags.value = archivedHashtags.value.filter { hashtag in
-            hashtag != tag}
+                                                                 hashtag != tag}
+        tag.activated = true
+        activatedHashtags.value.append(tag)
+        
     }
     
     func archiveHashtag(with tagId: Int) {
-        guard let tag = activatedHashtags.value.filter({ hashtag in
-                                                        hashtag.tagID == tagId}).first else { return }
-        archivedHashtags.value.append(tag)
+        guard var tag = activatedHashtags.value.filter({ hashtag in
+                                                        hashtag.tagID == tagId})
+                                                        .first else { return }
         activatedHashtags.value = activatedHashtags.value.filter { hashtag in
             hashtag != tag}
+        tag.activated = false
+        archivedHashtags.value.append(tag)
+        
     }
     
 }

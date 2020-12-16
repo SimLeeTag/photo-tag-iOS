@@ -13,7 +13,7 @@ struct Hashtags: Codable {
 
 // MARK: - EdList
 struct Hashtag: Codable {
-    let activated: Bool
+    var activated: Bool
     let frequency, tagID: Int
     let tagName: String
     
