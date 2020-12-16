@@ -1,5 +1,5 @@
 //
-//  TagNetworkManager.swift
+//  TagNetworkingManager.swift
 //  PhotoTag
 //
 //  Created by Keunna Lee on 2020/11/25.
@@ -12,7 +12,7 @@ struct HastagState: Codable {
     let activated: Bool // true = activated
 }
 
-final class TagNetworkManager {
+final class TagNetworkingManager {
     
     func fetchHashtags(completionHandler: @escaping (Hashtags?) -> Void) {
         UseCase.shared
