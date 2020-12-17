@@ -54,4 +54,16 @@ struct UseCase {
             .eraseToAnyPublisher()
     }
     
+    // for fetch image
+    func request<I: Decodable>(_ network: NetworkConnectable = NetworkManager.shared,
+                               type: I.Type, imageUrl: URL) -> AnyPublisher<I, Error> {
+
+        return network
+            .session
+            .dataTaskPublisher(for: URLRequest(url: imageUrl))
+            .map { $0.data }
+            .decode(type: I.self, decoder: decoder)
+            .eraseToAnyPublisher()
+    }
+    
 }

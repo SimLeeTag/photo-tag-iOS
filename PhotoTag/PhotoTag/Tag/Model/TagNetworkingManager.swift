@@ -14,6 +14,7 @@ struct HastagState: Codable {
 
 final class TagNetworkingManager {
     
+    // MARK: - Tag Management
     func fetchHashtags(completionHandler: @escaping (Hashtags?) -> Void) {
         UseCase.shared
             .request(type: Hashtags.self, endpoint: Endpoint(path: .fetchHashtags), method: .get)
@@ -38,6 +39,21 @@ final class TagNetworkingManager {
             }))
     }
     
+    // MARK: - Tag Category
+    func fetchTagsWithImage(size: Int, page: Int,
+                            completionHandler: @escaping ([Tag]?) -> Void) {
+        // /tags/explore?size=12&page=0&sort=tagName
+        UseCase.shared
+            .request(type: [Tag].self, endpoint: Endpoint(path: .fetchHashtags), method: .get)
+            .receive(subscriber: Subscribers.Sink(receiveCompletion: { [weak self] in
+                guard case let .failure(error) = $0 else { return }
+                debugPrint(error.localizedDescription)
+            }, receiveValue: { [weak self] data in
+                completionHandler(data)
+            }))
+    }
+    
+    // MARK: - Message
     private func checkResponseStatus(statusCode: Int) {
         if 200 == statusCode {
             debugPrint("요청이 성공했습니다")
