@@ -18,6 +18,11 @@ final class TagCategoryViewController: UIViewController {
     private let dataSource = TagCategoryCollectionViewDataSource()
     weak var coordinator: TagCoordinator?
     private let viewModel: TagCategoryViewModel
+    private let requestTagDataSize = 12
+    private var requestTime = 0
+    private var requestTagDataPageNumber: Int {
+        return requestTagDataSize * requestTime
+    }
     private var tagCategoryView: TagCategoryView! {
         return view as? TagCategoryView
     }
@@ -45,6 +50,7 @@ final class TagCategoryViewController: UIViewController {
         super.viewDidLoad()
         bind()
         fetchTags()
+        updateRequestTime()
         configure()
     }
     
@@ -66,6 +72,10 @@ final class TagCategoryViewController: UIViewController {
     
     private func hideNavigationBar() {
         self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    private func updateRequestTime() {
+        self.requestTime = requestTime + 1
     }
     
     private func navigateToTagManagement() {
@@ -123,5 +133,16 @@ extension TagCategoryViewController: UICollectionViewDelegateFlowLayout {
 extension TagCategoryViewController: TagCategoryLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
         return viewModel.tagImages.value[indexPath.item].size.height
+    }
+}
+
+extension TagCategoryViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let yOffset = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        if yOffset > contentHeight - scrollView.frame.height {
+            fetchTags()
+            updateRequestTime()
+        }
     }
 }
