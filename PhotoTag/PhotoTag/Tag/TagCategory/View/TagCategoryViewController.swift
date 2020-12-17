@@ -75,6 +75,31 @@ final class TagCategoryViewController: UIViewController {
     private func navigateToPhotoNoteList() {
         coordinator?.navigateToPhotoNoteList()
     }
+    
+    
+    private func bind() {
+        viewModel.title.bind { [weak self] sceneTitle in
+            self?.tagCategoryView.titleLabel.text = sceneTitle
+        }
+    }
+    
+    private func fetchTags() {
+        viewModel.fetchTags(size: requestTagDataSize, page: requestTagDataPageNumber) { fetchedViewModel in
+            self.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
+            self.updateTags()
+        }
+    }
+    
+    private func updateTags() {
+        DispatchQueue.main.async {
+            self.tagCategoryView.tagCategoryCollectionView.reloadData()
+        }
+    }
+    
+    @objc private func updateCollectionView() {
+        updateTags()
+    }
+    
 }
 
 extension TagCategoryViewController: TagCategoryViewDelegate {

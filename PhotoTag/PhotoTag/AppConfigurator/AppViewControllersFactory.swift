@@ -17,7 +17,7 @@ struct AppViewControllersFactory {
     }
     
     func tagCategoryViewController(coordinator: TagCoordinator) -> UIViewController {
-        return TagCategoryViewController(coordinator: coordinator)
+        return TagCategoryViewController(with: TagCategoryViewModel(), coordinator: coordinator)
     }
     
     func tagManagementViewController(coordinator: TagCoordinator) -> UIViewController {

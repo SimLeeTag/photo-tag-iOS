@@ -86,6 +86,12 @@
 		6A7C0576255C033300037184 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C0575255C033300037184 /* UIImage.swift */; };
 		6A7C0580255C081400037184 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C057F255C081400037184 /* CGFloat.swift */; };
 		6A7C0585255C086200037184 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7C0584255C086200037184 /* UIView.swift */; };
+		6A87E231258B35AC00896BD6 /* TagCategoryLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A87E230258B35AC00896BD6 /* TagCategoryLayout.swift */; };
+		6A87E235258B534F00896BD6 /* TagCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A87E234258B534F00896BD6 /* TagCategoryViewModel.swift */; };
+		6A87E239258B594500896BD6 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A87E238258B594500896BD6 /* Tag.swift */; };
+		6A87E243258B596300896BD6 /* PhotoNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A87E242258B596300896BD6 /* PhotoNotes.swift */; };
+		6A87E247258B5E2400896BD6 /* TagCategoryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A87E246258B5E2400896BD6 /* TagCategoryCellViewModel.swift */; };
+		6A87E252258B9B1A00896BD6 /* ImageLoadTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A87E251258B9B1A00896BD6 /* ImageLoadTaskManager.swift */; };
 		6A89B9B225546444003E1027 /* PhotoNoteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9B125546444003E1027 /* PhotoNoteCoordinator.swift */; };
 		6A89B9B725546463003E1027 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9B625546463003E1027 /* SearchCoordinator.swift */; };
 		6A89B9BF25547088003E1027 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89B9BE25547088003E1027 /* SearchViewController.swift */; };
@@ -169,6 +175,12 @@
 		6A7C0575255C033300037184 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		6A7C057F255C081400037184 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		6A7C0584255C086200037184 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		6A87E230258B35AC00896BD6 /* TagCategoryLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryLayout.swift; sourceTree = "<group>"; };
+		6A87E234258B534F00896BD6 /* TagCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryViewModel.swift; sourceTree = "<group>"; };
+		6A87E238258B594500896BD6 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		6A87E242258B596300896BD6 /* PhotoNotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNotes.swift; sourceTree = "<group>"; };
+		6A87E246258B5E2400896BD6 /* TagCategoryCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryCellViewModel.swift; sourceTree = "<group>"; };
+		6A87E251258B9B1A00896BD6 /* ImageLoadTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadTaskManager.swift; sourceTree = "<group>"; };
 		6A89B9B125546444003E1027 /* PhotoNoteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNoteCoordinator.swift; sourceTree = "<group>"; };
 		6A89B9B625546463003E1027 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		6A89B9BE25547088003E1027 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -312,6 +324,8 @@
 		6A7C055B255C00E300037184 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				6A87E234258B534F00896BD6 /* TagCategoryViewModel.swift */,
+				6A87E246258B5E2400896BD6 /* TagCategoryCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -342,6 +356,7 @@
 				6AD3ED6625519FE900F8EF61 /* UseCase.swift */,
 				6AD3ED6B2551A09900F8EF61 /* HTTPMethod.swift */,
 				6AD3ED702551A0B400F8EF61 /* NetworkError.swift */,
+				6A87E251258B9B1A00896BD6 /* ImageLoadTaskManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -380,6 +395,7 @@
 				6A5544FD255AD575003F3864 /* TagCategoryCollectionViewCell.swift */,
 				6A5544FE255AD575003F3864 /* TagCategoryCollectionViewCell.xib */,
 				6A63BA1E255C1F450096A0F7 /* TagCategoryCollectionViewDataSource.swift */,
+				6A87E230258B35AC00896BD6 /* TagCategoryLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -454,6 +470,8 @@
 			children = (
 				6ACCADBC256E28BE00072290 /* Hashtags.swift */,
 				6A761E3C258A65F000E0E0F4 /* TagNetworkingManager.swift */,
+				6A87E238258B594500896BD6 /* Tag.swift */,
+				6A87E242258B596300896BD6 /* PhotoNotes.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -701,22 +719,27 @@
 			files = (
 				6AD3ED6225519F9E00F8EF61 /* NetworkManager.swift in Sources */,
 				6A89B9D2255473C9003E1027 /* ChildCoordinator.swift in Sources */,
+				6A87E231258B35AC00896BD6 /* TagCategoryLayout.swift in Sources */,
 				6A89B9E825549764003E1027 /* WritePhotoNoteViewController.swift in Sources */,
 				6A6825332548384700B19C9A /* LayoutGuideCompatible.swift in Sources */,
 				6A6825222548053F00B19C9A /* TagManagementViewController.swift in Sources */,
+				6A87E243258B596300896BD6 /* PhotoNotes.swift in Sources */,
 				6A761E3D258A65F000E0E0F4 /* TagNetworkingManager.swift in Sources */,
 				6AB83AE02542B4340065B698 /* Coordinator.swift in Sources */,
 				6A7C056C255C022200037184 /* UICollectionView.swift in Sources */,
 				6A89B9B725546463003E1027 /* SearchCoordinator.swift in Sources */,
+				6A87E239258B594500896BD6 /* Tag.swift in Sources */,
 				6AB83AF425442B370065B698 /* TagCoordinator.swift in Sources */,
 				6AA9BD65254E93C200126749 /* LoginManager.swift in Sources */,
 				6A682539254854E200B19C9A /* AppViewControllersFactory.swift in Sources */,
 				6AD3ED6C2551A09900F8EF61 /* HTTPMethod.swift in Sources */,
+				6A87E247258B5E2400896BD6 /* TagCategoryCellViewModel.swift in Sources */,
 				6A89B9B225546444003E1027 /* PhotoNoteCoordinator.swift in Sources */,
 				6AD3ED6725519FE900F8EF61 /* UseCase.swift in Sources */,
 				6AFE3C05253EDF3200B385AC /* LoginViewController.swift in Sources */,
 				6A554505255AE449003F3864 /* ContentViewWithHeader.swift in Sources */,
 				6A68254425485DA300B19C9A /* LoginView.swift in Sources */,
+				6A87E235258B534F00896BD6 /* TagCategoryViewModel.swift in Sources */,
 				6A7C0571255C029E00037184 /* NSObject.swift in Sources */,
 				6A7C054E255B93A000037184 /* TagManagementTableViewCell.swift in Sources */,
 				6A4F23F72546EC8A00577718 /* PhotoNoteListViewController.swift in Sources */,
@@ -728,6 +751,7 @@
 				6A343C8025735C8C00146AAF /* TagManagementCellViewModel.swift in Sources */,
 				6A89B9BF25547088003E1027 /* SearchViewController.swift in Sources */,
 				6A7C0585255C086200037184 /* UIView.swift in Sources */,
+				6A87E252258B9B1A00896BD6 /* ImageLoadTaskManager.swift in Sources */,
 				6A5544FF255AD575003F3864 /* TagCategoryCollectionViewCell.swift in Sources */,
 				6AB83AF925442C030065B698 /* TagCategoryViewController.swift in Sources */,
 				6ACCADBD256E28BE00072290 /* Hashtags.swift in Sources */,
