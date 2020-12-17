@@ -24,7 +24,7 @@ final class LoginManager {
         return request
     }
     
-    // MARK: - functions
+    // MARK: - Functions
     func requestAppleLoginToken(credential: ASAuthorizationAppleIDCredential) {
         guard let tokenData = credential.identityToken,
               let token = String(data: tokenData, encoding: .utf8) else { return }

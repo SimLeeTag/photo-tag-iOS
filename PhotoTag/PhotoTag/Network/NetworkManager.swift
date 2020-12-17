@@ -24,7 +24,7 @@ struct NetworkManager: NetworkConnectable {
         self.session = session
     }
     
-    // MARK: - Methods
+    // MARK: - Functions
     func request(request: URLRequest) -> AnyPublisher<(data: Data, response: URLResponse), NetworkError> {
         session.dataTaskPublisher(for: request)
             .mapError { _ in NetworkError.apiError }

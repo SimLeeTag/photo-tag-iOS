@@ -17,7 +17,7 @@ struct UseCase {
     // MARK: - Lifecycle
     private init() { }
     
-    // MARK: - Methods
+    // MARK: - Functions
     func request<E: Encodable>(_ network: NetworkConnectable = NetworkManager.shared,
                                data: E,
                                endpoint: RequestProviding,
