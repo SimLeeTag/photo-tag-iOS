@@ -20,7 +20,7 @@ final class TagCategoryView: ContentViewWithHeader {
     }
     
     // MARK: - Properties
-    @UsesAutoLayout private var titleLabel = SubviewFactory.titleLabel()
+    @UsesAutoLayout var titleLabel = SubviewFactory.titleLabel()
     @UsesAutoLayout private var moveToTagManagementButton = SubviewFactory.moveToTagManagementButton()
     @UsesAutoLayout private var moveToPhotoListButton = SubviewFactory.moveToPhotoListButton()
     @UsesAutoLayout private(set) var tagCategoryCollectionView = SubviewFactory.tagCategoryCollectionView()
@@ -123,6 +123,7 @@ private extension TagCategoryView {
             let layout = UICollectionViewFlowLayout()
             let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
             collectionView.register(cellType: TagCategoryCollectionViewCell.self)
+            collectionView.contentInset = UIEdgeInsets(top: 23, left: 16, bottom: 10, right: 16)
             return collectionView
         }
         

@@ -17,14 +17,16 @@ final class TagCategoryViewController: UIViewController {
     // MARK: - Properties
     private let dataSource = TagCategoryCollectionViewDataSource()
     weak var coordinator: TagCoordinator?
+    private let viewModel: TagCategoryViewModel
     private var tagCategoryView: TagCategoryView! {
         return view as? TagCategoryView
     }
     
     // MARK: - Intialization
     //TODO:- add viewModel as parameter
-    init(coordinator: TagCoordinator) {
+    init(with viewModel: TagCategoryViewModel, coordinator: TagCoordinator) {
         self.coordinator = coordinator
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -36,21 +38,31 @@ final class TagCategoryViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // TODO: - request data from API
+        fetchTags()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
+        fetchTags()
         configure()
     }
     
     // MARK: - Functions
     private func configure () {
         hideNavigationBar()
-        tagCategoryView.delegate = self
-        // TODO: - navigate to tutorial scene
-        tagCategoryView.tagCategoryCollectionView.dataSource = dataSource
+        tagCategoryView.delegate = self // TagCategoryViewDelegate
+        setupCollectionView()
     }
+    
+    private func setupCollectionView() {
+        let collectionView = tagCategoryView.tagCategoryCollectionView
+        collectionView.delegate = self // UICollectionViewDelegateFlowLayout
+        collectionView.dataSource = dataSource
+        if let layout = collectionView.collectionViewLayout as? TagCategoryLayout {
+          layout.delegate = self // TagCategoryLayoutDelegate
+        }
+      }
     
     private func hideNavigationBar() {
         self.navigationController?.isNavigationBarHidden = true
@@ -64,12 +76,27 @@ final class TagCategoryViewController: UIViewController {
         coordinator?.navigateToPhotoNoteList()
     }
 }
+
 extension TagCategoryViewController: TagCategoryViewDelegate {
     func moveToTagManagementButtonDidTouched(_ tagCategoryView: TagCategoryView) {
         navigateToTagManagement()
     }
+    
     func moveToPhotoListButtonDidTouched(_ tagCategoryView: TagCategoryView) {
         navigateToPhotoNoteList()
     }
     
+}
+
+extension TagCategoryViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right + 10)) / 2
+        return CGSize(width: itemSize, height: itemSize)
+    }
+}
+
+extension TagCategoryViewController: TagCategoryLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
+        return viewModel.tagImages.value[indexPath.item].size.height
+    }
 }
