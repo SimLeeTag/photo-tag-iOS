@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectPhotoViewController: UIViewController {
+final class SelectPhotoViewController: UIViewController {
 
     weak var coordinator: PhotoNoteCoordinator?
     

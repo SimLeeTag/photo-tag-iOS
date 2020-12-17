@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TagCategoryCollectionViewCell: UICollectionViewCell {
+final class TagCategoryCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var latestImageView: UIImageView!
     @IBOutlet weak var tagNameLabel: UILabel!

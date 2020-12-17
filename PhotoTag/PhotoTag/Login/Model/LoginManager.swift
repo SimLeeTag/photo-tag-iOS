@@ -13,7 +13,7 @@ struct AppleLogin: Codable {
     let jwtToken: String
 }
 
-class LoginManager {
+final class LoginManager {
     
     // MARK: - properties
     var authorizationRequests: ASAuthorizationAppleIDRequest {

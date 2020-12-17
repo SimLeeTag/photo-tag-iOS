@@ -8,7 +8,7 @@
 import UIKit
 import AuthenticationServices
 
-class LoginView: UIView {
+final class LoginView: UIView {
     
     @UsesAutoLayout private(set) var logoImageView = SubviewFactory.logoImageView()
     @UsesAutoLayout private(set) var contentStackView = SubviewFactory.contentStackView()

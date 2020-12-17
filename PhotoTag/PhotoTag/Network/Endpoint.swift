@@ -19,20 +19,36 @@ struct Endpoint: RequestProviding {
     enum Path: CustomStringConvertible {
         case appleLogin
         case fetchHashtags
+        case patchHashtags
         
         var description: String {
             switch self {
             case .appleLogin: return "/apple-login"
             case .fetchHashtags: return "/tags/setting"
+            case .patchHashtags: return "/tags/"
             }
         }
     }
     
     // MARK: - Properties
     var url: URL? {
-        return URL(string: scheme + "://" + baseUrl + path.description)
+        if tagId == nil {
+            return URL(string: scheme + "://" + baseUrl + path.description)
+        }
+        return URL(string: scheme + "://" + baseUrl + path.description + "\(tagId!)")
+    }
+    
+    var urlWithTagId: URL? {
+        return URL(string: scheme + "://" + baseUrl + path.description + "\(tagId!)")
     }
     var baseUrl: String = "52.78.129.236:8080"
     var scheme: String = "http"
     var path: Path
+    var tagId: Int?
+    
+    static func hashtagPatch(path: Path, tagId: Int) -> RequestProviding {
+        var endpoint = Endpoint(path: path)
+        endpoint.tagId = tagId
+        return endpoint
+    }
 }

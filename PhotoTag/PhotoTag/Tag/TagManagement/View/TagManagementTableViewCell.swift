@@ -7,11 +7,12 @@
 
 import UIKit
 
-class TagManagementTableViewCell: UITableViewCell {
+final class TagManagementTableViewCell: UITableViewCell {
 
     @IBOutlet weak var tagNameLabel: UILabel!
     @IBOutlet weak var noteCountLabel: UILabel!
     private var viewModel: TagManagementCellViewModel!
+    private(set) var tagId: Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +28,7 @@ class TagManagementTableViewCell: UITableViewCell {
     func fill(with hashtag: Hashtag) {
         tagNameLabel.text = hashtag.tagName
         noteCountLabel.text = "\(hashtag.frequency) note(s)"
+        tagId = hashtag.tagID
     }
     
 }

@@ -12,7 +12,7 @@ enum TagCategoryCollectionViewConstant {
     static let activeHashtagsSectionNumber = 0
 }
 
-class TagCategoryViewController: UIViewController {
+final class TagCategoryViewController: UIViewController {
         
     // MARK: - Properties
     private let dataSource = TagCategoryCollectionViewDataSource()

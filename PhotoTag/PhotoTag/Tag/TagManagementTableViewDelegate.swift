@@ -7,34 +7,74 @@
 
 import UIKit
 
-class TagManagementTableViewDelegate: NSObject, UITableViewDelegate {
+final class TagManagementTableViewDelegate: NSObject, UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    var viewModel: TagManagementViewModel?
 
-        if indexPath.section == TagManagementConstant.activeHashtagsSectionNumber {
-            return UISwipeActionsConfiguration(actions: [
-                makeArchiveContextualAction(tableView, forRowAt: indexPath)
-            ])
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let cell = tableView.cellForRow(at: indexPath) as? TagManagementTableViewCell, let cellTagId = cell.tagId else {return UISwipeActionsConfiguration()}
+        
+        func didRestore() {
+            viewModel?.updateHashtagState(tagId: cellTagId, willBe: .activated)
+            sendNotification()
         }
         
-        return UISwipeActionsConfiguration(actions: [
-            makeRestoreContextualAction(tableView, forRowAt: indexPath)
-        ])
-    }
-    
-    private func makeArchiveContextualAction(_ tableView: UITableView, forRowAt indexPath: IndexPath) -> UIContextualAction {
-        return UIContextualAction(style: .destructive, title: TagManagementConstant.activeHashtagSwipeMenuText) { (_, _, completion) in
-            tableView.moveSection(indexPath.section, toSection: TagManagementConstant.archivedHashtagsSectionNumber)
-            completion(true)
+        func didArchive() {
+            viewModel?.updateHashtagState(tagId: cellTagId, willBe: .archived)
+            sendNotification()
         }
+        
+        let restore = ActionType.make(.restore, handler: didRestore)
+        let archive = ActionType.make(.archive, handler: didArchive)
+        
+        if indexPath.section == TagManagementConstant.activeHashtagsSectionNumber {
+            return UISwipeActionsConfiguration(actions: [archive])
+        }
+        
+        return UISwipeActionsConfiguration(actions: [restore])
     }
     
-    private func makeRestoreContextualAction(_ tableView: UITableView, forRowAt indexPath: IndexPath) -> UIContextualAction {
-        return UIContextualAction(style: .normal, title: TagManagementConstant.archivedHashtagSwipeMenuText) { (_, _, completion) in
+    private func sendNotification() {
+        NotificationCenter.default.post(name: .tagManagementViewModelUpdated, object: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return TagManagementConstant.cellHeight
+    }
+    
+}
+
+// MARK: - SwipeAction
+extension TagManagementTableViewDelegate {
+    func updateViewModel(with newViewModel: TagManagementViewModel) {
+        self.viewModel = newViewModel
+    }
+    enum ActionType {
+        case restore
+        case archive
+        
+        struct Attribute {
+            let style: UIContextualAction.Style
+            let title: String?
+        }
+        
+        static func make(_ actionType: ActionType, handler: @escaping () -> Void) -> UIContextualAction {
+            let type = actionType.attribute
+            let action = UIContextualAction(style: type.style, title: type.title) { action, view, completion in
+                handler()
+                completion(true)
+            }
             
-            tableView.moveSection(indexPath.section, toSection: TagManagementConstant.activeHashtagsSectionNumber)
-            completion(true)
+            return action
+        }
+        
+        var attribute: Attribute {
+            switch self {
+            case .restore:
+                return Attribute(style: .normal, title: "Restore")
+            case .archive:
+                return Attribute(style: .destructive, title: "Archive")
+            }
         }
     }
-    
 }

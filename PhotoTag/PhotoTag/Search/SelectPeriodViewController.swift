@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectPeriodViewController: UIViewController {
+final class SelectPeriodViewController: UIViewController {
 
     weak var coordinator: SearchCoordinator?
     

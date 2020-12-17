@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "btn_google_signin_dark_pressed_ios@3x-2.png",
+      "filename" : "checkImage.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "btn_google_signin_dark_pressed_ios@3x-1.png",
+      "filename" : "checkImage-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "btn_google_signin_dark_pressed_ios@3x.png",
+      "filename" : "checkImage-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -16,9 +16,10 @@ enum TagManagementConstant {
     static let archivedHashtagsSectionHeaderTitle = "Archived Hashtags"
     static let activeHashtagSwipeMenuText = "Archive"
     static let archivedHashtagSwipeMenuText = "Restore"
+    static let cellHeight: CGFloat = 50
 }
 
-class TagManagementViewController: UIViewController {
+final class TagManagementViewController: UIViewController {
     
     // MARK: - Properties
     private let dataSource: TagManagementTableViewDataSource
@@ -37,7 +38,7 @@ class TagManagementViewController: UIViewController {
         dataSource = TagManagementTableViewDataSource()
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder aDecoder: NSCoder) { return nil }
     
     // MARK: - Life Cycle
@@ -46,15 +47,14 @@ class TagManagementViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.fetchHashtags { fetchedViewModel in
-            self.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
-        }
-        
+        fetchHashtags()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNotification()
         bind()
+        fetchHashtags()
         configure()
     }
     
@@ -69,8 +69,18 @@ class TagManagementViewController: UIViewController {
         
     }
     
+    private func fetchHashtags() {
+        viewModel.fetchHashtags { fetchedViewModel in
+            self.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
+            self.delegate?.updateViewModel(with: fetchedViewModel)
+            self.updateHashTags()
+        }
+    }
+    
     private func updateHashTags() {
-        self.tagManagementView.hashtagTableView.reloadData()
+        DispatchQueue.main.async {
+            self.tagManagementView.hashtagTableView.reloadData()
+        }
     }
     
     private func configure () {
@@ -78,6 +88,14 @@ class TagManagementViewController: UIViewController {
         hideNavigationBar()
         tagManagementView.delegate = self
         setupTableView()
+    }
+    
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTableView), name: .tagManagementViewModelUpdated, object: nil)
+    }
+    
+    @objc private func updateTableView() {
+        updateHashTags()
     }
     
     private func setupTableView() {
@@ -93,9 +111,10 @@ class TagManagementViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
 }
+
 extension TagManagementViewController: TagManagementViewDelegate {
     func moveBackToTagCategoryButtonDidTouched(_ tagManagementView: TagManagementView) {
         navigateToTagCategory()
     }
-
+    
 }

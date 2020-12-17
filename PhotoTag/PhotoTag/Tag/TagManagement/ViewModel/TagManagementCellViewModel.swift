@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TagManagementCellViewModel {
+final class TagManagementCellViewModel {
     let tagName = Observable("hashtag")
     let noteCount = Observable(0)
 }

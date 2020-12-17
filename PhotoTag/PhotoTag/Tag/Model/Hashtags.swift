@@ -13,7 +13,7 @@ struct Hashtags: Codable {
 
 // MARK: - EdList
 struct Hashtag: Codable {
-    let activated: Bool
+    var activated: Bool
     let frequency, tagID: Int
     let tagName: String
     
@@ -21,5 +21,11 @@ struct Hashtag: Codable {
         case activated, frequency
         case tagID = "tagId"
         case tagName
+    }
+}
+
+extension Hashtag: Equatable {
+    static func == (lhs: Hashtag, rhs: Hashtag) -> Bool {
+        return lhs.activated == rhs.activated && lhs.frequency == rhs.frequency && lhs.tagID == rhs.tagID && lhs.tagName == rhs.tagName
     }
 }

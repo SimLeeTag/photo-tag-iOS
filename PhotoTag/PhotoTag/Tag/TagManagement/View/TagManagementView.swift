@@ -11,7 +11,7 @@ protocol TagManagementViewDelegate: class {
     func moveBackToTagCategoryButtonDidTouched(_ tagManagementView: TagManagementView)
 }
 
-class TagManagementView: ContentViewWithHeader {
+final class TagManagementView: ContentViewWithHeader {
     
     // MARK: - Properties
     @UsesAutoLayout private(set) var backButton = SubviewFactory.backButton()
