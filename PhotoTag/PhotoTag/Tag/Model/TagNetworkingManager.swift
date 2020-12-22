@@ -18,7 +18,7 @@ final class TagNetworkingManager {
     func fetchHashtags(completionHandler: @escaping (Hashtags?) -> Void) {
         UseCase.shared
             .request(type: Hashtags.self, endpoint: Endpoint(path: .fetchHashtags), method: .get)
-            .receive(subscriber: Subscribers.Sink(receiveCompletion: { [weak self] in
+            .receive(subscriber: Subscribers.Sink(receiveCompletion: { [ weak self ] in
                 guard case let .failure(error) = $0 else { return }
                 debugPrint(error.localizedDescription)
                 // TODO: - present alertController
@@ -31,7 +31,7 @@ final class TagNetworkingManager {
         UseCase.shared.request(data: data,
                                endpoint: Endpoint.hashtagPatch(path: .patchHashtags, tagId: tagId),
                                method: .patch)
-            .receive(subscriber: Subscribers.Sink(receiveCompletion: { [weak self] in
+            .receive(subscriber: Subscribers.Sink(receiveCompletion: { [ weak self ] in
                 guard case let .failure(error) = $0 else { return }
                 debugPrint(error.message)
             }, receiveValue: { [weak self] response in
@@ -40,15 +40,14 @@ final class TagNetworkingManager {
     }
     
     // MARK: - Tag Category
-    func fetchTagsWithImage(size: Int, page: Int,
+    func fetchTags(size: Int, page: Int,
                             completionHandler: @escaping ([Tag]?) -> Void) {
-        // /tags/explore?size=12&page=0&sort=tagName
         UseCase.shared
-            .request(type: [Tag].self, endpoint: Endpoint(path: .fetchHashtags), method: .get)
-            .receive(subscriber: Subscribers.Sink(receiveCompletion: { [weak self] in
+            .request(type: [Tag].self, urlComponents: Endpoint.tagCategoryFetch(withSize: size, page: page), method: .get)
+            .receive(subscriber: Subscribers.Sink(receiveCompletion: { [ weak self ] in
                 guard case let .failure(error) = $0 else { return }
                 debugPrint(error.localizedDescription)
-            }, receiveValue: { [weak self] data in
+            }, receiveValue: { [ weak self ] data in
                 completionHandler(data)
             }))
     }
@@ -57,7 +56,7 @@ final class TagNetworkingManager {
     private func checkResponseStatus(statusCode: Int) {
         if 200 == statusCode {
             debugPrint("요청이 성공했습니다")
-        } else if 204 == statusCode{
+        } else if 204 == statusCode {
             debugPrint("No Content. 콘텐츠가 없습니다")
         } else if 401 == statusCode {
             debugPrint("Unauthorized. 권한이 없습니다")

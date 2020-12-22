@@ -20,12 +20,14 @@ struct Endpoint: RequestProviding {
         case appleLogin
         case fetchHashtags
         case patchHashtags
+        case fetchTagCategory
         
         var description: String {
             switch self {
             case .appleLogin: return "/apple-login"
             case .fetchHashtags: return "/tags/setting"
             case .patchHashtags: return "/tags/"
+            case .fetchTagCategory: return "/tags/explore"
             }
         }
     }
@@ -50,5 +52,23 @@ struct Endpoint: RequestProviding {
         var endpoint = Endpoint(path: path)
         endpoint.tagId = tagId
         return endpoint
+    }
+    
+    static func tagCategoryFetch(withSize: Int, page: Int) -> URLComponents {
+        let queryParams: [String: String] = [
+            "size": "\(withSize)",
+            "page": "\(page)",
+            "sort": "tagName"
+        ]
+        return makeURL(with: queryParams, path: .fetchTagCategory)
+    }
+    
+    static func makeURL(with parameters: [String: String], path: Path) -> URLComponents {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "http"
+        urlComponents.host = "52.78.129.236"
+        urlComponents.path = ":8080" + path.description
+        urlComponents.setQueryItems(with: parameters)
+        return urlComponents
     }
 }

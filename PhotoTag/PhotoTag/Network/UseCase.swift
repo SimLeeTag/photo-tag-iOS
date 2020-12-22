@@ -66,4 +66,20 @@ struct UseCase {
             .eraseToAnyPublisher()
     }
     
+    // using URLComponents
+    func request<D: Decodable>(_ network: NetworkConnectable = NetworkManager.shared,
+                               type: D.Type, urlComponents: URLComponents,
+                               method: HTTPMethod) -> AnyPublisher<D, Error> {
+        guard let url = urlComponents.url else {
+            return Fail(error: NetworkError.urlError).eraseToAnyPublisher()
+        }
+        
+        return network
+            .session
+            .dataTaskPublisher(for: URLRequest(url: url, method: method))
+            .map { $0.data }
+            .decode(type: D.self, decoder: decoder)
+            .eraseToAnyPublisher()
+    }
+    
 }
