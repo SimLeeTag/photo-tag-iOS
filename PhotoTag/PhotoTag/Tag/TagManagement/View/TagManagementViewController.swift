@@ -46,10 +46,6 @@ final class TagManagementViewController: UIViewController {
         view = TagManagementView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        fetchHashtags()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNotification()

@@ -13,7 +13,7 @@ enum TagCategoryCollectionViewConstant {
 }
 
 final class TagCategoryViewController: UIViewController {
-        
+    
     // MARK: - Properties
     private let dataSource = TagCategoryCollectionViewDataSource()
     weak var coordinator: TagCoordinator?
@@ -23,6 +23,7 @@ final class TagCategoryViewController: UIViewController {
     private var requestTagDataPageNumber: Int {
         return requestTagDataSize * requestTime
     }
+    private var viewAppeard = false
     private var tagCategoryView: TagCategoryView! {
         return view as? TagCategoryView
     }
@@ -34,7 +35,7 @@ final class TagCategoryViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder aDecoder: NSCoder) { return nil }
     
     // MARK: - Life Cycle
@@ -42,16 +43,12 @@ final class TagCategoryViewController: UIViewController {
         view = TagCategoryView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        fetchTags()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        fetchTags()
-        updateRequestTime()
         configure()
+        fetchTags()
+        viewAppeard = true
     }
     
     // MARK: - Functions
@@ -65,10 +62,12 @@ final class TagCategoryViewController: UIViewController {
         let collectionView = tagCategoryView.tagCategoryCollectionView
         collectionView.delegate = self // UICollectionViewDelegateFlowLayout
         collectionView.dataSource = dataSource
+        collectionView.showsVerticalScrollIndicator = false
         if let layout = collectionView.collectionViewLayout as? TagCategoryLayout {
-          layout.delegate = self // TagCategoryLayoutDelegate
+            layout.delegate = self // TagCategoryLayoutDelegate
+            tagCategoryView.backgroundColor = .white
         }
-      }
+    }
     
     private func hideNavigationBar() {
         self.navigationController?.isNavigationBarHidden = true
@@ -85,7 +84,6 @@ final class TagCategoryViewController: UIViewController {
     private func navigateToPhotoNoteList() {
         coordinator?.navigateToPhotoNoteList()
     }
-    
     
     private func bind() {
         viewModel.title.bind { [weak self] sceneTitle in
@@ -104,10 +102,6 @@ final class TagCategoryViewController: UIViewController {
         DispatchQueue.main.async {
             self.tagCategoryView.tagCategoryCollectionView.reloadData()
         }
-    }
-    
-    @objc private func updateCollectionView() {
-        updateTags()
     }
     
 }
@@ -138,11 +132,13 @@ extension TagCategoryViewController: TagCategoryLayoutDelegate {
 
 extension TagCategoryViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let yOffset = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        if yOffset > contentHeight - scrollView.frame.height {
-            fetchTags()
-            updateRequestTime()
+        if viewAppeard {
+            let yOffset = scrollView.contentOffset.y
+            let contentHeight = scrollView.contentSize.height
+            if yOffset > contentHeight - scrollView.frame.height {
+                fetchTags()
+                updateRequestTime()
+            }
         }
     }
 }

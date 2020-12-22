@@ -16,14 +16,14 @@ final class TagCategoryCollectionViewDataSource: NSObject, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.tagsWithImage.value.count
+        return viewModel.tags.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let collectionViewCell = collectionView.dequeueReusableCell(with: TagCategoryCollectionViewCell.self, for: indexPath)
         bind(with: collectionViewCell)
-        if viewModel.tagsWithImage.value.count != 0, viewModel.tagImages.value.count != 0 {
-            collectionViewCell.fill(with: self.viewModel.tagsWithImage.value[indexPath.item])
+        if viewModel.tags.value.count != 0, self.viewModel.tagImages.value.count != 0 {
+            collectionViewCell.fill(with: self.viewModel.tags.value[indexPath.item])
             collectionViewCell.fillImage(with: self.viewModel.tagImages.value[indexPath.item])
         }
         return collectionViewCell
@@ -33,24 +33,18 @@ final class TagCategoryCollectionViewDataSource: NSObject, UICollectionViewDataS
 
 extension TagCategoryCollectionViewDataSource {
     func updateViewModel(updatedViewModel: TagCategoryViewModel) {
-        self.viewModel = updatedViewModel
     }
     
     private func bind(with cell: TagCategoryCollectionViewCell) {
         let cellViewModel = TagCategoryCellViewModel()
         cellViewModel.noteCountLabelText.bind { noteCount in
-            cell.noteCountLabel.text = "\(noteCount) note(s)"
+            cell.noteCountLabel.text = "\(noteCount)"
         }
         cellViewModel.tagNameLabelText.bind { tagName in
             cell.tagNameLabel.text = tagName
         }
-        cellViewModel.latestImageViewUrl.bind { imageUrl in
-            guard let url = URL(string: imageUrl) else { return }
-            
-            cellViewModel.updateTagImage(with: url) { image in
-                cellViewModel.image.value = image
-                self.viewModel.addImage(newImage: image)
-            }
+        cellViewModel.image.bind { image in
+            cell.latestImageView.image = image
         }
     }
 }
