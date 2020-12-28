@@ -17,7 +17,7 @@ struct UseCase {
     // MARK: - Lifecycle
     private init() { }
     
-    // MARK: - Methods
+    // MARK: - Functions
     func request<E: Encodable>(_ network: NetworkConnectable = NetworkManager.shared,
                                data: E,
                                endpoint: RequestProviding,
@@ -43,6 +43,34 @@ struct UseCase {
                                type: D.Type, endpoint: RequestProviding,
                                method: HTTPMethod) -> AnyPublisher<D, Error> {
         guard let url = endpoint.url else {
+            return Fail(error: NetworkError.urlError).eraseToAnyPublisher()
+        }
+        
+        return network
+            .session
+            .dataTaskPublisher(for: URLRequest(url: url, method: method))
+            .map { $0.data }
+            .decode(type: D.self, decoder: decoder)
+            .eraseToAnyPublisher()
+    }
+    
+    // for fetch image
+    func request<I: Decodable>(_ network: NetworkConnectable = NetworkManager.shared,
+                               type: I.Type, imageUrl: URL) -> AnyPublisher<I, Error> {
+
+        return network
+            .session
+            .dataTaskPublisher(for: URLRequest(url: imageUrl))
+            .map { $0.data }
+            .decode(type: I.self, decoder: decoder)
+            .eraseToAnyPublisher()
+    }
+    
+    // using URLComponents
+    func request<D: Decodable>(_ network: NetworkConnectable = NetworkManager.shared,
+                               type: D.Type, urlComponents: URLComponents,
+                               method: HTTPMethod) -> AnyPublisher<D, Error> {
+        guard let url = urlComponents.url else {
             return Fail(error: NetworkError.urlError).eraseToAnyPublisher()
         }
         

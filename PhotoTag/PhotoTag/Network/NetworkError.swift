@@ -14,6 +14,7 @@ enum NetworkError: Error {
     case apiError
     case jsonEncodingError
     case jsonDecodingError
+    case noData
     
     var message: String {
         switch self {
@@ -25,6 +26,8 @@ enum NetworkError: Error {
             return "Invalid API"
         case .jsonEncodingError, .jsonDecodingError:
             return "Invalid JSON Format"
+        case .noData:
+            return "No Data"
         }
     }
 }

@@ -16,5 +16,14 @@ final class TagCategoryCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    func fill(with tag: Tag) {
+        tagNameLabel.text = tag.tagName
+        noteCountLabel.text = "\(tag.frequency) note(s)"
+    }
+    
+    func fillImage(with image: UIImage) {
+        latestImageView.image = image
+    }
 
 }

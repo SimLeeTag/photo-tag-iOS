@@ -185,7 +185,39 @@ class PhotoTagTests: XCTestCase {
                         .contains(nonExistentTagId)
                        , "비활성화된(Archived) 해시태그 배열에 해당 태그 아이디를 가진 해시태그가 존재하지 않습니다.")
     }
-
+    
+    // MARK: - Network
+    func testMakeUrl() {
+        // given
+        let queryParams: [String: String] = [
+            "size": "\(12)",
+            "page": "\(0)",
+            "sort": "tagName"
+        ]
+        // when
+        let url = Endpoint.makeURL(with: queryParams, path: .fetchTagCategory)
+        let expectedUrl = URLComponents(string: "http://52.78.129.236:8080/tags/explore?size=12&page=0&sort=tagName")
+        // then
+        XCTAssertEqual(url.host, expectedUrl?.host, "url의 host가 일치합니다")
+        XCTAssertEqual(url.path, ":8080" + expectedUrl!.path, "url의 path와 일치합니다")
+        XCTAssertEqual(url.queryItems?.count, expectedUrl?.queryItems?.count, "url의 query의 수가 일치합니다")
+        XCTAssertEqual(url.scheme, expectedUrl?.scheme, "url의 scheme이 일치합니다")
+    }
+    
+    func testMakeTagCategoryRequestUrl() {
+        // given
+        let queryParams: [String: String] = [
+            "size": "\(12)",
+            "page": "\(0)",
+            "sort": "tagName"
+        ]
+        let expectedUrl = Endpoint.makeURL(with: queryParams, path: .fetchTagCategory)
+        // when
+        let url = Endpoint.tagCategoryFetch(withSize: 12, page: 0)
+        
+        // then
+        XCTAssertEqual(expectedUrl, url, "query를 이용한 정상적인 URL 생성했습니다.")
+    }
 }
 
 extension PhotoTagTests {
