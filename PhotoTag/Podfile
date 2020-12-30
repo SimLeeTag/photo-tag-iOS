@@ -6,6 +6,7 @@ target 'PhotoTag' do
   use_frameworks!
 
   pod 'SwiftLint'
+  pod 'YPImagePicker'
   
   # Pods for PhotoTag
 
@@ -13,9 +14,4 @@ target 'PhotoTag' do
     inherit! :search_paths
     # Pods for testing
   end
-
-  target 'PhotoTagUITests' do
-    # Pods for testing
-  end
-
 end
