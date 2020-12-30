@@ -6,14 +6,16 @@
 //
 
 import UIKit
+import YPImagePicker
 
-final class PhotoNoteViewController: UIViewController {
+class PhotoNoteViewController: UIViewController {
 
     weak var coordinator: PhotoNoteCoordinator?
+    let viewModel: PhotoNoteViewModel
     
-    //TODO:- add viewModel as parameter
-    init(coordinator: PhotoNoteCoordinator) {
+    init(coordinator: PhotoNoteCoordinator, viewModel: PhotoNoteViewModel) {
         self.coordinator = coordinator
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -21,6 +23,6 @@ final class PhotoNoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
 }

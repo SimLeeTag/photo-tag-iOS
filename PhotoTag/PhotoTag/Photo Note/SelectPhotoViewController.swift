@@ -11,9 +11,8 @@ import YPImagePicker
 final class SelectPhotoViewController: UIViewController {
 
     weak var coordinator: PhotoNoteCoordinator?
-    var selectedItems = [YPMediaItem]() // should move to View Model
+    var selectedItems = [YPMediaItem]()
     
-    //TODO:- add viewModel as parameter
     init(coordinator: PhotoNoteCoordinator) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
@@ -58,34 +57,44 @@ final class SelectPhotoViewController: UIViewController {
         picker.didFinishPicking { [unowned picker] items, cancelled in
 
             if cancelled {
-                // TODO: - show alert
-                print("Picker was canceled")
+                self.presentAlert()
                 picker.dismiss(animated: true, completion: nil)
                 return
             }
+            
             self.selectedItems = items
             picker.dismiss(animated: true, completion: nil)
+            
             self.showSelectedItems()
         }
+        
         present(picker, animated: true, completion: nil)
     }
     
     private func showSelectedItems() {
         let gallery = YPSelectionsGalleryVC(items: self.selectedItems) { galleryVC, items in
             self.selectedItems = items
-            // TODO: - update viewModel
             galleryVC.dismiss(animated: true, completion: nil)
-            self.coordinator?.navigateToPhotoNote()
-            // TODO: - pass selected images to photo note
+            self.coordinator?.navigateToPhotoNote(with: self.selectedItems)
         }
         let navController = UINavigationController(rootViewController: gallery)
         self.present(navController, animated: true, completion: nil)
     }
 }
 
+extension SelectPhotoViewController: AlertPresentable {
+    var alertComponents: AlertComponents {
+        let action = AlertActionComponent(title: "OK", handler: { _ in print("My task :)")})
+        let alertComponents = AlertComponents(title: "Oops! 😵", message: "No photos are selected", actions: [action], completion: {
+            self.coordinator?.navigateToPhotoNoteList()
+    })
+        return alertComponents
+    }
+}
+
 extension SelectPhotoViewController: YPImagePickerDelegate {
     func noPhotos() {
-        // TODO: - show alert
+        self.presentAlert()
     }
     
     func shouldAddToSelection(indexPath: IndexPath, numSelections: Int) -> Bool {
