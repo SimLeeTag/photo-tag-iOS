@@ -573,6 +573,7 @@
 				6AFE3BFA253EDF3200B385AC /* Frameworks */,
 				6AFE3BFB253EDF3200B385AC /* Resources */,
 				6AFE3C40253F08F700B385AC /* ShellScript */,
+				AB90835538DBC3BC0EF04232 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -678,6 +679,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
+		AB90835538DBC3BC0EF04232 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PhotoTag/Pods-PhotoTag-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PhotoTag/Pods-PhotoTag-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PhotoTag/Pods-PhotoTag-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		CAFC978B2E6AF54CBFDF2557 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
