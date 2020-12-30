@@ -469,7 +469,6 @@
 			isa = PBXGroup;
 			children = (
 				6AEB554F259CB3D00044699D /* PhotoNote */,
-				6AEB5550259CB3E90044699D /* View */,
 				6A5544EE255A75C4003F3864 /* PhotoNoteList */,
 				6A89B9E2255496F9003E1027 /* SelectPhotoViewController.swift */,
 				6A89B9E725549764003E1027 /* WritePhotoNoteViewController.swift */,
@@ -509,6 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				6AEB5548259CB25C0044699D /* ViewModel */,
+				6AEB5550259CB3E90044699D /* View */,
 			);
 			path = PhotoNote;
 			sourceTree = "<group>";
