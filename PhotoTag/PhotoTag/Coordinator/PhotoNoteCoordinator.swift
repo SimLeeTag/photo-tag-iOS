@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import YPImagePicker
 
 final class PhotoNoteCoordinator: ChildCoordinator {
     
@@ -30,7 +29,7 @@ final class PhotoNoteCoordinator: ChildCoordinator {
         navigationController.pushViewController(writePhotoNoteViewController, animated: true)
     }
     
-    func navigateToPhotoNote(with selectedItems: [YPMediaItem]) {
+    func navigateToPhotoNote(with selectedItems: [UIImage]) {
         let photoNoteViewController = appViewControllerFactory.photoNoteViewController(coordinator: self, viewModel: PhotoNoteViewModel(with: selectedItems) )
         navigationController.pushViewController(photoNoteViewController, animated: true)
     }
