@@ -121,8 +121,8 @@
 		6AE1245E256830A300291388 /* UISwipeGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE1245D256830A300291388 /* UISwipeGestureRecognizer.swift */; };
 		6AEB5545259CA8220044699D /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEB5544259CA8220044699D /* AlertView.swift */; };
 		6AEB554A259CB2640044699D /* PhotoNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEB5549259CB2640044699D /* PhotoNoteViewModel.swift */; };
-		6AEB5567259CB4B90044699D /* PhotoNoteViewController.swift 22-13-50-609.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEB5566259CB4B90044699D /* PhotoNoteViewController.swift 22-13-50-609.swift */; };
-		6AEB5568259CB4B90044699D /* PhotoNoteViewController.swift 22-13-50-609.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEB5566259CB4B90044699D /* PhotoNoteViewController.swift 22-13-50-609.swift */; };
+		6AEB5567259CB4B90044699D /* PhotoNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEB5566259CB4B90044699D /* PhotoNoteViewController.swift */; };
+		6AEB5568259CB4B90044699D /* PhotoNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEB5566259CB4B90044699D /* PhotoNoteViewController.swift */; };
 		6AEB5570259CB4D20044699D /* PhotoNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AEB556F259CB4D20044699D /* PhotoNoteViewController.xib */; };
 		6AEB5571259CB4D20044699D /* PhotoNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AEB556F259CB4D20044699D /* PhotoNoteViewController.xib */; };
 		6AEC28AE259223CC00D0634A /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEC28AD259223CC00D0634A /* URLComponents.swift */; };
@@ -221,7 +221,7 @@
 		6AE1245D256830A300291388 /* UISwipeGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISwipeGestureRecognizer.swift; sourceTree = "<group>"; };
 		6AEB5544259CA8220044699D /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		6AEB5549259CB2640044699D /* PhotoNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNoteViewModel.swift; sourceTree = "<group>"; };
-		6AEB5566259CB4B90044699D /* PhotoNoteViewController.swift 22-13-50-609.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhotoNoteViewController.swift 22-13-50-609.swift"; sourceTree = "<group>"; };
+		6AEB5566259CB4B90044699D /* PhotoNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoNoteViewController.swift; sourceTree = "<group>"; };
 		6AEB556F259CB4D20044699D /* PhotoNoteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoNoteViewController.xib; sourceTree = "<group>"; };
 		6AEC28AD259223CC00D0634A /* URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponents.swift; sourceTree = "<group>"; };
 		6AFE3BFD253EDF3200B385AC /* PhotoTag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -516,7 +516,7 @@
 		6AEB5550259CB3E90044699D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6AEB5566259CB4B90044699D /* PhotoNoteViewController.swift 22-13-50-609.swift */,
+				6AEB5566259CB4B90044699D /* PhotoNoteViewController.swift */,
 				6AEB556F259CB4D20044699D /* PhotoNoteViewController.xib */,
 			);
 			path = View;
@@ -800,7 +800,7 @@
 				6AB83AF425442B370065B698 /* TagCoordinator.swift in Sources */,
 				6AA9BD65254E93C200126749 /* LoginManager.swift in Sources */,
 				6A682539254854E200B19C9A /* AppViewControllersFactory.swift in Sources */,
-				6AEB5567259CB4B90044699D /* PhotoNoteViewController.swift 22-13-50-609.swift in Sources */,
+				6AEB5567259CB4B90044699D /* PhotoNoteViewController.swift in Sources */,
 				6AD3ED6C2551A09900F8EF61 /* HTTPMethod.swift in Sources */,
 				6A87E247258B5E2400896BD6 /* TagCategoryCellViewModel.swift in Sources */,
 				6A89B9B225546444003E1027 /* PhotoNoteCoordinator.swift in Sources */,
@@ -858,7 +858,7 @@
 				6A4AD1B1258A5B0200857FEC /* LoginViewController.swift in Sources */,
 				6A4AD1BC258A5B1700857FEC /* AppCoordinator.swift in Sources */,
 				6A4AD165258A5A1D00857FEC /* NetworkError.swift in Sources */,
-				6AEB5568259CB4B90044699D /* PhotoNoteViewController.swift 22-13-50-609.swift in Sources */,
+				6AEB5568259CB4B90044699D /* PhotoNoteViewController.swift in Sources */,
 				6A4AD159258A5A0200857FEC /* Endpoint.swift in Sources */,
 				6A4AD141258A59C200857FEC /* TagManagementTableViewDataSource.swift in Sources */,
 				6A4AD1F8258A5B9200857FEC /* LoginManager.swift in Sources */,

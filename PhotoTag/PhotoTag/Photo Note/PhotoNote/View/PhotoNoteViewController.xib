@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,10 +12,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoNoteViewController" customModule="PhotoTag" customModuleProvider="target">
             <connections>
-                <outlet property="dateLabel" destination="M4O-iK-5Lv" id="9uv-P1-4gC"/>
+                <outlet property="dateLabel" destination="M4O-iK-5Lv" id="KUd-fZ-Uj1"/>
                 <outlet property="firstImageView" destination="YGN-xg-cOy" id="Z1y-9Z-uBJ"/>
+                <outlet property="imageHorizontalScrollView" destination="cvY-A7-RUr" id="KPV-PY-lpE"/>
+                <outlet property="imagePageControl" destination="vSd-6A-BUH" id="Q5g-ij-tCD"/>
                 <outlet property="imageStackView" destination="PJC-T8-hQu" id="CZu-go-5ri"/>
-                <outlet property="noteTextView" destination="ddu-1g-Zcf" id="Gc6-3l-AQA"/>
+                <outlet property="moreButton" destination="l05-Tt-neW" id="OZH-1V-8pD"/>
+                <outlet property="noteTextView" destination="ddu-1g-Zcf" id="lIp-kl-0ge"/>
+                <outlet property="saveButton" destination="TRU-md-uko" id="bMO-tW-Zxs"/>
                 <outlet property="view" destination="iN0-l3-epB" id="cf3-e7-lid"/>
             </connections>
         </placeholder>
@@ -23,7 +28,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvY-A7-RUr">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvY-A7-RUr">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="627"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJC-T8-hQu">
@@ -48,19 +53,21 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLW-pz-HMz" userLabel="navigation view">
                     <rect key="frame" x="0.0" y="44" width="414" height="36"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gMr-vz-dmK" userLabel="close button">
+                        <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gMr-vz-dmK" userLabel="close button">
                             <rect key="frame" x="10" y="0.0" width="36" height="36"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="gMr-vz-dmK" secondAttribute="height" multiplier="1:1" id="CfF-PW-efz"/>
                             </constraints>
-                            <state key="normal" image="yp_remove"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                            <color key="tintColor" systemColor="systemGray6Color"/>
+                            <state key="normal" image="chevron.backward.circle.fill" catalog="system"/>
                             <connections>
                                 <action selector="closeButtonTapped:" destination="-1" eventType="touchUpInside" id="dk3-sg-oik"/>
                             </connections>
                         </button>
-                        <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l05-Tt-neW" userLabel="more button">
+                        <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l05-Tt-neW" userLabel="more button">
                             <rect key="frame" x="302.5" y="0.0" width="29" height="36"/>
-                            <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                            <color key="backgroundColor" systemColor="systemGray6Color"/>
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                             <state key="normal" image="ellipsis" catalog="system"/>
@@ -68,9 +75,9 @@
                                 <action selector="moreButtonTapped:" destination="-1" eventType="touchUpInside" id="Tfk-kK-XVW"/>
                             </connections>
                         </button>
-                        <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TRU-md-uko" userLabel="save button">
+                        <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TRU-md-uko" userLabel="save button">
                             <rect key="frame" x="336.5" y="0.0" width="67.5" height="36"/>
-                            <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                            <color key="backgroundColor" systemColor="systemGray6Color"/>
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                             <state key="normal" title="Save" image="checkmark" catalog="system">
@@ -94,6 +101,11 @@
                         <constraint firstItem="gMr-vz-dmK" firstAttribute="top" secondItem="OLW-pz-HMz" secondAttribute="top" id="hjb-Go-BEe"/>
                     </constraints>
                 </view>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="vSd-6A-BUH">
+                    <rect key="frame" x="0.0" y="584.5" width="414" height="27.5"/>
+                    <color key="pageIndicatorTintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="currentPageIndicatorTintColor" name="KeyColorInDarkMode"/>
+                </pageControl>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dqz-W5-OXJ">
                     <rect key="frame" x="0.0" y="627" width="414" height="235"/>
                     <subviews>
@@ -131,8 +143,10 @@
             <constraints>
                 <constraint firstItem="bd6-Ob-i5M" firstAttribute="top" secondItem="OLW-pz-HMz" secondAttribute="top" id="9Ag-AP-2Io"/>
                 <constraint firstItem="YGN-xg-cOy" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="EdQ-N3-KvT"/>
+                <constraint firstItem="vSd-6A-BUH" firstAttribute="trailing" secondItem="bd6-Ob-i5M" secondAttribute="trailing" id="FNW-eT-Oqu"/>
                 <constraint firstItem="OLW-pz-HMz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="G0N-lg-3Kc"/>
                 <constraint firstAttribute="trailing" secondItem="OLW-pz-HMz" secondAttribute="trailing" id="Hg4-f6-EQD"/>
+                <constraint firstItem="vSd-6A-BUH" firstAttribute="leading" secondItem="bd6-Ob-i5M" secondAttribute="leading" id="K5C-sT-5dF"/>
                 <constraint firstItem="cvY-A7-RUr" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.7" id="M9v-zs-TZu"/>
                 <constraint firstItem="Dqz-W5-OXJ" firstAttribute="leading" secondItem="bd6-Ob-i5M" secondAttribute="leading" id="OoY-Ux-NRP"/>
                 <constraint firstItem="bd6-Ob-i5M" firstAttribute="trailing" secondItem="Dqz-W5-OXJ" secondAttribute="trailing" id="XcH-lO-4nV"/>
@@ -140,29 +154,29 @@
                 <constraint firstAttribute="trailing" secondItem="cvY-A7-RUr" secondAttribute="trailing" id="ajq-JK-HgW"/>
                 <constraint firstItem="cvY-A7-RUr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dBv-nL-qwq"/>
                 <constraint firstItem="OLW-pz-HMz" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="dPM-ns-Itm"/>
+                <constraint firstItem="Dqz-W5-OXJ" firstAttribute="top" secondItem="vSd-6A-BUH" secondAttribute="bottom" constant="15" id="f8E-g7-g6n"/>
                 <constraint firstItem="Dqz-W5-OXJ" firstAttribute="top" secondItem="cvY-A7-RUr" secondAttribute="bottom" id="gAP-dI-kDa"/>
                 <constraint firstItem="bd6-Ob-i5M" firstAttribute="bottom" secondItem="Dqz-W5-OXJ" secondAttribute="bottom" id="qWd-eo-Sy7"/>
                 <constraint firstItem="OLW-pz-HMz" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.04" id="z3p-i1-vZ5"/>
             </constraints>
-            <connections>
-                <outlet property="dateLabel" destination="M4O-iK-5Lv" id="kAO-9n-6AC"/>
-                <outlet property="noteTextView" destination="ddu-1g-Zcf" id="Cue-tF-wlB"/>
-            </connections>
             <point key="canvasLocation" x="140.57971014492756" y="99.776785714285708"/>
         </view>
     </objects>
     <resources>
         <image name="checkmark" catalog="system" width="128" height="114"/>
+        <image name="chevron.backward.circle.fill" catalog="system" width="128" height="121"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
-        <image name="yp_remove" width="32" height="32"/>
+        <namedColor name="KeyColorInDarkMode">
+            <color red="0.99900001287460327" green="0.72100001573562622" blue="0.019999999552965164" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

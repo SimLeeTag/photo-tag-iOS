@@ -91,7 +91,6 @@ final class SelectPhotoViewController: UIViewController {
                 switch item {
                 case .photo(let photo):
                     selectedPhotos.append(photo.image)
-                    return selectedPhotos
                 case .video(_): break
                 }
             }
