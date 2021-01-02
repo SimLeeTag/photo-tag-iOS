@@ -21,6 +21,7 @@ class PhotoNoteViewController: UIViewController {
     @IBOutlet weak var imagePageControl: UIPageControl!
     @IBOutlet weak var imageHorizontalScrollView: UIScrollView!
     private var isCreating: Bool
+    private var noteContentText: String = ""
     
     init(coordinator: PhotoNoteCoordinator, viewModel: PhotoNoteViewModel, isCreating: Bool) {
         self.coordinator = coordinator
@@ -44,6 +45,9 @@ class PhotoNoteViewController: UIViewController {
         setupPageControl()
         displayPhotos()
         displayDate()
+        if isCreating {
+            presentNoteWritingScene()
+        }
     }
     
     private func displayDate() {
@@ -86,16 +90,24 @@ class PhotoNoteViewController: UIViewController {
     }
     
     private func presentNoteWritingScene() {
-        
+        let noteModalViewController = NoteViewController()
+        noteModalViewController.modalPresentationStyle = .automatic
+        noteModalViewController.delegate = self
+        self.present(noteModalViewController, animated: true)
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {
+        // present alert view to notice cancel creating note
     }
     
     @IBAction func moreButtonTapped(_ sender: Any) {
+        // present action sheet
+        // share note as image
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+        // if there is no hashtag add #noTag
+        // request to save data to API
     }
     
 }
@@ -108,10 +120,25 @@ extension PhotoNoteViewController {
     }
 }
 
+extension PhotoNoteViewController: PassNoteDelegate {
+    func passNoteText(content: String) {
+        noteContentText = content
+    }
+}
+
 extension PhotoNoteViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentPage = round(imageHorizontalScrollView.contentOffset.x / self.view.frame.width)
         imagePageControl.currentPage = Int(CGFloat(currentPage))
         scrollView.contentOffset.y = -scrollView.contentInset.top // block vertical scrolling
+    }
+}
+
+extension PhotoNoteViewController: UITextViewDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        presentNoteWritingScene()
+    }
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        return false
     }
 }

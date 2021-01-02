@@ -78,7 +78,7 @@ final class SelectPhotoViewController: UIViewController {
             
             // after check selected photos, navigate to next scene
             let selectedPhotos = self.filterPhotos(in: self.selectedItems)
-            self.coordinator?.navigateToPhotoNote(with: selectedPhotos)
+            self.coordinator?.navigateToPhotoNote(with: selectedPhotos, isCreatingMode: true)
         }
         let navController = UINavigationController(rootViewController: gallery)
         self.present(navController, animated: true, completion: nil)
