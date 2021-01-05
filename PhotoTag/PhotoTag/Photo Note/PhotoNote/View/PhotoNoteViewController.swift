@@ -57,8 +57,6 @@ class PhotoNoteViewController: UIViewController {
     }
     
     private func displayPhotos() {
-        var images = (firstImage: viewModel.passImages().0,
-                      secondToLastImage: viewModel.passImages().1)
         
         for i in 0..<viewModel.selectedImages.count {
             
@@ -97,7 +95,7 @@ class PhotoNoteViewController: UIViewController {
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {
-        // present alert view to notice cancel creating note
+        // move back to previous scene
     }
     
     @IBAction func moreButtonTapped(_ sender: Any) {
