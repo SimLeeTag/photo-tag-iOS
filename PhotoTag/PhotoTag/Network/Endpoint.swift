@@ -21,6 +21,7 @@ struct Endpoint: RequestProviding {
         case fetchHashtags
         case patchHashtags
         case fetchTagCategory
+        case createNote
         
         var description: String {
             switch self {
@@ -28,6 +29,7 @@ struct Endpoint: RequestProviding {
             case .fetchHashtags: return "/tags/setting"
             case .patchHashtags: return "/tags/"
             case .fetchTagCategory: return "/tags/explore"
+            case .createNote: return "/notes"
             }
         }
     }
