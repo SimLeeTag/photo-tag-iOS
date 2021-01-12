@@ -36,7 +36,7 @@ struct AppViewControllersFactory {
     }
     
     func writePhotoNoteViewController(coordinator: PhotoNoteCoordinator) -> UIViewController {
-        return WritePhotoNoteViewController(coordinator: coordinator)
+        return NoteViewController(coordinator: coordinator)
     }
     
     func photoNoteViewController(coordinator: PhotoNoteCoordinator, viewModel: PhotoNoteViewModel, isCreatingMode: Bool) -> UIViewController {

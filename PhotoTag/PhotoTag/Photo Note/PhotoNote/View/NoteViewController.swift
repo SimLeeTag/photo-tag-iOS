@@ -11,10 +11,19 @@ protocol PassNoteDelegate: class {
     func passNoteText(content: String)
 }
 
-class NoteViewController: UIViewController {
+final class NoteViewController: UIViewController {
     
+    @IBOutlet weak var noteTextView: UITextView!
     weak var delegate: PassNoteDelegate?
+    weak var coordinator: PhotoNoteCoordinator?
     private var contentText: String = ""
+    
+    init(coordinator: PhotoNoteCoordinator) {
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) { return nil }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,46 +31,20 @@ class NoteViewController: UIViewController {
     }
 
     private func setupView() {
-        setupNavigationBar()
         setupNoteTextView()
-    }
-    
-    private func setupNavigationBar() {
-        self.navigationItem.setLeftBarButton(cancelButton, animated: true)
-        self.navigationItem.setRightBarButton(saveButton, animated: true)
     }
     
     private func setupNoteTextView() {
         noteTextView.delegate = self
-        self.view.addSubview(noteTextView)
-        noteTextView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        noteTextView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        noteTextView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        noteTextView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
     }
     
-    @objc private func cancelButtonTapped() {
+    @IBAction func cancelButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc private func saveButtonTapped() {
-        // pass data to photo note view
+    @IBAction func saveButtonTapped(_ sender: Any) {
         delegate?.passNoteText(content: contentText)
-    }
-}
-
-extension NoteViewController {
-    private var noteTextView: UITextView {
-        let textView = UITextView()
-        return textView
-    }
-    
-    private var cancelButton: UIBarButtonItem {
-        return UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTapped))
-    }
-    
-    private var saveButton: UIBarButtonItem {
-        return UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
