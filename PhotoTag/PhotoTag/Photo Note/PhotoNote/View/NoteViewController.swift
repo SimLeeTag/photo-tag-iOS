@@ -13,9 +13,11 @@ final class NoteViewController: UIViewController {
     weak var coordinator: PhotoNoteCoordinator?
     static let contentTextKey = "contentText"
     private var contentText: String = ""
+    private var existingText = ""
     
-    init(coordinator: PhotoNoteCoordinator) {
+    init(coordinator: PhotoNoteCoordinator, with text: String) {
         self.coordinator = coordinator
+        self.existingText = text
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -27,7 +29,8 @@ final class NoteViewController: UIViewController {
     }
 
     private func setupView() {
-        noteTextView.becomeFirstResponder() // open keyboard
+        noteTextView.text = contentText
+        noteTextView.text = existingText
         setupNoteTextView()
     }
     
@@ -36,7 +39,7 @@ final class NoteViewController: UIViewController {
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -46,7 +49,9 @@ final class NoteViewController: UIViewController {
     
     private func sendNotification() {
         let dataToSend = [NoteViewController.contentTextKey : contentText]
-        NotificationCenter.default.post(name: .writeNote, object: nil, userInfo: dataToSend)
+        NotificationCenter.default.post(name: .writeNote,
+                                        object: nil,
+                                        userInfo: dataToSend)
     }
     
 }

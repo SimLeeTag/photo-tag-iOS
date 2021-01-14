@@ -24,8 +24,8 @@ final class PhotoNoteCoordinator: ChildCoordinator {
         navigationController.pushViewController(selectPhotoViewController, animated: true)
     }
     
-    func navigateToWritePhotoNote() {
-        let writePhotoNoteViewController = appViewControllerFactory.writePhotoNoteViewController(coordinator: self)
+    func navigateToWritePhotoNote(with text: String) {
+        let writePhotoNoteViewController = appViewControllerFactory.writePhotoNoteViewController(coordinator: self, with: text)
         navigationController.pushViewController(writePhotoNoteViewController, animated: true)
     }
     
