@@ -154,20 +154,6 @@ extension PhotoNoteViewController {
     }
 }
 
-//extension PhotoNoteViewController: PassNoteDelegate {
-//    func passNoteText(content: String) {
-//        noteContentText = content // save passed text
-//        filterTags(content: content)
-//    }
-//
-//    private func filterTags(content: String) {
-//        if !content.components(separatedBy: "").contains("#") {
-//            let noTagText = "#noTag"
-//            self.noteContentText += noTagText
-//        }
-//    }
-//}
-
 extension PhotoNoteViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentPage = round(imageHorizontalScrollView.contentOffset.x / self.view.frame.width)
