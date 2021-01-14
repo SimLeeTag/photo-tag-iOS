@@ -7,7 +7,6 @@ target 'PhotoTag' do
 
   pod 'SwiftLint'
   pod 'YPImagePicker'
-  pod 'Alamofire', '~> 5.2'
   
   # Pods for PhotoTag
 
