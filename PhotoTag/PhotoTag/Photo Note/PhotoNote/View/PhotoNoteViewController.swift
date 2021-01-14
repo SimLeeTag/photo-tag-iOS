@@ -12,16 +12,19 @@ class PhotoNoteViewController: UIViewController {
     
     weak var coordinator: PhotoNoteCoordinator?
     let viewModel: PhotoNoteViewModel
+    @IBOutlet weak var noteView: UIView!
     @IBOutlet weak var imageStackView: UIStackView!
     @IBOutlet weak var firstImageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var noteTextView: UITextView!
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var imagePageControl: UIPageControl!
     @IBOutlet weak var imageHorizontalScrollView: UIScrollView!
     private var isCreating: Bool
     private var noteContentText: String = ""
+    private let noteNetworkManager = NoteNetworkingManager()
     
     init(coordinator: PhotoNoteCoordinator, viewModel: PhotoNoteViewModel, isCreating: Bool) {
         self.coordinator = coordinator
@@ -35,11 +38,28 @@ class PhotoNoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupNotification()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(presentNoteWritingScene))
+        noteView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        // request to save data to API
+        noteNetworkManager.createNote(with: noteContentText, images: viewModel.selectedImages) { success in
+            if success {
+                self.presentAlert()
+            } else {
+                print("failed")
+            }
+        }
+    }
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+        coordinator?.navigateToPhotoNoteList()
     }
     
     private func setupView() {
-        moreButton.layer.cornerRadius = 10
-        saveButton.layer.cornerRadius = 10
+        setupButtons()
         noteTextView.isEditable = false
         imageHorizontalScrollView.delegate = self
         setupPageControl()
@@ -48,6 +68,25 @@ class PhotoNoteViewController: UIViewController {
         if isCreating {
             presentNoteWritingScene()
         }
+    }
+    
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(saveNoteText), name: .writeNote, object: nil)
+    }
+    
+    private func filterTags(content: String) {
+        if !content.components(separatedBy: "#").contains("#") {
+            print(content.components(separatedBy: "").contains("#"))
+            print(content.components(separatedBy: ""))
+            let noTagText = "#noTag"
+            self.noteContentText += noTagText
+        }
+    }
+    
+    private func setupButtons() {
+        moreButton.layer.cornerRadius = 10
+        saveButton.layer.cornerRadius = 10
+        backButton.layer.cornerRadius = 10
     }
     
     private func displayDate() {
@@ -87,27 +126,24 @@ class PhotoNoteViewController: UIViewController {
         imagePageControl.currentPage = 0
     }
     
-    private func presentNoteWritingScene() {
-        let noteModalViewController = NoteViewController()
-        noteModalViewController.modalPresentationStyle = .automatic
-        noteModalViewController.delegate = self
-        self.present(noteModalViewController, animated: true)
+    @objc private func presentNoteWritingScene() {
+        if isCreating {
+            coordinator?.navigateToWritePhotoNote()
+        }
     }
     
-    @IBAction func closeButtonTapped(_ sender: Any) {
-        // move back to previous scene
+    @objc func saveNoteText(_ notification: Notification) {
+        guard let content = notification.userInfo?[NoteViewController.contentTextKey] as? String else { return }
+        noteContentText = content // save passed text
+        filterTags(content: content)
+        updateTextViewWithText()
     }
     
-    @IBAction func moreButtonTapped(_ sender: Any) {
-        // present action sheet
-        // share note as image
+    private func updateTextViewWithText() {
+        DispatchQueue.main.async {
+            self.noteTextView.text = self.noteContentText
+        }
     }
-    
-    @IBAction func saveButtonTapped(_ sender: Any) {
-        // if there is no hashtag add #noTag
-        // request to save data to API
-    }
-    
 }
 extension PhotoNoteViewController {
     private func newImageView() -> UIImageView {
@@ -118,11 +154,19 @@ extension PhotoNoteViewController {
     }
 }
 
-extension PhotoNoteViewController: PassNoteDelegate {
-    func passNoteText(content: String) {
-        noteContentText = content
-    }
-}
+//extension PhotoNoteViewController: PassNoteDelegate {
+//    func passNoteText(content: String) {
+//        noteContentText = content // save passed text
+//        filterTags(content: content)
+//    }
+//
+//    private func filterTags(content: String) {
+//        if !content.components(separatedBy: "").contains("#") {
+//            let noTagText = "#noTag"
+//            self.noteContentText += noTagText
+//        }
+//    }
+//}
 
 extension PhotoNoteViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -133,10 +177,27 @@ extension PhotoNoteViewController: UIScrollViewDelegate {
 }
 
 extension PhotoNoteViewController: UITextViewDelegate {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        return false
+    }
+}
+
+extension PhotoNoteViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        true
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         presentNoteWritingScene()
     }
-    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        return false
+}
+
+extension PhotoNoteViewController: AlertPresentable {
+    var alertComponents: AlertComponents {
+        let action = AlertActionComponent(title: "OK", handler: { _ in print("My task :)")})
+        let alertComponents = AlertComponents(title: "New Note! ✨", message: "New note has been created", actions: [action], completion: {
+            self.coordinator?.navigateToPhotoNoteList()
+    })
+        return alertComponents
     }
 }

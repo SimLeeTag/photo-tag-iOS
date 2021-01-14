@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoNoteViewController" customModule="PhotoTag" customModuleProvider="target">
             <connections>
+                <outlet property="backButton" destination="gMr-vz-dmK" id="wfm-zT-ten"/>
                 <outlet property="dateLabel" destination="M4O-iK-5Lv" id="KUd-fZ-Uj1"/>
                 <outlet property="firstImageView" destination="YGN-xg-cOy" id="Z1y-9Z-uBJ"/>
                 <outlet property="imageHorizontalScrollView" destination="cvY-A7-RUr" id="KPV-PY-lpE"/>
@@ -19,6 +20,7 @@
                 <outlet property="imageStackView" destination="PJC-T8-hQu" id="CZu-go-5ri"/>
                 <outlet property="moreButton" destination="l05-Tt-neW" id="OZH-1V-8pD"/>
                 <outlet property="noteTextView" destination="ddu-1g-Zcf" id="lIp-kl-0ge"/>
+                <outlet property="noteView" destination="Dqz-W5-OXJ" id="uOp-3d-JMb"/>
                 <outlet property="saveButton" destination="TRU-md-uko" id="bMO-tW-Zxs"/>
                 <outlet property="view" destination="iN0-l3-epB" id="cf3-e7-lid"/>
             </connections>
@@ -55,14 +57,17 @@
                     <subviews>
                         <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gMr-vz-dmK" userLabel="close button">
                             <rect key="frame" x="10" y="0.0" width="36" height="36"/>
+                            <color key="backgroundColor" systemColor="systemGray6Color"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="gMr-vz-dmK" secondAttribute="height" multiplier="1:1" id="CfF-PW-efz"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                            <color key="tintColor" systemColor="systemGray6Color"/>
-                            <state key="normal" image="chevron.backward.circle.fill" catalog="system"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" image="chevron.backward">
+                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
                             <connections>
-                                <action selector="closeButtonTapped:" destination="-1" eventType="touchUpInside" id="dk3-sg-oik"/>
+                                <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="Dq0-WC-1aB"/>
                             </connections>
                         </button>
                         <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l05-Tt-neW" userLabel="more button">
@@ -71,9 +76,6 @@
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                             <state key="normal" image="ellipsis" catalog="system"/>
-                            <connections>
-                                <action selector="moreButtonTapped:" destination="-1" eventType="touchUpInside" id="Tfk-kK-XVW"/>
-                            </connections>
                         </button>
                         <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TRU-md-uko" userLabel="save button">
                             <rect key="frame" x="336.5" y="0.0" width="67.5" height="36"/>
@@ -84,7 +86,7 @@
                                 <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
-                                <action selector="saveButtonTapped:" destination="-1" eventType="touchUpInside" id="eWf-xy-Zkv"/>
+                                <action selector="saveButtonTapped:" destination="-1" eventType="touchUpInside" id="FQE-mM-lGV"/>
                             </connections>
                         </button>
                     </subviews>
@@ -118,7 +120,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ddu-1g-Zcf" userLabel="note text view">
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ddu-1g-Zcf" userLabel="note text view">
                                     <rect key="frame" x="0.0" y="20.5" width="394" height="214.5"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -164,7 +166,7 @@
     </objects>
     <resources>
         <image name="checkmark" catalog="system" width="128" height="114"/>
-        <image name="chevron.backward.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="chevron.backward" width="7" height="11"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <namedColor name="KeyColorInDarkMode">
             <color red="0.99900001287460327" green="0.72100001573562622" blue="0.019999999552965164" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
