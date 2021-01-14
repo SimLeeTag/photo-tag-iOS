@@ -21,7 +21,7 @@ final class NoteNetworkingManager {
         
         let boundary = generateBoundaryString()
         guard let endpoint = Endpoint(path: .createNote).url else { return }
-        var request = URLRequest(baseUrl: endpoint, method: .post)
+        var request = URLRequest(url: endpoint, method: .post)
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
         // memo Text Data
@@ -31,29 +31,35 @@ final class NoteNetworkingManager {
         guard let jsonString = String(data: jsonData, encoding: .utf8) else { return }
         let textData: [String: String] = ["request": jsonString]
         
-        var httpBody = Data()
+        var httpBody = NSMutableData()
         
         for (key, value) in textData {
-            httpBody.append(convertFormField(named: key, value: value, using: boundary))
+            httpBody.appendString(convertFormField(named: key, value: value, using: boundary))
         }
         
         // photo Image Data
         for image in images {
-            guard let imageData = image.pngData() else { return }
-            httpBody.append(convertFileData(fieldName: "file", fileName: "photo.png", mimeType: "image/png", fileData: imageData, using: boundary))
-            httpBody.append("--\(boundary)--") // add final boundary with the two trailing dashes
-            request.httpBody = httpBody
+            guard let imageData = image.jpegData(compressionQuality: 0.1) else { return }
+            httpBody.append(convertFileData(fieldName: "file", fileName: "photo.jpg", mimeType: "multipart/form-data", fileData: imageData, using: boundary))
         }
+        httpBody.appendString("--\(boundary)--")  // add final boundary with the two trailing dashes
+        request.httpBody = httpBody as Data
         
         // request
-        NetworkManager.shared.session.uploadTask(with: request, from: httpBody) { (data, response, error) in
+        UseCase.shared
+            .request(request: request)
+            .receive(subscriber: Subscribers.Sink(receiveCompletion: { [weak self] in
+            guard case let .failure(error) = $0 else { return }
+            debugPrint(error.message)
+            // TODO: - present alertController
+        }, receiveValue: { [weak self] response in
             guard let httpResponse = response as? HTTPURLResponse else { return }
             if httpResponse.statusCode == 200 {
                 completion(true)
-                return
             }
            completion(false)
-        }
+        }))
+        
     }
     
     private func generateBoundaryString() -> String {
@@ -76,15 +82,15 @@ final class NoteNetworkingManager {
                                  mimeType: String,
                                  fileData: Data,
                                  using boundary: String) -> Data {
-        var data = Data()
+        var data = NSMutableData()
         
-        data.append("--\(boundary)\r\n")
-        data.append("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(fileName)\"\r\n")
-        data.append("Content-Type: \(mimeType)\r\n\r\n")
+        data.appendString("--\(boundary)\r\n")
+        data.appendString("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(fileName)\"\r\n")
+        data.appendString("Content-Type: \(mimeType)\r\n\r\n")
         data.append(fileData)
-        data.append("\r\n")
+        data.appendString("\r\n")
         
-        return data
+        return data as Data
     }
 }
 
@@ -95,4 +101,11 @@ extension Data {
             append(data)
         }
     }
+}
+extension NSMutableData {
+  func appendString(_ string: String) {
+    if let data = string.data(using: .utf8) {
+      self.append(data)
+    }
+  }
 }

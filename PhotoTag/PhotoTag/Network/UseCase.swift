@@ -38,6 +38,16 @@ struct UseCase {
             .eraseToAnyPublisher()
     }
     
+    // send file
+    func request(_ network: NetworkConnectable = NetworkManager.shared,
+//                               data: Data,
+                               request: URLRequest) -> AnyPublisher<HTTPURLResponse, NetworkError> {
+        return network
+            .request(request: request)
+            .compactMap { $0.response as? HTTPURLResponse }
+            .mapError { _ in NetworkError.jsonDecodingError }
+            .eraseToAnyPublisher()
+    }
     
     func request<D: Decodable>(_ network: NetworkConnectable = NetworkManager.shared,
                                type: D.Type, endpoint: RequestProviding,
