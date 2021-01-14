@@ -30,7 +30,7 @@ struct UseCase {
         }
         
         return network
-            .request(request: URLRequest(url: url,
+            .request(request: URLRequest(urlWithToken: url,
                                          method: method,
                                          body: data))
             .compactMap { $0.response as? HTTPURLResponse }
@@ -38,6 +38,16 @@ struct UseCase {
             .eraseToAnyPublisher()
     }
     
+    // send file
+    func request(_ network: NetworkConnectable = NetworkManager.shared,
+//                               data: Data,
+                               request: URLRequest) -> AnyPublisher<HTTPURLResponse, NetworkError> {
+        return network
+            .request(request: request)
+            .compactMap { $0.response as? HTTPURLResponse }
+            .mapError { _ in NetworkError.jsonDecodingError }
+            .eraseToAnyPublisher()
+    }
     
     func request<D: Decodable>(_ network: NetworkConnectable = NetworkManager.shared,
                                type: D.Type, endpoint: RequestProviding,
@@ -48,7 +58,7 @@ struct UseCase {
         
         return network
             .session
-            .dataTaskPublisher(for: URLRequest(url: url, method: method))
+            .dataTaskPublisher(for: URLRequest(urlWithToken: url, method: method))
             .map { $0.data }
             .decode(type: D.self, decoder: decoder)
             .eraseToAnyPublisher()
@@ -76,7 +86,7 @@ struct UseCase {
         
         return network
             .session
-            .dataTaskPublisher(for: URLRequest(url: url, method: method))
+            .dataTaskPublisher(for: URLRequest(urlWithToken: url, method: method))
             .map { $0.data }
             .decode(type: D.self, decoder: decoder)
             .eraseToAnyPublisher()

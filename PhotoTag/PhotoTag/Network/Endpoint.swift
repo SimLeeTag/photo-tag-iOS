@@ -21,6 +21,7 @@ struct Endpoint: RequestProviding {
         case fetchHashtags
         case patchHashtags
         case fetchTagCategory
+        case createNote
         
         var description: String {
             switch self {
@@ -28,6 +29,7 @@ struct Endpoint: RequestProviding {
             case .fetchHashtags: return "/tags/setting"
             case .patchHashtags: return "/tags/"
             case .fetchTagCategory: return "/tags/explore"
+            case .createNote: return "/notes"
             }
         }
     }
@@ -43,7 +45,7 @@ struct Endpoint: RequestProviding {
     var urlWithTagId: URL? {
         return URL(string: scheme + "://" + baseUrl + path.description + "\(tagId!)")
     }
-    var baseUrl: String = "52.78.129.236:8080"
+    var baseUrl: String = "52.78.129.236"
     var scheme: String = "http"
     var path: Path
     var tagId: Int?

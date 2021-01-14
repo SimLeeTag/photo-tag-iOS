@@ -62,7 +62,7 @@ final class SelectPhotoViewController: UIViewController {
                 return
             }
             
-            self.selectedItems = items
+            self.selectedItems = items // save photos (first chance to apply photo filter)
             picker.dismiss(animated: true, completion: nil)
             
             self.showSelectedItems()
@@ -73,12 +73,29 @@ final class SelectPhotoViewController: UIViewController {
     
     private func showSelectedItems() {
         let gallery = YPSelectionsGalleryVC(items: self.selectedItems) { galleryVC, items in
-            self.selectedItems = items
+            self.selectedItems = items // save photos (last chance to apply photo filter)
             galleryVC.dismiss(animated: true, completion: nil)
-            self.coordinator?.navigateToPhotoNote(with: self.selectedItems)
+            
+            // after check selected photos, navigate to next scene
+            let selectedPhotos = self.filterPhotos(in: self.selectedItems)
+            self.coordinator?.navigateToPhotoNote(with: selectedPhotos, isCreatingMode: true)
         }
         let navController = UINavigationController(rootViewController: gallery)
         self.present(navController, animated: true, completion: nil)
+    }
+    
+    private func filterPhotos(in selectedItems: [YPMediaItem]) -> [UIImage] {
+        var selectedPhotos = [UIImage]()
+        if selectedItems.count != 0 {
+            for item in selectedItems {
+                switch item {
+                case .photo(let photo):
+                    selectedPhotos.append(photo.image)
+                case .video(_): break
+                }
+            }
+        }
+        return selectedPhotos
     }
 }
 

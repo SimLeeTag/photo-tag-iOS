@@ -6,13 +6,14 @@
 //
 
 import Foundation
-import YPImagePicker
+import UIKit.UIImage
 
 class PhotoNoteViewModel {
     
-    var selectedImages: [YPMediaItem]
+    private(set) var selectedImages: [UIImage]
+    var date: Date?
     
-    init(with selectedItems: [YPMediaItem]) {
+    init(with selectedItems: [UIImage]) {
         self.selectedImages = selectedItems
     }
 }

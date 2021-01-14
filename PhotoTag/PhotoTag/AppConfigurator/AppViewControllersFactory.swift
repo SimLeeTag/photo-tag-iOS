@@ -8,10 +8,6 @@
 import UIKit
 
 struct AppViewControllersFactory {
-    
-    //TODO:- add viewModelFactory
-    
-    //TODO:- add viewModel as parameter
     func loginViewController(coordinator: AppCoordinator) -> UIViewController {
         return LoginViewController(coordinator: coordinator)
     }
@@ -35,12 +31,13 @@ struct AppViewControllersFactory {
         return SelectPhotoViewController(coordinator: coordinator)
     }
     
-    func writePhotoNoteViewController(coordinator: PhotoNoteCoordinator) -> UIViewController {
-        return WritePhotoNoteViewController(coordinator: coordinator)
+    func writePhotoNoteViewController(coordinator: PhotoNoteCoordinator, with text: String) -> UIViewController {
+        let noteViewController = NoteViewController(coordinator: coordinator, with: text)
+        return noteViewController
     }
     
-    func photoNoteViewController(coordinator: PhotoNoteCoordinator, viewModel: PhotoNoteViewModel) -> UIViewController {
-        return PhotoNoteViewController(coordinator: coordinator, viewModel: viewModel)
+    func photoNoteViewController(coordinator: PhotoNoteCoordinator, viewModel: PhotoNoteViewModel, isCreatingMode: Bool) -> UIViewController {
+        return PhotoNoteViewController(coordinator: coordinator, viewModel: viewModel, isCreating: isCreatingMode)
     }
     
     func searchViewController(coordinator: SearchCoordinator) -> UIViewController {
