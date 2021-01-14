@@ -75,10 +75,8 @@ class PhotoNoteViewController: UIViewController {
     }
     
     private func filterTags(content: String) {
-        if !content.components(separatedBy: "#").contains("#") {
-            print(content.components(separatedBy: "").contains("#"))
-            print(content.components(separatedBy: ""))
-            let noTagText = "#noTag"
+        if !content.contains("#") {
+            let noTagText = " #noTag"
             self.noteContentText += noTagText
         }
     }
