@@ -7,15 +7,11 @@
 
 import UIKit
 
-protocol PassNoteDelegate: class {
-    func passNoteText(content: String)
-}
-
 final class NoteViewController: UIViewController {
     
     @IBOutlet weak var noteTextView: UITextView!
-    weak var delegate: PassNoteDelegate?
     weak var coordinator: PhotoNoteCoordinator?
+    static let contentTextKey = "contentText"
     private var contentText: String = ""
     
     init(coordinator: PhotoNoteCoordinator) {
@@ -31,6 +27,7 @@ final class NoteViewController: UIViewController {
     }
 
     private func setupView() {
+        noteTextView.becomeFirstResponder() // open keyboard
         setupNoteTextView()
     }
     
@@ -43,8 +40,13 @@ final class NoteViewController: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        delegate?.passNoteText(content: contentText)
-        self.dismiss(animated: true, completion: nil)
+        sendNotification()
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    private func sendNotification() {
+        let dataToSend = [NoteViewController.contentTextKey : contentText]
+        NotificationCenter.default.post(name: .writeNote, object: nil, userInfo: dataToSend)
     }
     
 }
@@ -54,12 +56,10 @@ extension NoteViewController: UITextViewDelegate {
         // save content text string value for passing data
         contentText = textView.text
     }
-    
-    override func didChangeValue(forKey key: String) {
-        // dealing with hashtag
-    }
-    
     func textViewDidBeginEditing(_ textView: UITextView) {
-        // keyboard
+        contentText = textView.text
+    }
+    func textViewDidChange(_ textView: UITextView) {
+        contentText = textView.text
     }
 }
