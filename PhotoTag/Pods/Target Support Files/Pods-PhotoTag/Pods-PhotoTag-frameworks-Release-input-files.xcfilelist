@@ -1,4 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-PhotoTag/Pods-PhotoTag-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/PryntTrimmerView/PryntTrimmerView.framework
 ${BUILT_PRODUCTS_DIR}/SteviaLayout/Stevia.framework
 ${BUILT_PRODUCTS_DIR}/YPImagePicker/YPImagePicker.framework

@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.4.1)
   - PryntTrimmerView (4.0.2)
   - SteviaLayout (4.7.3)
   - SwiftLint (0.40.3)
@@ -7,22 +8,25 @@ PODS:
     - SteviaLayout (~> 4.7.3)
 
 DEPENDENCIES:
+  - Alamofire (~> 5.2)
   - SwiftLint
   - YPImagePicker
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - PryntTrimmerView
     - SteviaLayout
     - SwiftLint
     - YPImagePicker
 
 SPEC CHECKSUMS:
+  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
   PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
   SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
   YPImagePicker: 15aed8bcaa4dad976e11b6114126d731a2f9f3c9
 
-PODFILE CHECKSUM: ef39a1eaee057881352cd038cffed181249dae48
+PODFILE CHECKSUM: cf12e0fff46683b2cb5e31b99aa4215dbeceba07
 
 COCOAPODS: 1.10.0
