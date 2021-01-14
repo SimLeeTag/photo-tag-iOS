@@ -40,14 +40,16 @@ class PhotoNoteViewController: UIViewController {
         setupView()
         setupNotification()
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(presentNoteWritingScene))
-        noteView.addGestureRecognizer(tapGestureRecognizer)
+        noteTextView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         // request to save data to API
         noteNetworkManager.createNote(with: noteContentText, images: viewModel.selectedImages) { success in
             if success {
-                self.presentAlert()
+                DispatchQueue.main.async {
+                    self.presentAlert()
+                }
             } else {
                 print("failed")
             }
@@ -126,10 +128,9 @@ class PhotoNoteViewController: UIViewController {
     
     @objc private func presentNoteWritingScene() {
         if isCreating {
-            coordinator?.navigateToWritePhotoNote()
+            coordinator?.navigateToWritePhotoNote(with: noteContentText)
         }
     }
-    
     @objc func saveNoteText(_ notification: Notification) {
         guard let content = notification.userInfo?[NoteViewController.contentTextKey] as? String else { return }
         noteContentText = content // save passed text
@@ -178,10 +179,10 @@ extension PhotoNoteViewController: UIGestureRecognizerDelegate {
 
 extension PhotoNoteViewController: AlertPresentable {
     var alertComponents: AlertComponents {
-        let action = AlertActionComponent(title: "OK", handler: { _ in print("My task :)")})
-        let alertComponents = AlertComponents(title: "New Note! ✨", message: "New note has been created", actions: [action], completion: {
+        let action = AlertActionComponent(title: "OK", handler: { _ in
             self.coordinator?.navigateToPhotoNoteList()
-    })
+        })
+        let alertComponents = AlertComponents(title: "New Note! ✨", message: "New note has been created", actions: [action])
         return alertComponents
     }
 }

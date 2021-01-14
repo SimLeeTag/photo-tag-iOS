@@ -108,7 +108,7 @@
                     <color key="pageIndicatorTintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="currentPageIndicatorTintColor" name="KeyColorInDarkMode"/>
                 </pageControl>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dqz-W5-OXJ" userLabel="Note View">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dqz-W5-OXJ" userLabel="Note View" customClass="NoteView" customModule="PhotoTag" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="627" width="414" height="235"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Wxs-Mv-r2c">
