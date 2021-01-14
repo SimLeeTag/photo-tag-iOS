@@ -18,8 +18,8 @@ extension URLRequest {
         self.httpBody = body
     }
     
-    init(url: URL, method: HTTPMethod, body: Data? = nil) {
-        self.init(url: url)
+    init(urlWithToken: URL, method: HTTPMethod, body: Data? = nil) {
+        self.init(url: urlWithToken)
         self.httpMethod = method.description
         self.setValue("application/json",
                       forHTTPHeaderField: "Content-Type")

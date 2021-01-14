@@ -9,10 +9,6 @@ import Foundation
 import Combine
 import UIKit.UIImage
 
-struct TextNote: Codable {
-    let rawMemo: String
-}
-
 final class NoteNetworkingManager {
     
     func createNote(with text: String,
@@ -21,7 +17,7 @@ final class NoteNetworkingManager {
         
         let boundary = generateBoundaryString()
         guard let endpoint = Endpoint(path: .createNote).url else { return }
-        var request = URLRequest(url: endpoint, method: .post)
+        var request = URLRequest(urlWithToken: endpoint, method: .post)
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
         // memo Text Data
@@ -32,11 +28,10 @@ final class NoteNetworkingManager {
         let textData: [String: String] = ["request": jsonString]
         
         var httpBody = NSMutableData()
-        
         for (key, value) in textData {
             httpBody.appendString(convertFormField(named: key, value: value, using: boundary))
         }
-        
+
         // photo Image Data
         for image in images {
             guard let imageData = image.jpegData(compressionQuality: 0.1) else { return }
@@ -44,7 +39,7 @@ final class NoteNetworkingManager {
         }
         httpBody.appendString("--\(boundary)--")  // add final boundary with the two trailing dashes
         request.httpBody = httpBody as Data
-        
+
         // request
         UseCase.shared
             .request(request: request)
@@ -53,13 +48,12 @@ final class NoteNetworkingManager {
             debugPrint(error.message)
             // TODO: - present alertController
         }, receiveValue: { [weak self] response in
-            guard let httpResponse = response as? HTTPURLResponse else { return }
-            if httpResponse.statusCode == 200 {
-                completion(true)
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                completion(false)
+                return
             }
-           completion(false)
+           completion(true)
         }))
-        
     }
     
     private func generateBoundaryString() -> String {
@@ -69,8 +63,10 @@ final class NoteNetworkingManager {
     private func convertFormField(named name: String,
                                   value: String,
                                   using boundary: String) -> String {
+        let mimeType = "application/json"
         var fieldString = "--\(boundary)\r\n"
         fieldString += "Content-Disposition: form-data; name=\"\(name)\"\r\n"
+        fieldString += "Content-Type: \(mimeType)\r\n\r\n"
         fieldString += "\r\n"
         fieldString += "\(value)\r\n"
         
@@ -82,7 +78,7 @@ final class NoteNetworkingManager {
                                  mimeType: String,
                                  fileData: Data,
                                  using boundary: String) -> Data {
-        var data = NSMutableData()
+        let data = NSMutableData()
         
         data.appendString("--\(boundary)\r\n")
         data.appendString("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(fileName)\"\r\n")
@@ -94,14 +90,6 @@ final class NoteNetworkingManager {
     }
 }
 
-extension Data {
-    
-    mutating func append(_ string: String, using encoding: String.Encoding = .utf8) {
-        if let data = string.data(using: encoding) {
-            append(data)
-        }
-    }
-}
 extension NSMutableData {
   func appendString(_ string: String) {
     if let data = string.data(using: .utf8) {
