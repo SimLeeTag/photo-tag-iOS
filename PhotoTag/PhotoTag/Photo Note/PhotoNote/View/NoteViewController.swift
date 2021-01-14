@@ -48,7 +48,7 @@ final class NoteViewController: UIViewController {
     }
     
     private func sendNotification() {
-        let dataToSend = [NoteViewController.contentTextKey : contentText]
+        let dataToSend = [NoteViewController.contentTextKey: contentText]
         NotificationCenter.default.post(name: .writeNote,
                                         object: nil,
                                         userInfo: dataToSend)
@@ -58,13 +58,20 @@ final class NoteViewController: UIViewController {
 
 extension NoteViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
-        // save content text string value for passing data
-        contentText = textView.text
+        contentText = textView.text // save content text string value for passing data
     }
     func textViewDidBeginEditing(_ textView: UITextView) {
         contentText = textView.text
     }
     func textViewDidChange(_ textView: UITextView) {
         contentText = textView.text
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text ?? ""
+        let maximumCount = 1000
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let changedText = currentText.replacingCharacters(in: stringRange, with: text)
+        return changedText.count <= maximumCount
     }
 }
