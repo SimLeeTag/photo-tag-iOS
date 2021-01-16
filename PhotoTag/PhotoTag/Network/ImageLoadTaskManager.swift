@@ -7,16 +7,18 @@
 
 import Foundation
 import Combine
+import UIKit.UIImage
 
 final class ImageLoadTaskManager {
     
-    func fetchImage(with url: URL, completionHandler: @escaping (Data?) -> Void) {
-        UseCase.shared.request(type: Data.self, imageUrl: url)
-            .receive(subscriber: Subscribers.Sink(receiveCompletion: { [weak self] in
-                guard case let .failure(error) = $0 else { return }
-                debugPrint(error.localizedDescription)
-            }, receiveValue: { [weak self] data in
-                completionHandler(data)
-            }))
+    func fetchImage(with imageURL: URL, completionHandler: @escaping (UIImage?) -> Void) {
+        
+        NetworkManager.shared.session.dataTask(with: imageURL) { (data, response, error) in
+            guard let data = data else { print("no image data"); return }
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                print("network error: \(error?.localizedDescription)"); return }
+            guard let image = UIImage(data: data) else { return }
+            completionHandler(image)
+        }
     }
 }

@@ -12,6 +12,24 @@ import Combine
 
 class PhotoTagTests: XCTestCase {
     
+    // MARK: - Tests for fetch Image
+    
+    func testRequestImage() {
+        //given
+        let expectation = XCTestExpectation(description: "image download is completed")
+        //when
+        guard let imageUrl =
+                URL(string: "https://cdn.pixabay.com/photo/2020/11/22/16/45/nutcracker-5767159_1280.jpg") else { return }
+        //then
+        let dataTask = URLSession.shared.dataTask(with: imageUrl) { (data, _, _) in
+            
+            XCTAssertNotNil(data, "No data was downloaded.")
+            expectation.fulfill()
+        }
+        dataTask.resume()
+        wait(for: [expectation], timeout: 10.0)
+    }
+  
     // MARK: - Tests for TagManagementViewModel
     
     func testUpdatedHashtagCount() {

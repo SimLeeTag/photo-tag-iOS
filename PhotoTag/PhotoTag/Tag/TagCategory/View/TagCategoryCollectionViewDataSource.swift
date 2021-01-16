@@ -22,9 +22,10 @@ final class TagCategoryCollectionViewDataSource: NSObject, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let collectionViewCell = collectionView.dequeueReusableCell(with: TagCategoryCollectionViewCell.self, for: indexPath)
         bind(with: collectionViewCell)
-        if viewModel.tags.value.count != 0, self.viewModel.tagImages.value.count != 0 {
-            collectionViewCell.fill(with: self.viewModel.tags.value[indexPath.item])
-            collectionViewCell.fillImage(with: self.viewModel.tagImages.value[indexPath.item])
+        let tagInCurrentPosition = self.viewModel.tags.value[indexPath.item]
+        if viewModel.tags.value.count != 0 {
+            collectionViewCell.fill(with: tagInCurrentPosition)
+            collectionViewCell.fillImage(with: viewModel.tagImages.value[indexPath.item])
         }
         return collectionViewCell
     }
@@ -33,6 +34,7 @@ final class TagCategoryCollectionViewDataSource: NSObject, UICollectionViewDataS
 
 extension TagCategoryCollectionViewDataSource {
     func updateViewModel(updatedViewModel: TagCategoryViewModel) {
+        self.viewModel = updatedViewModel
     }
     
     private func bind(with cell: TagCategoryCollectionViewCell) {
