@@ -23,7 +23,8 @@ final class TagCategoryViewController: UIViewController {
     private var requestTagDataPageNumber: Int {
         return requestTagDataSize * requestTime
     }
-    private var viewAppeard = false
+    private var viewAppeared = false
+    private var tagImageHeights: [CGFloat] = []
     private var tagCategoryView: TagCategoryView! {
         return view as? TagCategoryView
     }
@@ -47,8 +48,8 @@ final class TagCategoryViewController: UIViewController {
         super.viewDidLoad()
         bind()
         configure()
+        viewAppeared = true
         fetchTags()
-        viewAppeard = true
     }
     
     // MARK: - Functions
@@ -92,14 +93,28 @@ final class TagCategoryViewController: UIViewController {
     }
     
     private func fetchTags() {
-        viewModel.fetchTags(size: requestTagDataSize, page: requestTagDataPageNumber) { fetchedViewModel in
-            self.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
-            self.updateTags()
+        if viewAppeared {
+            viewModel.fetchTags(size: requestTagDataSize, page: requestTagDataPageNumber) { fetchedViewModel in
+                // fetch images here to determine cell heights in custom layout (TagCategoryLayoutDelegate)
+                self.viewModel.fetchTagImage(with: fetchedViewModel.tags.value) { [self] tagImages in
+                    fetchedViewModel.tagImages.value.append(contentsOf: tagImages)
+                    fetchedViewModel.tagImages.value = Array(Set(fetchedViewModel.tagImages.value)) // remove duplicate values
+                    self.saveTagImageHeight(tagImages)
+                    self.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
+                    self.updateTags()
+                }
+            }
         }
+    }
+        
+    private func saveTagImageHeight(_ images: [UIImage]) {
+        let heights = images.map {$0.size.height}
+        tagImageHeights.append(contentsOf: Array(Set(heights)))
     }
     
     private func updateTags() {
         DispatchQueue.main.async {
+            self.view.layoutIfNeeded()
             self.tagCategoryView.tagCategoryCollectionView.reloadData()
         }
     }
@@ -124,15 +139,9 @@ extension TagCategoryViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension TagCategoryViewController: TagCategoryLayoutDelegate {
-    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
-        return viewModel.tagImages.value[indexPath.item].size.height
-    }
-}
-
 extension TagCategoryViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if viewAppeard {
+        if viewAppeared {
             let yOffset = scrollView.contentOffset.y
             let contentHeight = scrollView.contentSize.height
             if yOffset > contentHeight - scrollView.frame.height {
@@ -140,5 +149,11 @@ extension TagCategoryViewController: UIScrollViewDelegate {
                 updateRequestTime()
             }
         }
+    }
+}
+
+extension TagCategoryViewController: TagCategoryLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
+        return self.tagImageHeights[indexPath.item]
     }
 }
