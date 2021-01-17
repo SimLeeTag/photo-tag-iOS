@@ -10,6 +10,7 @@ import AuthenticationServices
 
 enum UserDefaultKey {
     static let key = "userId"
+    static let selectedTagIds = "selectedTagIds"
 }
 
 final class LoginViewController: UIViewController {
