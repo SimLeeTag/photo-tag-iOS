@@ -35,7 +35,7 @@ final class NoteNetworkingManager {
         // photo Image Data
         for image in images {
             guard let imageData = image.jpegData(compressionQuality: 0.1) else { return }
-            httpBody.append(convertFileData(fieldName: "file", fileName: "\(Date())_photo.jpg", mimeType: "multipart/form-data", fileData: imageData, using: boundary))
+            httpBody.append(convertFileData(fieldName: "file", fileName: "\(Date().millisecondsSince1970)_photo.jpg", mimeType: "multipart/form-data", fileData: imageData, using: boundary))
         }
         httpBody.appendString("--\(boundary)--")  // add final boundary with the two trailing dashes
         request.httpBody = httpBody as Data
@@ -96,4 +96,14 @@ extension NSMutableData {
       self.append(data)
     }
   }
+}
+
+extension Date {
+ var millisecondsSince1970: Int64 {
+        return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
+    }
+
+    init(milliseconds: Int) {
+        self = Date(timeIntervalSince1970: TimeInterval(milliseconds / 1000))
+    }
 }
