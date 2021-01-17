@@ -40,7 +40,8 @@ struct UseCase {
     
     // send file
     func request(_ network: NetworkConnectable = NetworkManager.shared,
-                 request: URLRequest) -> AnyPublisher<HTTPURLResponse, NetworkError> {
+//                               data: Data,
+                               request: URLRequest) -> AnyPublisher<HTTPURLResponse, NetworkError> {
         return network
             .request(request: request)
             .compactMap { $0.response as? HTTPURLResponse }
@@ -60,6 +61,18 @@ struct UseCase {
             .dataTaskPublisher(for: URLRequest(urlWithToken: url, method: method))
             .map { $0.data }
             .decode(type: D.self, decoder: decoder)
+            .eraseToAnyPublisher()
+    }
+    
+    // for fetch image
+    func request<I: Decodable>(_ network: NetworkConnectable = NetworkManager.shared,
+                               type: I.Type, imageUrl: URL) -> AnyPublisher<I, Error> {
+
+        return network
+            .session
+            .dataTaskPublisher(for: URLRequest(url: imageUrl))
+            .map { $0.data }
+            .decode(type: I.self, decoder: decoder)
             .eraseToAnyPublisher()
     }
     
