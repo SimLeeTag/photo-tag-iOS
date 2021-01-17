@@ -16,9 +16,9 @@ final class TagCategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var contentStackView: UIStackView!
     private(set) var tagId: Int = 0
     override var isSelected: Bool {
-        didSet{
+        didSet {
             self.layer.cornerRadius = 5
-            cellContentView.backgroundColor = isSelected ? #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1).withAlphaComponent(0.5) : .clear
+            cellContentView.backgroundColor = isSelected ? #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1).withAlphaComponent(0.5) : .white
             self.contentView.backgroundColor = .clear
             self.backgroundColor = .clear
         }
@@ -26,6 +26,7 @@ final class TagCategoryCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.backgroundColor = .white
     }
     
     func updateTagId(_ id: Int) {
