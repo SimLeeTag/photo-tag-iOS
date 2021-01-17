@@ -161,7 +161,8 @@ extension TagCategoryViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return (collectionView.indexPathsForSelectedItems?.count ?? 0) < 4
+        guard let count = collectionView.indexPathsForSelectedItems?.count else { return true }
+        return count < 3
     }
 }
 
