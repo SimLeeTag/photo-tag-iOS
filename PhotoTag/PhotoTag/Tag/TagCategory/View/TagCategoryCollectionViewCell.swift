@@ -15,6 +15,19 @@ final class TagCategoryCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.backgroundColor = .white
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        latestImageView.image = nil
+        tagNameLabel.text = ""
+        noteCountLabel.text = ""
+        tagId = 0
+    }
+    
+    func updateTagId(_ id: Int) {
+        self.tagId = id
     }
     
     func fill(with tag: Tag) {

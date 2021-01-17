@@ -20,12 +20,18 @@ final class TagCategoryViewController: UIViewController {
     private let viewModel: TagCategoryViewModel
     private let requestTagDataSize = 12
     private var requestTime = 0
-    private var requestTagDataPageNumber: Int {
-        return requestTagDataSize * requestTime
-    }
-    private var viewAppeard = false
-    private var tagCategoryView: TagCategoryView! {
-        return view as? TagCategoryView
+    private var requestTagDataPageNumber: Int { return requestTagDataSize * requestTime }
+    private var viewAppeared = false
+    private var tagImageHeights: [CGFloat] = []
+    private var tagCategoryView: TagCategoryView! { return view as? TagCategoryView  }
+    private var selectedTagIds: [Int] = [] {
+        didSet {
+            if selectedTagIds.count < 1 || selectedTagIds.count > 3 {
+                deactivateButton()
+            } else {
+                activateButton()
+            }
+        }
     }
     
     // MARK: - Intialization
@@ -122,11 +128,20 @@ extension TagCategoryViewController: UICollectionViewDelegateFlowLayout {
         let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right + 10)) / 2
         return CGSize(width: itemSize, height: itemSize)
     }
-}
-
-extension TagCategoryViewController: TagCategoryLayoutDelegate {
-    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
-        return viewModel.tagImages.value[indexPath.item].size.height
+  
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let collectionViewCell = collectionView.cellForItem(at: indexPath) as? TagCategoryCollectionViewCell else { return }
+        self.selectedTagIds.append(collectionViewCell.tagId)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let collectionViewCell = collectionView.cellForItem(at: indexPath) as? TagCategoryCollectionViewCell else { return }
+        self.selectedTagIds = self.selectedTagIds.filter { $0 != collectionViewCell.tagId }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        guard let count = collectionView.indexPathsForSelectedItems?.count else { return true }
+        return count < 3
     }
 }
 
