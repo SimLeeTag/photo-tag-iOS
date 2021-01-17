@@ -69,7 +69,7 @@ struct Endpoint: RequestProviding {
         var urlComponents = URLComponents()
         urlComponents.scheme = "http"
         urlComponents.host = "52.78.129.236"
-        urlComponents.path = path.description
+        urlComponents.path = ":8080" + path.description
         urlComponents.setQueryItems(with: parameters)
         return urlComponents
     }

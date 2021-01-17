@@ -35,7 +35,7 @@ final class NoteNetworkingManager {
         // photo Image Data
         for image in images {
             guard let imageData = image.jpegData(compressionQuality: 0.1) else { return }
-            httpBody.append(convertFileData(fieldName: "file", fileName: "\(Date())_photo.jpg", mimeType: "multipart/form-data", fileData: imageData, using: boundary))
+            httpBody.append(convertFileData(fieldName: "file", fileName: "photo.jpg", mimeType: "multipart/form-data", fileData: imageData, using: boundary))
         }
         httpBody.appendString("--\(boundary)--")  // add final boundary with the two trailing dashes
         request.httpBody = httpBody as Data

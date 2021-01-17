@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Tag: Codable, Hashable {
+struct Tag: Codable {
     var thumbnail: String
     let frequency, tagID: Int
     let activated: Bool
