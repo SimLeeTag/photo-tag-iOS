@@ -12,6 +12,16 @@ final class TagCategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var latestImageView: UIImageView!
     @IBOutlet weak var tagNameLabel: UILabel!
     @IBOutlet weak var noteCountLabel: UILabel!
+    @IBOutlet weak var cellContentView: UIView!
+    @IBOutlet weak var contentStackView: UIStackView!
+    override var isSelected: Bool {
+        didSet{
+            self.layer.cornerRadius = 5
+            cellContentView.backgroundColor = isSelected ? #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1).withAlphaComponent(0.5) : .clear
+            self.contentView.backgroundColor = .clear
+            self.backgroundColor = .clear
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

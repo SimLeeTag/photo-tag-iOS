@@ -20,14 +20,20 @@ final class TagCategoryViewController: UIViewController {
     private let viewModel: TagCategoryViewModel
     private let requestTagDataSize = 12
     private var requestTime = 0
-    private var requestTagDataPageNumber: Int {
-        return requestTagDataSize * requestTime
-    }
+    private var requestTagDataPageNumber: Int { return requestTagDataSize * requestTime }
     private var viewAppeared = false
     private var tagImageHeights: [CGFloat] = []
-    private var tagCategoryView: TagCategoryView! {
-        return view as? TagCategoryView
+    private var selectedTagIds: [Int] = [] {
+        didSet {
+            if selectedTagIds.count > 0 || selectedTagIds.count > 3 {
+                activateButton()
+            } else {
+                deactivateButton()
+            }
+        }
     }
+    
+    private var tagCategoryView: TagCategoryView! { return view as? TagCategoryView  }
     
     // MARK: - Intialization
     //TODO:- add viewModel as parameter
@@ -47,7 +53,6 @@ final class TagCategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        //        setupNotification()
         fetchTags()
         configure()
         viewAppeared = true
@@ -95,7 +100,8 @@ final class TagCategoryViewController: UIViewController {
     
     private func fetchTags() {
         if viewAppeared {
-            viewModel.fetchTags(size: requestTagDataSize, page: requestTagDataPageNumber) { fetchedViewModel in
+            viewModel.fetchTags(size: requestTagDataSize,
+                                page: requestTagDataPageNumber) { fetchedViewModel in
                 self.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
                 self.updateTags()
             }
@@ -114,6 +120,17 @@ final class TagCategoryViewController: UIViewController {
         }
     }
     
+    private func activateButton() {
+        tagCategoryView.moveToPhotoListButton.isUserInteractionEnabled = true
+        tagCategoryView.moveToPhotoListButton.backgroundColor = UIColor.keyColorInLightMode
+        tagCategoryView.moveToPhotoListButton.setTitleColor(.white, for: .normal)
+    }
+    
+    private func deactivateButton() {
+        tagCategoryView.moveToPhotoListButton.isUserInteractionEnabled = false
+        tagCategoryView.moveToPhotoListButton.backgroundColor = UIColor.lightGray
+        tagCategoryView.moveToPhotoListButton.setTitleColor(.black, for: .normal)
+    }
 }
 
 extension TagCategoryViewController: TagCategoryViewDelegate {
@@ -131,6 +148,20 @@ extension TagCategoryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right + 10)) / 2
         return CGSize(width: itemSize, height: itemSize)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let collectionViewCell = collectionView.dequeueReusableCell(with: TagCategoryCollectionViewCell.self, for: indexPath)
+        self.selectedTagIds.append(indexPath.item)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let collectionViewCell = collectionView.dequeueReusableCell(with: TagCategoryCollectionViewCell.self, for: indexPath)
+        self.selectedTagIds = self.selectedTagIds.filter { $0 != indexPath.item }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return (collectionView.indexPathsForSelectedItems?.count ?? 0) < 4
     }
 }
 

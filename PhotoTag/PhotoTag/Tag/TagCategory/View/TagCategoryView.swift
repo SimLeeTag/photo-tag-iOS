@@ -113,9 +113,10 @@ private extension TagCategoryView {
             let button = UIButton()
             button.setTitle(TagCategoryViewConstant.goButtonTitle, for: .normal)
             button.clipsToBounds = false
+            button.isUserInteractionEnabled = false
             button.layer.cornerRadius = .ten
-            button.backgroundColor = UIColor.keyColorInLightMode
-            button.setTitleColor(.white, for: .normal)
+            button.backgroundColor = UIColor.lightGray
+            button.setTitleColor(.black, for: .normal)
             return button
         }
         
@@ -125,6 +126,7 @@ private extension TagCategoryView {
             collectionView.register(cellType: TagCategoryCollectionViewCell.self)
             collectionView.contentInset = UIEdgeInsets(top: 23, left: 16, bottom: 10, right: 16)
             collectionView.backgroundColor = .clear
+            collectionView.allowsMultipleSelection = true
             return collectionView
         }
         
