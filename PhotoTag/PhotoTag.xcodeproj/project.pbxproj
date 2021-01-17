@@ -118,6 +118,7 @@
 		6AC93F4A25B2D87A00882A12 /* PhotoNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEB5549259CB2640044699D /* PhotoNoteViewModel.swift */; };
 		6AC93F4D25B2D88000882A12 /* NoteNetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0A216725AAC158009D56DE /* NoteNetworkingManager.swift */; };
 		6AC93F5025B2D88400882A12 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7BB41825A0B111009D7F51 /* NoteViewController.swift */; };
+		6AC93F5425B3F74A00882A12 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC93F5325B3F74A00882A12 /* Array.swift */; };
 		6ACCADBD256E28BE00072290 /* Hashtags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACCADBC256E28BE00072290 /* Hashtags.swift */; };
 		6AD3ED5D25519F5700F8EF61 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD3ED5C25519F5700F8EF61 /* URLRequest.swift */; };
 		6AD3ED6225519F9E00F8EF61 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD3ED6125519F9E00F8EF61 /* NetworkManager.swift */; };
@@ -221,6 +222,7 @@
 		6AB83AF325442B370065B698 /* TagCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCoordinator.swift; sourceTree = "<group>"; };
 		6AB83AF825442C030065B698 /* TagCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCategoryViewController.swift; sourceTree = "<group>"; };
 		6AC73CF625A9DE7F00118E4D /* NoteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteViewController.xib; sourceTree = "<group>"; };
+		6AC93F5325B3F74A00882A12 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		6ACCADBC256E28BE00072290 /* Hashtags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hashtags.swift; sourceTree = "<group>"; };
 		6AD3ED5C25519F5700F8EF61 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		6AD3ED6125519F9E00F8EF61 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 				6AD3ED5C25519F5700F8EF61 /* URLRequest.swift */,
 				6AAB872125849A1B00D1F3B1 /* NotificationName.swift */,
 				6AEC28AD259223CC00D0634A /* URLComponents.swift */,
+				6AC93F5325B3F74A00882A12 /* Array.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -836,6 +839,7 @@
 				6A87E25E258C7B4000896BD6 /* MockTags.swift in Sources */,
 				6A4F23F72546EC8A00577718 /* PhotoNoteListViewController.swift in Sources */,
 				6A5544DC2559B3BB003F3864 /* ContentView.swift in Sources */,
+				6AC93F5425B3F74A00882A12 /* Array.swift in Sources */,
 				6A0A216825AAC158009D56DE /* NoteNetworkingManager.swift in Sources */,
 				6A63BA1A255C1ED40096A0F7 /* TagManagementTableViewDataSource.swift in Sources */,
 				6A343C7B25735C7000146AAF /* Observable.swift in Sources */,
