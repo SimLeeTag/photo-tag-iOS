@@ -52,9 +52,9 @@ final class TagCategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        fetchTags()
         configure()
-        viewAppeared = true
+        fetchTags()
+        viewAppeard = true
     }
     
     // MARK: - Functions
@@ -98,38 +98,18 @@ final class TagCategoryViewController: UIViewController {
     }
     
     private func fetchTags() {
-        if viewAppeared {
-            viewModel.fetchTags(size: requestTagDataSize,
-                                page: requestTagDataPageNumber) { fetchedViewModel in
-                self.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
-                self.updateTags()
-            }
+        viewModel.fetchTags(size: requestTagDataSize, page: requestTagDataPageNumber) { fetchedViewModel in
+            self.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
+            self.updateTags()
         }
-    }
-    
-    private func saveTagImageHeight(_ images: [UIImage]) {
-        let heights = images.map {$0.size.height}
-        tagImageHeights.append(contentsOf: heights)
     }
     
     private func updateTags() {
         DispatchQueue.main.async {
-            self.view.layoutIfNeeded()
             self.tagCategoryView.tagCategoryCollectionView.reloadData()
         }
     }
     
-    private func activateButton() {
-        tagCategoryView.moveToPhotoListButton.isUserInteractionEnabled = true
-        tagCategoryView.moveToPhotoListButton.backgroundColor = UIColor.keyColorInLightMode
-        tagCategoryView.moveToPhotoListButton.setTitleColor(.white, for: .normal)
-    }
-    
-    private func deactivateButton() {
-        tagCategoryView.moveToPhotoListButton.isUserInteractionEnabled = false
-        tagCategoryView.moveToPhotoListButton.backgroundColor = UIColor.lightGray
-        tagCategoryView.moveToPhotoListButton.setTitleColor(.black, for: .normal)
-    }
 }
 
 extension TagCategoryViewController: TagCategoryViewDelegate {
@@ -138,7 +118,6 @@ extension TagCategoryViewController: TagCategoryViewDelegate {
     }
     
     func moveToPhotoListButtonDidTouched(_ tagCategoryView: TagCategoryView) {
-        UserDefaults.standard.set(selectedTagIds, forKey: UserDefaultKey.selectedTagIds)
         navigateToPhotoNoteList()
     }
     
@@ -149,7 +128,7 @@ extension TagCategoryViewController: UICollectionViewDelegateFlowLayout {
         let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right + 10)) / 2
         return CGSize(width: itemSize, height: itemSize)
     }
-    
+  
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let collectionViewCell = collectionView.cellForItem(at: indexPath) as? TagCategoryCollectionViewCell else { return }
         self.selectedTagIds.append(collectionViewCell.tagId)
@@ -168,7 +147,7 @@ extension TagCategoryViewController: UICollectionViewDelegateFlowLayout {
 
 extension TagCategoryViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if viewAppeared {
+        if viewAppeard {
             let yOffset = scrollView.contentOffset.y
             let contentHeight = scrollView.contentSize.height
             if yOffset > contentHeight - scrollView.frame.height {
@@ -176,11 +155,5 @@ extension TagCategoryViewController: UIScrollViewDelegate {
                 updateRequestTime()
             }
         }
-    }
-}
-
-extension TagCategoryViewController: TagCategoryLayoutDelegate {
-    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
-        return self.viewModel.tagImages.value[indexPath.item].size.height
     }
 }
