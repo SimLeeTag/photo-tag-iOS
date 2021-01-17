@@ -23,6 +23,7 @@ final class TagCategoryViewController: UIViewController {
     private var requestTagDataPageNumber: Int { return requestTagDataSize * requestTime }
     private var viewAppeared = false
     private var tagImageHeights: [CGFloat] = []
+    private var tagCategoryView: TagCategoryView! { return view as? TagCategoryView  }
     private var selectedTagIds: [Int] = [] {
         didSet {
             if selectedTagIds.count > 0 || selectedTagIds.count > 3 {
@@ -32,8 +33,6 @@ final class TagCategoryViewController: UIViewController {
             }
         }
     }
-    
-    private var tagCategoryView: TagCategoryView! { return view as? TagCategoryView  }
     
     // MARK: - Intialization
     //TODO:- add viewModel as parameter
@@ -139,6 +138,7 @@ extension TagCategoryViewController: TagCategoryViewDelegate {
     }
     
     func moveToPhotoListButtonDidTouched(_ tagCategoryView: TagCategoryView) {
+        UserDefaults.standard.set(selectedTagIds, forKey: UserDefaultKey.selectedTagIds)
         navigateToPhotoNoteList()
     }
     
@@ -152,12 +152,12 @@ extension TagCategoryViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let collectionViewCell = collectionView.dequeueReusableCell(with: TagCategoryCollectionViewCell.self, for: indexPath)
-        self.selectedTagIds.append(indexPath.item)
+        self.selectedTagIds.append(collectionViewCell.tagId)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let collectionViewCell = collectionView.dequeueReusableCell(with: TagCategoryCollectionViewCell.self, for: indexPath)
-        self.selectedTagIds = self.selectedTagIds.filter { $0 != indexPath.item }
+        self.selectedTagIds = self.selectedTagIds.filter { $0 != collectionViewCell.tagId }
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
