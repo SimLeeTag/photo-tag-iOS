@@ -47,9 +47,10 @@ final class TagCategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        //        setupNotification()
+        fetchTags()
         configure()
         viewAppeared = true
-        fetchTags()
     }
     
     // MARK: - Functions
@@ -95,21 +96,15 @@ final class TagCategoryViewController: UIViewController {
     private func fetchTags() {
         if viewAppeared {
             viewModel.fetchTags(size: requestTagDataSize, page: requestTagDataPageNumber) { fetchedViewModel in
-                // fetch images here to determine cell heights in custom layout (TagCategoryLayoutDelegate)
-                self.viewModel.fetchTagImage(with: fetchedViewModel.tags.value) { [self] tagImages in
-                    fetchedViewModel.tagImages.value.append(contentsOf: tagImages)
-                    fetchedViewModel.tagImages.value = Array(Set(fetchedViewModel.tagImages.value)) // remove duplicate values
-                    self.saveTagImageHeight(tagImages)
-                    self.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
-                    self.updateTags()
-                }
+                self.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
+                self.updateTags()
             }
         }
     }
-        
+    
     private func saveTagImageHeight(_ images: [UIImage]) {
         let heights = images.map {$0.size.height}
-        tagImageHeights.append(contentsOf: Array(Set(heights)))
+        tagImageHeights.append(contentsOf: heights)
     }
     
     private func updateTags() {
@@ -154,6 +149,6 @@ extension TagCategoryViewController: UIScrollViewDelegate {
 
 extension TagCategoryViewController: TagCategoryLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
-        return self.tagImageHeights[indexPath.item]
+        return self.viewModel.tagImages.value[indexPath.item].size.height
     }
 }
