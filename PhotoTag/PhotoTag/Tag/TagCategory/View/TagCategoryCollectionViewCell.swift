@@ -29,6 +29,14 @@ final class TagCategoryCollectionViewCell: UICollectionViewCell {
         self.backgroundColor = .white
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        latestImageView.image = nil
+        tagNameLabel.text = ""
+        noteCountLabel.text = ""
+        tagId = 0
+    }
+    
     func updateTagId(_ id: Int) {
         self.tagId = id
     }

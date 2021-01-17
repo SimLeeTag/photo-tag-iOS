@@ -26,10 +26,10 @@ final class TagCategoryViewController: UIViewController {
     private var tagCategoryView: TagCategoryView! { return view as? TagCategoryView  }
     private var selectedTagIds: [Int] = [] {
         didSet {
-            if selectedTagIds.count > 0 || selectedTagIds.count > 3 {
-                activateButton()
-            } else {
+            if selectedTagIds.count < 1 || selectedTagIds.count > 3 {
                 deactivateButton()
+            } else {
+                activateButton()
             }
         }
     }
@@ -151,12 +151,12 @@ extension TagCategoryViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let collectionViewCell = collectionView.dequeueReusableCell(with: TagCategoryCollectionViewCell.self, for: indexPath)
+        guard let collectionViewCell = collectionView.cellForItem(at: indexPath) as? TagCategoryCollectionViewCell else { return }
         self.selectedTagIds.append(collectionViewCell.tagId)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let collectionViewCell = collectionView.dequeueReusableCell(with: TagCategoryCollectionViewCell.self, for: indexPath)
+        guard let collectionViewCell = collectionView.cellForItem(at: indexPath) as? TagCategoryCollectionViewCell else { return }
         self.selectedTagIds = self.selectedTagIds.filter { $0 != collectionViewCell.tagId }
     }
     
