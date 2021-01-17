@@ -25,6 +25,8 @@ final class TagCategoryCollectionViewDataSource: NSObject, UICollectionViewDataS
         bind(with: collectionViewCell)
         let tagInCurrentPosition = indexPath.item
         if !viewModel.tags.value.isEmpty && !viewModel.tagImageUrls.value.isEmpty {
+            let id = viewModel.tags.value[tagInCurrentPosition].tagID
+            collectionViewCell.updateTagId(id)
             collectionViewCell.fill(with: self.viewModel.tags.value[tagInCurrentPosition])
             viewModel.fetchTagImage(with: viewModel.tagImageUrls.value[tagInCurrentPosition]) { cellImage in
                 collectionViewCell.fillImage(with: cellImage)

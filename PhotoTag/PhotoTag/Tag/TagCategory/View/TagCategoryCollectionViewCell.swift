@@ -14,6 +14,7 @@ final class TagCategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var noteCountLabel: UILabel!
     @IBOutlet weak var cellContentView: UIView!
     @IBOutlet weak var contentStackView: UIStackView!
+    private(set) var tagId: Int = 0
     override var isSelected: Bool {
         didSet{
             self.layer.cornerRadius = 5
@@ -25,6 +26,10 @@ final class TagCategoryCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    func updateTagId(_ id: Int) {
+        self.tagId = id
     }
     
     func fill(with tag: Tag) {
