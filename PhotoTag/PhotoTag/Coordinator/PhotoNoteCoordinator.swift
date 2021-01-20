@@ -10,12 +10,12 @@ import UIKit
 final class PhotoNoteCoordinator: ChildCoordinator {
     
     override func start() {
-        let photoNoteListViewController = appViewControllerFactory.photoNoteListViewController(coordinator: self)
+        let photoNoteListViewController = appViewControllerFactory.photoNoteListViewController(coordinator: self, viewModel: PhotoNoteListViewModel())
         navigationController.pushViewController(photoNoteListViewController, animated: true)
     }
     
     func navigateToPhotoNoteList() {
-        let photoNoteListViewController = appViewControllerFactory.photoNoteListViewController(coordinator: self)
+        let photoNoteListViewController = appViewControllerFactory.photoNoteListViewController(coordinator: self, viewModel: PhotoNoteListViewModel())
         navigationController.pushViewController(photoNoteListViewController, animated: true)
     }
     
