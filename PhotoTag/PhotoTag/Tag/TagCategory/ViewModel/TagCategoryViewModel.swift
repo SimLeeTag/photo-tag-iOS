@@ -12,45 +12,43 @@ final class TagCategoryViewModel {
     
     let tagNetworkManager = TagNetworkingManager()
     let title = Observable("Tags")
-    let tagImages: Observable<[UIImage]> = Observable([])
     let buttonText = Observable("Select Tag")
     let imageLoadTaskManager = ImageLoadTaskManager()
     private(set) var tags: Observable<[Tag]> = Observable([])
+    private(set) var tagImages: Observable<[UIImage]> = Observable([])
+    private(set) var tagImageUrls: Observable<[String]> = Observable([])
     
     func fetchTags(size: Int, page: Int, completionHandler: @escaping (TagCategoryViewModel) -> Void) {
         tagNetworkManager.fetchTags(size: size, page: page) { tags in
             guard let hashtags = tags else { return }
-            self.updateTags(with: hashtags)
-            self.updateTagImages(with: hashtags) { viewModelWithImages in
-                completionHandler(viewModelWithImages)
+            self.appendTags(with: hashtags)
+            self.appendTagImageUrls(with: hashtags)
+            for url in self.tagImageUrls.value {
+                guard let url = URL(string: url) else { return }
+                self.imageLoadTaskManager.fetchImage(with: url) { image in
+                    guard let newImage = image else { return }
+                    self.tagImages.value.append(newImage)
+                }
             }
+            completionHandler(self)
         }
     }
     
-    func updateTags(with hashtags: [Tag]) {
+    func fetchTagImage(with url: String, completionHandler: @escaping (UIImage) -> Void) {
+        guard let imageUrl = URL(string: url) else { return }
+        self.imageLoadTaskManager.fetchImage(with: imageUrl) { image in
+            guard let newImage = image else { return }
+            completionHandler(newImage)
+        }
+    }
+    
+    private func appendTags(with hashtags: [Tag]) {
         self.tags.value.append(contentsOf: hashtags)
+        self.tags.value = self.tags.value.uniques // remove duplicate values
     }
     
-    func updateTagImages(with hashtags: [Tag], completionHandler: @escaping (TagCategoryViewModel) -> Void) {
-        for tag in hashtags {
-            guard let thumbnailUrl = URL(string: tag.thumbnail) else { debugPrint("Invalid thumbnail Url."); return }
-            self.fetchTagImage(with: thumbnailUrl) { tagImage in
-                self.tagImages.value.append(tagImage)
-                completionHandler(self)
-            }
-        }
-    }
-    
-    func addImage(newImage: UIImage) {
-        tagImages.value.append(newImage)
-    }
-}
-
-extension TagCategoryViewModel {
-    func fetchTagImage(with url: URL, completionHandler: @escaping (UIImage) -> Void) {
-        imageLoadTaskManager.fetchImage(with: url) { imageData in
-            guard let data = imageData, let image = UIImage(data: data) else { return }
-            completionHandler(image)
-        }
+    private func appendTagImageUrls(with hashtags: [Tag]) {
+        let tagImagesUrls = hashtags.map({$0.thumbnail})
+        self.tagImageUrls.value.append(contentsOf: tagImagesUrls)
     }
 }
