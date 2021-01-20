@@ -11,6 +11,21 @@ import UIKit.UIImage
 
 final class NoteNetworkingManager {
     
+    // fetch notes list
+    func fetchNoteList(tagIds: [Int],
+                       completionHandler: @escaping ([PhotoNote]?) -> Void) {
+        UseCase.shared
+            .request(type: [PhotoNote].self,
+                     urlComponents: Endpoint.fetchPhotoList(tagIds: tagIds), method: .get)
+            .receive(subscriber: Subscribers.Sink(receiveCompletion: { [ weak self ] in
+                guard case let .failure(error) = $0 else { return }
+                debugPrint(error.localizedDescription)
+            }, receiveValue: { [ weak self ] data in
+                completionHandler(data)
+            }))
+    }
+    
+    // create note
     func createNote(with text: String,
                     images: [UIImage],
                     completion: @escaping(Bool) -> Void) {

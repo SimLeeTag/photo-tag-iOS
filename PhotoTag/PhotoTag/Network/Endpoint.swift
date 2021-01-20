@@ -22,6 +22,7 @@ struct Endpoint: RequestProviding {
         case patchHashtags
         case fetchTagCategory
         case createNote
+        case fetchPhotoList
         
         var description: String {
             switch self {
@@ -30,6 +31,7 @@ struct Endpoint: RequestProviding {
             case .patchHashtags: return "/tags/"
             case .fetchTagCategory: return "/tags/explore"
             case .createNote: return "/notes"
+            case .fetchPhotoList: return "/tags"
             }
         }
     }
@@ -57,20 +59,27 @@ struct Endpoint: RequestProviding {
     }
     
     static func tagCategoryFetch(withSize: Int, page: Int) -> URLComponents {
-        let queryParams: [String: String] = [
-            "size": "\(withSize)",
-            "page": "\(page)",
-            "sort": "tagName"
-        ]
+        let queryParams =
+            [ URLQueryItem(name: "size", value: "\(withSize)"),
+              URLQueryItem(name: "page", value: "\(page)"),
+              URLQueryItem(name: "sort", value: "tagName") ]
         return makeURL(with: queryParams, path: .fetchTagCategory)
     }
     
-    static func makeURL(with parameters: [String: String], path: Path) -> URLComponents {
+    static func fetchPhotoList(tagIds: [Int]) -> URLComponents {
+        var queryItems = [URLQueryItem]()
+        for tagId in tagIds {
+            queryItems.append(URLQueryItem(name: "tag", value: "\(tagId)"))
+        }
+        return makeURL(with: queryItems, path: .fetchPhotoList)
+    }
+    
+    static func makeURL(with parameters: [URLQueryItem], path: Path) -> URLComponents {
         var urlComponents = URLComponents()
         urlComponents.scheme = "http"
         urlComponents.host = "52.78.129.236"
         urlComponents.path = path.description
-        urlComponents.setQueryItems(with: parameters)
+        urlComponents.queryItems = parameters
         return urlComponents
     }
 }
