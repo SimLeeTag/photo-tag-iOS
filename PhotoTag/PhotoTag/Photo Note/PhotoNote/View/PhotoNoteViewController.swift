@@ -9,7 +9,7 @@ import UIKit
 import YPImagePicker
 
 enum NoteState {
-    case creating, editing
+    case creating, reading
 }
 
 class PhotoNoteViewController: UIViewController {
@@ -61,7 +61,7 @@ class PhotoNoteViewController: UIViewController {
     }
     
     @IBAction func backButtonTapped(_ sender: Any) {
-        coordinator?.navigateToPhotoNoteList()
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func setupView() {
@@ -77,7 +77,7 @@ class PhotoNoteViewController: UIViewController {
     private func presentNoteViewForWriting() {
         switch noteState {
         case .creating: presentNoteWritingScene()
-        case .editing: break
+        case .reading: break
         }
     }
     

@@ -71,10 +71,10 @@ final class PhotoNoteListView: ContentViewWithHeader {
         headerStackView.pinLeading(to: contentView.leadingAnchor, offset: .ten)
         headerStackView.pinTrailing(to: contentView.trailingAnchor, offset: .ten)
         selectedTagsStackView.pinWidth(to: contentView.widthAnchor, multiplier: .zeroPointEight)
-        photoNoteListTableView.pinTop(to: headerStackView.bottomAnchor)
-        photoNoteListTableView.pinLeading(to: contentView.leadingAnchor)
-        photoNoteListTableView.pinTrailing(to: contentView.trailingAnchor)
-        photoNoteListTableView.pinBottom(to: contentView.bottomAnchor)
+        photoNoteListTableView.pinTop(to: headerStackView.bottomAnchor, offset: 10)
+        photoNoteListTableView.pinLeading(to: contentView.leadingAnchor, offset: 16)
+        photoNoteListTableView.pinTrailing(to: contentView.trailingAnchor, offset: -16)
+        photoNoteListTableView.pinBottom(to: contentView.bottomAnchor, offset: -10)
     }
     
     @objc private func leftSwipeDidBegin() {
@@ -119,8 +119,11 @@ private extension PhotoNoteListView {
             let tableView = UITableView()
             tableView.register(cellType: PhotoNoteListOneImageTableViewCell.self)
             tableView.register(cellType: PhotoNoteListThreeImageTableViewCell.self)
+            tableView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             tableView.backgroundColor = .clear
             tableView.allowsMultipleSelection = false
+            tableView.showsVerticalScrollIndicator = false
+            tableView.showsHorizontalScrollIndicator = false
             return tableView
         }
     }
