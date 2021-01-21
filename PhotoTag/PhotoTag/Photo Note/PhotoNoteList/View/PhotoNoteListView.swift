@@ -20,6 +20,7 @@ final class PhotoNoteListView: ContentViewWithHeader {
     @UsesAutoLayout private(set) var firstTagLabel = SubviewFactory.tagLabel()
     @UsesAutoLayout private(set) var secondTagLabel = SubviewFactory.tagLabel()
     @UsesAutoLayout private(set) var thirdTagLabel = SubviewFactory.tagLabel()
+    @UsesAutoLayout var photoNoteListTableView = SubviewFactory.photoNoteListTableView()
     weak var delegate: PhotoNoteListViewDelegate?
     
     // MARK: - Intialization
@@ -58,16 +59,22 @@ final class PhotoNoteListView: ContentViewWithHeader {
     
     override func configureContentView() {
         contentView.addSubview(headerStackView)
+        contentView.addSubview(photoNoteListTableView)
     }
     
     override func setupLayout() {
+        headerStackView.pinHeight(to: self.heightAnchor, multiplier: 0.1)
         contentView.pinEdges(to: self)
         headerStackView.alignment = .fill
         headerStackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         headerStackView.pinTop(to: self.safeAreaLayoutGuide.topAnchor, offset: .twenty)
         headerStackView.pinLeading(to: contentView.leadingAnchor, offset: .ten)
         headerStackView.pinTrailing(to: contentView.trailingAnchor, offset: .ten)
-        selectedTagsStackView.pinWidth(to: self.widthAnchor, multiplier: .zeroPointEight)
+        selectedTagsStackView.pinWidth(to: contentView.widthAnchor, multiplier: .zeroPointEight)
+        photoNoteListTableView.pinTop(to: headerStackView.bottomAnchor, offset: 10)
+        photoNoteListTableView.pinLeading(to: contentView.leadingAnchor, offset: 16)
+        photoNoteListTableView.pinTrailing(to: contentView.trailingAnchor, offset: -16)
+        photoNoteListTableView.pinBottom(to: contentView.bottomAnchor, offset: -10)
     }
     
     @objc private func leftSwipeDidBegin() {
@@ -106,6 +113,17 @@ private extension PhotoNoteListView {
             button.layer.cornerRadius = .ten
             button.setTitleColor(.black, for: .normal)
             return button
+        }
+        
+        static func photoNoteListTableView() -> UITableView {
+            let tableView = UITableView()
+            tableView.register(cellType: PhotoNoteListOneImageTableViewCell.self)
+            tableView.register(cellType: PhotoNoteListThreeImageTableViewCell.self)
+            tableView.backgroundColor = .clear
+            tableView.allowsMultipleSelection = false
+            tableView.showsVerticalScrollIndicator = false
+            tableView.showsHorizontalScrollIndicator = false
+            return tableView
         }
     }
 }

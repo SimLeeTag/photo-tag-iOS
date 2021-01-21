@@ -23,8 +23,8 @@ struct AppViewControllersFactory {
         return tagManagementViewController
     }
     
-    func photoNoteListViewController(coordinator: PhotoNoteCoordinator) -> UIViewController {
-        return PhotoNoteListViewController(coordinator: coordinator)
+    func photoNoteListViewController(coordinator: PhotoNoteCoordinator, viewModel: PhotoNoteListViewModel) -> UIViewController {
+        return PhotoNoteListViewController(coordinator: coordinator, viewModel: viewModel)
     }
     
     func selectPhotoViewController(coordinator: PhotoNoteCoordinator) -> UIViewController {
@@ -36,7 +36,7 @@ struct AppViewControllersFactory {
         return noteViewController
     }
     
-    func photoNoteViewController(coordinator: PhotoNoteCoordinator, viewModel: PhotoNoteViewModel, isCreatingMode: Bool) -> UIViewController {
+    func photoNoteViewController(coordinator: PhotoNoteCoordinator, viewModel: PhotoNoteViewModel, isCreatingMode: NoteState) -> UIViewController {
         return PhotoNoteViewController(coordinator: coordinator, viewModel: viewModel, isCreating: isCreatingMode)
     }
     

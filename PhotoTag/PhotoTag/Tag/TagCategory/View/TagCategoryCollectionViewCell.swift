@@ -48,7 +48,7 @@ final class TagCategoryCollectionViewCell: UICollectionViewCell {
     
     func fillImage(with image: UIImage?) {
         DispatchQueue.main.async {
-            self.latestImageView.contentMode = .scaleToFill
+            self.latestImageView.contentMode = .scaleAspectFill
             if image == nil {
                 self.latestImageView.image = #imageLiteral(resourceName: "logo") // if there is no image, set default image
             }

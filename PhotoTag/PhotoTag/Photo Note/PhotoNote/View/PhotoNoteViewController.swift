@@ -8,6 +8,10 @@
 import UIKit
 import YPImagePicker
 
+enum NoteState {
+    case creating, reading
+}
+
 class PhotoNoteViewController: UIViewController {
     
     weak var coordinator: PhotoNoteCoordinator?
@@ -22,14 +26,14 @@ class PhotoNoteViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var imagePageControl: UIPageControl!
     @IBOutlet weak var imageHorizontalScrollView: UIScrollView!
-    private var isCreating: Bool
+    private var noteState: NoteState
     private var noteContentText: String = ""
     private let noteNetworkManager = NoteNetworkingManager()
     
-    init(coordinator: PhotoNoteCoordinator, viewModel: PhotoNoteViewModel, isCreating: Bool) {
+    init(coordinator: PhotoNoteCoordinator, viewModel: PhotoNoteViewModel, isCreating: NoteState) {
         self.coordinator = coordinator
         self.viewModel = viewModel
-        self.isCreating = isCreating
+        self.noteState = isCreating
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -57,7 +61,7 @@ class PhotoNoteViewController: UIViewController {
     }
     
     @IBAction func backButtonTapped(_ sender: Any) {
-        coordinator?.navigateToPhotoNoteList()
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func setupView() {
@@ -67,9 +71,18 @@ class PhotoNoteViewController: UIViewController {
         setupPageControl()
         displayPhotos()
         displayDate()
-        if isCreating {
-            presentNoteWritingScene()
+        presentNoteViewForWriting()
+    }
+    
+    private func presentNoteViewForWriting() {
+        switch noteState {
+        case .creating: presentNoteWritingScene()
+        case .reading: break
         }
+    }
+    
+    private func presentNoteViewForEditing() {
+
     }
     
     private func setupNotification() {
@@ -127,9 +140,10 @@ class PhotoNoteViewController: UIViewController {
     }
     
     @objc private func presentNoteWritingScene() {
-        if isCreating {
+        if noteState == .creating {
             coordinator?.navigateToWritePhotoNote(with: noteContentText)
         }
+        
     }
     @objc func saveNoteText(_ notification: Notification) {
         guard let content = notification.userInfo?[NoteViewController.contentTextKey] as? String else { return }

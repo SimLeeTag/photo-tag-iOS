@@ -40,8 +40,9 @@ final class TagNetworkingManager {
     }
     
     // MARK: - Tag Category
-    func fetchTags(size: Int, page: Int,
-                            completionHandler: @escaping ([Tag]?) -> Void) {
+    func fetchTags(size: Int,
+                   page: Int,
+                   completionHandler: @escaping ([Tag]?) -> Void) {
         UseCase.shared
             .request(type: [Tag].self, urlComponents: Endpoint.tagCategoryFetch(withSize: size, page: page), method: .get)
             .receive(subscriber: Subscribers.Sink(receiveCompletion: { [ weak self ] in

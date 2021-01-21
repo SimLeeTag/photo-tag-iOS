@@ -12,6 +12,7 @@ class PhotoNoteViewModel {
     
     private(set) var selectedImages: [UIImage]
     var date: Date?
+    var noteContentText: String?
     
     init(with selectedItems: [UIImage]) {
         self.selectedImages = selectedItems
