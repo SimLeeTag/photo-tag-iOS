@@ -119,7 +119,6 @@ private extension PhotoNoteListView {
             let tableView = UITableView()
             tableView.register(cellType: PhotoNoteListOneImageTableViewCell.self)
             tableView.register(cellType: PhotoNoteListThreeImageTableViewCell.self)
-            tableView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             tableView.backgroundColor = .clear
             tableView.allowsMultipleSelection = false
             tableView.showsVerticalScrollIndicator = false

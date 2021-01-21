@@ -43,9 +43,9 @@ class PhotoNoteListThreeImageTableViewCell: UITableViewCell, NoteListCell {
     
     func fillImages(with images: [UIImage?]) {
         DispatchQueue.main.async {
-            self.biggestImageView.contentMode = .scaleToFill
-            self.rightTopImageView.contentMode = .scaleToFill
-            self.rightbottomImageView.contentMode = .scaleToFill
+            self.biggestImageView.contentMode = .scaleAspectFill
+            self.rightTopImageView.contentMode = .scaleAspectFill
+            self.rightbottomImageView.contentMode = .scaleAspectFill
             self.biggestImageView.image = images[0]
             self.rightTopImageView.image = images[1]
             self.rightbottomImageView.image = images[2]
