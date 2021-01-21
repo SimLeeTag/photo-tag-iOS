@@ -46,6 +46,7 @@ final class PhotoNoteListViewController: UIViewController {
     // MARK: - Functions
     private func configure () {
         hideNavigationBar()
+        photoNoteListView.photoNoteListTableView.delegate = self
         photoNoteListView.photoNoteListTableView.dataSource = dataSource
         photoNoteListView.delegate = self
     }
@@ -102,5 +103,12 @@ extension PhotoNoteListViewController: PhotoNoteListViewDelegate {
     
     func rightSwipeDidBegin(_ photoNoteListView: PhotoNoteListView) {
         navigateToTagCategory()
+    }
+}
+
+extension PhotoNoteListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: - request data from API and pass data through coordinator
+        coordinator?.navigateToPhotoNote(isCreatingMode: .reading)
     }
 }
