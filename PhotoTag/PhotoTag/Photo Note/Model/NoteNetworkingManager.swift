@@ -11,8 +11,10 @@ import UIKit.UIImage
 
 final class NoteNetworkingManager {
     
+    private let decoder: JSONDecoder = .init()
+    
     // fetch notes list
-    func fetchNoteList(tagIds: [Int],
+    func fetchNoteList(tagIds: [TagID],
                        completionHandler: @escaping ([PhotoNote]?) -> Void) {
         UseCase.shared
             .request(type: [PhotoNote].self,
@@ -25,9 +27,20 @@ final class NoteNetworkingManager {
             }))
     }
     
+    func fetchNote(noteId: NoteID,
+                   completionHandler: @escaping (PhotoNote?) -> Void) {
+        UseCase.shared.request(noteId: noteId)
+            .receive(subscriber: Subscribers.Sink(receiveCompletion: { [ weak self ] in
+                guard case let .failure(error) = $0 else { return }
+                debugPrint(error.localizedDescription)
+            }, receiveValue: { [weak self] data in
+                completionHandler(data)
+            }))
+    }
+    
     // create note
-    func createNote(with text: String,
-                    images: [UIImage],
+    func createNote(with text: NoteText,
+                    images: [NoteImage],
                     completion: @escaping(Bool) -> Void) {
         
         let boundary = generateBoundaryString()
@@ -75,6 +88,9 @@ final class NoteNetworkingManager {
         return "Boundary-\(UUID().uuidString)"
     }
     
+}
+
+extension NoteNetworkingManager {
     private func convertFormField(named name: String,
                                   value: String,
                                   using boundary: String) -> String {
@@ -102,23 +118,5 @@ final class NoteNetworkingManager {
         data.appendString("\r\n")
         
         return data as Data
-    }
-}
-
-extension NSMutableData {
-  func appendString(_ string: String) {
-    if let data = string.data(using: .utf8) {
-      self.append(data)
-    }
-  }
-}
-
-extension Date {
- var millisecondsSince1970: Int64 {
-        return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
-    }
-
-    init(milliseconds: Int) {
-        self = Date(timeIntervalSince1970: TimeInterval(milliseconds / 1000))
     }
 }

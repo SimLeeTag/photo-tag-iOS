@@ -21,7 +21,6 @@ final class TagNetworkingManager {
             .receive(subscriber: Subscribers.Sink(receiveCompletion: { [ weak self ] in
                 guard case let .failure(error) = $0 else { return }
                 debugPrint(error.localizedDescription)
-                // TODO: - present alertController
             }, receiveValue: { [weak self] data in
                 completionHandler(data)
             }))

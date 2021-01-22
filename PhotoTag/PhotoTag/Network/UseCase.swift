@@ -38,6 +38,18 @@ struct UseCase {
             .eraseToAnyPublisher()
     }
     
+    // fetch note
+    func request(_ network: NetworkConnectable = NetworkManager.shared,
+                   noteId: NoteID) -> AnyPublisher<PhotoNote, Error> {
+        let request = URLRequest(url: Endpoint.noteFetch(noteId: noteId).url!)
+        return network
+            .session
+            .dataTaskPublisher(for: request)
+            .map { $0.data }
+            .decode(type: PhotoNote.self, decoder: decoder)
+            .eraseToAnyPublisher()
+    }
+    
     // send file
     func request(_ network: NetworkConnectable = NetworkManager.shared,
                  request: URLRequest) -> AnyPublisher<HTTPURLResponse, NetworkError> {

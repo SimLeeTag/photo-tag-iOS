@@ -49,7 +49,7 @@ class PhotoNoteViewController: UIViewController {
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         // request to save data to API
-        noteNetworkManager.createNote(with: noteContentText, images: viewModel.selectedImages) { success in
+        noteNetworkManager.createNote(with: noteContentText, images: viewModel.selectedImages.value) { success in
             if success {
                 DispatchQueue.main.async {
                     self.presentAlert()
@@ -69,24 +69,41 @@ class PhotoNoteViewController: UIViewController {
         noteTextView.isEditable = false
         imageHorizontalScrollView.delegate = self
         setupPageControl()
+        bind()
+        presentNoteViewForWriting()
         displayPhotos()
         displayDate()
-        presentNoteViewForWriting()
     }
     
     private func presentNoteViewForWriting() {
         switch noteState {
         case .creating: presentNoteWritingScene()
-        case .reading: break
+        case .reading: presentNoteViewForReading() // request note data to server
         }
     }
     
-    private func presentNoteViewForEditing() {
-
+    private func presentNoteViewForReading() {
+        viewModel.fetchNoteContent { photoNote in
+            self.viewModel.storeFetchedNote(photoNote: photoNote)
+            self.dateLabel.text = "\(photoNote.created)"
+        }
     }
     
     private func setupNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(saveNoteText), name: .writeNote, object: nil)
+    }
+    
+    private func bind() {
+        viewModel.date.bind { [weak self] date in
+            guard let date = date else { return }
+            self?.dateLabel.text = date
+        }
+        
+        viewModel.noteContentText.bind { [weak self] noteText in
+            guard let noteText = noteText else { return }
+            self?.noteContentText = noteText
+        }
+        
     }
     
     private func filterTags(content: String) {
@@ -108,37 +125,6 @@ class PhotoNoteViewController: UIViewController {
         }
     }
     
-    private func displayPhotos() {
-        
-        for i in 0..<viewModel.selectedImages.count {
-            
-            let xPosition = self.view.frame.width * CGFloat(i)
-            
-            if i == 0 {
-                firstImageView.image = viewModel.selectedImages[i]
-                firstImageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
-                
-                imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i)
-            } else {
-                
-                let imageView = newImageView()
-                imageView.image = viewModel.selectedImages[i]
-                
-                imageStackView.addArrangedSubview(imageView)
-                imageView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-                
-                imageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
-                imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i)
-            }
-        }
-        self.view.bringSubviewToFront(imagePageControl)
-    }
-    
-    private func setupPageControl() {
-        imagePageControl.numberOfPages = viewModel.selectedImages.count
-        imagePageControl.currentPage = 0
-    }
-    
     @objc private func presentNoteWritingScene() {
         if noteState == .creating {
             coordinator?.navigateToWritePhotoNote(with: noteContentText)
@@ -158,6 +144,41 @@ class PhotoNoteViewController: UIViewController {
         }
     }
 }
+
+// display images
+extension PhotoNoteViewController {
+    private func displayPhotos() {
+        
+        for i in 0..<viewModel.selectedImages.value.count {
+            
+            let xPosition = self.view.frame.width * CGFloat(i)
+            
+            if i == 0 {
+                firstImageView.image = viewModel.selectedImages.value[i]
+                firstImageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
+                
+                imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i)
+            } else {
+                
+                let imageView = newImageView()
+                imageView.image = viewModel.selectedImages.value[i]
+                
+                imageStackView.addArrangedSubview(imageView)
+                imageView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+                
+                imageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
+                imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i)
+            }
+        }
+        self.view.bringSubviewToFront(imagePageControl)
+    }
+    
+    private func setupPageControl() {
+        imagePageControl.numberOfPages = viewModel.selectedImages.value.count
+        imagePageControl.currentPage = 0
+    }
+}
+
 extension PhotoNoteViewController {
     private func newImageView() -> UIImageView {
         let imageView = UIImageView()
