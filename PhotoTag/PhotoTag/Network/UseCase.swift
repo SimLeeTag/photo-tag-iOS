@@ -41,7 +41,8 @@ struct UseCase {
     // fetch note
     func request(_ network: NetworkConnectable = NetworkManager.shared,
                    noteId: NoteID) -> AnyPublisher<PhotoNote, Error> {
-        let request = URLRequest(url: Endpoint.noteFetch(noteId: noteId).url!)
+        let url = Endpoint.noteFetch(noteId: noteId).url!
+        let request = URLRequest(urlWithToken: url, method: .get)
         return network
             .session
             .dataTaskPublisher(for: request)
