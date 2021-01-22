@@ -27,10 +27,12 @@ class PhotoNoteViewController: UIViewController {
     @IBOutlet weak var imagePageControl: UIPageControl!
     @IBOutlet weak var imageHorizontalScrollView: UIScrollView!
     private var noteState: NoteState
-    private var noteContentText: String = ""
+    private var noteContentText: NoteText = ""
     private let noteNetworkManager = NoteNetworkingManager()
     
-    init(coordinator: PhotoNoteCoordinator, viewModel: PhotoNoteViewModel, isCreating: NoteState) {
+    init(coordinator: PhotoNoteCoordinator,
+         viewModel: PhotoNoteViewModel,
+         isCreating: NoteState) {
         self.coordinator = coordinator
         self.viewModel = viewModel
         self.noteState = isCreating
@@ -69,41 +71,34 @@ class PhotoNoteViewController: UIViewController {
         noteTextView.isEditable = false
         imageHorizontalScrollView.delegate = self
         setupPageControl()
-        bind()
-        presentNoteViewForWriting()
-        displayPhotos()
-        displayDate()
-    }
-    
-    private func presentNoteViewForWriting() {
-        switch noteState {
-        case .creating: presentNoteWritingScene()
-        case .reading: presentNoteViewForReading() // request note data to server
+        presentNoteViewForWriting { [weak self] in
+            // before call displayPhotos function, viewModel.selectedImages should be ready
+            self?.displayPhotos()
+            self?.displayDate()
         }
     }
     
-    private func presentNoteViewForReading() {
+    private func presentNoteViewForWriting(completionHandler: @escaping () -> Void) {
+        switch noteState {
+        case .creating: presentNoteWritingScene { completionHandler() }
+        case .reading: presentNoteViewForReading { completionHandler() }
+        }
+    }
+    
+    private func presentNoteViewForReading(completionHandler: @escaping () -> Void) {
         viewModel.fetchNoteContent { photoNote in
-            self.viewModel.storeFetchedNote(photoNote: photoNote)
-            self.dateLabel.text = "\(photoNote.created)"
+            self.viewModel.storeFetchedNote(photoNote: photoNote) {
+                DispatchQueue.main.async {
+                    self.dateLabel.text = "\(photoNote.created)"
+                        .components(separatedBy: "T").first!
+                    self.noteTextView.text = photoNote.rawMemo }
+            }
+            completionHandler()
         }
     }
     
     private func setupNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(saveNoteText), name: .writeNote, object: nil)
-    }
-    
-    private func bind() {
-        viewModel.date.bind { [weak self] date in
-            guard let date = date else { return }
-            self?.dateLabel.text = date
-        }
-        
-        viewModel.noteContentText.bind { [weak self] noteText in
-            guard let noteText = noteText else { return }
-            self?.noteContentText = noteText
-        }
-        
     }
     
     private func filterTags(content: String) {
@@ -125,11 +120,11 @@ class PhotoNoteViewController: UIViewController {
         }
     }
     
-    @objc private func presentNoteWritingScene() {
+    @objc private func presentNoteWritingScene(completionHandler: () -> Void) {
+        defer { completionHandler()}
         if noteState == .creating {
             coordinator?.navigateToWritePhotoNote(with: noteContentText)
         }
-        
     }
     @objc func saveNoteText(_ notification: Notification) {
         guard let content = notification.userInfo?[NoteViewController.contentTextKey] as? String else { return }
@@ -139,9 +134,7 @@ class PhotoNoteViewController: UIViewController {
     }
     
     private func updateTextViewWithText() {
-        DispatchQueue.main.async {
-            self.noteTextView.text = self.noteContentText
-        }
+        DispatchQueue.main.async { self.noteTextView.text = self.noteContentText }
     }
 }
 
@@ -165,12 +158,13 @@ extension PhotoNoteViewController {
                 
                 imageStackView.addArrangedSubview(imageView)
                 imageView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-                
+                DispatchQueue.main.async {
                 imageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
+                }
                 imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i)
             }
         }
-        self.view.bringSubviewToFront(imagePageControl)
+        DispatchQueue.main.async { self.view.bringSubviewToFront(self.imagePageControl) }
     }
     
     private func setupPageControl() {
@@ -208,7 +202,7 @@ extension PhotoNoteViewController: UIGestureRecognizerDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        presentNoteWritingScene()
+        presentNoteWritingScene {}
     }
 }
 

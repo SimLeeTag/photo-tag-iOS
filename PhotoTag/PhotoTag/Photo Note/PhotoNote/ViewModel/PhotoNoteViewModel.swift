@@ -29,7 +29,7 @@ class PhotoNoteViewModel {
         }
     }
     
-    func storeFetchedNote(photoNote: PhotoNote) {
+    func storeFetchedNote(photoNote: PhotoNote, completionHandler: @escaping() -> Void) {
         self.date.value = "\(photoNote.created)"
         self.noteContentText.value = photoNote.rawMemo
         self.noteImageUrls.value = photoNote.photos
@@ -37,6 +37,8 @@ class PhotoNoteViewModel {
             fetchImages(url: url) { image in
                 self.selectedImages.value.append(image)
             }
+            // TODO: - fix me. should fetch all images in here and then run the handler.
+            if self.selectedImages.value.count == photoNote.photos.count { completionHandler() }
         }
     }
     
