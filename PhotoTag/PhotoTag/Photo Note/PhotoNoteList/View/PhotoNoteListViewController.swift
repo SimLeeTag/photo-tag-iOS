@@ -109,6 +109,7 @@ extension PhotoNoteListViewController: PhotoNoteListViewDelegate {
 extension PhotoNoteListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: - request data from API and pass data through coordinator
-        coordinator?.navigateToPhotoNote(isCreatingMode: .reading)
+        guard let cell = tableView.cellForRow(at: indexPath) as? NoteListCell else { return }
+        coordinator?.navigateToPhotoNote(noteId: cell.noteId, isCreatingMode: .reading)
     }
 }

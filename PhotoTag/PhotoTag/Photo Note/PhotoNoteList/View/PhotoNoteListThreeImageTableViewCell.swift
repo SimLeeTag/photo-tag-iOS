@@ -14,7 +14,7 @@ class PhotoNoteListThreeImageTableViewCell: UITableViewCell, NoteListCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var leftImageCountLabel: UILabel!
-    private(set) var noteId: Int = 0
+    var noteId: NoteID = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()

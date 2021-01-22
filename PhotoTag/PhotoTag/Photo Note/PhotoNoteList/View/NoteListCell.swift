@@ -8,6 +8,7 @@
 import UIKit
 
 protocol NoteListCell {
+    var noteId: NoteID { get set }
     func highlightTag(in note: PhotoNote, _ contentLabel: UILabel)
     func fill(with note: PhotoNote)
 }

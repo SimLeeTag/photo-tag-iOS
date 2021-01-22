@@ -29,8 +29,8 @@ final class PhotoNoteCoordinator: ChildCoordinator {
         navigationController.pushViewController(writePhotoNoteViewController, animated: true)
     }
     
-    func navigateToPhotoNote(with selectedItems: [UIImage] = [], isCreatingMode: NoteState) {
-        let photoNoteViewController = appViewControllerFactory.photoNoteViewController(coordinator: self, viewModel: PhotoNoteViewModel(with: selectedItems), isCreatingMode: isCreatingMode )
+    func navigateToPhotoNote(with selectedItems: [UIImage] = [], noteId: NoteID = 4, isCreatingMode: NoteState) {
+        let photoNoteViewController = appViewControllerFactory.photoNoteViewController(coordinator: self, viewModel: PhotoNoteViewModel(with: selectedItems, noteId: noteId), isCreatingMode: isCreatingMode )
         navigationController.pushViewController(photoNoteViewController, animated: true)
     }
 }
