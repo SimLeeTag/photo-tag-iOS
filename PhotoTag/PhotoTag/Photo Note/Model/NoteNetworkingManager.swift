@@ -27,6 +27,7 @@ final class NoteNetworkingManager {
             }))
     }
     
+    // get selected note data
     func fetchNote(noteId: NoteID,
                    completionHandler: @escaping (PhotoNote?) -> Void) {
         UseCase.shared.request(noteId: noteId)

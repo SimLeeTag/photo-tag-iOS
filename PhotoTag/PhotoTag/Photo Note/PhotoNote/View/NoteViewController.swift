@@ -12,10 +12,10 @@ final class NoteViewController: UIViewController {
     @IBOutlet weak var noteTextView: UITextView!
     weak var coordinator: PhotoNoteCoordinator?
     static let contentTextKey = "contentText"
-    private var contentText: String = ""
+    private var contentText: NoteText = ""
     private var existingText = ""
     
-    init(coordinator: PhotoNoteCoordinator, with text: String) {
+    init(coordinator: PhotoNoteCoordinator, with text: NoteText) {
         self.coordinator = coordinator
         self.existingText = text
         super.init(nibName: nil, bundle: nil)

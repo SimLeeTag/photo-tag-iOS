@@ -12,7 +12,7 @@ final class TagManagementTableViewCell: UITableViewCell {
     @IBOutlet weak var tagNameLabel: UILabel!
     @IBOutlet weak var noteCountLabel: UILabel!
     private var viewModel: TagManagementCellViewModel!
-    private(set) var tagId: Int?
+    private(set) var tagId: TagID?
     
     override func awakeFromNib() {
         super.awakeFromNib()

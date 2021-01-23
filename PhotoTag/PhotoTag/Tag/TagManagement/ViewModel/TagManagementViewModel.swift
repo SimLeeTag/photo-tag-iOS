@@ -36,7 +36,7 @@ final class TagManagementViewModel {
         }
     }
     
-    func updateHashtagState(tagId: Int, willBe state: TagType) {
+    func updateHashtagState(tagId: TagID, willBe state: TagType) {
         let tagState = state == .activated ? true : false
         if tagState { // archived -> activated
             restoreHashtag(with: tagId)
@@ -46,7 +46,7 @@ final class TagManagementViewModel {
         tagNetworkManager.updateHashtagActivatedState(of: tagId, with: HastagState(activated: tagState))
     }
     
-    func restoreHashtag(with tagId: Int) {
+    func restoreHashtag(with tagId: TagID) {
         guard var tag = archivedHashtags.value.filter({ hashtag in
                                                         hashtag.tagID == tagId})
                                                         .first else { return }
@@ -57,7 +57,7 @@ final class TagManagementViewModel {
         
     }
     
-    func archiveHashtag(with tagId: Int) {
+    func archiveHashtag(with tagId: TagID) {
         guard var tag = activatedHashtags.value.filter({ hashtag in
                                                         hashtag.tagID == tagId})
                                                         .first else { return }

@@ -14,7 +14,7 @@ final class TagCategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var noteCountLabel: UILabel!
     @IBOutlet weak var cellContentView: UIView!
     @IBOutlet weak var contentStackView: UIStackView!
-    private(set) var tagId: Int = 0
+    private(set) var tagId: TagID = 0
     override var isSelected: Bool {
         didSet {
             self.layer.cornerRadius = 5
