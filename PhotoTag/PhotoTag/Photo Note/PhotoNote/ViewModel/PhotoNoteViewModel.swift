@@ -29,20 +29,26 @@ class PhotoNoteViewModel {
         }
     }
     
-    func storeFetchedNote(photoNote: PhotoNote, completionHandler: @escaping() -> Void) {
+    func storeFetchedNote(photoNote: PhotoNote) {
         self.date.value = "\(photoNote.created)"
         self.noteContentText.value = photoNote.rawMemo
         self.noteImageUrls.value = photoNote.photos
         for url in photoNote.photos {
             fetchImages(url: url) { image in
                 self.selectedImages.value.append(image)
+                if self.selectedImages.value.count == photoNote.photos.count {
+                    self.sendNotification()
+                }
             }
-            // TODO: - fix me. should fetch all images in here and then run the handler.
-            if self.selectedImages.value.count == photoNote.photos.count { completionHandler() }
         }
     }
     
-    func fetchImages(url: String, completionHandler: @escaping (NoteImage) -> Void) {
+    // send notification to PhotoNoteViewController to display images
+    private func sendNotification() {
+        NotificationCenter.default.post(name: .noteImages, object: nil)
+    }
+    
+    private func fetchImages(url: String, completionHandler: @escaping (NoteImage) -> Void) {
         guard let imageUrl = URL(string: url) else { return }
         imageLoadTaskManager.fetchImage(with: imageUrl) { image in
             guard let image = image else { return }

@@ -72,8 +72,9 @@ class PhotoNoteViewController: UIViewController {
         imageHorizontalScrollView.delegate = self
         setupPageControl()
         presentNoteViewForWriting { [weak self] in
-            // before call displayPhotos function, viewModel.selectedImages should be ready
-            self?.displayPhotos()
+            if self?.noteState == .creating {
+                self?.displayPhotos()
+            }
             self?.displayDate()
         }
     }
@@ -87,18 +88,19 @@ class PhotoNoteViewController: UIViewController {
     
     private func presentNoteViewForReading(completionHandler: @escaping () -> Void) {
         viewModel.fetchNoteContent { photoNote in
-            self.viewModel.storeFetchedNote(photoNote: photoNote) {
-                DispatchQueue.main.async {
-                    self.dateLabel.text = "\(photoNote.created)"
-                        .components(separatedBy: "T").first!
-                    self.noteTextView.text = photoNote.rawMemo }
-            }
+            self.viewModel.storeFetchedNote(photoNote: photoNote)
+            DispatchQueue.main.async {
+                self.dateLabel.text = "\(photoNote.created)"
+                    .components(separatedBy: "T").first!
+                self.noteTextView.text = photoNote.rawMemo }
+            
             completionHandler()
         }
     }
     
     private func setupNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(saveNoteText), name: .writeNote, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(allImagesAreFetched), name: .noteImages, object: nil)
     }
     
     private func filterTags(content: String) {
@@ -115,19 +117,20 @@ class PhotoNoteViewController: UIViewController {
     }
     
     private func displayDate() {
-        if viewModel.date == nil {
-            dateLabel.isHidden = true
-        }
+        DispatchQueue.main.async {
+            if self.viewModel.date == nil { self.dateLabel.isHidden = true } }
     }
     
     @objc private func presentNoteWritingScene(completionHandler: () -> Void) {
-        defer { completionHandler()}
+        defer { completionHandler() }
         if noteState == .creating {
             coordinator?.navigateToWritePhotoNote(with: noteContentText)
         }
     }
+    
     @objc func saveNoteText(_ notification: Notification) {
-        guard let content = notification.userInfo?[NoteViewController.contentTextKey] as? String else { return }
+        guard let content =
+                notification.userInfo?[NoteViewController.contentTextKey] as? String else { return }
         noteContentText = content // save passed text
         filterTags(content: content)
         updateTextViewWithText()
@@ -136,32 +139,37 @@ class PhotoNoteViewController: UIViewController {
     private func updateTextViewWithText() {
         DispatchQueue.main.async { self.noteTextView.text = self.noteContentText }
     }
+    
+    // receive notification after fetching all images
+    @objc private func allImagesAreFetched(_ notification: Notification) {
+        self.displayPhotos()
+    }
 }
 
 // display images
 extension PhotoNoteViewController {
     private func displayPhotos() {
-        
         for i in 0..<viewModel.selectedImages.value.count {
             
-            let xPosition = self.view.frame.width * CGFloat(i)
-            
             if i == 0 {
-                firstImageView.image = viewModel.selectedImages.value[i]
-                firstImageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
+                DispatchQueue.main.async {
+                    let xPosition = self.view.frame.width * CGFloat(i)
+                    self.firstImageView.image = self.viewModel.selectedImages.value[i]
+                    self.firstImageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
+                    self.imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i)
+                }
                 
-                imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i)
             } else {
                 
-                let imageView = newImageView()
-                imageView.image = viewModel.selectedImages.value[i]
-                
-                imageStackView.addArrangedSubview(imageView)
-                imageView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
                 DispatchQueue.main.async {
-                imageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
-                }
-                imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i)
+                    let imageView = self.newImageView()
+                    imageView.image = self.viewModel.selectedImages.value[i]
+                    
+                    self.imageStackView.addArrangedSubview(imageView)
+                    imageView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+                    let xPosition = self.view.frame.width * CGFloat(i)
+                    imageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
+                    self.imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i) }
             }
         }
         DispatchQueue.main.async { self.view.bringSubviewToFront(self.imagePageControl) }
