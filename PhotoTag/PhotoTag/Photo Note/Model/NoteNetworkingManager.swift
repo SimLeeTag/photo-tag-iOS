@@ -13,7 +13,7 @@ final class NoteNetworkingManager {
     
     private let decoder: JSONDecoder = .init()
     
-    // fetch notes list
+    // MARK: - fetch notes list
     func fetchNoteList(tagIds: [TagID],
                        completionHandler: @escaping ([PhotoNote]?) -> Void) {
         UseCase.shared
@@ -27,10 +27,10 @@ final class NoteNetworkingManager {
             }))
     }
     
-    // get selected note data
+    // MARK: - get selected note data
     func fetchNote(noteId: NoteID,
                    completionHandler: @escaping (PhotoNote?) -> Void) {
-        UseCase.shared.request(noteId: noteId)
+        UseCase.shared.request(noteId: noteId, method: .get)
             .receive(subscriber: Subscribers.Sink(receiveCompletion: { [ weak self ] in
                 guard case let .failure(error) = $0 else { return }
                 debugPrint(error.localizedDescription)
@@ -39,7 +39,34 @@ final class NoteNetworkingManager {
             }))
     }
     
-    // create note
+    // MARK: - delete note
+    func deleteNote(noteId: NoteID,
+                    completionHandler: @escaping (Bool?) -> Void) {
+        UseCase.shared.request(noteId: noteId, method: .delete, body: nil)
+             .receive(subscriber: Subscribers.Sink(receiveCompletion: { [ weak self ] in
+                 guard case let .failure(error) = $0 else { return }
+                 debugPrint(error.localizedDescription)
+             }, receiveValue: { [weak self] httpResponse in
+                let isSuccess = (200...299).contains(httpResponse.statusCode)
+                 completionHandler(isSuccess)
+             }))
+     }
+    
+    // MARK: - edit note
+    func editNote(noteId: NoteID,
+                  noteText: String,
+                  completionHandler: @escaping (Bool?) -> Void) {
+        UseCase.shared.request(noteId: noteId, method: .put, body: noteText)
+            .receive(subscriber: Subscribers.Sink(receiveCompletion: { [ weak self ] in
+                guard case let .failure(error) = $0 else { return }
+                debugPrint(error.localizedDescription)
+            }, receiveValue: { [weak self] httpResponse in
+                let isSuccess = (200...299).contains(httpResponse.statusCode)
+                 completionHandler(isSuccess)
+            }))
+    }
+    
+    // MARK: - create note
     func createNote(with text: NoteText,
                     images: [NoteImage],
                     completion: @escaping(Bool) -> Void) {
@@ -85,10 +112,6 @@ final class NoteNetworkingManager {
         }))
     }
     
-    private func generateBoundaryString() -> String {
-        return "Boundary-\(UUID().uuidString)"
-    }
-    
 }
 
 extension NoteNetworkingManager {
@@ -119,5 +142,9 @@ extension NoteNetworkingManager {
         data.appendString("\r\n")
         
         return data as Data
+    }
+    
+    private func generateBoundaryString() -> String {
+        return "Boundary-\(UUID().uuidString)"
     }
 }

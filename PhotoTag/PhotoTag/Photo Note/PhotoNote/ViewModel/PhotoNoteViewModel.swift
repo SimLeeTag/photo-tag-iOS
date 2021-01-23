@@ -55,4 +55,12 @@ class PhotoNoteViewModel {
             completionHandler(image)
         }
     }
+    
+    // MARK: - delete note
+    func deleteNote(completionHandler: @escaping (Bool?) -> Void) {
+        noteNetworkingManager.deleteNote(noteId: noteId.value) { isSuccess in
+            completionHandler(isSuccess)
+        }
+     }
+    
 }
