@@ -12,5 +12,5 @@ final class TagCategoryCellViewModel {
     
     let tagNameLabelText = Observable("tag name")
     let noteCountLabelText = Observable(0)
-    let image: Observable<UIImage?> = Observable(nil)
+    let image: Observable<NoteImage?> = Observable(nil)
 }

@@ -38,6 +38,33 @@ struct UseCase {
             .eraseToAnyPublisher()
     }
     
+    // fetch note
+    func request(_ network: NetworkConnectable = NetworkManager.shared,
+                 noteId: NoteID, method: HTTPMethod) -> AnyPublisher<PhotoNote, Error> {
+        let url = Endpoint.noteFetch(noteId: noteId).url!
+        let request =  URLRequest(urlWithToken: url, method: method)
+        return network
+            .session
+            .dataTaskPublisher(for: request)
+            .map { $0.data }
+            .decode(type: PhotoNote.self, decoder: decoder)
+            .eraseToAnyPublisher()
+    }
+    
+    // delete note
+    func request(_ network: NetworkConnectable = NetworkManager.shared,
+                 noteId: NoteID, method: HTTPMethod, body: String?) -> AnyPublisher<HTTPURLResponse, Error> {
+        let url = Endpoint.noteFetch(noteId: noteId).url!
+        let body = body?.data(using: .utf8)
+        let request =
+            body == nil ? URLRequest(urlWithToken: url, method: method) : URLRequest(urlWithToken: url, method: method, body: body!)
+        return network
+            .request(request: request)
+            .compactMap { $0.response as? HTTPURLResponse }
+            .mapError { _ in NetworkError.jsonDecodingError }
+            .eraseToAnyPublisher()
+    }
+    
     // send file
     func request(_ network: NetworkConnectable = NetworkManager.shared,
                  request: URLRequest) -> AnyPublisher<HTTPURLResponse, NetworkError> {

@@ -9,21 +9,20 @@ import Foundation
 
 class PhotoNoteListViewModel {
     
-    typealias TagID = Int
     let noteNetworkingManager = NoteNetworkingManager()
     var selectedTags: [TagID] = []
     var firstSelectedTagText = Observable("")
     var secondSelectedTagText = Observable("")
     var thirdSelectedTagText = Observable("")
     private(set) var photoNoteList: Observable<[PhotoNote]> = Observable([])
-    
+
     init() {
-        self.selectedTags = takeTagIdsOut()
+        self.selectedTags = takeTagIdsOut() // bring seleted tag ids stored in UserDefaults
     }
     
-    private func takeTagIdsOut() -> [Int] {
+    private func takeTagIdsOut() -> [TagID] {
         let noTagId = 4
-        guard let selectedTagIds = UserDefaults.standard.array(forKey: UserDefaultKey.selectedTagIds) as? [Int] else { return [noTagId] }
+        guard let selectedTagIds = UserDefaults.standard.array(forKey: UserDefaultKey.selectedTagIds) as? [TagID] else { return [noTagId] }
         return selectedTagIds
     }
     

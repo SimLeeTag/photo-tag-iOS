@@ -11,8 +11,10 @@ import UIKit.UIImage
 
 final class NoteNetworkingManager {
     
-    // fetch notes list
-    func fetchNoteList(tagIds: [Int],
+    private let decoder: JSONDecoder = .init()
+    
+    // MARK: - fetch notes list
+    func fetchNoteList(tagIds: [TagID],
                        completionHandler: @escaping ([PhotoNote]?) -> Void) {
         UseCase.shared
             .request(type: [PhotoNote].self,
@@ -25,9 +27,48 @@ final class NoteNetworkingManager {
             }))
     }
     
-    // create note
-    func createNote(with text: String,
-                    images: [UIImage],
+    // MARK: - get selected note data
+    func fetchNote(noteId: NoteID,
+                   completionHandler: @escaping (PhotoNote?) -> Void) {
+        UseCase.shared.request(noteId: noteId, method: .get)
+            .receive(subscriber: Subscribers.Sink(receiveCompletion: { [ weak self ] in
+                guard case let .failure(error) = $0 else { return }
+                debugPrint(error.localizedDescription)
+            }, receiveValue: { [weak self] data in
+                completionHandler(data)
+            }))
+    }
+    
+    // MARK: - delete note
+    func deleteNote(noteId: NoteID,
+                    completionHandler: @escaping (Bool?) -> Void) {
+        UseCase.shared.request(noteId: noteId, method: .delete, body: nil)
+             .receive(subscriber: Subscribers.Sink(receiveCompletion: { [ weak self ] in
+                 guard case let .failure(error) = $0 else { return }
+                 debugPrint(error.localizedDescription)
+             }, receiveValue: { [weak self] httpResponse in
+                let isSuccess = (200...299).contains(httpResponse.statusCode)
+                 completionHandler(isSuccess)
+             }))
+     }
+    
+    // MARK: - edit note
+    func editNote(noteId: NoteID,
+                  noteText: String,
+                  completionHandler: @escaping (Bool?) -> Void) {
+        UseCase.shared.request(noteId: noteId, method: .put, body: noteText)
+            .receive(subscriber: Subscribers.Sink(receiveCompletion: { [ weak self ] in
+                guard case let .failure(error) = $0 else { return }
+                debugPrint(error.localizedDescription)
+            }, receiveValue: { [weak self] httpResponse in
+                let isSuccess = (200...299).contains(httpResponse.statusCode)
+                 completionHandler(isSuccess)
+            }))
+    }
+    
+    // MARK: - create note
+    func createNote(with text: NoteText,
+                    images: [NoteImage],
                     completion: @escaping(Bool) -> Void) {
         
         let boundary = generateBoundaryString()
@@ -71,10 +112,9 @@ final class NoteNetworkingManager {
         }))
     }
     
-    private func generateBoundaryString() -> String {
-        return "Boundary-\(UUID().uuidString)"
-    }
-    
+}
+
+extension NoteNetworkingManager {
     private func convertFormField(named name: String,
                                   value: String,
                                   using boundary: String) -> String {
@@ -103,22 +143,8 @@ final class NoteNetworkingManager {
         
         return data as Data
     }
-}
-
-extension NSMutableData {
-  func appendString(_ string: String) {
-    if let data = string.data(using: .utf8) {
-      self.append(data)
-    }
-  }
-}
-
-extension Date {
- var millisecondsSince1970: Int64 {
-        return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
-    }
-
-    init(milliseconds: Int) {
-        self = Date(timeIntervalSince1970: TimeInterval(milliseconds / 1000))
+    
+    private func generateBoundaryString() -> String {
+        return "Boundary-\(UUID().uuidString)"
     }
 }

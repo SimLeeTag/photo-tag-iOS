@@ -27,10 +27,12 @@ class PhotoNoteViewController: UIViewController {
     @IBOutlet weak var imagePageControl: UIPageControl!
     @IBOutlet weak var imageHorizontalScrollView: UIScrollView!
     private var noteState: NoteState
-    private var noteContentText: String = ""
+    private var noteContentText: NoteText = ""
     private let noteNetworkManager = NoteNetworkingManager()
     
-    init(coordinator: PhotoNoteCoordinator, viewModel: PhotoNoteViewModel, isCreating: NoteState) {
+    init(coordinator: PhotoNoteCoordinator,
+         viewModel: PhotoNoteViewModel,
+         isCreating: NoteState) {
         self.coordinator = coordinator
         self.viewModel = viewModel
         self.noteState = isCreating
@@ -48,20 +50,29 @@ class PhotoNoteViewController: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        // request to save data to API
-        noteNetworkManager.createNote(with: noteContentText, images: viewModel.selectedImages) { success in
-            if success {
-                DispatchQueue.main.async {
-                    self.presentAlert()
-                }
-            } else {
-                print("failed")
-            }
+        switch noteState {
+        case .creating: saveNewNote()
+        case .reading: editNote()
         }
     }
-    
     @IBAction func backButtonTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func moreButtonTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "Choose Action", message: "", preferredStyle: .actionSheet)
+
+            alert.addAction(UIAlertAction(title: "Delete", style: .destructive , handler:{ (UIAlertAction)in
+                print("User click Delete button")
+                self.deleteNote()
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler:{ (UIAlertAction)in
+                print("User click Dismiss button")
+            }))
+        
+            self.present(alert, animated: true)
+        
     }
     
     private func setupView() {
@@ -69,24 +80,63 @@ class PhotoNoteViewController: UIViewController {
         noteTextView.isEditable = false
         imageHorizontalScrollView.delegate = self
         setupPageControl()
-        displayPhotos()
-        displayDate()
         presentNoteViewForWriting()
+        if noteState == .creating {
+            displayPhotos()
+        }
+        displayDate()
+        
     }
     
     private func presentNoteViewForWriting() {
         switch noteState {
         case .creating: presentNoteWritingScene()
-        case .reading: break
+        case .reading: presentNoteViewForReading()
         }
     }
     
-    private func presentNoteViewForEditing() {
-
+    private func presentNoteViewForReading() {
+        viewModel.fetchNoteContent { photoNote in
+            self.viewModel.storeFetchedNote(photoNote: photoNote)
+            self.noteContentText = photoNote.rawMemo
+            DispatchQueue.main.async {
+                self.dateLabel.text = "\(photoNote.created)"
+                    .components(separatedBy: "T").first!
+                self.noteTextView.text = photoNote.rawMemo }
+            self.highlightTag(in: photoNote)
+        }
     }
     
     private func setupNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(saveNoteText), name: .writeNote, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(allImagesAreFetched), name: .noteImages, object: nil)
+    }
+    
+    private func saveNewNote() {
+        noteNetworkManager.createNote(with: noteContentText,
+                                      images: viewModel.selectedImages.value) { success in
+            if success {
+                DispatchQueue.main.async { self.presentAlert() }
+            } else { print("Failed to create new note") }
+        }
+    }
+    
+    private func editNote() {
+        noteNetworkManager.createNote(with: noteContentText,
+                                      images: viewModel.selectedImages.value) { success in
+            if success {
+                DispatchQueue.main.async { self.presentAlert() }
+            } else { print("Failed to edit note") }
+        }
+    }
+    
+    private func deleteNote() {
+        viewModel.deleteNote { success in
+            guard let success = success else { return }
+            if success {
+                DispatchQueue.main.async {  self.presentAlert() }
+            } else {  print("Failed to delete note") }
+        }
     }
     
     private func filterTags(content: String) {
@@ -103,61 +153,81 @@ class PhotoNoteViewController: UIViewController {
     }
     
     private func displayDate() {
-        if viewModel.date == nil {
-            dateLabel.isHidden = true
-        }
-    }
-    
-    private func displayPhotos() {
-        
-        for i in 0..<viewModel.selectedImages.count {
-            
-            let xPosition = self.view.frame.width * CGFloat(i)
-            
-            if i == 0 {
-                firstImageView.image = viewModel.selectedImages[i]
-                firstImageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
-                
-                imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i)
-            } else {
-                
-                let imageView = newImageView()
-                imageView.image = viewModel.selectedImages[i]
-                
-                imageStackView.addArrangedSubview(imageView)
-                imageView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-                
-                imageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
-                imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i)
-            }
-        }
-        self.view.bringSubviewToFront(imagePageControl)
-    }
-    
-    private func setupPageControl() {
-        imagePageControl.numberOfPages = viewModel.selectedImages.count
-        imagePageControl.currentPage = 0
+        DispatchQueue.main.async {
+            if self.viewModel.date == nil { self.dateLabel.isHidden = true } }
     }
     
     @objc private func presentNoteWritingScene() {
-        if noteState == .creating {
-            coordinator?.navigateToWritePhotoNote(with: noteContentText)
-        }
-        
+        coordinator?.navigateToWritePhotoNote(with: noteContentText)
     }
+    
     @objc func saveNoteText(_ notification: Notification) {
-        guard let content = notification.userInfo?[NoteViewController.contentTextKey] as? String else { return }
+        guard let content =
+                notification.userInfo?[NoteViewController.contentTextKey] as? String else { return }
         noteContentText = content // save passed text
         filterTags(content: content)
         updateTextViewWithText()
     }
     
     private func updateTextViewWithText() {
+        DispatchQueue.main.async { self.noteTextView.text = self.noteContentText }
+    }
+    
+    // receive notification after fetching all images
+    @objc private func allImagesAreFetched(_ notification: Notification) {
+        self.displayPhotos()
+    }
+    
+    private func highlightTag(in note: PhotoNote) {
+        let tags = note.tags.map({"#\($0)"})
+        let font = UIFont.systemFont(ofSize: 20)
         DispatchQueue.main.async {
-            self.noteTextView.text = self.noteContentText
+        guard let labelText = self.noteTextView.text else { return }
+        let attributedStr = NSMutableAttributedString(string: labelText)
+        for tag in tags {
+            
+            attributedStr.addAttribute(.foregroundColor, value: UIColor.keyColorInLightMode, range: (labelText as NSString).range(of: "\(tag)"))
+        }
+        self.noteTextView.attributedText = attributedStr
         }
     }
 }
+
+// display images
+extension PhotoNoteViewController {
+    private func displayPhotos() {
+        for i in 0..<viewModel.selectedImages.value.count {
+            
+            if i == 0 {
+                DispatchQueue.main.async {
+                    let xPosition = self.view.frame.width * CGFloat(i)
+                    self.firstImageView.image = self.viewModel.selectedImages.value[i]
+                    self.firstImageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
+                    self.imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i)
+                }
+                
+            } else {
+                
+                DispatchQueue.main.async {
+                    let imageView = self.newImageView()
+                    imageView.image = self.viewModel.selectedImages.value[i]
+                    
+                    self.imageStackView.addArrangedSubview(imageView)
+                    imageView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+                    let xPosition = self.view.frame.width * CGFloat(i)
+                    imageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
+                    self.imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i) }
+            }
+        }
+        DispatchQueue.main.async { self.view.bringSubviewToFront(self.imagePageControl) }
+    }
+    
+    private func setupPageControl() {
+        imagePageControl.numberOfPages = viewModel.selectedImages.value.count
+        imagePageControl.currentPage = 0
+    }
+}
+
 extension PhotoNoteViewController {
     private func newImageView() -> UIImageView {
         let imageView = UIImageView()
@@ -196,7 +266,7 @@ extension PhotoNoteViewController: AlertPresentable {
         let action = AlertActionComponent(title: "OK", handler: { _ in
             self.coordinator?.navigateToPhotoNoteList()
         })
-        let alertComponents = AlertComponents(title: "New Note! ✨", message: "New note has been created", actions: [action])
+        let alertComponents = AlertComponents(title: "Save! ✨", message: "Your behavior has been applied.", actions: [action])
         return alertComponents
     }
 }

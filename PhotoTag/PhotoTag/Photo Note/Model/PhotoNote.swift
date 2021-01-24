@@ -8,15 +8,13 @@
 import Foundation
 
 struct PhotoNote: Codable {
-    let created: String
     let noteID: Int
-    let photos: [String]
-    let rawMemo: String
     let tags: [String]
+    let created, rawMemo: String
+    let photos: [String]
 
     enum CodingKeys: String, CodingKey {
-        case created
         case noteID = "noteId"
-        case photos, rawMemo, tags
+        case tags, created, rawMemo, photos
     }
 }

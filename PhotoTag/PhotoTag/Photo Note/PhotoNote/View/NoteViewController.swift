@@ -12,10 +12,10 @@ final class NoteViewController: UIViewController {
     @IBOutlet weak var noteTextView: UITextView!
     weak var coordinator: PhotoNoteCoordinator?
     static let contentTextKey = "contentText"
-    private var contentText: String = ""
+    private var contentText: NoteText = ""
     private var existingText = ""
     
-    init(coordinator: PhotoNoteCoordinator, with text: String) {
+    init(coordinator: PhotoNoteCoordinator, with text: NoteText) {
         self.coordinator = coordinator
         self.existingText = text
         super.init(nibName: nil, bundle: nil)
@@ -69,7 +69,7 @@ extension NoteViewController: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let currentText = textView.text ?? ""
-        let maximumCount = 1000
+        let maximumCount = 500
         guard let stringRange = Range(range, in: currentText) else { return false }
         let changedText = currentText.replacingCharacters(in: stringRange, with: text)
         return changedText.count <= maximumCount
