@@ -112,6 +112,36 @@ final class NoteNetworkingManager {
         }))
     }
     
+    // MARK: - fetch tag recommendation
+    func fetchTagRecommendation(images: [NoteImage],
+                    completion: @escaping(TagSuggestion) -> Void) {
+        
+        let boundary = generateBoundaryString()
+        guard let endpoint = Endpoint(path: .tagSuggestion).url else { return }
+        var request = URLRequest(urlWithToken: endpoint, method: .get)
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+        let httpBody = NSMutableData()
+
+        // photo Image Data
+        for image in images {
+            guard let imageData = image.jpegData(compressionQuality: 0.1) else { return }
+            httpBody.append(convertFileData(fieldName: "photo", fileName: "\(Date().millisecondsSince1970)_photo.jpg", mimeType: "multipart/form-data", fileData: imageData, using: boundary))
+        }
+        httpBody.appendString("--\(boundary)--")  // add final boundary with the two trailing dashes
+        request.httpBody = httpBody as Data
+
+        // request
+        UseCase.shared
+            .request(urlRequest: request)
+            .receive(subscriber: Subscribers.Sink(receiveCompletion: { [weak self] in
+            guard case let .failure(error) = $0 else { return }
+            debugPrint(error.localizedDescription)
+        }, receiveValue: { data in
+           completion(data)
+        }))
+    }
+    
 }
 
 extension NoteNetworkingManager {

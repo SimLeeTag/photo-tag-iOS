@@ -24,6 +24,7 @@ struct Endpoint: RequestProviding {
         case createNote
         case fetchPhotoNoteList
         case fetchPhotoNote
+        case tagSuggestion
         
         var description: String {
             switch self {
@@ -34,6 +35,7 @@ struct Endpoint: RequestProviding {
             case .createNote: return "/notes"
             case .fetchPhotoNoteList: return "/tags"
             case .fetchPhotoNote: return "/notes/"
+            case .tagSuggestion: return "/suggestion"
             }
         }
     }

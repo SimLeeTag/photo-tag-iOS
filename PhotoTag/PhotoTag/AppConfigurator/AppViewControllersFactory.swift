@@ -31,8 +31,8 @@ struct AppViewControllersFactory {
         return SelectPhotoViewController(coordinator: coordinator)
     }
     
-    func writePhotoNoteViewController(coordinator: PhotoNoteCoordinator, with text: String) -> UIViewController {
-        let noteViewController = NoteViewController(coordinator: coordinator, with: text)
+    func writePhotoNoteViewController(coordinator: PhotoNoteCoordinator, with text: String, and photos: [NoteImage]) -> UIViewController {
+        let noteViewController = NoteViewController(coordinator: coordinator, with: text, and: photos)
         return noteViewController
     }
     

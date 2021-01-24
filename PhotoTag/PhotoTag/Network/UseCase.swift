@@ -65,13 +65,24 @@ struct UseCase {
             .eraseToAnyPublisher()
     }
     
-    // send file
+    // send file (send file and return HTTPURLResponse)
     func request(_ network: NetworkConnectable = NetworkManager.shared,
                  request: URLRequest) -> AnyPublisher<HTTPURLResponse, NetworkError> {
         return network
             .request(request: request)
             .compactMap { $0.response as? HTTPURLResponse }
             .mapError { _ in NetworkError.jsonDecodingError }
+            .eraseToAnyPublisher()
+    }
+    
+    // tag suggestion (send file and return two string arrays)
+    func request(_ network: NetworkConnectable = NetworkManager.shared,
+                 urlRequest: URLRequest) -> AnyPublisher<TagSuggestion, Error> {
+        return network
+            .session
+            .dataTaskPublisher(for: urlRequest)
+            .map { $0.data }
+            .decode(type: TagSuggestion.self, decoder: decoder)
             .eraseToAnyPublisher()
     }
     
