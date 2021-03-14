@@ -55,6 +55,7 @@ final class TagCategoryViewController: UIViewController {
         fetchTags()
         configure()
         viewAppeared = true
+        activateButton()
     }
     
     // MARK: - Functions
