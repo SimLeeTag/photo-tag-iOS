@@ -28,6 +28,7 @@ class PhotoNoteViewController: UIViewController {
     @IBOutlet weak var imageHorizontalScrollView: UIScrollView!
     private var noteState: NoteState
     private var noteContentText: NoteText = ""
+    private var tagNames: [TagName] = []
     private let noteNetworkManager = NoteNetworkingManager()
     
     init(coordinator: PhotoNoteCoordinator,
@@ -158,7 +159,7 @@ class PhotoNoteViewController: UIViewController {
     }
     
     @objc private func presentNoteWritingScene() {
-        coordinator?.navigateToWritePhotoNote(with: noteContentText)
+        coordinator?.navigateToWritePhotoNote(with: noteContentText, photos: viewModel.selectedImages.value)
     }
     
     @objc func saveNoteText(_ notification: Notification) {

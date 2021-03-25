@@ -30,9 +30,6 @@ class PhotoNoteListViewModel {
         noteNetworkingManager.fetchNoteList(tagIds: selectedTags) { photoList in
             guard let allPhotoList = photoList else { return }
             self.photoNoteList.value = allPhotoList
-            self.firstSelectedTagText.value = self.photoNoteList.value[0].tags[0]
-            self.secondSelectedTagText.value = self.photoNoteList.value[1].tags[0]
-            self.thirdSelectedTagText.value = self.photoNoteList.value[2].tags[0]
             completionHandler(allPhotoList)
         }
     }

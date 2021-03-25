@@ -9,6 +9,7 @@ import Foundation
 import UIKit.UIImage
 
 // tag
+typealias TagName = String
 typealias TagID = Int
 typealias TagImage = UIImage
 

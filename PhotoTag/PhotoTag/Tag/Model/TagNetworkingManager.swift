@@ -26,7 +26,7 @@ final class TagNetworkingManager {
             }))
     }
     
-    func updateHashtagActivatedState(of tagId: Int, with data: HastagState) {
+    func updateHashtagActivatedState(of tagId: TagID, with data: HastagState) {
         UseCase.shared.request(data: data,
                                endpoint: Endpoint.hashtagPatch(path: .patchHashtags, tagId: tagId),
                                method: .patch)
