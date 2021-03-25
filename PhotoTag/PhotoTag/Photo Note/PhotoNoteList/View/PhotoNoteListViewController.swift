@@ -39,7 +39,6 @@ final class PhotoNoteListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        bind()
         fetchNoteListData()
     }
     
@@ -70,26 +69,6 @@ final class PhotoNoteListViewController: UIViewController {
             self.dataSource.noteList = noteList
             DispatchQueue.main.async {
                 self.photoNoteListView.photoNoteListTableView.reloadData()
-            }
-        }
-    }
-    
-    private func bind() {
-        self.viewModel.firstSelectedTagText.bind { firstTagName in
-            DispatchQueue.main.async {
-                self.photoNoteListView.firstTagLabel.text = firstTagName
-            }
-        }
-        
-        self.viewModel.firstSelectedTagText.bind {  secondTagName in
-            DispatchQueue.main.async {
-                self.photoNoteListView.secondTagLabel.text = secondTagName
-            }
-        }
-        
-        self.viewModel.firstSelectedTagText.bind {  thirdTagName in
-            DispatchQueue.main.async {
-                self.photoNoteListView.thirdTagLabel.text = thirdTagName
             }
         }
     }
