@@ -35,7 +35,6 @@ final class TagCategoryViewController: UIViewController {
     }
     
     // MARK: - Intialization
-    //TODO:- add viewModel as parameter
     init(with viewModel: TagCategoryViewModel, coordinator: TagCoordinator) {
         self.coordinator = coordinator
         self.viewModel = viewModel
