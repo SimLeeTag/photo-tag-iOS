@@ -156,7 +156,8 @@ class PhotoNoteViewController: UIViewController {
     }
     
     @objc private func presentNoteWritingScene() {
-        coordinator?.navigateToWritePhotoNote(with: noteContentText)
+        UserDefaults.standard.set(viewModel.selectedImages.value, forKey: UserDefaultKey.selectedImages) // temporarily store selected images
+        coordinator?.navigateToWritePhotoNote(with: viewModel.noteContentText.value)
     }
     
     @objc func saveNoteText(_ notification: Notification) {
@@ -165,6 +166,8 @@ class PhotoNoteViewController: UIViewController {
         viewModel.noteContentText.value = content // save passed text
         filterTags(content: content)
         updateTextViewWithText()
+        guard let existingImages = UserDefaults.standard.imageArray(forKey: UserDefaultKey.selectedImages) else { return }
+        viewModel.updateSelectedImages(with: existingImages) // retrieve selected images
     }
     
     private func updateTextViewWithText() {
