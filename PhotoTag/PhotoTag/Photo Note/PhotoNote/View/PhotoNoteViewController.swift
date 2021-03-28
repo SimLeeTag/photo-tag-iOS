@@ -196,30 +196,24 @@ class PhotoNoteViewController: UIViewController {
 // display images
 extension PhotoNoteViewController {
     private func displayPhotos() {
+        
         for i in 0..<viewModel.selectedImages.value.count {
+            let image = self.viewModel.selectedImages.value[i]
             
-            if i == 0 {
-                DispatchQueue.main.async {
-                    let xPosition = self.view.frame.width * CGFloat(i)
-                    self.firstImageView.image = self.viewModel.selectedImages.value[i]
-                    self.firstImageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
-                    self.imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i)
-                }
-                
-            } else {
-                
-                DispatchQueue.main.async {
-                    let imageView = self.newImageView()
-                    imageView.image = self.viewModel.selectedImages.value[i]
-                    
-                    self.imageStackView.addArrangedSubview(imageView)
-                    imageView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-                    let xPosition = self.view.frame.width * CGFloat(i)
-                    imageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
-                    self.imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i) }
-            }
+            DispatchQueue.main.async {
+                let imageView = self.newImageView()
+                imageView.image = image
+                self.layoutImage(imageView, i) }
         }
         DispatchQueue.main.async { self.view.bringSubviewToFront(self.imagePageControl) }
+    }
+    
+    private func layoutImage(_ imageView: UIImageView, _ index: Int) {
+        self.imageStackView.addArrangedSubview(imageView)
+        imageView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        let xPosition = self.view.frame.width * CGFloat(index)
+        imageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
+        self.imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+index)
     }
     
     private func setupPageControl() {
