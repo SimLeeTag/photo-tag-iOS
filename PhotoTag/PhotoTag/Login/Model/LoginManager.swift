@@ -28,6 +28,7 @@ final class LoginManager {
     func requestAppleLoginToken(credential: ASAuthorizationAppleIDCredential) {
         guard let tokenData = credential.identityToken,
               let token = String(data: tokenData, encoding: .utf8) else { return }
+        UserDefaults.standard.setValue(token, forKey: UserDefaultKey.userId)
         UseCase.shared
             .request(data: AppleLogin(jwtToken: token),
                      endpoint: Endpoint(path: .appleLogin),
@@ -44,7 +45,7 @@ final class LoginManager {
     
     private func checkResponseStatus(statusCode: Int, token: String) {
         if 200 <= statusCode || statusCode < 300 {
-            UserDefaults.standard.set(token, forKey: UserDefaultKey.key)
+            UserDefaults.standard.set(token, forKey: UserDefaultKey.userId)
         } else {
             debugPrint("유효하지 않은 Apple ID 입니다.")
         }

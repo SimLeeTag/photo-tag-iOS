@@ -23,8 +23,20 @@ extension URLRequest {
         self.httpMethod = method.description
         self.setValue("application/json",
                       forHTTPHeaderField: "Content-Type")
-        self.setValue("Bearer " + UserDefaults.standard.string(forKey: UserDefaultKey.key)!, forHTTPHeaderField: "Authorization")
+        self.setValue("Bearer " + UserDefaults.standard.string(forKey: UserDefaultKey.userId)!, forHTTPHeaderField: "Authorization")
         
         self.httpBody = body
+    }
+    
+    // with request body
+    init(urlWithToken: URL, method: HTTPMethod, body: Data, jsonKey: String) {
+        self.init(url: urlWithToken)
+        let json = [jsonKey: body]
+        let jsonData = try? JSONEncoder().encode(json)
+        self.httpMethod = method.description
+        self.setValue("application/json",
+                      forHTTPHeaderField: "Content-Type")
+        self.setValue("Bearer " + UserDefaults.standard.string(forKey: UserDefaultKey.userId)!, forHTTPHeaderField: "Authorization")
+        self.httpBody = jsonData!
     }
 }
