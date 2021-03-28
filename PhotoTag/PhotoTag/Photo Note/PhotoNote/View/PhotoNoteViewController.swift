@@ -90,7 +90,8 @@ class PhotoNoteViewController: UIViewController {
             displayPhotos()
         }
         displayDate()
-        
+        bind()
+        self.firstImageView.isHidden = true
     }
     
     private func presentNoteViewForWriting() {
@@ -113,6 +114,20 @@ class PhotoNoteViewController: UIViewController {
         }
     }
     
+    private func bind() {
+        viewModel.noteImageUrls.bind { urlStrings in
+            self.viewModel.imageLoadTaskManager.fetchImageGroup(imageUrls: urlStrings) { imageGroup in
+                self.viewModel.updateSelectedImages(with: imageGroup)
+                self.viewModel.sendNotification()
+            }
+        }
+        viewModel.noteContentText.bind { noteStr in
+            DispatchQueue.main.async {
+                self.noteTextView.text = noteStr
+            }
+        }
+    }
+    
     private func setupNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(saveNoteText), name: .writeNote, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(allImagesAreFetched), name: .noteImages, object: nil)
@@ -129,6 +144,10 @@ class PhotoNoteViewController: UIViewController {
         moreButton.layer.cornerRadius = 10
         saveButton.layer.cornerRadius = 10
         backButton.layer.cornerRadius = 10
+        if noteState == .creating {
+            self.moreButton.isHidden = true
+            self.backButton.isHidden = true
+        }
     }
     
     private func displayDate() {
