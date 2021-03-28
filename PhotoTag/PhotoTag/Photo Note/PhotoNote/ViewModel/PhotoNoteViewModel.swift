@@ -11,15 +11,19 @@ import UIKit.UIImage
 class PhotoNoteViewModel {
     private(set) var selectedImages: Observable<[NoteImage]> = Observable([])
     let noteNetworkingManager = NoteNetworkingManager()
-    let imageLoadTaskManager = ImageLoadTaskManager()
+    let imageLoadTaskManager = ImageDownloadManager()
     var date: Observable<String?> = Observable("")
     var noteId: Observable<NoteID>  = Observable(0)
-    var noteContentText: Observable<NoteText?> = Observable("")
+    var noteContentText: Observable<NoteText> = Observable("")
     var noteImageUrls: Observable<[String]> =  Observable([""])
     
     init(with selectedItems: [NoteImage], noteId: NoteID) {
         self.selectedImages.value = selectedItems
         self.noteId.value = noteId
+    }
+    
+    func updateSelectedImages(with images: [UIImage]) {
+        selectedImages.value = images
     }
     
     func fetchNoteContent(completionHandler: @escaping (PhotoNote) -> Void) {
@@ -29,38 +33,50 @@ class PhotoNoteViewModel {
         }
     }
     
+    // MARK: - After fetch note data, save and send notification
     func storeFetchedNote(photoNote: PhotoNote) {
+        defer {
+            self.sendNotification()
+        }
         self.date.value = "\(photoNote.created)"
         self.noteContentText.value = photoNote.rawMemo
         self.noteImageUrls.value = photoNote.photos
-        for url in photoNote.photos {
-            fetchImages(url: url) { image in
-                self.selectedImages.value.append(image)
-                if self.selectedImages.value.count == photoNote.photos.count {
-                    self.sendNotification()
-                }
-            }
-        }
     }
     
     // send notification to PhotoNoteViewController to display images
-    private func sendNotification() {
+    func sendNotification() {
         NotificationCenter.default.post(name: .noteImages, object: nil)
     }
     
     private func fetchImages(url: String, completionHandler: @escaping (NoteImage) -> Void) {
         guard let imageUrl = URL(string: url) else { return }
+        
+        // using dispatch group
         imageLoadTaskManager.fetchImage(with: imageUrl) { image in
             guard let image = image else { return }
             completionHandler(image)
         }
     }
     
-    // MARK: - delete note
+    // MARK: - Request to Server
+    func saveNewNote(completionHandler: @escaping () -> Void) {
+        noteNetworkingManager.createNote(with: noteContentText.value,
+                                      images: selectedImages.value) { success in
+            if success { completionHandler()
+            } else { print("Failed to create new note") }
+        }
+    }
+    
+    func editNote(completionHandler: @escaping () -> Void) {
+        noteNetworkingManager.editNote(noteId: noteId.value, noteText: noteContentText.value) { success in
+            if success ?? false { completionHandler()
+            } else { print("Failed to edit note") }
+        }
+    }
+    
     func deleteNote(completionHandler: @escaping (Bool?) -> Void) {
         noteNetworkingManager.deleteNote(noteId: noteId.value) { isSuccess in
             completionHandler(isSuccess)
         }
-     }
-    
+    }
 }

@@ -27,15 +27,15 @@ class PhotoNoteViewController: UIViewController {
     @IBOutlet weak var imagePageControl: UIPageControl!
     @IBOutlet weak var imageHorizontalScrollView: UIScrollView!
     private var noteState: NoteState
-    private var noteContentText: NoteText = ""
-    private let noteNetworkManager = NoteNetworkingManager()
     
     init(coordinator: PhotoNoteCoordinator,
          viewModel: PhotoNoteViewModel,
-         isCreating: NoteState) {
+         isCreating: NoteState,
+         selectedImages: [NoteImage]) {
         self.coordinator = coordinator
         self.viewModel = viewModel
         self.noteState = isCreating
+        self.viewModel.updateSelectedImages(with: selectedImages)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -43,16 +43,20 @@ class PhotoNoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
         setupNotification()
+        setupView()
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(presentNoteWritingScene))
         noteTextView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         switch noteState {
-        case .creating: saveNewNote()
-        case .reading: editNote()
+        case .creating: viewModel.saveNewNote {
+            DispatchQueue.main.async { self.presentAlert() }
+        }
+        case .reading: viewModel.editNote {
+            DispatchQueue.main.async { self.presentAlert() }
+        }
         }
     }
     @IBAction func backButtonTapped(_ sender: Any) {
@@ -61,17 +65,18 @@ class PhotoNoteViewController: UIViewController {
     
     @IBAction func moreButtonTapped(_ sender: Any) {
         let alert = UIAlertController(title: "Choose Action", message: "", preferredStyle: .actionSheet)
-
-            alert.addAction(UIAlertAction(title: "Delete", style: .destructive , handler:{ (UIAlertAction)in
-                print("User click Delete button")
-                self.deleteNote()
-            }))
-            
-            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler:{ (UIAlertAction)in
-                print("User click Dismiss button")
-            }))
         
-            self.present(alert, animated: true)
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive , handler:{ (UIAlertAction)in
+            print("User click Delete button")
+            self.viewModel.deleteNote { success in
+                if success ?? false { DispatchQueue.main.async { self.presentAlert() }}}
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler:{ (UIAlertAction)in
+            print("User click Dismiss button")
+        }))
+        
+        self.present(alert, animated: true)
         
     }
     
@@ -97,8 +102,9 @@ class PhotoNoteViewController: UIViewController {
     
     private func presentNoteViewForReading() {
         viewModel.fetchNoteContent { photoNote in
+            self.viewModel.noteId.value = photoNote.noteID
             self.viewModel.storeFetchedNote(photoNote: photoNote)
-            self.noteContentText = photoNote.rawMemo
+            self.viewModel.noteContentText.value = photoNote.rawMemo
             DispatchQueue.main.async {
                 self.dateLabel.text = "\(photoNote.created)"
                     .components(separatedBy: "T").first!
@@ -112,37 +118,10 @@ class PhotoNoteViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(allImagesAreFetched), name: .noteImages, object: nil)
     }
     
-    private func saveNewNote() {
-        noteNetworkManager.createNote(with: noteContentText,
-                                      images: viewModel.selectedImages.value) { success in
-            if success {
-                DispatchQueue.main.async { self.presentAlert() }
-            } else { print("Failed to create new note") }
-        }
-    }
-    
-    private func editNote() {
-        noteNetworkManager.createNote(with: noteContentText,
-                                      images: viewModel.selectedImages.value) { success in
-            if success {
-                DispatchQueue.main.async { self.presentAlert() }
-            } else { print("Failed to edit note") }
-        }
-    }
-    
-    private func deleteNote() {
-        viewModel.deleteNote { success in
-            guard let success = success else { return }
-            if success {
-                DispatchQueue.main.async {  self.presentAlert() }
-            } else {  print("Failed to delete note") }
-        }
-    }
-    
     private func filterTags(content: String) {
         if !content.contains("#") {
             let noTagText = " #noTag"
-            self.noteContentText += noTagText
+            self.viewModel.noteContentText.value += noTagText
         }
     }
     
@@ -164,13 +143,13 @@ class PhotoNoteViewController: UIViewController {
     @objc func saveNoteText(_ notification: Notification) {
         guard let content =
                 notification.userInfo?[NoteViewController.contentTextKey] as? String else { return }
-        noteContentText = content // save passed text
+        viewModel.noteContentText.value = content // save passed text
         filterTags(content: content)
         updateTextViewWithText()
     }
     
     private func updateTextViewWithText() {
-        DispatchQueue.main.async { self.noteTextView.text = self.noteContentText }
+        DispatchQueue.main.async { self.noteTextView.text = self.viewModel.noteContentText.value }
     }
     
     // receive notification after fetching all images
@@ -180,15 +159,14 @@ class PhotoNoteViewController: UIViewController {
     
     private func highlightTag(in note: PhotoNote) {
         let tags = note.tags.map({"#\($0)"})
-        let font = UIFont.systemFont(ofSize: 20)
         DispatchQueue.main.async {
-        guard let labelText = self.noteTextView.text else { return }
-        let attributedStr = NSMutableAttributedString(string: labelText)
-        for tag in tags {
-            
-            attributedStr.addAttribute(.foregroundColor, value: UIColor.keyColorInLightMode, range: (labelText as NSString).range(of: "\(tag)"))
-        }
-        self.noteTextView.attributedText = attributedStr
+            guard let labelText = self.noteTextView.text else { return }
+            let attributedStr = NSMutableAttributedString(string: labelText)
+            for tag in tags {
+                
+                attributedStr.addAttribute(.foregroundColor, value: UIColor.keyColorInLightMode, range: (labelText as NSString).range(of: "\(tag)"))
+            }
+            self.noteTextView.attributedText = attributedStr
         }
     }
 }
