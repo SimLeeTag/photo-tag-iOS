@@ -10,7 +10,7 @@ import UIKit
 final class TagCategoryCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     private var viewModel = TagCategoryViewModel()
-    private let imageLoadTaskManager = ImageLoadTaskManager()
+    private let imageLoadTaskManager = ImageDownloadManager()
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return TagCategoryCollectionViewConstant.numberOfSections

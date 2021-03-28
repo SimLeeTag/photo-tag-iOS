@@ -13,7 +13,7 @@ final class TagCategoryViewModel {
     let tagNetworkManager = TagNetworkingManager()
     let title = Observable("Tags")
     let buttonText = Observable("Select Tag")
-    let imageLoadTaskManager = ImageLoadTaskManager()
+    let imageLoadTaskManager = ImageDownloadManager()
     private(set) var tags: Observable<[Tag]> = Observable([])
     private(set) var tagImages: Observable<[UIImage]> = Observable([])
     private(set) var tagImageUrls: Observable<[String]> = Observable([])

@@ -10,15 +10,13 @@ import UIKit
 final class PhotoNoteListTableViewDataSource: NSObject, UITableViewDataSource {
     
     var noteList = [PhotoNote]()
-    let imageLoadTaskManager = ImageLoadTaskManager()
+    let imageLoadTaskManager = ImageDownloadManager()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return noteList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let note = noteList[indexPath.item]
-        
         if noteList[indexPath.item].photos.count < 3 {
             return makeOneImageTypeCell(tableView, cellForRowAt: indexPath)
         }
