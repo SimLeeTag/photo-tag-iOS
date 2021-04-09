@@ -47,15 +47,6 @@ class PhotoNoteViewModel {
         NotificationCenter.default.post(name: .noteImages, object: nil)
     }
     
-    func fetchImage(url: String, completionHandler: @escaping (NoteImage) -> Void) {
-        guard let imageUrl = URL(string: url) else { return }
-
-        ImageDownloadManager.fetchImage(with: imageUrl) { image in
-            guard let image = image else { return }
-            completionHandler(image)
-        }
-    }
-    
     // MARK: - Request to Server
     func saveNewNote(completionHandler: @escaping () -> Void) {
         noteNetworkingManager.createNote(with: noteContentText.value,
