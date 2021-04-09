@@ -40,13 +40,15 @@ final class ImageDownloadManager {
         NetworkManager.shared.session.dataTask(with: imageURL) { (data, response, error) in
             guard let data = data else { print("no image data"); return }
             
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                print("network error: \(error?.localizedDescription)"); return }
-            
-            guard let image = UIImage(data: data) else { return }
-            
-            completionHandler(image)
+            if let httpResponse = response as? HTTPURLResponse,
+               (200...299).contains(httpResponse.statusCode) {
+                guard let image = UIImage(data: data) else { return }
+                completionHandler(image)
+            } else {
+                let image = #imageLiteral(resourceName: "logo") // default image
+                completionHandler(image)
+                print("network error: \(error?.localizedDescription)")
+            }
         }.resume()
     }
 }
