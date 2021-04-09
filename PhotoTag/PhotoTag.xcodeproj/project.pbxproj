@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6A0A216825AAC158009D56DE /* NoteNetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0A216725AAC158009D56DE /* NoteNetworkingManager.swift */; };
 		6A2F405D26203A9C002BC6E4 /* PhotoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2F405C26203A9C002BC6E4 /* PhotoImageView.swift */; };
+		6A2F406B26205546002BC6E4 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2F406A26205546002BC6E4 /* ImageCache.swift */; };
 		6A343C7B25735C7000146AAF /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A343C7A25735C7000146AAF /* Observable.swift */; };
 		6A343C8025735C8C00146AAF /* TagManagementCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A343C7F25735C8C00146AAF /* TagManagementCellViewModel.swift */; };
 		6A4AD139258A58C200857FEC /* TagManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6825212548053F00B19C9A /* TagManagementViewController.swift */; };
@@ -179,6 +180,7 @@
 		55C8346B7FC7025DA7D4F3EB /* Pods-PhotoTag.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTag.release.xcconfig"; path = "Target Support Files/Pods-PhotoTag/Pods-PhotoTag.release.xcconfig"; sourceTree = "<group>"; };
 		6A0A216725AAC158009D56DE /* NoteNetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteNetworkingManager.swift; sourceTree = "<group>"; };
 		6A2F405C26203A9C002BC6E4 /* PhotoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoImageView.swift; sourceTree = "<group>"; };
+		6A2F406A26205546002BC6E4 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		6A343C68257245D100146AAF /* PhotoTagRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoTagRelease.entitlements; sourceTree = "<group>"; };
 		6A343C7A25735C7000146AAF /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		6A343C7F25735C8C00146AAF /* TagManagementCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementCellViewModel.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				6A68254F25497B7200B19C9A /* Shadow.swift */,
 				6A343C7A25735C7000146AAF /* Observable.swift */,
 				6A8DA21625BA5BA70027AEAE /* Typealias.swift */,
+				6A2F406A26205546002BC6E4 /* ImageCache.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -882,6 +885,7 @@
 				6AD3ED6C2551A09900F8EF61 /* HTTPMethod.swift in Sources */,
 				6AC3ED5C25B8A1870032FF29 /* PhotoNoteListTableViewDataSource.swift in Sources */,
 				6A87E247258B5E2400896BD6 /* TagCategoryCellViewModel.swift in Sources */,
+				6A2F406B26205546002BC6E4 /* ImageCache.swift in Sources */,
 				6A89B9B225546444003E1027 /* PhotoNoteCoordinator.swift in Sources */,
 				6AD3ED6725519FE900F8EF61 /* UseCase.swift in Sources */,
 				6AFE3C05253EDF3200B385AC /* LoginViewController.swift in Sources */,

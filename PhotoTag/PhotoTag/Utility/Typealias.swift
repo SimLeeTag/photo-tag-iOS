@@ -16,3 +16,6 @@ typealias TagImage = UIImage
 typealias NoteID = Int
 typealias NoteImage = UIImage
 typealias NoteText = String
+
+// image
+typealias ImgUrl = String

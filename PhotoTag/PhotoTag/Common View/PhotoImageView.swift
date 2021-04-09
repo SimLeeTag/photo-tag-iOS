@@ -7,8 +7,6 @@
 
 import UIKit
 
-var imageCache = [String: UIImage]()
-
 final class PhotoImageView: UIImageView {
     
     // MARK: - Properties
@@ -41,7 +39,7 @@ final class PhotoImageView: UIImageView {
         lastImgUrl = urlString
         
         // Check cached image first
-        if let cachedImage = imageCache[urlString] {
+        if let cachedImage = ImageCache.shared.cacheDic[urlString] {
             self.image = cachedImage
             self.isLoading = false
             return
@@ -50,7 +48,7 @@ final class PhotoImageView: UIImageView {
         guard let url = URL(string: urlString) else { return }
         
         ImageDownloadManager.fetchImage(with: url) { [weak self] photoImage in
-            imageCache[url.absoluteString] = photoImage
+            ImageCache.shared.cacheDic[url.absoluteString] = photoImage
             DispatchQueue.main.async {
                 self?.image = photoImage
                 self?.isLoading = false
