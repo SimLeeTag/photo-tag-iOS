@@ -13,7 +13,6 @@ final class TagCategoryViewModel {
     let tagNetworkManager = TagNetworkingManager()
     let title = Observable("Tags")
     let buttonText = Observable("Select Tag")
-    let imageLoadTaskManager = ImageDownloadManager()
     private(set) var tags: Observable<[Tag]> = Observable([])
     private(set) var tagImages: Observable<[UIImage]> = Observable([])
     private(set) var tagImageUrls: Observable<[String]> = Observable([])
@@ -25,7 +24,7 @@ final class TagCategoryViewModel {
             self.appendTagImageUrls(with: hashtags)
             for url in self.tagImageUrls.value {
                 guard let url = URL(string: url) else { return }
-                self.imageLoadTaskManager.fetchImage(with: url) { image in
+                ImageDownloadManager.fetchImage(with: url) { image in
                     guard let newImage = image else { return }
                     self.tagImages.value.append(newImage)
                 }
@@ -36,7 +35,7 @@ final class TagCategoryViewModel {
     
     func fetchTagImage(with url: String, completionHandler: @escaping (UIImage) -> Void) {
         guard let imageUrl = URL(string: url) else { return }
-        self.imageLoadTaskManager.fetchImage(with: imageUrl) { image in
+        ImageDownloadManager.fetchImage(with: imageUrl) { image in
             guard let newImage = image else { return }
             completionHandler(newImage)
         }

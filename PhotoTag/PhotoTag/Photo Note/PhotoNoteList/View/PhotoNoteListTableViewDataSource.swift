@@ -10,7 +10,6 @@ import UIKit
 final class PhotoNoteListTableViewDataSource: NSObject, UITableViewDataSource {
     
     var noteList = [PhotoNote]()
-    let imageLoadTaskManager = ImageDownloadManager()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return noteList.count
@@ -27,10 +26,6 @@ final class PhotoNoteListTableViewDataSource: NSObject, UITableViewDataSource {
 
 extension PhotoNoteListTableViewDataSource {
     
-    func updatePhotoNoteList(_ photoNoteList: [PhotoNote]) {
-        self.noteList = photoNoteList
-    }
-    
     private func makeOneImageTypeCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> PhotoNoteListOneImageTableViewCell {
         // note data that should be in appropriate indexPath
         let note = noteList[indexPath.item]
@@ -41,7 +36,7 @@ extension PhotoNoteListTableViewDataSource {
         
         // fetch and fill image in cell
         guard let imageUrl = URL(string: note.photos[0]) else { return PhotoNoteListOneImageTableViewCell()}
-        imageLoadTaskManager.fetchImage(with: imageUrl) { image in
+        ImageDownloadManager.fetchImage(with: imageUrl) { image in
             tableViewCell.fillImage(with: image)
             
             // if one images in cell, hidden +1 label
@@ -75,7 +70,7 @@ extension PhotoNoteListTableViewDataSource {
         
         for url in imageURLs {
             guard let imageUrl = URL(string: url) else { return PhotoNoteListThreeImageTableViewCell()}
-            imageLoadTaskManager.fetchImage(with: imageUrl) { image in
+            ImageDownloadManager.fetchImage(with: imageUrl) { image in
                 images.append(image)
                 
                 // after fetch all the images to display in cell, fill those images in cell

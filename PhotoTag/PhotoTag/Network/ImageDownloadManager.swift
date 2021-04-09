@@ -11,9 +11,9 @@ import UIKit.UIImage
 
 final class ImageDownloadManager {
     
-    let userQueue = DispatchQueue.global(qos: .userInitiated)
+    static let userQueue = DispatchQueue.global(qos: .userInitiated)
     
-    func fetchImageGroup(imageUrls: [String], completionHandler: @escaping ([UIImage]) -> Void) {
+    static func fetchImageGroup(imageUrls: [String], completionHandler: @escaping ([UIImage]) -> Void) {
         let group = DispatchGroup()
         var downloadedImages: [UIImage] = []
         for urlString in imageUrls {
@@ -35,7 +35,7 @@ final class ImageDownloadManager {
         }
     }
     
-    func fetchImage(with imageURL: URL, completionHandler: @escaping (UIImage?) -> Void) {
+    static func fetchImage(with imageURL: URL, completionHandler: @escaping (UIImage?) -> Void) {
         
         NetworkManager.shared.session.dataTask(with: imageURL) { (data, response, error) in
             guard let data = data else { print("no image data"); return }

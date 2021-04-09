@@ -11,7 +11,6 @@ import UIKit.UIImage
 class PhotoNoteViewModel {
     private(set) var selectedImages: Observable<[NoteImage]> = Observable([])
     let noteNetworkingManager = NoteNetworkingManager()
-    let imageLoadTaskManager = ImageDownloadManager()
     var date: Observable<String?> = Observable("")
     var noteId: Observable<NoteID>  = Observable(0)
     var noteContentText: Observable<NoteText> = Observable("")
@@ -48,11 +47,10 @@ class PhotoNoteViewModel {
         NotificationCenter.default.post(name: .noteImages, object: nil)
     }
     
-    private func fetchImages(url: String, completionHandler: @escaping (NoteImage) -> Void) {
+    func fetchImage(url: String, completionHandler: @escaping (NoteImage) -> Void) {
         guard let imageUrl = URL(string: url) else { return }
-        
-        // using dispatch group
-        imageLoadTaskManager.fetchImage(with: imageUrl) { image in
+
+        ImageDownloadManager.fetchImage(with: imageUrl) { image in
             guard let image = image else { return }
             completionHandler(image)
         }

@@ -116,7 +116,8 @@ class PhotoNoteViewController: UIViewController {
     
     private func bind() {
         viewModel.noteImageUrls.bind { urlStrings in
-            self.viewModel.imageLoadTaskManager.fetchImageGroup(imageUrls: urlStrings) { imageGroup in
+            // using GCD Group
+            ImageDownloadManager.fetchImageGroup(imageUrls: urlStrings) { imageGroup in
                 self.viewModel.updateSelectedImages(with: imageGroup)
                 self.viewModel.sendNotification()
             }
@@ -226,7 +227,7 @@ extension PhotoNoteViewController {
     private func newImageView() -> UIImageView {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleToFill
         return imageView
     }
 }
