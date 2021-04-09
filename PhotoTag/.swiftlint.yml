@@ -19,3 +19,8 @@ excluded:
 - PhotoTag/App/AppDelegate.swift
 - PhotoTag/App/SceneDelegate.swift
 - PhotoTag/App
+- PhotoTag/Tag/Model/TagNetworkingManager.swift
+- PhotoTag/Network/ImageDownloadManager.swift
+- PhotoTagTests/PhotoTagTests.swift
+- PhotoTag/Photo Note/PhotoNote/View/PhotoNoteViewController.swift
+- PhotoTag/Photo Note/Model/NoteNetworkingManage.swift
