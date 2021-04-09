@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6A0A216825AAC158009D56DE /* NoteNetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0A216725AAC158009D56DE /* NoteNetworkingManager.swift */; };
+		6A2F405D26203A9C002BC6E4 /* PhotoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2F405C26203A9C002BC6E4 /* PhotoImageView.swift */; };
 		6A343C7B25735C7000146AAF /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A343C7A25735C7000146AAF /* Observable.swift */; };
 		6A343C8025735C8C00146AAF /* TagManagementCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A343C7F25735C8C00146AAF /* TagManagementCellViewModel.swift */; };
 		6A4AD139258A58C200857FEC /* TagManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6825212548053F00B19C9A /* TagManagementViewController.swift */; };
@@ -177,6 +178,7 @@
 		4748E784DBC15642B3BBD5BE /* Pods-PhotoTagTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTagTests.release.xcconfig"; path = "Target Support Files/Pods-PhotoTagTests/Pods-PhotoTagTests.release.xcconfig"; sourceTree = "<group>"; };
 		55C8346B7FC7025DA7D4F3EB /* Pods-PhotoTag.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTag.release.xcconfig"; path = "Target Support Files/Pods-PhotoTag/Pods-PhotoTag.release.xcconfig"; sourceTree = "<group>"; };
 		6A0A216725AAC158009D56DE /* NoteNetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteNetworkingManager.swift; sourceTree = "<group>"; };
+		6A2F405C26203A9C002BC6E4 /* PhotoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoImageView.swift; sourceTree = "<group>"; };
 		6A343C68257245D100146AAF /* PhotoTagRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoTagRelease.entitlements; sourceTree = "<group>"; };
 		6A343C7A25735C7000146AAF /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		6A343C7F25735C8C00146AAF /* TagManagementCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementCellViewModel.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				6A554504255AE449003F3864 /* ContentViewWithHeader.swift */,
 				6A5544E32559B3CA003F3864 /* ScrollableContentViewWithHeader.swift */,
 				6AEB5544259CA8220044699D /* AlertView.swift */,
+				6A2F405C26203A9C002BC6E4 /* PhotoImageView.swift */,
 			);
 			path = "Common View";
 			sourceTree = "<group>";
@@ -919,6 +922,7 @@
 				6A63BA12255C0AD10096A0F7 /* UITableView.swift in Sources */,
 				6AFE3C01253EDF3200B385AC /* AppDelegate.swift in Sources */,
 				6A89B9E3255496F9003E1027 /* SelectPhotoViewController.swift in Sources */,
+				6A2F405D26203A9C002BC6E4 /* PhotoImageView.swift in Sources */,
 				6AAE725E2555988B00CF7F9F /* TagCategoryView.swift in Sources */,
 				6A57CAEF255ED33600E42348 /* UsesAutoLayout.swift in Sources */,
 				6A63BA2C255C2F210096A0F7 /* TagManagementTableViewDelegate.swift in Sources */,
