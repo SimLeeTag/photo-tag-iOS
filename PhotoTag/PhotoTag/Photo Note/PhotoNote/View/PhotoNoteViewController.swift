@@ -116,10 +116,24 @@ class PhotoNoteViewController: UIViewController {
     
     private func bind() {
         viewModel.noteImageUrls.bind { urlStrings in
-            // using GCD Group
-            ImageDownloadManager.fetchImageGroup(imageUrls: urlStrings) { imageGroup in
-                self.viewModel.updateSelectedImages(with: imageGroup)
+
+            // Check cached image first
+            var imgGroup: [NoteImage] = []
+            for imgUrlStr in urlStrings {
+                if let cachedImage = ImageCache.shared.cacheDic[imgUrlStr] {
+                    imgGroup.append(cachedImage)
+                }
+            }
+            
+            if imgGroup.count == urlStrings.count {
+                self.viewModel.updateSelectedImages(with: imgGroup)
                 self.viewModel.sendNotification()
+            } else {
+                // request images by using GCD Group
+                ImageDownloadManager.fetchImageGroup(imageUrls: urlStrings) { imageGroup in
+                    self.viewModel.updateSelectedImages(with: imageGroup)
+                    self.viewModel.sendNotification()
+                }
             }
         }
         viewModel.noteContentText.bind { noteStr in

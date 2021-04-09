@@ -21,7 +21,7 @@ class PhotoNoteViewModel {
         self.noteId.value = noteId
     }
     
-    func updateSelectedImages(with images: [UIImage]) {
+    func updateSelectedImages(with images: [NoteImage]) {
         selectedImages.value = images
     }
     
