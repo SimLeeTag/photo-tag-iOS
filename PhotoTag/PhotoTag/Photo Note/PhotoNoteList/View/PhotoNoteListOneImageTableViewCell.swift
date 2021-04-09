@@ -40,7 +40,7 @@ class PhotoNoteListOneImageTableViewCell: UITableViewCell, NoteListCell {
     
     func fillImage(with image: UIImage?) {
         DispatchQueue.main.async {
-            self.noteImageView.contentMode = .scaleAspectFill
+            self.noteImageView.contentMode = .scaleToFill
             if image == nil {
                 self.noteImageView.image = #imageLiteral(resourceName: "logo") // if there is no image, set default image
             }
