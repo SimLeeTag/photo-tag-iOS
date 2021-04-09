@@ -27,9 +27,9 @@ class PhotoNoteListViewModel {
     }
     
     func fetchPhotoNoteList(completionHandler: @escaping ([PhotoNote]?) -> Void) {
-        noteNetworkingManager.fetchNoteList(tagIds: selectedTags) { photoList in
+        noteNetworkingManager.fetchNoteList(tagIds: selectedTags) { [weak self] photoList in
             guard let allPhotoList = photoList else { return }
-            self.photoNoteList.value = allPhotoList
+            self?.photoNoteList.value = allPhotoList
             completionHandler(allPhotoList)
         }
     }

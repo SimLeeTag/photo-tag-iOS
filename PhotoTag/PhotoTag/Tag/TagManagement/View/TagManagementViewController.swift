@@ -31,7 +31,6 @@ final class TagManagementViewController: UIViewController {
     }
     
     // MARK: - Intialization
-    //TODO:- add viewModel as parameter
     init(with viewModel: TagManagementViewModel, coordinator: TagCoordinator) {
         self.coordinator = coordinator
         self.viewModel = viewModel
@@ -66,10 +65,10 @@ final class TagManagementViewController: UIViewController {
     }
     
     private func fetchHashtags() {
-        viewModel.fetchHashtags { fetchedViewModel in
-            self.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
-            self.delegate?.updateViewModel(with: fetchedViewModel)
-            self.updateHashTags()
+        viewModel.fetchHashtags { [weak self] fetchedViewModel in
+            self?.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
+            self?.delegate?.updateViewModel(with: fetchedViewModel)
+            self?.updateHashTags()
         }
     }
     

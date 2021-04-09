@@ -99,9 +99,9 @@ final class TagCategoryViewController: UIViewController {
     private func fetchTags() {
         if viewAppeared {
             viewModel.fetchTags(size: requestTagDataSize,
-                                page: requestTagDataPageNumber) { fetchedViewModel in
-                self.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
-                self.updateTags()
+                                page: requestTagDataPageNumber) { [weak self] fetchedViewModel in
+                self?.dataSource.updateViewModel(updatedViewModel: fetchedViewModel)
+                self?.updateTags()
             }
         }
     }

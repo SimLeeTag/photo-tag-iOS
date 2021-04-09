@@ -66,7 +66,7 @@ class PhotoNoteViewController: UIViewController {
     @IBAction func moreButtonTapped(_ sender: Any) {
         let alert = UIAlertController(title: "Choose Action", message: "", preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive , handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive , handler: { (UIAlertAction) in
             print("User click Delete button")
             self.viewModel.deleteNote { success in
                 if success ?? false { DispatchQueue.main.async { self.presentAlert() }}}
@@ -102,15 +102,15 @@ class PhotoNoteViewController: UIViewController {
     }
     
     private func presentNoteViewForReading() {
-        viewModel.fetchNoteContent { photoNote in
-            self.viewModel.noteId.value = photoNote.noteID
-            self.viewModel.storeFetchedNote(photoNote: photoNote)
-            self.viewModel.noteContentText.value = photoNote.rawMemo
+        viewModel.fetchNoteContent { [weak self] photoNote in
+            self?.viewModel.noteId.value = photoNote.noteID
+            self?.viewModel.storeFetchedNote(photoNote: photoNote)
+            self?.viewModel.noteContentText.value = photoNote.rawMemo
             DispatchQueue.main.async {
-                self.dateLabel.text = "\(photoNote.created)"
+                self?.dateLabel.text = "\(photoNote.created)"
                     .components(separatedBy: "T").first!
-                self.noteTextView.text = photoNote.rawMemo }
-            self.highlightTag(in: photoNote)
+                self?.noteTextView.text = photoNote.rawMemo }
+            self?.highlightTag(in: photoNote)
         }
     }
     
@@ -130,9 +130,9 @@ class PhotoNoteViewController: UIViewController {
                 self.viewModel.sendNotification()
             } else {
                 // request images by using GCD Group
-                ImageDownloadManager.fetchImageGroup(imageUrls: urlStrings) { imageGroup in
-                    self.viewModel.updateSelectedImages(with: imageGroup)
-                    self.viewModel.sendNotification()
+                ImageDownloadManager.fetchImageGroup(imageUrls: urlStrings) { [weak self] imageGroup in
+                    self?.viewModel.updateSelectedImages(with: imageGroup)
+                    self?.viewModel.sendNotification()
                 }
             }
         }

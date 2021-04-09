@@ -64,11 +64,11 @@ final class PhotoNoteListViewController: UIViewController {
     
     // fetch data and put each data in viewmodel properties
     private func fetchNoteListData() {
-        viewModel.fetchPhotoNoteList() { photoNoteList in
+        viewModel.fetchPhotoNoteList() { [weak self] photoNoteList in
             guard let noteList = photoNoteList else { return }
-            self.dataSource.noteList = noteList
+            self?.dataSource.noteList = noteList
             DispatchQueue.main.async {
-                self.photoNoteListView.photoNoteListTableView.reloadData()
+                self?.photoNoteListView.photoNoteListTableView.reloadData()
             }
         }
     }

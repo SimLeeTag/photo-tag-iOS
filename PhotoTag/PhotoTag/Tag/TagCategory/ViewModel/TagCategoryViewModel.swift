@@ -18,11 +18,11 @@ final class TagCategoryViewModel {
     private(set) var tagImageUrls: Observable<[String]> = Observable([])
     
     func fetchTags(size: Int, page: Int, completionHandler: @escaping (TagCategoryViewModel) -> Void) {
-        tagNetworkManager.fetchTags(size: size, page: page) { tags in
+        tagNetworkManager.fetchTags(size: size, page: page) { [weak self] tags in
             guard let hashtags = tags else { return }
-            self.appendTags(with: hashtags)
-            self.appendTagImageUrls(with: hashtags)
-            completionHandler(self)
+            self?.appendTags(with: hashtags)
+            self?.appendTagImageUrls(with: hashtags)
+            if let self = self { completionHandler(self) }
         }
     }
     
