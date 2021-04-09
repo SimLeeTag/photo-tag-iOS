@@ -111,8 +111,7 @@ private extension PhotoNoteListView {
         
         static func photoNoteListTableView() -> UITableView {
             let tableView = UITableView()
-            tableView.register(cellType: PhotoNoteListOneImageTableViewCell.self)
-            tableView.register(cellType: PhotoNoteListThreeImageTableViewCell.self)
+            tableView.register(cellType: PhotoNoteListTableViewCell.self)
             tableView.backgroundColor = .clear
             tableView.allowsMultipleSelection = false
             tableView.showsVerticalScrollIndicator = false
