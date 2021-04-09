@@ -10,7 +10,6 @@ import UIKit
 final class TagCategoryCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     private var viewModel = TagCategoryViewModel()
-    private let imageLoadTaskManager = ImageDownloadManager()
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return TagCategoryCollectionViewConstant.numberOfSections
@@ -28,9 +27,7 @@ final class TagCategoryCollectionViewDataSource: NSObject, UICollectionViewDataS
             let id = viewModel.tags.value[tagInCurrentPosition].tagID
             collectionViewCell.updateTagId(id)
             collectionViewCell.fill(with: self.viewModel.tags.value[tagInCurrentPosition])
-            viewModel.fetchTagImage(with: viewModel.tagImageUrls.value[tagInCurrentPosition]) { cellImage in
-                collectionViewCell.fillImage(with: cellImage)
-            }
+            collectionViewCell.url = URL(string: viewModel.tagImageUrls.value[tagInCurrentPosition])
         }
         collectionViewCell.backgroundColor = .black
         return collectionViewCell
