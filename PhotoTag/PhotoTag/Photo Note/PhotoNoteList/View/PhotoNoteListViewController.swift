@@ -12,6 +12,8 @@ final class PhotoNoteListViewController: UIViewController {
     weak var coordinator: PhotoNoteCoordinator? // show tag category create new note
     private let viewModel: PhotoNoteListViewModel
     private let dataSource: PhotoNoteListTableViewDataSource
+    // archive objects for cancellation
+    var imageProviders = Set<PhotoNoteImageProvider>()
     private var photoNoteListView: PhotoNoteListView! {
         return view as? PhotoNoteListView
     }
@@ -64,7 +66,7 @@ final class PhotoNoteListViewController: UIViewController {
     
     // fetch data and put each data in viewmodel properties
     private func fetchNoteListData() {
-        viewModel.fetchPhotoNoteList() { [weak self] photoNoteList in
+        viewModel.fetchPhotoNoteList {[weak self] photoNoteList in
             guard let noteList = photoNoteList else { return }
             self?.dataSource.noteList = noteList
             DispatchQueue.main.async {
@@ -87,8 +89,26 @@ extension PhotoNoteListViewController: PhotoNoteListViewDelegate {
 
 extension PhotoNoteListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: - request data from API and pass data through coordinator
         guard let cell = tableView.cellForRow(at: indexPath) as? NoteListCell else { return }
         coordinator?.navigateToPhotoNote(noteId: cell.noteId, isCreatingMode: .reading)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? NoteListCell else { return }
+        let note = self.dataSource.noteList[indexPath.row]
+        let imageProvider = PhotoNoteImageProvider(note: note) { images in
+            OperationQueue.main.addOperation { cell.fillImages(images) } }
+        imageProviders.insert(imageProvider)
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? PhotoNoteListTableViewCell else { return }
+        // to find and cancel an object that provides an image
+        for provider in imageProviders.filter({ $0.note == cell.photoNote }) {
+            provider.cancel()
+            
+            // remove the object from Set
+            imageProviders.remove(provider)
+        }
     }
 }

@@ -17,12 +17,13 @@ final class PhotoNoteListTableViewDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // note data that should be in appropriate indexPath
-        let note = noteList[indexPath.item]
-        
         // fill data except image first
         let tableViewCell = tableView.dequeueReusableCell(with: PhotoNoteListTableViewCell.self, for: indexPath)
-        tableViewCell.fill(with: note)
+        
+        /* for now, deliver only the "PhotoNote" structure needed for the cell.
+         Additional actions for the cell are executed on other code later. (TableViewDelegate)
+         */
+        tableViewCell.photoNote = noteList[indexPath.row]
         
         // no effect when cell is selected
         DispatchQueue.main.async { tableViewCell.selectionStyle = .none }
