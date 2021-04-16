@@ -10,7 +10,6 @@ import UIKit
 final class PhotoImageView: UIImageView {
     
     // MARK: - Properties
-    // set activity indicator
     var isLoading: Bool {
       get { return activityIndicator.isAnimating }
       set {
@@ -49,10 +48,14 @@ final class PhotoImageView: UIImageView {
         
         ImageDownloadManager.fetchImage(with: url) { [weak self] photoImage in
             ImageCache.shared.cacheDic[url.absoluteString] = photoImage
-            DispatchQueue.main.async {
-                self?.image = photoImage
-                self?.isLoading = false
-            }
+            self?.updateImage(with: photoImage)
+        }
+    }
+    
+    func updateImage(with image: NoteImage?) {
+        DispatchQueue.main.async {
+            self.image = image
+            self.isLoading = false
         }
     }
     
