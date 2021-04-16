@@ -24,3 +24,4 @@ excluded:
 - PhotoTagTests/PhotoTagTests.swift
 - PhotoTag/Photo Note/PhotoNote/View/PhotoNoteViewController.swift
 - PhotoTag/Photo Note/Model/NoteNetworkingManage.swift
+- PhotoTag/Utility/Extension/UIColor.swift
