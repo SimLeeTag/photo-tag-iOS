@@ -97,5 +97,64 @@ extension PhotoNoteListTableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }
+}
+
+// Page Controll & Image Animation
+extension PhotoNoteListTableViewCell: UIScrollViewDelegate {
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let pageIndex = round(scrollView.contentOffset.x/self.contentView.frame.width)
+        pageControl.currentPage = Int(pageIndex)
+        
+        let offset = percentOffset()
+        if !scrollView.subviews.isEmpty {
+            imagesWithAnimation(i: Int(pageIndex), next: Int(pageIndex) + 1, percentOffset: offset)
+        }
+    }
+    
+    private func percentOffset() -> CGPoint {
+        let maximumHorizontalOffset: CGFloat = scrollView.contentSize.width - scrollView.frame.width
+        let currentHorizontalOffset: CGFloat = scrollView.contentOffset.x
+        
+        // vertical
+        let maximumVerticalOffset: CGFloat = scrollView.contentSize.height - scrollView.frame.height
+        let currentVerticalOffset: CGFloat = scrollView.contentOffset.y
+        
+        let percentageHorizontalOffset: CGFloat = currentHorizontalOffset / maximumHorizontalOffset
+        let percentageVerticalOffset: CGFloat = currentVerticalOffset / maximumVerticalOffset
+        
+        let percentOffset: CGPoint = CGPoint(x: percentageHorizontalOffset, y: percentageVerticalOffset)
+        return percentOffset
+    }
+    
+    private func imagesWithAnimation(i: Int, next: Int, percentOffset: CGPoint) {
+        let scrollViewSubViews = scrollView.subviews
+        let interval: CGFloat = CGFloat((100 / scrollViewSubViews.count - 1))
+        var minimum: CGFloat = 0.0
+        var maximum: CGFloat = 0.0
+        for i in 0..<scrollViewSubViews.count {
+            minimum = interval * CGFloat(i)
+            maximum = interval * CGFloat(next)
+            
+            if percentOffset.x > minimum && percentOffset.x <= maximum {
+                guard let imageView = scrollView.subviews[i] as? UIImageView else { return }
+                guard let nextImageView = scrollView.subviews[next] as? UIImageView else { return}
+                imageView.transform = CGAffineTransform(scaleX: (maximum-percentOffset.x)/interval, y: (maximum-percentOffset.x)/interval)
+                nextImageView.transform = CGAffineTransform(scaleX: percentOffset.x, y: percentOffset.x)
+            }
+        }
+    }
+    
+    func scrollView(_ scrollView: UIScrollView, didScrollToPercentageOffset percentageHorizontalOffset: CGFloat) {
+        if pageControl.currentPage == 0 {
+            let pageUnselectedColor: UIColor = UIColor.fade(fromRed: 255/255, fromGreen: 255/255, fromBlue: 255/255, fromAlpha: 1, toRed: 103/255, toGreen: 58/255, toBlue: 183/255, toAlpha: 1, withPercentage: percentageHorizontalOffset * 3)
+            pageControl.pageIndicatorTintColor = pageUnselectedColor
+            
+            let bgColor: UIColor = UIColor.fade(fromRed: 103/255, fromGreen: 58/255, fromBlue: 183/255, fromAlpha: 1, toRed: 255/255, toGreen: 255/255, toBlue: 255/255, toAlpha: 1, withPercentage: percentageHorizontalOffset * 3)
+            scrollView.subviews[pageControl.currentPage].backgroundColor = bgColor
+            
+            let pageSelectedColor: UIColor = UIColor.fade(fromRed: 81/255, fromGreen: 36/255, fromBlue: 152/255, fromAlpha: 1, toRed: 103/255, toGreen: 58/255, toBlue: 183/255, toAlpha: 1, withPercentage: percentageHorizontalOffset * 3)
+            pageControl.currentPageIndicatorTintColor = pageSelectedColor
+        }
+    }
 }

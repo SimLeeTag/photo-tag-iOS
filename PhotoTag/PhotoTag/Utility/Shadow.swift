@@ -9,18 +9,18 @@ import UIKit
 
 struct Shadow {
     let color: UIColor?
-    let x: CGFloat
-    let y: CGFloat
-    let blur: CGFloat
+    let offset: CGSize
+    let blur: CGFloat?
     let spread: CGFloat
+    let opacity: Float
 }
 
 extension CALayer {
     func makeShadow(with shadow: Shadow) {
         shadowColor = shadow.color?.cgColor
-        shadowOpacity = 0.4
-        shadowOffset = CGSize(width: shadow.x, height: shadow.y)
-        shadowRadius = shadow.blur / 3.0
+        shadowOpacity = shadow.opacity
+        shadowOffset = shadow.offset
+        shadowRadius = shadow.blur ?? 0 / 3.0
         if shadow.spread == 0 {
             shadowPath = nil
         } else {
