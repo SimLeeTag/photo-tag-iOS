@@ -11,9 +11,6 @@ class PhotoNoteListViewModel {
     
     let noteNetworkingManager = NoteNetworkingManager()
     var selectedTags: [TagID] = []
-    var firstSelectedTagText = Observable("")
-    var secondSelectedTagText = Observable("")
-    var thirdSelectedTagText = Observable("")
     private(set) var photoNoteList: Observable<[PhotoNote]> = Observable([])
 
     init() {
