@@ -18,3 +18,5 @@ struct PhotoNote: Codable {
         case tags, created, rawMemo, photos
     }
 }
+// to enable PhotoNoteImageProvider to adopt Hashable protocol
+extension PhotoNote: Hashable {}
