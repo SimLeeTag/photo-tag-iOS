@@ -51,13 +51,14 @@ struct UseCase {
             .eraseToAnyPublisher()
     }
     
-    // delete note
+    // edit note & delete note
     func request(_ network: NetworkConnectable = NetworkManager.shared,
-                 noteId: NoteID, method: HTTPMethod, body: String?) -> AnyPublisher<HTTPURLResponse, Error> {
+                 noteId: NoteID, method: HTTPMethod, body: String?, jsonKey: String = "") -> AnyPublisher<HTTPURLResponse, Error> {
         let url = Endpoint.noteFetch(noteId: noteId).url!
         let body = body?.data(using: .utf8)
+        // empty body -> delete / with body -> edit
         let request =
-            body == nil ? URLRequest(urlWithToken: url, method: method) : URLRequest(urlWithToken: url, method: method, body: body!)
+            body == nil ? URLRequest(urlWithToken: url, method: method) : URLRequest(urlWithToken: url, method: method, body: body!, jsonKey: jsonKey)
         return network
             .request(request: request)
             .compactMap { $0.response as? HTTPURLResponse }

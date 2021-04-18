@@ -13,32 +13,16 @@ final class TagCategoryViewModel {
     let tagNetworkManager = TagNetworkingManager()
     let title = Observable("Tags")
     let buttonText = Observable("Select Tag")
-    let imageLoadTaskManager = ImageLoadTaskManager()
     private(set) var tags: Observable<[Tag]> = Observable([])
     private(set) var tagImages: Observable<[UIImage]> = Observable([])
     private(set) var tagImageUrls: Observable<[String]> = Observable([])
     
     func fetchTags(size: Int, page: Int, completionHandler: @escaping (TagCategoryViewModel) -> Void) {
-        tagNetworkManager.fetchTags(size: size, page: page) { tags in
+        tagNetworkManager.fetchTags(size: size, page: page) { [weak self] tags in
             guard let hashtags = tags else { return }
-            self.appendTags(with: hashtags)
-            self.appendTagImageUrls(with: hashtags)
-            for url in self.tagImageUrls.value {
-                guard let url = URL(string: url) else { return }
-                self.imageLoadTaskManager.fetchImage(with: url) { image in
-                    guard let newImage = image else { return }
-                    self.tagImages.value.append(newImage)
-                }
-            }
-            completionHandler(self)
-        }
-    }
-    
-    func fetchTagImage(with url: String, completionHandler: @escaping (UIImage) -> Void) {
-        guard let imageUrl = URL(string: url) else { return }
-        self.imageLoadTaskManager.fetchImage(with: imageUrl) { image in
-            guard let newImage = image else { return }
-            completionHandler(newImage)
+            self?.appendTags(with: hashtags)
+            self?.appendTagImageUrls(with: hashtags)
+            if let self = self { completionHandler(self) }
         }
     }
     

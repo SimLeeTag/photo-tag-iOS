@@ -36,8 +36,8 @@ struct AppViewControllersFactory {
         return noteViewController
     }
     
-    func photoNoteViewController(coordinator: PhotoNoteCoordinator, viewModel: PhotoNoteViewModel, isCreatingMode: NoteState) -> UIViewController {
-        return PhotoNoteViewController(coordinator: coordinator, viewModel: viewModel, isCreating: isCreatingMode)
+    func photoNoteViewController(coordinator: PhotoNoteCoordinator, viewModel: PhotoNoteViewModel, isCreatingMode: NoteState, selectedImages: [NoteImage]) -> UIViewController {
+        return PhotoNoteViewController(coordinator: coordinator, viewModel: viewModel, isCreating: isCreatingMode, selectedImages: selectedImages)
     }
     
     func searchViewController(coordinator: SearchCoordinator) -> UIViewController {

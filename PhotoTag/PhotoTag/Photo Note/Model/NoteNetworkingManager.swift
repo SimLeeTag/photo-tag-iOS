@@ -56,7 +56,7 @@ final class NoteNetworkingManager {
     func editNote(noteId: NoteID,
                   noteText: String,
                   completionHandler: @escaping (Bool?) -> Void) {
-        UseCase.shared.request(noteId: noteId, method: .put, body: noteText)
+        UseCase.shared.request(noteId: noteId, method: .put, body: noteText, jsonKey: "rawMemo")
             .receive(subscriber: Subscribers.Sink(receiveCompletion: { [ weak self ] in
                 guard case let .failure(error) = $0 else { return }
                 debugPrint(error.localizedDescription)

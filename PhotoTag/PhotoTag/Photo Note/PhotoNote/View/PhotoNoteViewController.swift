@@ -27,15 +27,15 @@ class PhotoNoteViewController: UIViewController {
     @IBOutlet weak var imagePageControl: UIPageControl!
     @IBOutlet weak var imageHorizontalScrollView: UIScrollView!
     private var noteState: NoteState
-    private var noteContentText: NoteText = ""
-    private let noteNetworkManager = NoteNetworkingManager()
     
     init(coordinator: PhotoNoteCoordinator,
          viewModel: PhotoNoteViewModel,
-         isCreating: NoteState) {
+         isCreating: NoteState,
+         selectedImages: [NoteImage]) {
         self.coordinator = coordinator
         self.viewModel = viewModel
         self.noteState = isCreating
+        self.viewModel.updateSelectedImages(with: selectedImages)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -43,16 +43,20 @@ class PhotoNoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
         setupNotification()
+        setupView()
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(presentNoteWritingScene))
         noteTextView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         switch noteState {
-        case .creating: saveNewNote()
-        case .reading: editNote()
+        case .creating: viewModel.saveNewNote {
+            DispatchQueue.main.async { self.presentAlert() }
+        }
+        case .reading: viewModel.editNote {
+            DispatchQueue.main.async { self.presentAlert() }
+        }
         }
     }
     @IBAction func backButtonTapped(_ sender: Any) {
@@ -61,17 +65,18 @@ class PhotoNoteViewController: UIViewController {
     
     @IBAction func moreButtonTapped(_ sender: Any) {
         let alert = UIAlertController(title: "Choose Action", message: "", preferredStyle: .actionSheet)
-
-            alert.addAction(UIAlertAction(title: "Delete", style: .destructive , handler:{ (UIAlertAction)in
-                print("User click Delete button")
-                self.deleteNote()
-            }))
-            
-            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler:{ (UIAlertAction)in
-                print("User click Dismiss button")
-            }))
         
-            self.present(alert, animated: true)
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive , handler: { (UIAlertAction) in
+            print("User click Delete button")
+            self.viewModel.deleteNote { success in
+                if success ?? false { DispatchQueue.main.async { self.presentAlert() }}}
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler:{ (UIAlertAction)in
+            print("User click Dismiss button")
+        }))
+        
+        self.present(alert, animated: true)
         
     }
     
@@ -85,7 +90,8 @@ class PhotoNoteViewController: UIViewController {
             displayPhotos()
         }
         displayDate()
-        
+        bind()
+        self.firstImageView.isHidden = true
     }
     
     private func presentNoteViewForWriting() {
@@ -96,14 +102,44 @@ class PhotoNoteViewController: UIViewController {
     }
     
     private func presentNoteViewForReading() {
-        viewModel.fetchNoteContent { photoNote in
-            self.viewModel.storeFetchedNote(photoNote: photoNote)
-            self.noteContentText = photoNote.rawMemo
+        viewModel.fetchNoteContent { [weak self] photoNote in
+            self?.viewModel.noteId.value = photoNote.noteID
+            self?.viewModel.storeFetchedNote(photoNote: photoNote)
+            self?.viewModel.noteContentText.value = photoNote.rawMemo
             DispatchQueue.main.async {
-                self.dateLabel.text = "\(photoNote.created)"
+                self?.dateLabel.text = "\(photoNote.created)"
                     .components(separatedBy: "T").first!
-                self.noteTextView.text = photoNote.rawMemo }
-            self.highlightTag(in: photoNote)
+                self?.noteTextView.text = photoNote.rawMemo }
+            self?.highlightTag(in: photoNote)
+        }
+    }
+    
+    private func bind() {
+        viewModel.noteImageUrls.bind { urlStrings in
+
+            // Check cached image first
+            var imgGroup: [NoteImage] = []
+            for imgUrlStr in urlStrings {
+                if let cachedImage = ImageCache.shared.cacheDic[imgUrlStr] {
+                    imgGroup.append(cachedImage)
+                }
+            }
+            
+            if imgGroup.count == urlStrings.count {
+                self.viewModel.updateSelectedImages(with: imgGroup)
+                self.viewModel.sendNotification()
+            } else {
+                // request images by using GCD Group
+                ImageDownloadManager.fetchImageGroup(imageUrls: urlStrings) { [weak self] imageGroup in
+                    self?.viewModel.updateSelectedImages(with: imageGroup)
+                    self?.viewModel.sendNotification()
+                }
+            }
+        }
+        viewModel.noteContentText.bind { noteStr in
+            DispatchQueue.main.async {
+                self.noteTextView.text = noteStr
+            }
         }
     }
     
@@ -112,37 +148,10 @@ class PhotoNoteViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(allImagesAreFetched), name: .noteImages, object: nil)
     }
     
-    private func saveNewNote() {
-        noteNetworkManager.createNote(with: noteContentText,
-                                      images: viewModel.selectedImages.value) { success in
-            if success {
-                DispatchQueue.main.async { self.presentAlert() }
-            } else { print("Failed to create new note") }
-        }
-    }
-    
-    private func editNote() {
-        noteNetworkManager.createNote(with: noteContentText,
-                                      images: viewModel.selectedImages.value) { success in
-            if success {
-                DispatchQueue.main.async { self.presentAlert() }
-            } else { print("Failed to edit note") }
-        }
-    }
-    
-    private func deleteNote() {
-        viewModel.deleteNote { success in
-            guard let success = success else { return }
-            if success {
-                DispatchQueue.main.async {  self.presentAlert() }
-            } else {  print("Failed to delete note") }
-        }
-    }
-    
     private func filterTags(content: String) {
         if !content.contains("#") {
             let noTagText = " #noTag"
-            self.noteContentText += noTagText
+            self.viewModel.noteContentText.value += noTagText
         }
     }
     
@@ -150,6 +159,10 @@ class PhotoNoteViewController: UIViewController {
         moreButton.layer.cornerRadius = 10
         saveButton.layer.cornerRadius = 10
         backButton.layer.cornerRadius = 10
+        if noteState == .creating {
+            self.moreButton.isHidden = true
+            self.backButton.isHidden = true
+        }
     }
     
     private func displayDate() {
@@ -158,19 +171,22 @@ class PhotoNoteViewController: UIViewController {
     }
     
     @objc private func presentNoteWritingScene() {
-        coordinator?.navigateToWritePhotoNote(with: noteContentText)
+        UserDefaults.standard.set(viewModel.selectedImages.value, forKey: UserDefaultKey.selectedImages) // temporarily store selected images
+        coordinator?.navigateToWritePhotoNote(with: viewModel.noteContentText.value)
     }
     
     @objc func saveNoteText(_ notification: Notification) {
         guard let content =
                 notification.userInfo?[NoteViewController.contentTextKey] as? String else { return }
-        noteContentText = content // save passed text
+        viewModel.noteContentText.value = content // save passed text
         filterTags(content: content)
         updateTextViewWithText()
+        guard let existingImages = UserDefaults.standard.imageArray(forKey: UserDefaultKey.selectedImages) else { return }
+        viewModel.updateSelectedImages(with: existingImages) // retrieve selected images
     }
     
     private func updateTextViewWithText() {
-        DispatchQueue.main.async { self.noteTextView.text = self.noteContentText }
+        DispatchQueue.main.async { self.noteTextView.text = self.viewModel.noteContentText.value }
     }
     
     // receive notification after fetching all images
@@ -180,15 +196,14 @@ class PhotoNoteViewController: UIViewController {
     
     private func highlightTag(in note: PhotoNote) {
         let tags = note.tags.map({"#\($0)"})
-        let font = UIFont.systemFont(ofSize: 20)
         DispatchQueue.main.async {
-        guard let labelText = self.noteTextView.text else { return }
-        let attributedStr = NSMutableAttributedString(string: labelText)
-        for tag in tags {
-            
-            attributedStr.addAttribute(.foregroundColor, value: UIColor.keyColorInLightMode, range: (labelText as NSString).range(of: "\(tag)"))
-        }
-        self.noteTextView.attributedText = attributedStr
+            guard let labelText = self.noteTextView.text else { return }
+            let attributedStr = NSMutableAttributedString(string: labelText)
+            for tag in tags {
+                
+                attributedStr.addAttribute(.foregroundColor, value: UIColor.keyColorInLightMode, range: (labelText as NSString).range(of: "\(tag)"))
+            }
+            self.noteTextView.attributedText = attributedStr
         }
     }
 }
@@ -196,30 +211,24 @@ class PhotoNoteViewController: UIViewController {
 // display images
 extension PhotoNoteViewController {
     private func displayPhotos() {
+        
         for i in 0..<viewModel.selectedImages.value.count {
+            let image = self.viewModel.selectedImages.value[i]
             
-            if i == 0 {
-                DispatchQueue.main.async {
-                    let xPosition = self.view.frame.width * CGFloat(i)
-                    self.firstImageView.image = self.viewModel.selectedImages.value[i]
-                    self.firstImageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
-                    self.imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i)
-                }
-                
-            } else {
-                
-                DispatchQueue.main.async {
-                    let imageView = self.newImageView()
-                    imageView.image = self.viewModel.selectedImages.value[i]
-                    
-                    self.imageStackView.addArrangedSubview(imageView)
-                    imageView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-                    let xPosition = self.view.frame.width * CGFloat(i)
-                    imageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
-                    self.imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+i) }
-            }
+            DispatchQueue.main.async {
+                let imageView = self.newImageView()
+                imageView.image = image
+                self.layoutImage(imageView, i) }
         }
         DispatchQueue.main.async { self.view.bringSubviewToFront(self.imagePageControl) }
+    }
+    
+    private func layoutImage(_ imageView: UIImageView, _ index: Int) {
+        self.imageStackView.addArrangedSubview(imageView)
+        imageView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        let xPosition = self.view.frame.width * CGFloat(index)
+        imageView.frame = CGRect(x: xPosition, y: 0, width: self.view.frame.width, height: self.imageStackView.frame.height)
+        self.imageHorizontalScrollView.contentSize.width = self.view.frame.width * CGFloat(1+index)
     }
     
     private func setupPageControl() {
@@ -232,7 +241,7 @@ extension PhotoNoteViewController {
     private func newImageView() -> UIImageView {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleToFill
         return imageView
     }
 }

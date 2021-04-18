@@ -17,9 +17,6 @@ final class PhotoNoteListView: ContentViewWithHeader {
     // MARK: - Properties
     @UsesAutoLayout private(set) var searchButton = SubviewFactory.searchButton()
     @UsesAutoLayout private(set) var selectedTagsStackView = SubviewFactory.selectedTagsStackView()
-    @UsesAutoLayout private(set) var firstTagLabel = SubviewFactory.tagLabel()
-    @UsesAutoLayout private(set) var secondTagLabel = SubviewFactory.tagLabel()
-    @UsesAutoLayout private(set) var thirdTagLabel = SubviewFactory.tagLabel()
     @UsesAutoLayout var photoNoteListTableView = SubviewFactory.photoNoteListTableView()
     weak var delegate: PhotoNoteListViewDelegate?
     
@@ -50,9 +47,6 @@ final class PhotoNoteListView: ContentViewWithHeader {
     }
     
     override func configureHeaderView() {
-        selectedTagsStackView.addArrangedSubview(firstTagLabel)
-        selectedTagsStackView.addArrangedSubview(secondTagLabel)
-        selectedTagsStackView.addArrangedSubview(thirdTagLabel)
         headerStackView.addArrangedSubview(selectedTagsStackView)
         headerStackView.addArrangedSubview(searchButton)
     }
@@ -63,7 +57,7 @@ final class PhotoNoteListView: ContentViewWithHeader {
     }
     
     override func setupLayout() {
-        headerStackView.pinHeight(to: self.heightAnchor, multiplier: 0.1)
+        headerStackView.pinHeight(to: self.heightAnchor, multiplier: 0.03)
         contentView.pinEdges(to: self)
         headerStackView.alignment = .fill
         headerStackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -117,8 +111,7 @@ private extension PhotoNoteListView {
         
         static func photoNoteListTableView() -> UITableView {
             let tableView = UITableView()
-            tableView.register(cellType: PhotoNoteListOneImageTableViewCell.self)
-            tableView.register(cellType: PhotoNoteListThreeImageTableViewCell.self)
+            tableView.register(cellType: PhotoNoteListTableViewCell.self)
             tableView.backgroundColor = .clear
             tableView.allowsMultipleSelection = false
             tableView.showsVerticalScrollIndicator = false

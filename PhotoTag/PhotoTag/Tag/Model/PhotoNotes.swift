@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct PhotoNotes: Codable {
-    let notes: [Note]
-}
-
 struct Note: Codable {
     let tagID, noteID: Int
     let tags, photos: [String]

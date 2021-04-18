@@ -27,12 +27,12 @@ final class TagManagementViewModel {
     }
     
     func fetchHashtags(completionHandler: @escaping (TagManagementViewModel) -> Void) {
-        tagNetworkManager.fetchHashtags { hashtags in
+        tagNetworkManager.fetchHashtags { [weak self] hashtags in
             guard let activatedList = hashtags?.activatedList else { return }
             guard let archievedList = hashtags?.archivedList else { return }
-            self.activatedHashtags = Observable(activatedList)
-            self.archivedHashtags = Observable(archievedList)
-            completionHandler(self)
+            self?.activatedHashtags = Observable(activatedList)
+            self?.archivedHashtags = Observable(archievedList)
+            if let self = self { completionHandler(self) }
         }
     }
     

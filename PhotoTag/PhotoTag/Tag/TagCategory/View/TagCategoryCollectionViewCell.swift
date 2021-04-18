@@ -9,12 +9,19 @@ import UIKit
 
 final class TagCategoryCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var latestImageView: UIImageView!
+    @IBOutlet weak var latestImageView: PhotoImageView!
     @IBOutlet weak var tagNameLabel: UILabel!
     @IBOutlet weak var noteCountLabel: UILabel!
     @IBOutlet weak var cellContentView: UIView!
     @IBOutlet weak var contentStackView: UIStackView!
     private(set) var tagId: TagID = 0
+    var url: URL? {
+        didSet {
+            guard let url = url?.absoluteString else { return }
+            latestImageView.isLoading = true
+            latestImageView.loadImage(with: url)
+        }
+    }
     override var isSelected: Bool {
         didSet {
             self.layer.cornerRadius = 5
