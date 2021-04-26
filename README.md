@@ -5,8 +5,10 @@
 ## Photo Tag
 
 - 활동 기간: 2020.10 ~ 2021.02 + 리팩토링 2021.04
-- 키워드: GCD, DispatchQueue, OperationQueue, HTTP, Image Cache, MVVM-C, Combine, Test Case, Code Review, Swift, UIKit, Codebase UI
-- 주요 내용: 디바이스 사진앱에 저장되어있는 사진(최대 5장)에 해시태그와 함께 노트를 작성하여 관리할 수 있도록 만든 포토 노트 앱입니다. MVVM-C 패턴의 프로젝트로 동시성 프로그래밍을 활용한 네트워크 처리 및 이미지 처리, 메모리 관리(리테인 사이클 해결)의 초점을 맞췄고, 반응형 UI와 Combine 프레임워크를 시도했습니다.
+- 키워드  
+GCD, DispatchQueue, OperationQueue, HTTP, Image Cache, MVVM-C, Combine, Test Case, Code Review, Swift, UIKit, Codebase UI
+- 주요 내용  
+디바이스 사진앱에 저장되어있는 사진(최대 5장)에 해시태그와 함께 노트를 작성하여 관리할 수 있도록 만든 포토 노트 앱입니다. MVVM-C 패턴의 프로젝트로 동시성 프로그래밍을 활용한 네트워크 처리 및 이미지 처리, 메모리 관리(리테인 사이클 해결)의 초점을 맞췄고, 반응형 UI와 Combine 프레임워크를 시도했습니다.
 
 <br/>
 
@@ -20,7 +22,7 @@
 ## 고민한 점과 문제 해결 과정  
 👉🏻 [리팩토링 PR #58](https://github.com/SimLeeTag/photo-tag-iOS/pull/58)
 
-### 1. 거대한 ViewController를 벗어나고 각 객체의 정상 동작을 효율적으로 확인하기 위한 노력을 MVVM-C를 찾다
+### 1. 거대한 ViewController를 벗어나고 각 객체의 정상 동작을 효율적으로 확인하기 위한 노력: MVVM-C
 
 **[  각 객체의 역할과 책임을 소분하고 더 유연하게 만들기 위한 노력 ]**
 
@@ -41,7 +43,7 @@
 2. [Coordinator 1](https://lena-chamna.netlify.app/post/ios_design_pattern_coordinator_basic/) 
 3. [Coordinator 2](https://lena-chamna.netlify.app/post/ios_design_pattern_coordinator_advanced/) 
 
-### 2. HTTP, 응용을 위해 기본을 이해하다
+### 2. HTTP, 응용을 위한 기본 이해
 
 백엔드 개발자와 상의하여서 정한 API 형식에 맞게 클라이언트에서 서버로 이미지 파일과 텍스트를 업로드를 해야했습니다. 형식에 맞게 HTTP 요청을 구현했어야 하는데, HTTP 에 대한 기본적인 이해가 필요했습니다. 그래서 **HTTP 규약과 구성 등 HTTP**에 대한 기본을 먼저 학습한 다음에 응용하였고 결국에는 서버에 파일 보내는 것을 성공했었습니다. 
 
@@ -49,7 +51,7 @@
 1. [HTTP 이해하기](https://lena-chamna.netlify.app/post/http_multipart_form-data/) 
 2. [클라이언트에서 서버로 파일 보내기](https://lena-chamna.netlify.app/post/uploading_array_of_images_using_multipart_form-data_in_swift/))
 
-### 3. 혼자 진행하는 프로젝트 이대로 괜찮을까 고민하다
+### 3. 피드백 받기
 
 이전 프로젝트를 진행하면서 아쉬웠던 부분을 보완하면서 백엔드 개발자 1명과 함께 사이드 프로젝트를 진행했었습니다. 혼자 개발을 하면서 더 고려해야하는 점은 없는지, 더 나은 방법은 없는지 등 다른 의견과 시야의 필요성을 느끼고 **직접 다른 iOS 개발자 분들에게 코드 리뷰를 부탁**하였고, **피드백과 코멘트를 주고받으면서 더 다양한 부분을 깊이 고민을 하면서 개발**할 수 있었습니다. 
 * [관련된 대표 PR](https://github.com/SimLeeTag/photo-tag-iOS/pull/21)
@@ -65,15 +67,20 @@
 - **Metrickit**을 이용하여 앱 반응성 체크 Metrickit을 이용하여 런타임에서 앱이 멈춘 시간을 체크하였고, 이미지를 서버에 요청하여 받아온 데이터를 표시할 때 걸리는 시간이 문제임을 확인하고 이 시간을 줄이기 위해 아래와 같은 노력을 했습니다.
 - **네트워크 관련 동시성 프로그래밍** 
 #Dispatch_Queues #Operation #이미지_압축 #URLSession #HTTP #multi-part / form data #Combine  
-    1. **Dispatch Queue와 Dispatch Group**을 사용하여 서버와 통신하여 비동기적으로 도착하는 데이터, 특히 이미지 데이터가 UI에 표시될 때 산발적이지 않고 모두 도착한 다음 표시되도록 구현했습니다.
-    2. **Combine**을 사용하여 프레임워크에서 제공하는 이벤트 처리 연산자들을 통해 런타임에서 발생하는 네트워킹 관련 비동기 이벤트들을 핸들링을 했습니다.
-    3. 이미지 파일을 서버와 주고 받기 위해 **HTTP**에 대한 기본 규약을 공부하여 API 명세에 맞도록multipart/form-data 요청을 부분을 구현하였습니다.
-    4. 이미지를 서버에 보낼 때 iOS 디바이스로 촬영한 HEIC의 용량이 서버에서 허용하는 값보다 높아 요청이 거절되는 문제가 있어 이미지 확장자를 변경하고 **다운사이징(리사이징)** 처리하였습니다.([PhotoNoteNetworkManager](https://github.com/SimLeeTag/photo-tag-iOS/blob/dev/PhotoTag/PhotoTag/Photo%20Note/Model/NoteNetworkingManager.swift))
-    5. 해시태그가 포함되어있는 이미지 노트 목록을 구현할 때 스크롤링하여 지나가는 부분에 대해 불필요한 서버 요청을 줄이고 반응 속도를 높이고자 요청 취소와 일시중지 기능이 있는 **OperationQueue**을 이용하여 구현하였습니다.
+    > **[ 포토 노트 상세 화면 - 이미지 처리 ]**
+    상세화면에서 노트의 데이터를 서버에 요청하여 가져오는 경우, 비동기적으로 도착하는 이미지가 산발적으로 표시되지 않고 노트에 포함된 모든 이미지들을다 가져와 표시하도록 **Dispatch Queue**를 이용하여 처리하였습니다.<br>
+    **[ 포토 노트 리스트 화면 - 스크롤링에 따른 데이터 요청]** 
+    태그별 포토 노트 리스트(메인) 화면에서 **Operation Queue**를 이용하여 Table View에서 스크롤이 지나간 Cell은 데이터(이미지 포함)를 표시를 하지 않고(요청을 취소하고), 보여지는 부분의 Cell 만 표시하도록 구현했습니다.
+    
+  1. **Dispatch Queue와 Dispatch Group**을 사용하여 서버와 통신하여 비동기적으로 도착하는 데이터, 특히 이미지 데이터가 UI에 표시될 때 산발적이지 않고 모두 도착한 다음 표시되도록 구현했습니다.
+  2. 해시태그가 포함되어있는 이미지 노트 목록을 구현할 때 스크롤링하여 지나가는 부분에 대해 불필요한 서버 요청을 줄이고 반응 속도를 높이고자 요청 취소와 일시중지 기능이 있는 **OperationQueue**을 이용하여 구현하였습니다.
+  3. Operation Queue를 이용하여 작업끼리의 순서와 타이밍을 맞춰야 할 필요가 있을 때 프로토콜을 활용하여 operation의 dependency 설정했습니다. ([Operations](https://github.com/SimLeeTag/photo-tag-iOS/tree/dev/PhotoTag/PhotoTag/Utility/Operation))
+  4. 이미지를 서버에 보낼 때 iOS 디바이스로 촬영한 HEIC의 용량이 서버에서 허용하는 값보다 높아 요청이 거절되는 문제가 있어 이미지 확장자를 변경하고 **다운사이징(리사이징)** 처리하였습니다.
+  5. 서버에서 데이터를 가지고 오는 completion handler에서 발생하는 순환 참조 문제를 'weak' 를 사용하여 클로저 순환 참조(retain cycle) 해결했습니다.
+
 - **좀 더 효율적인 UI Rendering을 만들기**  
 #이미지*캐싱 #메모리*캐싱 #디스크_캐싱   
-서버 통신 비용 절감 및 랜더링 속도를 높이기 위해서 **캐싱** 기능을 구현했습니다. 앱의 로고 등 Static한 데이터는 디스크 캐싱을 하였고, 한 번 다운로드한 이미지 데이터는 앱을 종료하기 전까지 메모리 힙(heap)에 저장하여 재사용할 수 있도록 구현하였습니다.
-
+서버 통신 비용 절감 및 랜더링 속도를 높이기 위해서 서버에 요청하여 데이터를 받아온 후 한 번 다운로드 한 이미지를 **캐싱**하여 재사용하도록 구현했습니다.
 
 * 관련 블로그 글: 
 1. [동시성 프로그래밍(Concurrency programming): 스레드와 큐(Thread and Queue)](https://lena-chamna.netlify.app/post/concurrency_programming_thread_and_queue/) 
@@ -81,6 +88,13 @@
 3. [Swift의 Automatic Reference Counting(ARC) vs Java의 Garbage Collection(GC)](https://lena-chamna.netlify.app/post/automatic_reference_counting_vs_garbage_collection/)
 4. [Improving App Responsiveness - 앱 반응성 높이기](https://lena-chamna.netlify.app/post/improving_app_responsiveness/)
 
+
+### 5. UI - 코드 베이스 UI + Xib 
+- Storyboard 없이 코드로 UI를 만들어 AutoLayout을 지정하거나 Xib로 뷰를 모듈화하여 구현하였습니다.
+- **작업 효율성을 높이기 위한 작업 - AutoLayout 코드 구현**
+LayoutGuideCompatible 프로토콜을 만들어 UILayoutGuide와 UIView를 상속하여 자주 쓰이는 Autolayout 관련 기능을 맵핑해서 메서드로 구현했습니다. - [LayoutGuideCompatible](https://github.com/SimLeeTag/photo-tag-iOS/blob/dev/PhotoTag/PhotoTag/Utility/LayoutGuideCompatible.swift)
+- view controller에 들어가는 view를 클래스로 분리하였는데, 이 때 delegate를 만들어 뷰나 그 안의 차일드 뷰(child view)들이 터치 이벤트를 받는 경우 delegate를 통해 메서드가 실행되도록 구현했습니다.
+- 서버(API)와의 네트워크 통신에서 2019년 WWDC에서 처음 소개된 **Combine**을 사용하고 있습니다.
 
 <br/>
 
